@@ -1,0 +1,344 @@
+﻿<div ng-include="paciente.header.url"></div>
+
+<section id="suggestions" class="doted-bg1">
+
+    <div class="section-title text-center" ng-if="rutvalido">
+        <h3 class="animated hidden-xs" data-animation="bounceInLeft">
+            Paciente:
+            <label class="text-blue animated hidden-xs" data-animation="bounceInLeft" ng-bind="Titulo">
+            </label> &nbsp;&nbsp;
+            Rut:
+            <label class="text-blue animated hidden-xs" data-animation="bounceInLeft" ng-bind="RutPaciente">
+            </label>
+        </h3>
+    </div>
+    <!-- Container -->
+    <div class="container effect8  nopadding">
+        <!-- Row -->
+        <div class="row mb10">
+            <div class="col-md-12">
+                <div class="tabs-menu">
+                    <ul class="nav nav-tabs nav-justified" role="tablist">
+                        <li role="presentation" class="active"><a data-target="#antecedentes" aria-controls="home" role="tab" data-toggle="tab">Antecedentes Personales</a></li>
+                        <li role="presentation"><a data-target="#agenda" aria-controls="profile" role="tab" data-toggle="tab">Agenda del Paciente</a></li>
+                        <li role="presentation"><a data-target="#sesiones" aria-controls="profile" role="tab" data-toggle="tab">Plan del Paciente</a></li>
+                        <li role="presentation"><a data-target="#licencias" aria-controls="profile" role="tab" data-toggle="tab" ng-click="cargarLicencias()">Licencias del Paciente</a></li>
+                    </ul>
+                </div>
+                <div class="tab-content">
+                    <div role="tabpanel" class="tab-pane fade in active" id="antecedentes">
+                        <form class="form-horizontal" name="frmPaciente" id="contact" ng-submit="registrarPaciente()" role="form" ng-disabled="true">
+                            <div ng-class="{hidden: !loading}">
+                                <h5>Cargando paciente... <i class="fa fa-user hidden-xs" aria-hidden="true"></i></h5>
+                                <div class="progress">
+                                    <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%; background-color: #32b8da;">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group"> 
+                                <div class="col-sm-2">
+                                    <label class="control-label" for="nombre" ng-if="!rutvalido">Paciente</label>
+                                </div>                                                       
+                                <div class="col-sm-4">
+                                    <select ng-if="!rutvalido" ng-model="PacienteFiltro.ID" ng-change="FiltrarPaciente(PacienteFiltro.ID)" class="js-example-basic-single form-control" style="width: 100%" name="pacienteFiltro" id="pacienteFiltro" data-ng-options="pacienteFiltro.ID as pacienteFiltro.Nombre for pacienteFiltro in PacientesFiltro">
+                                        <option value="">Paciente</option>
+                                    </select>
+                                    <script ng-if="!rutvalido" type="text/javascript">$(document).ready(function () { $('.js-example-basic-single').select2(); });</script>
+                                </div>                                
+                            </div>
+                            <div class="form-group">        
+                                <div class="col-sm-2">
+                                    <label class="control-label" for="nombre">Rut</label>
+                                </div>                        
+                                <div class="col-sm-2">
+                                    <input type="number" class="form-control" id="rut" name="rut" required placeholder="Rut Paciente" min="0" ng-maxlength="8" ng-disabled="rutvalido" ng-model="Paciente.Persona.Rut">
+                                </div>
+                                <div class="col-sm-1">
+                                    <label class="control-label" for="nombre">Dv</label>
+                                </div>
+                                <div class="col-sm-1">
+                                    <input type="text" class="form-control" id="dv" name="dv" required placeholder="Dv" ng-disabled="rutvalido" maxlength="1" ng-model="Paciente.Persona.Dv">
+                                </div>                 
+                                <div class="col-sm-2">
+                                    
+                                </div>                                           
+                                <div class="col-sm-4">                                    
+                                    <a class="btn small" ng-click="frmPaciente.rut.$invalid || frmPaciente.dv.$invalid || getRut()" role="button" ng-if="!rutvalido">
+                                        Buscar <!--data-target="#collapseDataPaciente"-->
+                                    </a>
+                                    <a class="btn border small" ng-click="Limpiar()" role="button" ng-if="rutvalido">
+                                        Limpiar <!--data-target="#collapseDataPaciente"-->
+                                    </a>
+                                    <a class="btn border small" ng-click="Exportar()" role="button" ng-if="rutvalido">
+                                        Exportar Data
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="collapse" id="collapseDataPaciente">
+                                <div class="form-group">
+                                    <div class="col-sm-2">
+                                        <label class="control-label" for="nombre">Nombre</label>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <input type="text" required class="form-control" id="nombre" pattern="[A-Za-z\s]{1,}" placeholder="Nombre Paciente" ng-model="Paciente.Persona.Nombre" maxlength="250">
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <label class="control-label" for="nombre">A. Paterno</label>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <input type="text" required class="form-control" id="paterno" pattern="[A-Za-z]{1,}" placeholder="A. Paterno Paciente" ng-model="Paciente.Persona.Paterno" maxlength="200">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-2">
+                                        <label class="control-label" for="paterno">A. Materno</label>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <input type="text" required class="form-control" id="materno" pattern="[A-Za-z]{1,}" placeholder="A. Materno Paciente" ng-model="Paciente.Persona.Materno" maxlength="200">
+                                    </div>
+                                    <div class="col-sm-6">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-2">
+                                        <label class="control-label" for="edad">Fecha Nacimiento</label>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <input moment-picker="Fecha1" required today="true" ng-model="Paciente.Persona.FechaNac" max-view="day" format="DD/MM/YYYY" start-view="month" locale="es" class="form-control" placeholder="Fecha Nacimiento">
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <label class="control-label" for="sexo">Sexo</label>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="form-check">
+                                            <select class="form-control" required aria-required="true" name="sexo" id="sexo" data-ng-options="tipoSexo.ID as tipoSexo.Nombre for tipoSexo in TipoSexos" ng-model="Paciente.Persona.Sexo.ID">
+                                                <option value="">Seleccione</option>
+                                            </select>                                            
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-2">
+                                        <label class="control-label" for="estadoCivil">Estado Civil</label>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="form-check">
+                                            <select class="form-control" required aria-required="true" name="estadoCivil" id="estadoCivil" data-ng-options="tipoEstadoCivil.ID as tipoEstadoCivil.Nombre for tipoEstadoCivil in TipoEstadoCiviles" ng-model="Paciente.Persona.EstadoCivil.ID">
+                                                <option value="">Seleccione</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <label class="control-label" for="nacionalidad">Nacionalidad</label>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="form-check">
+                                            <select class="form-control" required aria-required="true" name="nacionalidad" id="nacionalidad" data-ng-options="tipoNacionalidad.ID as tipoNacionalidad.Nombre for tipoNacionalidad in TipoNacionalidades" ng-model="Paciente.Persona.Nacionalidad.ID">
+                                                <option value="">Seleccione</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-2">
+                                        <label class="control-label" for="region">Región</label>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="form-check">
+                                            <select class="form-control" required aria-required="true" name="region" id="region" data-ng-options="tipoRegion.ID as tipoRegion.Nombre for tipoRegion in TipoRegiones" ng-model="Paciente.Persona.Region.ID">
+                                                <option value="">Seleccione</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <label class="control-label" for="comuna">Comuna</label>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="form-check">
+                                            <select class="form-control" required aria-required="true" name="comuna" id="comuna" data-ng-options="tipoComuna.ID as tipoComuna.Nombre for tipoComuna in TipoComunas" ng-model="Paciente.Persona.Comuna.ID">
+                                                <option value="">Seleccione</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-2">
+                                        <label class="control-label" for="movil">Movil</label>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <input type="number" required class="form-control" id="movil" placeholder="Movil Paciente" ng-model="Paciente.Persona.Movil">
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <label class="control-label" for="telefono">Teléfono</label>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <input type="number" class="form-control" id="telefono" placeholder="Teléfono Paciente" ng-model="Paciente.Persona.Telefono">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-2">
+                                        <label class="control-label" for="nombre">Dirección</label>
+                                    </div>
+                                    <div class="col-sm-10">
+                                        <input type="text" required class="form-control" id="domicilio" placeholder="Domicilio Paciente" ng-model="Paciente.Persona.Direccion" maxlength="250">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-2">
+                                        <label class="control-label" for="email">Email</label>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <input type="email" required class="form-control" id="email" placeholder="Email Paciente" ng-model="Paciente.Persona.Email" maxlength="100">
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <label class="control-label" for="prevision">Prevision</label>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="form-check">
+                                            <select class="form-control" required aria-required="true" name="prevision" id="prevision" data-ng-options="tipoPrevision.ID as tipoPrevision.Nombre for tipoPrevision in TipoPrevisiones" ng-model="Paciente.Persona.Prevision.ID">
+                                                <option value="">Seleccione</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-2">
+                                        <label class="control-label" for="edad">Situación Laboral</label>
+                                    </div>
+                                    <div class="col-sm-10">
+                                        <textarea class="form-control" required rows="4" ng-model="Paciente.Persona.SituacionLaboral" maxlength="250"></textarea>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-12 text-right">
+                                        <button id="btnGuardar" type="submit" ng-show="!Mod" class="btn blue medium" data-loading-text="<i class='fa fa-spinner fa-spin'></i> Registrando ...">Registrar</button>
+                                        <button id="btnModificar" type="submit" ng-show="Mod" class="btn blue medium" data-loading-text="<i class='fa fa-spinner fa-spin'></i> Registrando ...">Registrar</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>                        
+                    </div>
+                    <div role="tabpanel" class="tab-pane fade mb10" id="agenda">
+                        <div class="form-inline">
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-search"></i>
+                                    </div>
+                                    <select ng-model="Especialidad.Id" class="form-control" required aria-required="true" name="especialidad" id="especialidad" data-ng-options="especialidad.ID as especialidad.Nombre for especialidad in Especialidades"><option value="">Todos</option></select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="section-title text-center">
+                            <h5 class="animated hidden-xs" data-animation="bounceInLeft" style="font-weight:bold">
+                                Pendientes:
+                                <label class="text-blue animated hidden-xs" data-animation="bounceInLeft">
+                                    {{Paciente.Reservas | CantidadEstados:1:Especialidad.Id}}
+                                </label>&nbsp;&nbsp;
+                                Realizadas:
+                                <label class="text-blue animated hidden-xs" data-animation="bounceInLeft">
+                                    {{Paciente.Reservas | CantidadEstados:2:Especialidad.Id}}
+                                </label>&nbsp;&nbsp;
+                                Vencidas:
+                                <label class="text-blue animated hidden-xs" data-animation="bounceInLeft">
+                                    {{Paciente.Reservas | CantidadEstados:3:Especialidad.Id}}
+                                </label>&nbsp;&nbsp;
+                                Anuladas:
+                                <label class="text-blue animated hidden-xs" data-animation="bounceInLeft">
+                                    {{Paciente.Reservas | CantidadEstados:4:Especialidad.Id}}
+                                </label>&nbsp;&nbsp;
+                                No Realizadas:
+                                <label class="text-blue animated hidden-xs" data-animation="bounceInLeft">
+                                    {{Paciente.Reservas | CantidadEstados:5:Especialidad.Id}}
+                                </label>
+                            </h5>
+                        </div>
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Especialista</th>
+                                    <th>Tipo Reserva</th>
+                                    <th>Fecha</th>
+                                    <th>Hora</th>
+                                    <th>Estado</th>
+                                    <th>Modificar</th>
+                                    <th>Obs. Esp.</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="reserva in Paciente.Reservas | filterEstados:Especialidad.Id">
+                                    <td>{{reserva.Especialista.Persona.Nombre}} {{reserva.Especialista.Persona.Paterno}} {{reserva.Especialista.Persona.Materno}} - {{reserva.Especialista.Especialidad.Nombre}}</td>
+                                    <td>{{reserva.Tipo.Nombre}}</td>
+                                    <td>{{reserva.FechaString}}</td>
+                                    <td>{{reserva.Hora}}</td>
+                                    <td>{{reserva.Estado.Nombre}}</td>
+                                    <td><button class="btn small-xs blue" ng-click="anularReserva(reserva.Id)"><i class="fa fa-edit" aria-hidden="true"></i></button></td>
+                                    <td><button class="btn small-xs blue" ng-show="reserva.Tipo.ID == 2 && tipo !== '1'" ng-click="agregarObservacion(reserva.Id)"><i class="fa fa-edit" aria-hidden="true"></i></button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <span class="clearfix"></span>
+                    </div>
+                    <div role="tabpanel" class="tab-pane fade" id="sesiones">
+                        <a class="btn small pull-left mb40" ng-show="rutvalido" ng-click="nuevoPlan(-1, null, null, null)" role="button">
+                            Nueva Planificacion
+                        </a>
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Nombre</th>
+                                    <th>Asistencia</th>
+                                    <th>Descripción</th>
+                                    <th>Inicio</th>
+                                    <th>Termino</th>
+                                    <th>Estado</th>
+                                    <th>Modificar</th>
+                                    <th>Finalizar</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="plan in Paciente.Planes">
+                                    <td>{{plan.Nombre}}</td>
+                                    <td>{{plan.Realizadas}} / {{plan.Cantidad}}</td>
+                                    <td>{{plan.Descripcion}}</td>
+                                    <td>{{plan.FechaInicioString}}</td>
+                                    <td>{{plan.FechaFinalizacionPlanString}}</td>
+                                    <td>{{plan.Estado.Nombre}}<span ng-hide="plan.Estado.ID == 1"> - {{plan.Motivo.Nombre}}</span></td>
+                                    <td><button ng-show="plan.Estado.ID == 1" class="btn small-xs blue" ng-click="nuevoPlan(plan.Id, plan.Descripcion, plan.Nombre, plan.Cantidad)"><i class="fa fa-edit" aria-hidden="true"></i></button></td>
+                                    <td><button ng-show="plan.Estado.ID == 1" class="btn small-xs blue" ng-click="finalizarPlan(plan.Id)"><i class="fa fa-gavel" aria-hidden="true"></i></button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <span class="clearfix"></span>
+                    </div>
+                    <div role="tabpanel" class="tab-pane fade" id="licencias">
+                        <a class="btn small pull-left mb40" ng-show="rutvalido" ng-click="nuevaLicencia()" role="button">
+                            Nueva Licencia
+                        </a>
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>N°</th>
+                                    <th>Inicio</th>
+                                    <th>Termino</th>
+                                    <th>Observación</th>
+                                    <th>Editar</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="licencia in Paciente.Licencias">
+                                    <td>{{licencia.Id}}</td>
+                                    <td>{{licencia.InicioString}}</td>
+                                    <td>{{licencia.TerminoString}}</td>
+                                    <td>{{licencia.Observacion}}</td>
+                                    <td><button class="btn small" ng-click="editarLicencia(licencia.Id, licencia.Inicio, licencia.Termino, licencia.Observacion)"><i class="fa fa-edit" aria-hidden="true"></i></button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <span class="clearfix"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

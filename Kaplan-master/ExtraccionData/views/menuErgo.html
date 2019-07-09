@@ -1,0 +1,244 @@
+﻿<div ng-include="menuErgo.header.url"></div>
+<section id="suggestions" class="doted-bg1">
+    <div class="container-fluid" ng-class="{hidden: loading}">
+        <!-- Row -->
+        <div class="row">
+            <div class="col-md-12">
+                <form class="form-horizontal" name="frmRegistrosMedicos" id="contact" role="form" ng-disabled="true">
+                    <div class="section-title text-center mb20">
+                        <h2 class="animated hidden-xs" data-animation="bounceInLeft">Listado Registros Maquina ERGO </h2>
+                        <p class="text-blue animated hidden-xs" data-animation="bounceInLeft">
+                            <a href="" ng-click="Export()">Exportar Datos <i class="fa fa-download fa-2x hidden-xs" aria-hidden="true"></i></a>
+                        </p>
+                    </div>
+                    <span class="clearfix"></span>
+                    <div class="row" ng-class="{hidden: loading}">
+                        <div class="col-xs-12">
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-condensed" style="background-color:#fcfdfee6; font-size:12px">
+                                    <thead>
+                                        <tr>
+                                            <th style="text-align:center; min-width:100px"><input class="form-control input-sm input-filtro" id="id_paciente" ng-model="id_paciente" placeholder="id_paciente" style="width: 100%;" ng-style="id_paciente ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:110px"><input class="form-control input-sm input-filtro" id="numero_ficha" ng-model="numero_ficha" placeholder="numero_ficha" style="width: 100%;" ng-style="numero_ficha ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:100px"><input class="form-control input-sm input-filtro" id="numero_reserva" ng-model="numero_reserva" placeholder="numero_reserva" style="width: 100%;" ng-style="numero_reserva ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:100px"><input class="form-control input-sm input-filtro" id="sexo" ng-model="sexo" placeholder="sexo" style="width: 100%;" ng-style="sexo ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:250px"><input class="form-control input-sm input-filtro" id="situacion_laboral" ng-model="situacion_laboral"  placeholder="situacion_laboral" style="width: 100%;" ng-style="situacion_laboral ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:100px"><input class="form-control input-sm input-filtro" id="vol" ng-model="vol" placeholder="vol" style="width: 100%;" ng-style="vol ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:100px"><input class="form-control input-sm input-filtro" id="vcol" ng-model="vcol" placeholder="vcol" style="width: 100%;" ng-style="vcol ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:100px"><input class="form-control input-sm input-filtro" id="vel" ng-model="vel" placeholder="vel" style="width: 100%;" ng-style="vel ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:100px"><input class="form-control input-sm input-filtro" id="hrl" ng-model="hrl" placeholder="hrl" style="width: 100%;" ng-style="hrl ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:100px"><input class="form-control input-sm input-filtro" id="fergo" ng-model="fergo" placeholder="fergo" style="width: 100%;" ng-style="fergo ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:100px"><input class="form-control input-sm input-filtro" id="loadA" ng-model="loadA" placeholder="loadA" style="width: 100%;" ng-style="loadA ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:100px"><input class="form-control input-sm input-filtro" id="prload" ng-model="prload" placeholder="prload" style="width: 100%;" ng-style="prload ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:100px"><input class="form-control input-sm input-filtro" id="peto" ng-model="peto" placeholder="peto" style="width: 100%;" ng-style="peto ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:100px"><input class="form-control input-sm input-filtro" id="petco" ng-model="petco" placeholder="petco" style="width: 100%;" ng-style="petco ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:100px"><input class="form-control input-sm input-filtro" id="bpsys" ng-model="bpsys" placeholder="bpsys" style="width: 100%;" ng-style="bpsys ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:100px"><input class="form-control input-sm input-filtro" id="bpdia" ng-model="bpdia" placeholder="bpdia" style="width: 100%;" ng-style="bpdia ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:100px"><input class="form-control input-sm input-filtro" id="paoA" ng-model="paoA" placeholder="paoA" style="width: 100%;" ng-style="paoA ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:100px"><input class="form-control input-sm input-filtro" id="paco" ng-model="paco" placeholder="paco" style="width: 100%;" ng-style="paco ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:100px"><input class="form-control input-sm input-filtro" id="speed" ng-model="speed" placeholder="speed" style="width: 100%;" ng-style="speed ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:100px"><input class="form-control input-sm input-filtro" id="grade" ng-model="grade" placeholder="grade" style="width: 100%;" ng-style="grade ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:100px"><input class="form-control input-sm input-filtro" id="dfco" ng-model="dfco" placeholder="dfco" style="width: 100%;" ng-style="dfco? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:100px"><input class="form-control input-sm input-filtro" id="rer" ng-model="rer" placeholder="rer" style="width: 100%;" ng-style="rer ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:100px"><input class="form-control input-sm input-filtro" id="vok" ng-model="vok" placeholder="vok" style="width: 100%;" ng-style="vok ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:100px"><input class="form-control input-sm input-filtro" id="vcok" ng-model="vcok" placeholder="vcok" style="width: 100%;" ng-style="vcok ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:100px"><input class="form-control input-sm input-filtro" id="vek" ng-model="vek" placeholder="vek" style="width: 100%;" ng-style="vek ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:100px"><input class="form-control input-sm input-filtro" id="ox" ng-model="ox" placeholder="ox" style="width: 100%;" ng-style="ox ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:100px"><input class="form-control input-sm input-filtro" id="eqo" ng-model="eqo" placeholder="eqo" style="width: 100%;" ng-style="eqo ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:100px"><input class="form-control input-sm input-filtro" id="eqco" ng-model="eqco" placeholder="eqco" style="width: 100%;" ng-style="eqco ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:100px"><input class="form-control input-sm input-filtro" id="vt" ng-model="vt" placeholder="vt" style="width: 100%;" ng-style="vt ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:100px"><input class="form-control input-sm input-filtro" id="timeA" ng-model="timeA" placeholder="timeA" style="width: 100%;" ng-style="timeA? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:100px"><input class="form-control input-sm input-filtro" id="loadk" ng-model="loadk" placeholder="loadk" style="width: 100%;" ng-style="loadk ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:100px"><input class="form-control input-sm input-filtro" id="paoB" ng-model="paoB" placeholder="paoB" style="width: 100%;" ng-style="paoB ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:100px"><input class="form-control input-sm input-filtro" id="aado" ng-model="aado" placeholder="aado" style="width: 100%;" ng-style="aado ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:100px"><input class="form-control input-sm input-filtro" id="va" ng-model="va" placeholder="va" style="width: 100%;" ng-style="va ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:100px"><input class="form-control input-sm input-filtro" id="vd" ng-model="vd" placeholder="vd" style="width: 100%;" ng-style="vd ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:100px"><input class="form-control input-sm input-filtro" id="vdvt" ng-model="vdvt" placeholder="vdvt" style="width: 100%;" ng-style="vdvt ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:100px"><input class="form-control input-sm input-filtro" id="mets" ng-model="mets" placeholder="mets" style="width: 100%;" ng-style="mets ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:100px"><input class="form-control input-sm input-filtro" id="aadco" ng-model="aadco" placeholder="aadco" style="width: 100%;" ng-style="aadco ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:100px"><input class="form-control input-sm input-filtro" id="eff" ng-model="eff" placeholder="eff" style="width: 100%;" ng-style="eff ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:100px"><input class="form-control input-sm input-filtro" id="co" ng-model="co" placeholder="co" style="width: 100%;" ng-style="co ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:100px"><input class="form-control input-sm input-filtro" id="sv" ng-model="sv" placeholder="sv" style="width: 100%;" ng-style="sv ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:100px"><input class="form-control input-sm input-filtro" id="lac" ng-model="lac" placeholder="lac" style="width: 100%;" ng-style="lac ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:100px"><input class="form-control input-sm input-filtro" id="br" ng-model="br" placeholder="br" style="width: 100%;" ng-style="br ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:100px"><input class="form-control input-sm input-filtro" id="spo" ng-model="spo " placeholder="spo" style="width: 100%;" ng-style="spo ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:100px"><input class="form-control input-sm input-filtro" id="ee" ng-model="ee" placeholder="ee" style="width: 100%;" ng-style="ee? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:100px"><input class="form-control input-sm input-filtro" id="feto" ng-model="feto" placeholder="feto" style="width: 100%;" ng-style="feto ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:100px"><input class="form-control input-sm input-filtro" id="fetco" ng-model="fetco" placeholder="fetco" style="width: 100%;" ng-style="fetco? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:100px"><input class="form-control input-sm input-filtro" id="cho" ng-model="cho" placeholder="cho" style="width: 100%;" ng-style="cho ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:100px"><input class="form-control input-sm input-filtro" id="grasa" ng-model="grasa" placeholder="grasa" style="width: 100%;" ng-style="grasa ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr dir-paginate="registro in Registros | itemsPerPage: 1000 |  filter: {id_paciente : id_paciente} | filter: {numero_ficha : numero_ficha} | filter: {numero_reserva : numero_reserva} | filter: {sexo : sexo} | filter: {situacion_laboral : situacion_laboral} | filter: {vol : vol} | filter: {vcol : vcol} | filter: {vel : vel} | filter: {hrl : hrl} | filter: {fergo : fergo} | filter: {loadA : loadA} | filter: {prload : prload} | filter: {peto : peto} | filter: {petco : petco} | filter: {bpsys : bpsys} | filter: {bpdia : bpdia} | filter: {paoA : paoA} | filter: {paco : paco} | filter: {speed : speed} | filter: {grade : grade} | filter: {dfco : dfco} | filter: {rer : rer} | filter: {vok : vok} | filter: {vcok : vcok} | filter: {vek : vek} | filter: {ox : ox} | filter: {eqo : eqo} | filter: {eqco : eqco} | filter: {vt : vt} | filter: {timeA : timeA} | filter: {loadk : loadk} | filter: {paoB : paoB} | filter: {aado : aado} | filter: {va : va} | filter: {vd : vd} | filter: {vdvt : vdvt} | filter: {mets : mets} | filter: {aadco : aadco} | filter: {eff : eff} | filter: {co : co} | filter: {sv : sv} | filter: {lac : lac} | filter: {br : br} | filter: {spo : spo} | filter: {ee : ee} | filter: {feto : feto} | filter: {fetco : fetco} | filter: {cho : cho} | filter: {grasa : grasa}" pagination-id="pag_reg">
+                                            <td style="text-align:center;">{{ registro.id_paciente}}</td>
+                                            <td style="text-align:center;">{{ registro.numero_ficha }}</td>
+                                            <td style="text-align:center;">{{ registro.numero_reserva }}</td>
+                                            <td>{{ registro.sexo }}</td>
+                                            <td>{{ registro.situacion_laboral }}</td>
+                                            <td style="text-align:center;">{{ registro.vol}}</td>
+                                            <td style="text-align:center;">{{ registro.vcol}}</td>
+                                            <td style="text-align:center;">{{ registro.vel}}</td>
+                                            <td style="text-align:center;">{{ registro.hrl}}</td>
+                                            <td style="text-align:center;">{{ registro.fergo}}</td>
+                                            <td style="text-align:center;">{{ registro.loadA}}</td>
+                                            <td style="text-align:center;">{{ registro.prload}}</td>
+                                            <td style="text-align:center;">{{ registro.peto}}</td>
+                                            <td style="text-align:center;">{{ registro.petco}}</td>
+                                            <td style="text-align:center;">{{ registro.bpsys}}</td>
+                                            <td style="text-align:center;">{{ registro.bpdia}}</td>
+                                            <td style="text-align:center;">{{ registro.paoA}}</td>
+                                            <td style="text-align:center;">{{ registro.paco}}</td>
+                                            <td style="text-align:center;">{{ registro.speed}}</td>
+                                            <td style="text-align:center;">{{ registro.grade}}</td>
+                                            <td style="text-align:center;">{{ registro.dfco}}</td>
+                                            <td style="text-align:center;">{{ registro.rer}}</td>
+                                            <td style="text-align:center;">{{ registro.vok}}</td>
+                                            <td style="text-align:center;">{{ registro.vcok}}</td>
+                                            <td style="text-align:center;">{{ registro.vek}}</td>
+                                            <td style="text-align:center;">{{ registro.ox}}</td>
+                                            <td style="text-align:center;">{{ registro.eqo}}</td>
+                                            <td style="text-align:center;">{{ registro.eqco}}</td>
+                                            <td style="text-align:center;">{{ registro.vt}}</td>
+                                            <td style="text-align:center;">{{ registro.timeA}}</td>
+                                            <td style="text-align:center;">{{ registro.loadk}}</td>
+                                            <td style="text-align:center;">{{ registro.paoB}}</td>
+                                            <td style="text-align:center;">{{ registro.aado}}</td>
+                                            <td style="text-align:center;">{{ registro.va}}</td>
+                                            <td style="text-align:center;">{{ registro.vd}}</td>
+                                            <td style="text-align:center;">{{ registro.vdvt}}</td>
+                                            <td style="text-align:center;">{{ registro.mets}}</td>
+                                            <td style="text-align:center;">{{ registro.aadco}}</td>
+                                            <td style="text-align:center;">{{ registro.eff}}</td>
+                                            <td style="text-align:center;">{{ registro.co}}</td>
+                                            <td style="text-align:center;">{{ registro.sv}}</td>
+                                            <td style="text-align:center;">{{ registro.lac}}</td>
+                                            <td style="text-align:center;">{{ registro.br}}</td>
+                                            <td style="text-align:center;">{{ registro.spo}}</td>
+                                            <td style="text-align:center;">{{ registro.ee}}</td>
+                                            <td style="text-align:center;">{{ registro.feto}}</td>
+                                            <td style="text-align:center;">{{ registro.fetco}}</td>
+                                            <td style="text-align:center;">{{ registro.cho}}</td>
+                                            <td style="text-align:center;">{{ registro.grasa}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <dir-pagination-controls pagination-id="pag_reg" boundary-links="true" direction-links="true">	</dir-pagination-controls>
+                                <table id="paraReporte" class="table table-bordered table-condensed" style="background-color:#fcfdfeb3; font-size:12px" " ng-show="false">
+                                    <thead>
+                                        <tr>
+                                            <th>id_paciente</th>
+                                            <th>numero_ficha</th>
+                                            <th>numero_reserva</th>
+                                            <th>sexo</th>
+                                            <th>situacion_laboral</th>
+                                            <th>vol</th>
+                                            <th>vcol</th>
+                                            <th>vel</th>
+                                            <th>hrl</th>
+                                            <th>fergo</th>
+                                            <th>loadA</th>
+                                            <th>prload</th>
+                                            <th>peto</th>
+                                            <th>petco</th>
+                                            <th>bpsys</th>
+                                            <th>bpdia</th>
+                                            <th>paoA</th>
+                                            <th>paco</th>
+                                            <th>speed</th>
+                                            <th>grade</th>
+                                            <th>dfco</th>
+                                            <th>rer</th>
+                                            <th>vok</th>
+                                            <th>vcok</th>
+                                            <th>vek</th>
+                                            <th>ox</th>
+                                            <th>eqo</th>
+                                            <th>eqco</th>
+                                            <th>vt</th>
+                                            <th>timeA</th>
+                                            <th>loadk</th>
+                                            <th>paoB</th>
+                                            <th>aado</th>
+                                            <th>va</th>
+                                            <th>vd</th>
+                                            <th>vdvt</th>
+                                            <th>mets</th>
+                                            <th>aadco</th>
+                                            <th>eff</th>
+                                            <th>co</th>
+                                            <th>sv</th>
+                                            <th>lac</th>
+                                            <th>br</th>
+                                            <th>spo</th>
+                                            <th>ee</th>
+                                            <th>feto</th>
+                                            <th>fetco</th>
+                                            <th>cho</th>
+                                            <th>grasa</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="registro in Registros | filter: {id_paciente : id_paciente} | filter: {numero_ficha : numero_ficha} | filter: {numero_reserva : numero_reserva} | filter: {sexo : sexo} | filter: {situacion_laboral : situacion_laboral} | filter: {vol : vol} | filter: {vcol : vcol} | filter: {vel : vel} | filter: {hrl : hrl} | filter: {fergo : fergo} | filter: {loadA : loadA} | filter: {prload : prload} | filter: {peto : peto} | filter: {petco : petco} | filter: {bpsys : bpsys} | filter: {bpdia : bpdia} | filter: {paoA : paoA} | filter: {paco : paco} | filter: {speed : speed} | filter: {grade : grade} | filter: {dfco : dfco} | filter: {rer : rer} | filter: {vok : vok} | filter: {vcok : vcok} | filter: {vek : vek} | filter: {ox : ox} | filter: {eqo : eqo} | filter: {eqco : eqco} | filter: {vt : vt} | filter: {timeA : timeA} | filter: {loadk : loadk} | filter: {paoB : paoB} | filter: {aado : aado} | filter: {va : va} | filter: {vd : vd} | filter: {vdvt : vdvt} | filter: {mets : mets} | filter: {aadco : aadco} | filter: {eff : eff} | filter: {co : co} | filter: {sv : sv} | filter: {lac : lac} | filter: {br : br} | filter: {spo : spo} | filter: {ee : ee} | filter: {feto : feto} | filter: {fetco : fetco} | filter: {cho : cho} | filter: {grasa : grasa}">
+                                            <td>{{ registro.id_paciente}}</td>
+                                            <td>{{ registro.numero_ficha}}</td>
+                                            <td>{{ registro.numero_reserva}}</td>
+                                            <td>{{ registro.sexo}}</td>
+                                            <td>{{ registro.situacion_laboral}}</td>
+                                            <td>{{ registro.vol}}</td>
+                                            <td>{{ registro.vcol}}</td>
+                                            <td>{{ registro.vel}}</td>
+                                            <td>{{ registro.hrl}}</td>
+                                            <td>{{ registro.fergo}}</td>
+                                            <td>{{ registro.loadA}}</td>
+                                            <td>{{ registro.prload}}</td>
+                                            <td>{{ registro.peto}}</td>
+                                            <td>{{ registro.petco}}</td>
+                                            <td>{{ registro.bpsys}}</td>
+                                            <td>{{ registro.bpdia}}</td>
+                                            <td>{{ registro.paoA}}</td>
+                                            <td>{{ registro.paco}}</td>
+                                            <td>{{ registro.speed}}</td>
+                                            <td>{{ registro.grade}}</td>
+                                            <td>{{ registro.dfco}}</td>
+                                            <td>{{ registro.rer}}</td>
+                                            <td>{{ registro.vok}}</td>
+                                            <td>{{ registro.vcok}}</td>
+                                            <td>{{ registro.vek}}</td>
+                                            <td>{{ registro.ox}}</td>
+                                            <td>{{ registro.eqo}}</td>
+                                            <td>{{ registro.eqco}}</td>
+                                            <td>{{ registro.vt}}</td>
+                                            <td>{{ registro.timeA}}</td>
+                                            <td>{{ registro.loadk}}</td>
+                                            <td>{{ registro.paoB}}</td>
+                                            <td>{{ registro.aado}}</td>
+                                            <td>{{ registro.va}}</td>
+                                            <td>{{ registro.vd}}</td>
+                                            <td>{{ registro.vdvt}}</td>
+                                            <td>{{ registro.mets}}</td>
+                                            <td>{{ registro.aadco}}</td>
+                                            <td>{{ registro.eff}}</td>
+                                            <td>{{ registro.co}}</td>
+                                            <td>{{ registro.sv}}</td>
+                                            <td>{{ registro.lac}}</td>
+                                            <td>{{ registro.br}}</td>
+                                            <td>{{ registro.spo}}</td>
+                                            <td>{{ registro.ee}}</td>
+                                            <td>{{ registro.feto}}</td>
+                                            <td>{{ registro.fetco}}</td>
+                                            <td>{{ registro.cho}}</td>
+                                            <td>{{ registro.grasa}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <span class="clearfix"></span>
+            </div>
+        </div>
+    </div>
+</section>

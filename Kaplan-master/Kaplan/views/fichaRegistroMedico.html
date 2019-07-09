@@ -1,0 +1,61 @@
+﻿<section id="suggestions" class="doted-bg1" ng-controller="fichaRegistroMedicoController">
+    <div class="container effect8  nopadding">
+        <!-- Row -->
+        <div class="row">
+            <div class="col-md-12">
+                <!-- Tab panes -->
+                <div class="tab-content">
+                    <div role="tabpanel" class="tab-pane fade in active" id="home-tab">
+                        <form class="form-horizontal mb20" name="frmRegistrosMedicos" id="contact" role="form" ng-disabled="true">
+                            <div class="section-title text-center">
+                                <h2 class="animated hidden-xs" data-animation="bounceInLeft">Registros Médicos</h2>
+                                <p class="text-blue animated hidden-xs" data-animation="bounceInLeft">
+                                    Listado Registros Médicos
+                                </p>
+                                <a class="btn small pull-left mb40" ng-click="NuevoRegistro()" role="button">
+                                    Agregar Registro Médico
+                                </a>
+                            </div>
+                            <span class="clearfix"></span>
+                            <div class="row" ng-class="{hidden: loading}">
+                                <div class="col-xs-12">
+                                    <div class="table-responsive">
+                                        <table class="table table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th>Fecha</th>
+                                                    <th>Registro</th>
+                                                    <th>Guardado por</th>
+                                                    <th>Dirigido a</th>
+                                                    <th>Leido por</th>
+                                                    <th>Leido el</th>
+                                                    <th align="center">Marcar Leido</th>
+                                                    <th align="center">Eliminar</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr dir-paginate="registro in RegistrosMedicos | itemsPerPage: 20" pagination-id="pag_regmedico">
+                                                    <td>{{registro.FechaString}}</td>
+                                                    <td>{{registro.Registro}}</td>
+                                                    <td>{{registro.EspecialistaEmisor}}</td>
+                                                    <td>{{registro.idEspecialidadReceptor.Nombre}}</td>
+                                                    <td>{{registro.EspecialistaReceptor}}</td>
+                                                    <td>{{registro.FechaLeidoString}}</td>
+                                                    <td align="center"><button type="button" title="Marcar como Leido" ng-show="registro.Estado == 1 && registro.idEspecialidadReceptor.ID == TipoEspecialidad" class="btn small-xs blue" ng-click="LeerRegistro(registro.Id)" aria-label="Center Align"><i class="fa fa-book"></i></button></td>
+                                                    <td align="center"><button type="button" title="Eliminar" ng-show="registro.Estado == 1 && registro.idEspecialidadReceptor.ID == TipoEspecialidad" class="btn small-xs" ng-click="Eliminar(registro.Id)" aria-label="Center Align"><i class="fa fa-remove"></i></button></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <dir-pagination-controls pagination-id="pag_regmedico" boundary-links="true" direction-links="true">	</dir-pagination-controls>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                        <span class="clearfix"></span>
+                    </div>
+                </div>
+            </div>
+            <!-- ./end Tab Content -->
+        </div>
+    </div>
+</section>

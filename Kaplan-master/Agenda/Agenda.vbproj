@@ -1,0 +1,455 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props" Condition="Exists('..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>
+    </SchemaVersion>
+    <ProjectGuid>{9C52F765-3641-4988-9F8E-C82FECD369EA}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{F184B08F-C81C-45F6-A57F-5ABD9991F28F}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <RootNamespace>Agenda</RootNamespace>
+    <AssemblyName>Agenda</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <MyType>Custom</MyType>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>Full</DebugType>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\</OutputPath>
+    <DocumentationFile>Agenda.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+    <PublishDatabaseSettings>
+      <Objects>
+      </Objects>
+    </PublishDatabaseSettings>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DocumentationFile>Agenda.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.AI.Agent.Intercept, Version=1.2.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.Agent.Intercept.1.2.1\lib\net45\Microsoft.AI.Agent.Intercept.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AI.DependencyCollector, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.DependencyCollector.2.0.0\lib\net45\Microsoft.AI.DependencyCollector.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AI.PerfCounterCollector, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.PerfCounterCollector.2.0.0\lib\net45\Microsoft.AI.PerfCounterCollector.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AI.ServerTelemetryChannel, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.WindowsServer.TelemetryChannel.2.0.0\lib\net45\Microsoft.AI.ServerTelemetryChannel.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AI.Web, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.Web.2.0.0\lib\net45\Microsoft.AI.Web.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AI.WindowsServer, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.WindowsServer.2.0.0\lib\net45\Microsoft.AI.WindowsServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.ApplicationInsights, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.2.0.0\lib\net45\Microsoft.ApplicationInsights.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="tmp\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Import Include="Microsoft.VisualBasic" />
+    <Import Include="System" />
+    <Import Include="System.Collections" />
+    <Import Include="System.Collections.Generic" />
+    <Import Include="System.Data" />
+    <Import Include="System.Linq" />
+    <Import Include="System.Xml.Linq" />
+    <Import Include="System.Diagnostics" />
+    <Import Include="System.Collections.Specialized" />
+    <Import Include="System.Configuration" />
+    <Import Include="System.Text" />
+    <Import Include="System.Text.RegularExpressions" />
+    <Import Include="System.Web" />
+    <Import Include="System.Web.Caching" />
+    <Import Include="System.Web.SessionState" />
+    <Import Include="System.Web.Security" />
+    <Import Include="System.Web.Profile" />
+    <Import Include="System.Web.UI" />
+    <Import Include="System.Web.UI.WebControls" />
+    <Import Include="System.Web.UI.WebControls.WebParts" />
+    <Import Include="System.Web.UI.HtmlControls" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="css\angular-moment-picker.min.css" />
+    <Content Include="css\angular-ui-notification.min.css" />
+    <Content Include="css\animate.css" />
+    <Content Include="css\bootstrap\bootstrap-theme.css" />
+    <Content Include="css\bootstrap\bootstrap-theme.min.css" />
+    <Content Include="css\bootstrap\bootstrap.css" />
+    <Content Include="css\bootstrap\bootstrap.min.css" />
+    <Content Include="css\datepicker.css" />
+    <Content Include="css\font-awesome-4.7.0\css\font-awesome.css" />
+    <Content Include="css\font-awesome-4.7.0\css\font-awesome.min.css" />
+    <Content Include="css\font-awesome-4.7.0\fonts\fontawesome-webfont.svg" />
+    <Content Include="css\font-awesome-4.7.0\HELP-US-OUT.txt" />
+    <Content Include="css\font-awesome.min.css" />
+    <Content Include="css\media.css" />
+    <Content Include="css\select2.min.css" />
+    <Content Include="css\style.css" />
+    <Content Include="default.aspx" />
+    <Content Include="doGet.asmx" />
+    <Content Include="doPost.asmx" />
+    <Content Include="header.html" />
+    <Content Include="img\after.jpg" />
+    <Content Include="img\before.jpg" />
+    <Content Include="img\bg-2-xl.png" />
+    <Content Include="img\bg.png" />
+    <Content Include="img\bg\bg-1.jpg" />
+    <Content Include="img\bg\bg-2.jpg" />
+    <Content Include="img\bg\bg-3-gardient.jpg" />
+    <Content Include="img\bg\bg-3.jpg" />
+    <Content Include="img\bg\bg-4.jpg" />
+    <Content Include="img\bg\bg-5.jpg" />
+    <Content Include="img\doctor-profile.jpg" />
+    <Content Include="img\doctor-small-inverse.png" />
+    <Content Include="img\doctor-small.png" />
+    <Content Include="img\doctors\profile-1.jpg" />
+    <Content Include="img\doctors\profile-2.jpg" />
+    <Content Include="img\doctors\profile-3.jpg" />
+    <Content Include="img\doted-bg.jpg" />
+    <Content Include="img\favicon.ico" />
+    <Content Include="img\news\image-01.jpg" />
+    <Content Include="img\news\image-02.jpg" />
+    <Content Include="img\news\image-03.jpg" />
+    <Content Include="img\news\image-04.jpg" />
+    <Content Include="js\controllers\agendaDiaHoraController.js" />
+    <Content Include="js\controllers\calendarioController.js" />
+    <Content Include="js\controllers\especialistaAusenciasController.js" />
+    <Content Include="js\controllers\especialistaController.js" />
+    <Content Include="js\controllers\especialistaMisHorasController.js" />
+    <Content Include="js\controllers\finalizarPlanController.js" />
+    <Content Include="js\controllers\headerController.js" />
+    <Content Include="js\controllers\licenciaController.js" />
+    <Content Include="js\controllers\loginController.js" />
+    <Content Include="js\controllers\motivoCierrePlanController.js" />
+    <Content Include="js\controllers\planController.js" />
+    <Content Include="js\controllers\recuperarController.js" />
+    <Content Include="js\controllers\reservaAnularController.js" />
+    <Content Include="js\controllers\reservaController.js" />
+    <Content Include="js\controllers\reservaObservacionController.js" />
+    <Content Include="js\script\bootstrap\bootstrap.js" />
+    <Content Include="js\script\bootstrap\bootstrap.min.js" />
+    <Content Include="js\script\bootstrap\npm.js" />
+    <Content Include="js\script\md5.js" />
+    <Content Include="js\script\select2.min.js" />
+    <Content Include="js\services\agendaDiaHoraService.js" />
+    <Content Include="js\services\calendarioService.js" />
+    <Content Include="js\services\especialistaService.js" />
+    <Content Include="js\services\licenciaService.js" />
+    <Content Include="js\services\loginService.js" />
+    <Content Include="js\services\motivoCierrePlanService.js" />
+    <Content Include="js\services\planService.js" />
+    <Content Include="js\services\reservaService.js" />
+    <Content Include="js\services\WindowsService.js" />
+    <Content Include="login.html" />
+    <Content Include="js\app.js" />
+    <Content Include="js\controllers\defaultController.js" />
+    <Content Include="js\controllers\pacienteController.js" />
+    <Content Include="js\script\angular-locale_es-cl.js" />
+    <Content Include="js\script\angular-modal-service.js" />
+    <Content Include="js\script\angular-moment-picker.min.js" />
+    <Content Include="js\script\angular-route.min.js" />
+    <Content Include="js\script\angular-ui-notification.min.js" />
+    <Content Include="js\script\angular.min.js" />
+    <Content Include="js\script\bootstrap-datepicker.js" />
+    <Content Include="js\script\dirPagination.js" />
+    <Content Include="js\script\jquery-3.1.1.min.js" />
+    <Content Include="js\script\jquery.appear.js" />
+    <Content Include="js\script\jquery.countTo.js" />
+    <Content Include="js\script\jquery.easing.min.js" />
+    <Content Include="js\script\main.js" />
+    <Content Include="js\script\moment-with-locales.js" />
+    <Content Include="js\services\pacienteService.js" />
+    <Content Include="js\services\tipoService.js" />
+    <Content Include="views\motivoCierrePlan.html" />
+    <Content Include="views\recuperar.html" />
+    <Content Include="VerDocumentoCsv.aspx" />
+    <Content Include="views\agendaDiaHora.html" />
+    <Content Include="views\calendario.html" />
+    <Content Include="views\especialista.html" />
+    <Content Include="views\especialistaAusencias.html" />
+    <Content Include="views\especialistaMisHoras.html" />
+    <Content Include="views\finalizarPlan.html" />
+    <Content Include="views\licencia.html" />
+    <Content Include="views\paciente.html" />
+    <Content Include="views\plan.html" />
+    <Content Include="views\reserva.html" />
+    <Content Include="views\reservaAnular.html" />
+    <Content Include="views\reservaObservacion.html" />
+    <Content Include="Web.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="default.aspx.designer.vb">
+      <DependentUpon>default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="default.aspx.vb">
+      <DependentUpon>default.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="doGet.asmx.vb">
+      <DependentUpon>doGet.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="doPost.asmx.vb">
+      <DependentUpon>doPost.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="models\AtencionHora.vb" />
+    <Compile Include="models\Ausencia.vb" />
+    <Compile Include="models\CachedType.vb" />
+    <Compile Include="models\Dia.vb" />
+    <Compile Include="models\Especialista.vb" />
+    <Compile Include="models\httpResult.vb" />
+    <Compile Include="models\Licencia.vb" />
+    <Compile Include="models\MotivoCierrePlan.vb" />
+    <Compile Include="models\Paciente.vb" />
+    <Compile Include="models\Persona.vb" />
+    <Compile Include="models\Plan.vb" />
+    <Compile Include="models\Reserva.vb" />
+    <Compile Include="models\ResumenCalendario.vb" />
+    <Compile Include="models\TipoAnulada.vb" />
+    <Compile Include="models\TipoDia.vb" />
+    <Compile Include="models\TipoEspecialidad.vb" />
+    <Compile Include="models\TipoEstadoCivil.vb" />
+    <Compile Include="models\TipoComuna.vb" />
+    <Compile Include="models\TipoEstadoPlan.vb" />
+    <Compile Include="models\TipoEstadoReserva.vb" />
+    <Compile Include="models\TipoHora.vb" />
+    <Compile Include="models\TipoMotivo.vb" />
+    <Compile Include="models\TipoMotivoPlan.vb" />
+    <Compile Include="models\TipoNoRealizada.vb" />
+    <Compile Include="models\TipoPacienteFiltro.vb" />
+    <Compile Include="models\TipoRegion.vb" />
+    <Compile Include="models\TipoPrevision.vb" />
+    <Compile Include="models\TipoPais.vb" />
+    <Compile Include="models\TipoReserva.vb" />
+    <Compile Include="models\TipoSexo.vb" />
+    <Compile Include="models\Usuario.vb" />
+    <Compile Include="My Project\AssemblyInfo.vb" />
+    <Compile Include="My Project\Application.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Application.myapp</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\MyExtensions\MyWebExtension.vb">
+      <VBMyExtensionTemplateID>Microsoft.VisualBasic.Web.MyExtension</VBMyExtensionTemplateID>
+      <VBMyExtensionTemplateVersion>1.0.0.0</VBMyExtensionTemplateVersion>
+    </Compile>
+    <Compile Include="My Project\Resources.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Settings.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="reports\Reporte.vb" />
+    <Compile Include="VerDocumentoCsv.aspx.designer.vb">
+      <DependentUpon>VerDocumentoCsv.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="VerDocumentoCsv.aspx.vb">
+      <DependentUpon>VerDocumentoCsv.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="My Project\Resources.resx">
+      <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.vb</LastGenOutput>
+      <CustomToolNamespace>My.Resources</CustomToolNamespace>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="ApplicationInsights.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="css\bootstrap\bootstrap-theme.css.map" />
+    <Content Include="css\bootstrap\bootstrap-theme.min.css.map" />
+    <Content Include="css\bootstrap\bootstrap.css.map" />
+    <Content Include="css\bootstrap\bootstrap.min.css.map" />
+    <Content Include="js\script\jquery-3.3.1.min.map" />
+    <Content Include="css\font-awesome-4.7.0\fonts\fontawesome-webfont.eot" />
+    <Content Include="css\font-awesome-4.7.0\fonts\fontawesome-webfont.ttf" />
+    <Content Include="css\font-awesome-4.7.0\fonts\fontawesome-webfont.woff" />
+    <Content Include="css\font-awesome-4.7.0\fonts\fontawesome-webfont.woff2" />
+    <Content Include="css\font-awesome-4.7.0\fonts\FontAwesome.otf" />
+    <Content Include="css\font-awesome-4.7.0\less\animated.less" />
+    <Content Include="css\font-awesome-4.7.0\less\bordered-pulled.less" />
+    <Content Include="css\font-awesome-4.7.0\less\core.less" />
+    <Content Include="css\font-awesome-4.7.0\less\fixed-width.less" />
+    <Content Include="css\font-awesome-4.7.0\less\font-awesome.less" />
+    <Content Include="css\font-awesome-4.7.0\less\icons.less" />
+    <Content Include="css\font-awesome-4.7.0\less\larger.less" />
+    <Content Include="css\font-awesome-4.7.0\less\list.less" />
+    <Content Include="css\font-awesome-4.7.0\less\mixins.less" />
+    <Content Include="css\font-awesome-4.7.0\less\path.less" />
+    <Content Include="css\font-awesome-4.7.0\less\rotated-flipped.less" />
+    <Content Include="css\font-awesome-4.7.0\less\screen-reader.less" />
+    <Content Include="css\font-awesome-4.7.0\less\stacked.less" />
+    <Content Include="css\font-awesome-4.7.0\less\variables.less" />
+    <Content Include="css\font-awesome-4.7.0\scss\font-awesome.scss" />
+    <Content Include="css\font-awesome-4.7.0\scss\_animated.scss" />
+    <Content Include="css\font-awesome-4.7.0\scss\_bordered-pulled.scss" />
+    <Content Include="css\font-awesome-4.7.0\scss\_core.scss" />
+    <Content Include="css\font-awesome-4.7.0\scss\_fixed-width.scss" />
+    <Content Include="css\font-awesome-4.7.0\scss\_icons.scss" />
+    <Content Include="css\font-awesome-4.7.0\scss\_larger.scss" />
+    <Content Include="css\font-awesome-4.7.0\scss\_list.scss" />
+    <Content Include="css\font-awesome-4.7.0\scss\_mixins.scss" />
+    <Content Include="css\font-awesome-4.7.0\scss\_path.scss" />
+    <Content Include="css\font-awesome-4.7.0\scss\_rotated-flipped.scss" />
+    <Content Include="css\font-awesome-4.7.0\scss\_screen-reader.scss" />
+    <Content Include="css\font-awesome-4.7.0\scss\_stacked.scss" />
+    <Content Include="css\font-awesome-4.7.0\scss\_variables.scss" />
+    <Content Include="js\script\angular.min.js.map" />
+    <None Include="My Project\Application.myapp">
+      <Generator>MyApplicationCodeGenerator</Generator>
+      <LastGenOutput>Application.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="My Project\PublishProfiles\Agenda Desarrollo.pubxml" />
+    <None Include="My Project\PublishProfiles\Agenda Producción.pubxml" />
+    <None Include="My Project\PublishProfiles\Kaplan Produccion %28Agenda%29.pubxml" />
+    <None Include="My Project\PublishProfiles\Local.pubxml" />
+    <None Include="My Project\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <CustomToolNamespace>My</CustomToolNamespace>
+      <LastGenOutput>Settings.Designer.vb</LastGenOutput>
+    </None>
+    <Content Include="packages.config" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionExplicit>On</OptionExplicit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionCompare>Binary</OptionCompare>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionStrict>Off</OptionStrict>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionInfer>On</OptionInfer>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\</OutputPath>
+    <DocumentationFile>Agenda.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+    <DebugType>Full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\</OutputPath>
+    <DocumentationFile>Agenda.xml</DocumentationFile>
+    <Optimize>true</Optimize>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.VisualBasic.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>2587</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:2587/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>Este proyecto hace referencia a los paquetes NuGet que faltan en este equipo. Use la restauración de paquetes NuGet para descargarlos. Para obtener más información, consulte http://go.microsoft.com/fwlink/?LinkID=322105. El archivo que falta es {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

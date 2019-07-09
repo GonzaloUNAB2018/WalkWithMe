@@ -1,0 +1,80 @@
+﻿<div ng-include="especialistaAusencias.header.url"></div>
+
+<!--<section class="gardient-bg-small hidden-xs">
+    <div class="container">
+        <h1 class="pull-left">Especialista</h1>
+        <div class="pull-right">
+            <ol class="breadcrumb">
+                <li><a href="#!calendario">Home</a></li>
+                <li class="active">Mantenedor Especialista</li>
+            </ol>
+        </div>
+    </div>
+</section>-->
+
+<section id="department-single" class="doted-bg1">
+    <div class="container effect8 nopadding">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="tab-content">
+                    <div role="tabpanel" class="tab-pane fade in active" id="home-tab">
+                        <h3 class="text-blue mt10">Mis Ausencias</h3>
+                        <p>Menú para registrar las ausencias y evitar el agendamiento de las sesiones de los pacientes.</p>
+                        <div class="department-prices">
+                            <div class="row">
+                                <form class="form-horizontal" name="frmAusencia" ng-submit="registrarAusencia()" role="form" ng-disabled="true">
+                                    <div class="col-md-3">
+                                        <h4>Dia</h4>
+                                        <input moment-picker="Dia" today="true" ng-model="Ausencia.Dia" max-view="day" format="DD/MM/YYYY" start-view="month" locale="es" class="form-control" placeholder="Dia" required>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <h4>Hora</h4>
+                                        <select class="form-control" required aria-required="true" name="Hora" id="Hora" data-ng-options="tipohora.ID as tipohora.Nombre for tipohora in TipoHoras" ng-model="Ausencia.Hora.ID">
+                                            <option value="">Seleccione</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <h4>Motivo</h4>
+                                        <textarea class="form-control" rows="1" ng-model="Ausencia.Motivo" maxlength="100" placeholder="Motivo" required></textarea>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <button id="btnGuardar" style="margin-top:50%" type="submit" class="btn  blue medium" data-loading-text="<i class='fa fa-spinner fa-spin'></i> Guardando ...">Guardar</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <span class="clearfix"></span>
+                        <section id="doctor-profile" class="mt30">
+                            <div class="row">
+                                <div class="col-xs-12 col-md-8 col-md-offset-2">
+                                    <div class="table-responsive">
+                                        <table class="table table-striped" align="center">
+                                            <thead>
+                                                <tr></tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr dir-paginate="ausencia in Ausencias | itemsPerPage: 8" pagination-id="pag_ausencias" ng-mouseover="row = $index" ng-mouseleave="row = -1">
+                                                    <td>{{ausencia.DiaString}}</td>
+                                                    <td>{{ausencia.Hora.Nombre}}</td>
+                                                    <td>{{ausencia.Motivo}}</td>
+                                                    <td>
+                                                        <div class="btn-group btn-group-xs" ng-show="row == $index">
+                                                            <button type="button" class="btn border small-xs" ng-click="eliminarAusencia(ausencia.Id)" title="Eliminar Ausencia" aria-label="Left Align"><i class="fa fa-remove"></i></button>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <dir-pagination-controls pagination-id="pag_ausencias" boundary-links="true" direction-links="true">	</dir-pagination-controls>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                        <span class="clearfix"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+

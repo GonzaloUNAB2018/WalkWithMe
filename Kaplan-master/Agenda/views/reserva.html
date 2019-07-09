@@ -1,0 +1,131 @@
+﻿<div class="modal fade" id="timeTableModal" tabindex="-1" role="dialog" aria-labelledby="Book">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Nueva Reserva</h4>
+            </div>
+            <div class="modal-body">
+                <form name="frmReserva" ng-submit="registrarReserva()" role="form" ng-disabled="true">
+                    
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <label class="control-label" for="Fecha">Fecha</label>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-check">
+                                <label class="control-label" for="Fecha" ng-bind="Reserva.Fecha"></label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <label class="control-label" for="Hora">Hora</label>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-check">
+                                <label class="control-label" for="Hora" ng-bind="Reserva.Hora">&nbsp;Horas</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <label class="control-label" for="nombre" ng-if="!rutvalido">Paciente</label>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-check">
+                                <select ng-if="!rutvalido" ng-model="PacienteFiltro.ID" ng-change="FiltrarPaciente(PacienteFiltro.ID)" class="js-example-basic-single form-control" style="width: 100%" name="pacienteFiltro" id="pacienteFiltro" data-ng-options="pacienteFiltro.ID as pacienteFiltro.Nombre for pacienteFiltro in PacientesFiltro">
+                                    <option value="">Paciente</option>
+                                </select>
+                                <script ng-if="!rutvalido" type="text/javascript">$(document).ready(function () { $('.js-example-basic-single').select2(); });</script>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-2 short-div">
+                            <label class="control-label" for="sexo">Rut</label>
+                        </div>
+                        <div class="col-sm-3">
+                            <input type="number" class="form-control" id="rut" placeholder="Rut Paciente" min="0" ng-disabled="rutvalido" ng-blur="getRut()" ng-model="Rut">
+                        </div>
+                        <div class="col-sm-3">
+                            <input type="text" class="form-control" id="dv" placeholder="Dv" ng-disabled="rutvalido" maxlength="1" ng-change="getRut()" ng-model="Dv">
+                        </div>
+                        <!--<div class="col-sm-4 text-right">
+                            <a class="btn small" ng-click="getRut()" role="button" ng-if="!rutvalido">Buscar</a>
+                        </div>-->
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <label class="control-label" for="Hora" style="vertical-align: 10px;">Paciente</label>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-check">
+                                <label class="control-label" for="Hora" style="vertical-align: 10px;" ng-bind="Paciente.Persona.Nombre + ' ' + Paciente.Persona.Paterno + ' ' + Paciente.Persona.Materno"></label>
+                            </div>
+                        </div>
+                        <!--<div class="col-sm-4 text-right">
+                            <a class="btn border small" ng-click="Limpiar()" role="button" ng-if="!rutvalido">Limpiar</a>
+                        </div>-->
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-2 short-div">
+                            <label class="control-label" for="plan">Plan</label>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-check">
+                                <select ng-model="Reserva.Plan.Id" class="form-control" required aria-required="true" name="plan" id="plan" data-ng-options="plan.Id as plan.Nombre for plan in Paciente.Planes | filter:filterPlanActivo()">
+                                    <option value="">Seleccione</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-2 short-div">
+                            <label class="control-label" for="reserva">Tipo Reserva</label>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-check">
+                                <select ng-model="Reserva.Tipo.ID" class="form-control" required aria-required="true" name="reserva" id="reserva" data-ng-options="tiporeserva.ID as tiporeserva.Nombre for tiporeserva in TipoReserva">
+                                    <option value="">Seleccione</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-2 short-div">
+                            <label class="control-label" for="sexo">Especialidad</label>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-check">
+                                <select ng-model="Especialidad.Id" ng-change="cargarEspecialistas(Especialidad.Id)" class="form-control" required aria-required="true" name="especialidad" id="especialidad" data-ng-options="especialidad.ID as especialidad.Nombre for especialidad in Especialidades">
+                                    <option value="">Seleccione</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-2 short-div">
+                            <label class="control-label" for="sexo">Especialista</label>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-check">
+                                <select ng-model="Reserva.Especialista.Id" class="form-control" required ng-change="EstadisticaxReserva(Paciente.Persona.Id, Reserva.Especialista.Id)" aria-required="true" name="especialista" id="especialista" data-ng-options="especialista.Id as especialista.Persona.Nombre + ' ' + especialista.Persona.Paterno + ' ' + especialista.Persona.Materno for especialista in Especialistas">
+                                    <option value="">Seleccione</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-9 text-left">
+                            <p class="label label-info pull-left">Total: {{total | number}} / Anuladas: {{anuladas | number}}</p>
+                        </div>
+                        <div class="col-sm-3 text-right">
+                            <button id="btnGuardar" type="submit" class="btn blue medium" data-loading-text="<i class='fa fa-spinner fa-spin'></i> Guardando ...">Guardar</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

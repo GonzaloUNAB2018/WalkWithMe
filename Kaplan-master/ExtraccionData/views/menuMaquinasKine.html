@@ -1,0 +1,95 @@
+﻿<div ng-include="menuMaquina.header.url"></div>
+<section id="suggestions" class="doted-bg1">
+    <div class="container-fluid" ng-class="{hidden: loading}">
+        <!-- Row -->
+        <div class="row">
+            <div class="col-md-12">
+                <form class="form-horizontal" name="frmRegistrosMedicos" id="contact" role="form" ng-disabled="true">
+                    <div class="section-title text-center mb20">
+                        <h2 class="animated hidden-xs" data-animation="bounceInLeft">Listado Registros Maquina Kinesiologia</h2>
+                        <p class="text-blue animated hidden-xs" data-animation="bounceInLeft">
+                            <a href="" ng-click="Export()">Exportar Datos <i class="fa fa-download fa-2x hidden-xs" aria-hidden="true"></i></a>
+                        </p>
+                    </div>
+                    <span class="clearfix"></span>
+                    <div class="row" ng-class="{hidden: loading}">
+                        <div class="col-xs-12">
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-condensed" style="background-color:#fcfdfee6; font-size:12px">
+                                    <thead>
+                                        <tr>
+                                            <th style="text-align:center; min-width:100px"><input class="form-control input-sm input-filtro" id="id_paciente" ng-model="id_paciente" placeholder="id_paciente" style="width: 100%;" ng-style="id_paciente ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:100px"><input class="form-control input-sm input-filtro" id="id_electro" ng-model="id_electro" placeholder="id_electro" style="width: 100%;" ng-style="id_electro ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:110px"><input class="form-control input-sm input-filtro" id="numero_ficha" ng-model="numero_ficha" placeholder="numero_ficha" style="width: 100%;" ng-style="numero_ficha ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:110px"><input class="form-control input-sm input-filtro" id="numero_reserva" ng-model="numero_reserva" placeholder="numero_reserva" style="width: 100%;" ng-style="numero_reserva ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:100px"><input class="form-control input-sm input-filtro" id="sexo" ng-model="sexo" placeholder="sexo" style="width: 100%;" ng-style="sexo ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:250px"><input class="form-control input-sm input-filtro" id="situacion_laboral" ng-model="situacion_laboral" placeholder="situacion_laboral" style="width: 100%;" ng-style="situacion_laboral ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:100px"><input class="form-control input-sm input-filtro" id="datoA" ng-model="datoA" placeholder="datoA" style="width: 100%;" ng-style="datoA ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:100px"><input class="form-control input-sm input-filtro" id="datoB" ng-model="datoB" placeholder="datoB" style="width: 100%;" ng-style="datoB ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:100px"><input class="form-control input-sm input-filtro" id="datoC" ng-model="datoC" placeholder="datoC" style="width: 100%;" ng-style="datoC ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:100px"><input class="form-control input-sm input-filtro" id="datoD" ng-model="datoD" placeholder="datoD" style="width: 100%;" ng-style="datoD ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:100px"><input class="form-control input-sm input-filtro" id="datoE" ng-model="datoE" placeholder="datoE" style="width: 100%;" ng-style="datoE ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:100px"><input class="form-control input-sm input-filtro" id="datoF" ng-model="datoF" placeholder="datoF" style="width: 100%;" ng-style="datoF ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr dir-paginate="registro in Registros | itemsPerPage: 1000 |  filter: {id_paciente : id_paciente} |  filter: {id_electro : id_electro} | filter: {numero_ficha  : numero_ficha } | filter: {numero_reserva : numero_reserva} | filter: {sexo  : sexo } | filter: {situacion_laboral  : situacion_laboral } | filter: {datoA  : datoA } | filter: {datoB : datoB} | filter: {datoC  : datoC } | filter: {datoD  : datoD } | filter: {datoE  : datoE } | filter: {datoF  : datoF }" pagination-id="pag_reg">
+                                            <td style="text-align:center;">{{ registro.id_paciente}}</td>
+                                            <td style="text-align:center;">{{ registro.id_electro}}</td>
+                                            <td style="text-align:center;">{{ registro.numero_ficha }}</td>
+                                            <td style="text-align:center;">{{ registro.numero_reserva }}</td>
+                                            <td>{{ registro.sexo }}</td>
+                                            <td>{{ registro.situacion_laboral }}</td>
+                                            <td style="text-align:center;">{{ registro.datoA }}</td>
+                                            <td style="text-align:center;">{{ registro.datoB}}</td>
+                                            <td style="text-align:center;">{{ registro.datoC }}</td>
+                                            <td style="text-align:center;">{{ registro.datoD }}</td>
+                                            <td style="text-align:center;">{{ registro.datoE }}</td>
+                                            <td style="text-align:center;">{{ registro.datoF }}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <dir-pagination-controls pagination-id="pag_reg" boundary-links="true" direction-links="true">	</dir-pagination-controls>
+                                <table id="paraReporte" class="table table-bordered table-condensed" style="background-color:#fcfdfeb3; font-size:12px" " ng-show="false">
+                                    <thead>
+                                        <tr>
+                                            <th>id_paciente </th>
+                                            <th>id_electro </th>
+                                            <th>numero_ficha </th>
+                                            <th>numero_reserva </th>
+                                            <th>sexo </th>
+                                            <th>situacion_laboral </th>
+                                            <th>datoA </th>
+                                            <th>datoB</th>
+                                            <th>datoC </th>
+                                            <th>datoD </th>
+                                            <th>datoE </th>
+                                            <th>datoF </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="registro in Registros | filter: {id_paciente : id_paciente} | filter: {id_electro : id_electro} | filter: {numero_ficha  : numero_ficha } | filter: {numero_reserva : numero_reserva} | filter: {sexo  : sexo } | filter: {situacion_laboral  : situacion_laboral } | filter: {datoA  : datoA } | filter: {datoB : datoB} | filter: {datoC  : datoC } | filter: {datoD  : datoD } | filter: {datoE  : datoE } | filter: {datoF  : datoF }">
+                                            <td>{{ registro.id_paciente}}</td>
+                                            <td>{{ registro.id_electro}}</td>
+                                            <td>{{ registro.numero_ficha }}</td>
+                                            <td>{{ registro.numero_reserva }}</td>
+                                            <td>{{ registro.sexo }}</td>
+                                            <td>{{ registro.situacion_laboral }}</td>
+                                            <td>{{ registro.datoA }}</td>
+                                            <td>{{ registro.datoB}}</td>
+                                            <td>{{ registro.datoC }}</td>
+                                            <td>{{ registro.datoD }}</td>
+                                            <td>{{ registro.datoE }}</td>
+                                            <td>{{ registro.datoF }}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <span class="clearfix"></span>
+            </div>
+        </div>
+    </div>
+</section>

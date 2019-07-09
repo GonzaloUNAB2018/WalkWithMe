@@ -1,0 +1,31 @@
+﻿Public Class RequerimientosNutricionales
+    Public Property GEB As Integer
+    Public Property FA As Integer
+    Public Property Energia As Integer
+    Public Property KcalDia As Integer
+    Public Property ProteinaPorc As Integer
+    Public Property ProteinaGra As Integer
+    Public Property ProteinaCal As Integer
+    Public Property ProteinaDia As Integer
+    Public Property LipidosPorc As Integer
+    Public Property LipidosGra As Integer
+    Public Property LipidosCal As Integer
+    Public Property LipidosDia As Integer
+    Public Property HidratosPorc As Integer
+    Public Property HidratosGra As Integer
+    Public Property HidratosCal As Integer
+    Public Property HidratosDia As Integer
+    Public Property SumaPorc As Integer
+    Public Property RequerimientoKCal As Integer
+    Public Property RequerimientoCho As Integer
+    Public Property RequerimientoLip As Integer
+    Public Property RequerimientoProt As Integer
+    Public Property AporteKCal As Integer
+    Public Property AporteCho As Integer
+    Public Property AporteLip As Integer
+    Public Property AporteProt As Integer
+    Public Property AdecuacionKCal As Integer
+    Public Property AdecuacionCho As Integer
+    Public Property AdecuacionLip As Integer
+    Public Property AdecuacionProt As Integer
+End Class

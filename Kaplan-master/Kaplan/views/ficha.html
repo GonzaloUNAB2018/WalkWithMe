@@ -1,0 +1,97 @@
+﻿<nav class="navbar navbar-default navbar-dark" role="navigation" style="padding-top:0">
+    <!-- Top Bar -->
+    <div class="top-bar dark">
+        <!-- Container -->
+        <div class="container-fluid">
+            <!-- Row -->
+            <div class="row mb50">
+                <div class="col-lg-6 pull-left col-sm-6 pull-left col-md-6 col-xs-12" ng-if="rutvalido">
+                    <div class="dropdown pull-left">
+                        <span class="dropdown-toggle" id="dropdownLang" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"><i class="fa fa-user" style="color:#fff"></i><span style="color:#fff">Paciente:</span> {{Titulo}} - Rut: {{RutPaciente}} <a href="" ng-click="LimpiarRut()"><i class="fa fa-window-close" aria-hidden="true"></i></a></span>
+                    </div>
+                </div>
+                <div class="col-lg-6 pull-right col-sm-6 pull-right col-md-6 col-xs-12">
+                    <div class="dropdown pull-right">
+                        <span class="dropdown-toggle" id="dropdownLang" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"><i class="fa fa-user-circle-o" style="color:#fff"></i> {{Nombres}} <span class="caret"></span></span>
+                        <ul class="dropdown-menu pull-right" aria-labelledby="dropdownLang">
+                            <li><a href="">Rol: {{NombreEspecialidad}}</a></li>
+                            <li><a href="" ng-click="CerrarSesion()">Cerrar Sesión</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div> <!-- ./end Row -->
+        </div> <!-- ./end Container -->
+    </div>
+    <!-- End / Top Bar -->
+    <!-- Nav -->
+    <nav class="navbar navbar-default navbar-dark" role="navigation">
+        <div class="container-fluid">
+            <!-- LOGO -->
+            <a class="navbar-brand page-scroll" href="" style="line-height: normal"><i class="fa fa-heartbeat hidden-xs" aria-hidden="true"></i> Fundación <span class="text-light">Kaplan</span></a>
+            <!-- END / LOGO -->
+
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse navbar-ex1-collapse" ng-if="rutvalido">
+                <ul class="nav navbar-nav navbar-right">
+                    <!-- Hidden li included to remove active class from about link when scrolled up past about section -->
+                    <li class="hidden">
+                        <a class="page-scroll" href="#page-top"></a>
+                    </li>
+                    <li class="dropdown">
+                        <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Registros Médicos <i class="fa fa-paperclip fa-2x hidden-xs" aria-hidden="true"></i></a>
+                        <ul class="dropdown-menu dropdown-menu-left">                            
+                            <li><a href="" ng-click="nav('views/fichaRegistroMedico.html')">Registros Médicos</a></li>
+                            <li><a href="" ng-click="nav('views/fichaExamen.html')">Exámenes</a></li>
+                            <li><a href="" ng-click="ModalEvolucion()">Reporte Evolución</a></li>
+                            <!--<li><a href="" ng-click="nav('views/fichaRegistroMedico.html')">Registro Manual</a></li>-->
+                            <li><a href="" ng-click="nav('views/fichaCargaArchivo.html')">Carga de Archivo</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Ficha Clínica <i class="fa fa-user-md fa-2x hidden-xs" aria-hidden="true"></i></a>
+                        <ul class="dropdown-menu dropdown-menu-left">
+                            <li><a href="" ng-click="nav('views/fichaEnfermeria.html')">Enfermería</a></li>
+                            <li><a href="" ng-click="nav('views/fichaKinesiologia.html')">Kinesiología</a></li>
+                            <li><a href="" ng-click="nav('views/fichaNutricion.html')">Nutrición</a></li>
+                            <li><a href="" ng-click="nav('views/fichaPsicologia.html')">Psicología</a></li>
+                            <li><a href="" ng-click="nav('views/fichaMedico.html')">Médico</a></li>
+                        </ul>
+                    </li>
+                    <!--<li>
+                        <a href="" ng-click="nav('views/fichaEnfermeria.html')">Ficha Enfermería <i class="fa fa-medkit fa-2x hidden-xs" aria-hidden="true"></i></a>
+                    </li>
+                    <li>
+                        <a href="" ng-click="nav('views/fichaKinesiologia.html')">Ficha Kinesiología <i class="fa fa-bicycle fa-2x hidden-xs" aria-hidden="true"></i></a>
+                    </li>
+                    <li>
+                        <a href="" ng-click="nav('views/fichaNutricion.html')">Ficha Nutricionista <i class="fa fa-cutlery fa-2x hidden-xs" aria-hidden="true"></i></a>
+                    </li>
+                    <li>
+                        <a href="" ng-click="nav('views/fichaPsicologia.html')">Ficha Psicólogo <i class="fa fa-comments fa-2x hidden-xs" aria-hidden="true"></i></a>
+                    </li>-->
+                    <!--<li>
+                        <a href="" ng-click="nav('views/fichaMedico.html')">Ficha Médico <i class="fa fa-stethoscope fa-2x hidden-xs" aria-hidden="true"></i></a>
+                    </li>-->
+                    <!--<li>
+                        <a href="" ng-click="nav('views/fichaExamen.html')">Exámenes <i class="fa fa-file-text-o fa-2x hidden-xs" aria-hidden="true"></i></a>
+                    </li>-->
+                    <!--<li>
+                        <a href="" ng-click="nav('views/fichaRegistroMedico.html')">Reg. Médicos <i class="fa fa-file-text fa-2x hidden-xs" aria-hidden="true"></i></a>
+                    </li>-->
+                </ul> <!-- END / NAVBAR RIGHT -->
+            </div>
+        </div> <!-- END CONTAINER -->
+    </nav>
+    <!-- ./end Nav -->
+</nav>
+<div ng-include="ficha.filePath.url"></div>

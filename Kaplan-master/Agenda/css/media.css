@@ -1,0 +1,112 @@
+/* CSS Media Queries */
+@media screen and (max-width: 780px){
+	#welcome .services:first-child {
+		margin-top: 30px;
+	}
+
+	#meet-doctors .doctor-box {
+		height: 240px !important;
+	}
+
+	#call-us p.number {
+		font-size: 46px;
+		line-height: 46px;
+	}
+
+	#blog .blog-post img, #blog .blog-post .content {
+		width: 100%;
+		float: none;
+	}
+
+	.navbar {
+		padding-top: 0;
+	}
+
+	.navbar-nav .open .dropdown-menu {
+	  	background-color: #32b8da;
+	  	color: #fff;
+		border-radius: 0 !important;
+	}
+
+	.navbar-default .navbar-nav .open .dropdown-menu>li>a:focus, .navbar-default .navbar-nav .open .dropdown-menu>li>a:hover {
+	  	color: #f4f5f7;
+	  	background-color: #4c6575;
+	}
+
+	.navbar-default .navbar-nav .open .dropdown-menu>li>a {
+		padding: 15px 25px;
+	  	color: #fff;
+	}
+
+	#meet-doctors-wide .doctor-box {
+		position: relative;
+		height: 240px;
+		margin-top: 92px;
+	}
+
+	footer h3 {
+		font-size: 24px;
+		margin-bottom: 10px;
+		position: relative;
+	}
+
+	footer .widget {
+		padding: 10px 0;
+	}
+
+	#before-after .img-before,	#before-after .img-after {
+		margin-right: 20px;
+	}
+	
+		
+	#home-w-form .home-intro-text {
+		padding: 20px 0 40px 0;
+	}
+}
+
+@media screen and (max-width: 980px){
+	#stats .stats-box {
+		margin-bottom: 20px;
+	}
+
+	#meet-doctors .doctor-box .doctor-box-content {
+		margin-top: 15px;
+	}
+
+	.item {
+		border-bottom: 1px solid #f4f4f4;
+	}
+
+	#stories .review {
+		margin-bottom: 30px;
+	}
+
+	.tab-pane {
+		margin-bottom: 20px;
+	}
+
+	.tab-content .tab-pane .content {
+		width: 100%;
+		float: left;
+		overflow: hidden;
+		font-weight: 300;
+	}
+
+	.tab-content .tab-pane .image {
+		display: none;
+	}
+
+	.tabs-menu .nav-tabs > li > a {
+	  margin-bottom: 0;
+	}
+}
+
+@media screen and (min-width: 780px){
+	.dropdown:hover .dropdown-menu {
+	    display: block;
+		-webkit-transition: all 0.5s ease;
+		   -moz-transition: all 0.5s ease;
+		     -o-transition: all 0.5s ease;
+		        transition: all 0.5s ease;
+	}
+}

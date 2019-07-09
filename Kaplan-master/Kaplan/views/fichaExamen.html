@@ -1,0 +1,59 @@
+﻿<section id="suggestions" class="doted-bg1" ng-controller="fichaExamenController">
+    <div class="container effect8  nopadding">
+        <!-- Row -->
+        <div class="row">
+            <div class="col-md-12">
+                <!-- Tab panes -->
+                <div class="tab-content">
+                    <div role="tabpanel" class="tab-pane fade in active" id="home-tab">
+                        <form class="form-horizontal mb20" name="frmExamen" id="contact"  role="form" ng-disabled="true">
+                            <div class="section-title text-center">
+                                <h2 class="animated hidden-xs" data-animation="bounceInLeft">Exámenes</h2>
+                                <p class="text-blue animated hidden-xs" data-animation="bounceInLeft">
+                                    Listado Exámenes
+                                </p>
+                                <a class="btn small pull-left mb40" ng-click="NuevoExamen()" role="button">
+                                    Agregar Exámen
+                                </a>
+                            </div>
+                            <span class="clearfix"></span>
+                            <div class="row" ng-class="{hidden: loading}">
+                                <div class="col-xs-12">
+                                    <div class="table-responsive">
+                                        <table class="table table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th>Nombre</th>                                                    
+                                                    <th>Descripción</th>
+                                                    <th>Fecha Examen</th>
+                                                    <th>Formato</th>
+                                                    <th>Guardado por</th>
+                                                    <th align="center">Descargar</th>
+                                                    <th align="center">Eliminar</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr dir-paginate="examen in Examenes | itemsPerPage: 20" pagination-id="pag_examen">
+                                                    <td>{{examen.Nombre}}</td>
+                                                    <td>{{examen.Descripcion}}</td>
+                                                    <td>{{examen.FechaString}}</td>
+                                                    <td>{{examen.Formato}}</td>
+                                                    <td>{{examen.EspecialistaNombre}}</td>
+                                                    <td align="center"><button type="button" title="Descargar" class="btn small-xs blue" ng-click="Descargar(examen.Id)" aria-label="Center Align"><i class="fa fa-download"></i></button></td>
+                                                    <td align="center"><button type="button" title="Eliminar" class="btn small-xs" ng-click="Eliminar(examen.Id)" aria-label="Center Align"><i class="fa fa-remove"></i></button></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <dir-pagination-controls pagination-id="pag_examen" boundary-links="true" direction-links="true">	</dir-pagination-controls>
+                                    </div>
+                                </div>
+                            </div>                            
+                        </form>
+                        <span class="clearfix"></span>
+                    </div>
+                </div>
+            </div>
+            <!-- ./end Tab Content -->
+        </div>
+    </div>
+</section>

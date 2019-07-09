@@ -1,0 +1,49 @@
+﻿<div class="modal fade" id="timeTableModal" tabindex="-1" role="dialog" aria-labelledby="Book">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Nuevo Ingreso de Examen</h4>
+            </div>
+            <div class="modal-body">
+                <form name="frmReserva" ng-submit="registrarExamen()" role="form" ng-disabled="true">
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <label class="control-label pull-right" for="Archivo">Nombre</label>
+                        </div>
+                        <div class="col-sm-4">
+                            <input ng-model="Examen.Nombre" type="text" class="form-control" id="ExNombre" placeholder="Nombre Exámen" required aria-required="true" ng-disabled="FormEditabe" maxlength="250">
+                        </div>
+                        <div class="col-sm-2">
+                            <label class="control-label pull-right" for="Fecha">Fecha</label>
+                        </div>
+                        <div class="col-sm-4">
+                            <input ng-model="Examen.Fecha" moment-picker="periodo" max-view="day" max-date="termino" format="DD/MM/YYYY" start-view="month" locale="es" name="periodo" id="periodo" class="form-control" placeholder="Fecha Exámen" ng-readonly="true" style="background-color:white">
+                        </div>
+                    </div>      
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <label class="control-label pull-right" for="Descripcion">Descripción del Exámen</label>
+                        </div>
+                        <div class="col-sm-10">
+                            <textarea ng-model="Examen.Descripcion" class="form-control" id="Descripcion" rows="4" placeholder="Descripción" required aria-required="true" ng-disabled="FormEditabe" maxlength="250"></textarea>
+                        </div>                        
+                    </div>  
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <label class="control-label pull-right" for="Descripcion">Exámen</label>
+                        </div>
+                        <div class="col-sm-10">
+                            <input type="file" id="examenFile" name="examenFile" file-model="examenFile" required />
+                        </div>
+                    </div>                
+                    <div class="row">
+                        <div class="col-sm-3 pull-right">
+                            <button id="btnGuardar" type="submit" class="btn blue medium" data-loading-text="<i class='fa fa-spinner fa-spin'></i> Guardando ...">Guardar</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

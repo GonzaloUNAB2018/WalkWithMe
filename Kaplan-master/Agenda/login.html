@@ -1,0 +1,41 @@
+﻿<!-- Nav -->
+<nav class="navbar navbar-default navbar-dark" role="navigation">
+    <div class="container">
+        <!-- LOGO -->
+        <a class="navbar-brand page-scroll" href="/ficha" style="line-height: normal"><i class="fa fa-heartbeat hidden-xs" aria-hidden="true"></i> Fundación <span class="text-light">Kaplan > Ficha</span></a>
+        <!-- END / LOGO -->
+
+    </div>
+</nav>
+<!-- ./end Nav -->
+<!-- Sectin Home No Slider -->
+<section id="home-no-slider">
+    <div class="container">
+        <div id="content" style="min-width:400px">
+            <h2 style="text-shadow: 3px 3px 2px #4c6575;"><b>Fundación</b> <br>Dr. Jorge Kaplan Meyer</h2>
+            <p></p>
+        </div>
+
+        <div id="form">
+            <div class="form-base" style="min-width: 210px; text-align: center">
+                <div class="form-header">
+                    <p style="font-size: 20px; font-weight: bold;">Bienvenido a Sistema Kaplan</p>
+                </div>
+                <form ng-submit="formSubmit()" class="form" id="FormLogin">
+                    <input type="text" class="form-control" ng-model="Usuario.User" placeholder="Usuario" required="" />
+                    <input type="password" class="form-control" ng-model="Usuario.Pass" placeholder="Contraseña" required=""/>
+                    <a href="#!/recuperar">¿Olvidaste tu contraseña? </a>
+                </form>
+                <div class="form-footer">
+                    <button type="submit" id="btnGuardar" class="btn blue small" form="FormLogin" style= "width: 100%; height:100%; font-size: 20px; font-weight: bold;" data-loading-text="<i class='fa fa-spinner fa-spin'></i> Ingresando ...">Iniciar Sesión</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- ./end Home No Slider -->
+<!-- Scroll to top -->
+<div class="scroll-top">
+    <a href="#totop"><i class="fa fa-angle-double-up"></i></a>
+</div>
+<!-- ./end Scroll to top -->

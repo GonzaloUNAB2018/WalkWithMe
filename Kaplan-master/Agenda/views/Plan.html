@@ -1,0 +1,43 @@
+﻿<div class="modal fade" id="timeTableModal" tabindex="-1" role="dialog" aria-labelledby="Book">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Nueva Planificacion de Sesiones</h4>
+            </div>
+            <div class="modal-body">
+                <form name="frmPlan" ng-submit="registrarPlan()" role="form" ng-disabled="true">
+                    <div class="form-group">
+                        <div class="col-sm-2">
+                            <label class="control-label" for="Nombre">Nombre del Plan</label>
+                        </div>
+                        <div class="col-sm-4">
+                            <input type="text" class="form-control" id="nombre" placeholder="Nombre del Planificacion" ng-model="Plan.Nombre" required maxlength="200">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-2 short-div">
+                            <label class="control-label" for="Cantidad">Cantidad de Sesiones</label>
+                        </div>
+                        <div class="col-sm-4">
+                            <input type="number" class="form-control" id="Cantidad" name="Cantidad" required placeholder="Cantidad de Sesiones" min="0" ng-maxlength="8" ng-model="Plan.Cantidad">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-2">
+                            <label class="control-label" for="Descripcion">Descripcion del Plan</label>
+                        </div>
+                        <div class="col-sm-10">
+                            <textarea class="form-control" rows="4" id="descripcion" required placeholder="Descripcion de la Planificacion" ng-model="Plan.Descripcion" maxlength="250"></textarea>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12 text-right">
+                            <button id="btnGuardar" type="submit" class="btn blue medium" data-loading-text="<i class='fa fa-spinner fa-spin'></i> Guardando ...">Registrar Planificacion</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

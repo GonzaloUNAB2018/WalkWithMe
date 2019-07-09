@@ -1,0 +1,110 @@
+﻿<div class="modal fade" id="timeTableModal" tabindex="-1" role="dialog" aria-labelledby="Book">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Modificación Reserva</h4>
+            </div>
+            <div class="modal-body">
+                <form name="frmReserva" ng-submit="anularReserva()" role="form" ng-disabled="true">
+                    <div ng-class="{hidden: !loading}">
+                        <h5>Cargando Reserva... <i class="fa fa-pencil hidden-xs" aria-hidden="true"></i></h5>
+                        <div class="progress">
+                            <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%; background-color: #32b8da;">
+                            </div>
+                        </div>
+                    </div>  
+                    <div class="row" ng-class="{hidden: loading}">
+                        <div class="col-sm-2">
+                            <label class="control-label" for="Fecha">Fecha</label>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-check">
+                                <label class="control-label" for="Fecha" ng-bind="Reserva.FechaString"></label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" ng-class="{hidden: loading}">
+                        <div class="col-sm-2">
+                            <label class="control-label" for="Hora">Hora</label>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-check">
+                                <label class="control-label" for="Hora" ng-bind="Reserva.Hora">&nbsp;Horas</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" ng-class="{hidden: loading}">
+                        <div class="col-sm-2 short-div">
+                            <label class="control-label" for="sexo">Rut</label>
+                        </div>
+                        <div class="col-sm-6">
+                            <label class="control-label" for="Fecha" ng-bind="(Reserva.Paciente.Persona.Rut + '-' + Reserva.Paciente.Persona.Dv)"></label>
+                        </div>                        
+                    </div>
+                    <div class="row" ng-class="{hidden: loading}">
+                        <div class="col-sm-2">
+                            <label class="control-label" for="Hora" style="vertical-align: 10px;">Paciente</label>
+                        </div>
+                        <div class="col-sm-6">
+                            <label class="control-label" for="Fecha" ng-bind="(Reserva.Paciente.Persona.Nombre) + ' ' + (Reserva.Paciente.Persona.Paterno) + ' ' + (Reserva.Paciente.Persona.Materno)"></label>
+                        </div>                     
+                    </div>
+                    <div class="row" ng-class="{hidden: loading}">
+                        <div class="col-sm-2 short-div">
+                            <label class="control-label" for="sexo">Especialidad</label>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-check">
+                                <label class="control-label" for="Fecha" ng-bind="Reserva.Especialista.Especialidad.Nombre"></label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" ng-class="{hidden: loading}">
+                        <div class="col-sm-2 short-div">
+                            <label class="control-label" for="sexo">Especialista</label>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-check">
+                                <label class="control-label" for="Fecha" ng-bind="(Reserva.Especialista.Persona.Nombre) + ' ' + (Reserva.Especialista.Persona.Paterno) + ' ' + (Reserva.Especialista.Persona.Materno)"></label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" ng-class="{hidden: loading}">
+                        <div class="col-sm-2 short-div">
+                            <label class="control-label" for="sexo">Estado</label>
+                        </div>
+                        <div class="col-sm-6">
+                            <select ng-change="cargarMotivos(Reserva.Estado.ID)" ng-model="Reserva.Estado.ID" class="form-control" required aria-required="true" name="estado" id="estado" data-ng-options="estado.ID as estado.Nombre for estado in TipoEstadoReservas">
+                                <option value="">Seleccione</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row" ng-class="{hidden: loading}">
+                        <div class="col-sm-2 short-div">
+                            <label class="control-label" for="sexo">Motivo</label>
+                        </div>
+                        <div class="col-sm-6">
+                            <select ng-disabled="!(Reserva.Estado.ID == 4 || Reserva.Estado.ID == 5)" ng-model="Reserva.Motivo.ID" class="form-control" required aria-required="true" name="motivo" id="motivo" data-ng-options="motivo.ID as motivo.Nombre for motivo in TipoMotivos">
+                                <option value="">Seleccione</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row" ng-class="{hidden: loading}">
+                        <div class="col-sm-2 short-div">
+                            <label class="control-label" for="sexo">Observación</label>
+                        </div>
+                        <div class="col-sm-10">
+                            <textarea class="form-control" rows="4" ng-model="Reserva.Observacion" maxlength="250"></textarea>
+                        </div>
+                    </div>
+                    <div class="row" ng-class="{hidden: loading}">
+                        <div class="col-sm-12 text-right">
+                            <button id="btnGuardar" type="submit" class="btn blue medium" data-loading-text="<i class='fa fa-spinner fa-spin'></i> Guardando ...">Guardar</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

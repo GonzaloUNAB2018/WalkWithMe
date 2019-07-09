@@ -1,0 +1,207 @@
+﻿<div ng-include="menuMaquinaCons.header.url"></div>
+<section id="suggestions" class="doted-bg1">
+    <div class="container-fluid" ng-class="{hidden: loading}">
+        <!-- Row -->
+        <div class="row">
+            <div class="col-md-12">
+                <form class="form-horizontal" name="frmRegistrosMedicos" id="contact" role="form" ng-disabled="true">
+                    <div class="section-title text-center mb20">
+                        <h2 class="animated hidden-xs" data-animation="bounceInLeft">Listado Registros Maquina Kinesiologia Constant</h2>
+                        <p class="text-blue animated hidden-xs" data-animation="bounceInLeft">
+                            <a href="" ng-click="Export()">Exportar Datos <i class="fa fa-download fa-2x hidden-xs" aria-hidden="true"></i></a>
+                        </p>
+                    </div>
+                    <span class="clearfix"></span>
+                    <div class="row" ng-class="{hidden: loading}">
+                        <div class="col-xs-12">
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-condensed" style="background-color:#fcfdfee6; font-size:12px">
+                                    <thead>
+                                        <tr>
+                                            <th style="text-align:center; min-width:250px"><input class="form-control input-sm input-filtro" id="id_electro" ng-model="id_electro" placeholder="id_electro" style="width: 100%;" ng-style="id_electro? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:250px"><input class="form-control input-sm input-filtro" id="id_paciente" ng-model="id_paciente" placeholder="id_paciente" style="width: 100%;" ng-style="id_paciente? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:250px"><input class="form-control input-sm input-filtro" id="numero_ficha" ng-model="numero_ficha" placeholder="numero_ficha" style="width: 100%;" ng-style="numero_ficha? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:250px"><input class="form-control input-sm input-filtro" id="numero_reserva" ng-model="numero_reserva" placeholder="numero_reserva" style="width: 100%;" ng-style="numero_reserva? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:250px"><input class="form-control input-sm input-filtro" id="sexo" ng-model="sexo" placeholder="sexo" style="width: 100%;" ng-style="sexo? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:250px"><input class="form-control input-sm input-filtro" id="situacion_laboral" ng-model="situacion_laboral" placeholder="situacion_laboral" style="width: 100%;" ng-style="situacion_laboral? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:250px"><input class="form-control input-sm input-filtro" id="Starttest" ng-model="Starttest" placeholder="Starttest" style="width: 100%;" ng-style="Starttest? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:250px"><input class="form-control input-sm input-filtro" id="EndTest" ng-model="EndTest" placeholder="EndTest" style="width: 100%;" ng-style="EndTest? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:250px"><input class="form-control input-sm input-filtro" id="TestType" ng-model="TestType" placeholder="TestType" style="width: 100%;" ng-style="TestType? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:250px"><input class="form-control input-sm input-filtro" id="TotalTesttime" ng-model="TotalTesttime" placeholder="TotalTesttime" style="width: 100%;" ng-style="TotalTesttime? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:250px"><input class="form-control input-sm input-filtro" id="WarmupLoad" ng-model="WarmupLoad" placeholder="WarmupLoad" style="width: 100%;" ng-style="WarmupLoad? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:250px"><input class="form-control input-sm input-filtro" id="WarmupLoadIncrease" ng-model="WarmupLoadIncrease" placeholder="WarmupLoadIncrease" style="width: 100%;" ng-style="WarmupLoadIncrease? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:250px"><input class="form-control input-sm input-filtro" id="TrainingDuration" ng-model="TrainingDuration" placeholder="TrainingDuration" style="width: 100%;" ng-style="TrainingDuration? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:250px"><input class="form-control input-sm input-filtro" id="TrainingLoad" ng-model="TrainingLoad" placeholder="TrainingLoad" style="width: 100%;" ng-style="TrainingLoad? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:250px"><input class="form-control input-sm input-filtro" id="RelativeDecrease" ng-model="RelativeDecrease" placeholder="RelativeDecrease" style="width: 100%;" ng-style="RelativeDecrease? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:250px"><input class="form-control input-sm input-filtro" id="AlarmLimit" ng-model="AlarmLimit" placeholder="AlarmLimit" style="width: 100%;" ng-style="AlarmLimit? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:250px"><input class="form-control input-sm input-filtro" id="LoadLimit" ng-model="LoadLimit" placeholder="LoadLimit" style="width: 100%;" ng-style="LoadLimit? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:250px"><input class="form-control input-sm input-filtro" id="NIBPDuration" ng-model="NIBPDuration" placeholder="NIBPDuration" style="width: 100%;" ng-style="NIBPDuration? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:250px"><input class="form-control input-sm input-filtro" id="Warmup1Time" ng-model="Warmup1Time" placeholder="Warmup1Time" style="width: 100%;" ng-style="Warmup1Time? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:250px"><input class="form-control input-sm input-filtro" id="RestingPulse" ng-model="RestingPulse" placeholder="RestingPulse" style="width: 100%;" ng-style="RestingPulse? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:250px"><input class="form-control input-sm input-filtro" id="RestingBloodPressure" ng-model="RestingBloodPressure" placeholder="RestingBloodPressure" style="width: 100%;" ng-style="RestingBloodPressure? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:250px"><input class="form-control input-sm input-filtro" id="Warmup2Time" ng-model="Warmup2Time" placeholder="Warmup2Time" style="width: 100%;" ng-style="Warmup2Time? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:250px"><input class="form-control input-sm input-filtro" id="TrainingTime" ng-model="TrainingTime" placeholder="TrainingTime" style="width: 100%;" ng-style="TrainingTime? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:250px"><input class="form-control input-sm input-filtro" id="StressPulse" ng-model="StressPulse" placeholder="StressPulse" style="width: 100%;" ng-style="StressPulse? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:250px"><input class="form-control input-sm input-filtro" id="StressAvgPulse" ng-model="StressAvgPulse" placeholder="StressAvgPulse" style="width: 100%;" ng-style="StressAvgPulse? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:250px"><input class="form-control input-sm input-filtro" id="StressBloodPressure" ng-model="StressBloodPressure" placeholder="StressBloodPressure" style="width: 100%;" ng-style="StressBloodPressure? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:250px"><input class="form-control input-sm input-filtro" id="Recovery1Time" ng-model="Recovery1Time" placeholder="Recovery1Time" style="width: 100%;" ng-style="Recovery1Time? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:250px"><input class="form-control input-sm input-filtro" id="RecoveryPulse" ng-model="RecoveryPulse" placeholder="RecoveryPulse" style="width: 100%;" ng-style="RecoveryPulse? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:250px"><input class="form-control input-sm input-filtro" id="RecoveryBloodPressure" ng-model="RecoveryBloodPressure" placeholder="RecoveryBloodPressure" style="width: 100%;" ng-style="RecoveryBloodPressure? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:250px"><input class="form-control input-sm input-filtro" id="Recovery2Time" ng-model="Recovery2Time" placeholder="Recovery2Time" style="width: 100%;" ng-style="Recovery2Time? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:250px"><input class="form-control input-sm input-filtro" id="LoadValues" ng-model="LoadValues" placeholder="LoadValues" style="width: 100%;" ng-style="LoadValues? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:250px"><input class="form-control input-sm input-filtro" id="BeginCons" ng-model="BeginCons" placeholder="BeginCons" style="width: 100%;" ng-style="BeginCons? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:250px"><input class="form-control input-sm input-filtro" id="EndCons" ng-model="EndCons" placeholder="EndCons" style="width: 100%;" ng-style="EndCons? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:250px"><input class="form-control input-sm input-filtro" id="Maximum" ng-model="Maximum" placeholder="Maximum" style="width: 100%;" ng-style="Maximum? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:250px"><input class="form-control input-sm input-filtro" id="Minimum" ng-model="Minimum" placeholder="Minimum" style="width: 100%;" ng-style="Minimum? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:250px"><input class="form-control input-sm input-filtro" id="Joule" ng-model="Joule" placeholder="Joule" style="width: 100%;" ng-style="Joule? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:250px"><input class="form-control input-sm input-filtro" id="AverageLoad" ng-model="AverageLoad" placeholder="AverageLoad" style="width: 100%;" ng-style="AverageLoad? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:250px"><input class="form-control input-sm input-filtro" id="JouleBeats" ng-model="JouleBeats" placeholder="JouleBeats" style="width: 100%;" ng-style="JouleBeats? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:250px"><input class="form-control input-sm input-filtro" id="VO2Max" ng-model="VO2Max" placeholder="VO2Max" style="width: 100%;" ng-style="VO2Max? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:250px"><input class="form-control input-sm input-filtro" id="Borgscale" ng-model="Borgscale" placeholder="Borgscale" style="width: 100%;" ng-style="Borgscale? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr dir-paginate="registro in Registros | itemsPerPage: 1000 |  filter: {id_electro : id_electro} | filter: {id_paciente : id_paciente} | filter: {numero_ficha : numero_ficha} | filter: {numero_reserva : numero_reserva} | filter: {sexo : sexo} | filter: {situacion_laboral : situacion_laboral} | filter: {Starttest : Starttest} | filter: {EndTest : EndTest} | filter: {TestType : TestType} | filter: {TotalTesttime : TotalTesttime} | filter: {WarmupLoad : WarmupLoad} | filter: {WarmupLoadIncrease : WarmupLoadIncrease} | filter: {TrainingDuration : TrainingDuration} | filter: {TrainingLoad : TrainingLoad} | filter: {RelativeDecrease : RelativeDecrease} | filter: {AlarmLimit : AlarmLimit} | filter: {LoadLimit : LoadLimit} | filter: {NIBPDuration : NIBPDuration} | filter: {Warmup1Time : Warmup1Time} | filter: {RestingPulse : RestingPulse} | filter: {RestingBloodPressure : RestingBloodPressure} | filter: {Warmup2Time : Warmup2Time} | filter: {TrainingTime : TrainingTime} | filter: {StressPulse : StressPulse} | filter: {StressAvgPulse : StressAvgPulse} | filter: {StressBloodPressure : StressBloodPressure} | filter: {Recovery1Time : Recovery1Time} | filter: {RecoveryPulse : RecoveryPulse} | filter: {RecoveryBloodPressure : RecoveryBloodPressure} | filter: {Recovery2Time : Recovery2Time} | filter: {LoadValues : LoadValues} | filter: {BeginCons : BeginCons} | filter: {EndCons : EndCons} | filter: {Maximum : Maximum} | filter: {Minimum : Minimum} | filter: {Joule : Joule} | filter: {AverageLoad : AverageLoad} | filter: {JouleBeats : JouleBeats} | filter: {VO2Max : VO2Max} | filter: {Borgscale : Borgscale}" pagination-id="pag_reg">
+                                            <td>{{ registro.id_electro}}</td>
+                                            <td>{{ registro.id_paciente}}</td>
+                                            <td>{{ registro.numero_ficha}}</td>
+                                            <td>{{ registro.numero_reserva}}</td>
+                                            <td>{{ registro.sexo}}</td>
+                                            <td>{{ registro.situacion_laboral}}</td>
+                                            <td>{{ registro.Starttest}}</td>
+                                            <td>{{ registro.EndTest}}</td>
+                                            <td>{{ registro.TestType}}</td>
+                                            <td>{{ registro.TotalTesttime}}</td>
+                                            <td>{{ registro.WarmupLoad}}</td>
+                                            <td>{{ registro.WarmupLoadIncrease}}</td>
+                                            <td>{{ registro.TrainingDuration}}</td>
+                                            <td>{{ registro.TrainingLoad}}</td>
+                                            <td>{{ registro.RelativeDecrease}}</td>
+                                            <td>{{ registro.AlarmLimit}}</td>
+                                            <td>{{ registro.LoadLimit}}</td>
+                                            <td>{{ registro.NIBPDuration}}</td>
+                                            <td>{{ registro.Warmup1Time}}</td>
+                                            <td>{{ registro.RestingPulse}}</td>
+                                            <td>{{ registro.RestingBloodPressure}}</td>
+                                            <td>{{ registro.Warmup2Time}}</td>
+                                            <td>{{ registro.TrainingTime}}</td>
+                                            <td>{{ registro.StressPulse}}</td>
+                                            <td>{{ registro.StressAvgPulse}}</td>
+                                            <td>{{ registro.StressBloodPressure}}</td>
+                                            <td>{{ registro.Recovery1Time}}</td>
+                                            <td>{{ registro.RecoveryPulse}}</td>
+                                            <td>{{ registro.RecoveryBloodPressure}}</td>
+                                            <td>{{ registro.Recovery2Time}}</td>
+                                            <td>{{ registro.LoadValues}}</td>
+                                            <td>{{ registro.BeginCons}}</td>
+                                            <td>{{ registro.EndCons}}</td>
+                                            <td>{{ registro.Maximum}}</td>
+                                            <td>{{ registro.Minimum}}</td>
+                                            <td>{{ registro.Joule}}</td>
+                                            <td>{{ registro.AverageLoad}}</td>
+                                            <td>{{ registro.JouleBeats}}</td>
+                                            <td>{{ registro.VO2Max}}</td>
+                                            <td>{{ registro.Borgscale}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <dir-pagination-controls pagination-id="pag_reg" boundary-links="true" direction-links="true">	</dir-pagination-controls>
+                                <table id="paraReporte" class="table table-bordered table-condensed" style="background-color:#fcfdfeb3; font-size:12px" " ng-show="false">
+                                    <thead>
+                                        <tr>
+                                            <th>id_electro</th>
+                                            <th>id_paciente</th>
+                                            <th>numero_ficha</th>
+                                            <th>numero_reserva</th>
+                                            <th>sexo</th>
+                                            <th>situacion_laboral</th>
+                                            <th>Starttest</th>
+                                            <th>EndTest</th>
+                                            <th>TestType</th>
+                                            <th>TotalTesttime</th>
+                                            <th>WarmupLoad</th>
+                                            <th>WarmupLoadIncrease</th>
+                                            <th>TrainingDuration</th>
+                                            <th>TrainingLoad</th>
+                                            <th>RelativeDecrease</th>
+                                            <th>AlarmLimit</th>
+                                            <th>LoadLimit</th>
+                                            <th>NIBPDuration</th>
+                                            <th>Warmup1Time</th>
+                                            <th>RestingPulse</th>
+                                            <th>RestingBloodPressure</th>
+                                            <th>Warmup2Time</th>
+                                            <th>TrainingTime</th>
+                                            <th>StressPulse</th>
+                                            <th>StressAvgPulse</th>
+                                            <th>StressBloodPressure</th>
+                                            <th>Recovery1Time</th>
+                                            <th>RecoveryPulse</th>
+                                            <th>RecoveryBloodPressure</th>
+                                            <th>Recovery2Time</th>
+                                            <th>LoadValues</th>
+                                            <th>BeginCons</th>
+                                            <th>EndCons</th>
+                                            <th>Maximum</th>
+                                            <th>Minimum</th>
+                                            <th>Joule</th>
+                                            <th>AverageLoad</th>
+                                            <th>JouleBeats</th>
+                                            <th>VO2Max</th>
+                                            <th>Borgscale</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="registro in Registros | filter: {id_electro : id_electro} | filter: {id_paciente : id_paciente} | filter: {numero_ficha : numero_ficha} | filter: {numero_reserva : numero_reserva} | filter: {sexo : sexo} | filter: {situacion_laboral : situacion_laboral} | filter: {Starttest : Starttest} | filter: {EndTest : EndTest} | filter: {TestType : TestType} | filter: {TotalTesttime : TotalTesttime} | filter: {WarmupLoad : WarmupLoad} | filter: {WarmupLoadIncrease : WarmupLoadIncrease} | filter: {TrainingDuration : TrainingDuration} | filter: {TrainingLoad : TrainingLoad} | filter: {RelativeDecrease : RelativeDecrease} | filter: {AlarmLimit : AlarmLimit} | filter: {LoadLimit : LoadLimit} | filter: {NIBPDuration : NIBPDuration} | filter: {Warmup1Time : Warmup1Time} | filter: {RestingPulse : RestingPulse} | filter: {RestingBloodPressure : RestingBloodPressure} | filter: {Warmup2Time : Warmup2Time} | filter: {TrainingTime : TrainingTime} | filter: {StressPulse : StressPulse} | filter: {StressAvgPulse : StressAvgPulse} | filter: {StressBloodPressure : StressBloodPressure} | filter: {Recovery1Time : Recovery1Time} | filter: {RecoveryPulse : RecoveryPulse} | filter: {RecoveryBloodPressure : RecoveryBloodPressure} | filter: {Recovery2Time : Recovery2Time} | filter: {LoadValues : LoadValues} | filter: {BeginCons : BeginCons} | filter: {EndCons : EndCons} | filter: {Maximum : Maximum} | filter: {Minimum : Minimum} | filter: {Joule : Joule} | filter: {AverageLoad : AverageLoad} | filter: {JouleBeats : JouleBeats} | filter: {VO2Max : VO2Max} | filter: {Borgscale : Borgscale}">
+                                            <td>{{ registro.id_electro}}</td>
+                                            <td>{{ registro.id_paciente}}</td>
+                                            <td>{{ registro.numero_ficha}}</td>
+                                            <td>{{ registro.numero_reserva}}</td>
+                                            <td>{{ registro.sexo}}</td>
+                                            <td>{{ registro.situacion_laboral}}</td>
+                                            <td>{{ registro.Starttest}}</td>
+                                            <td>{{ registro.EndTest}}</td>
+                                            <td>{{ registro.TestType}}</td>
+                                            <td>{{ registro.TotalTesttime}}</td>
+                                            <td>{{ registro.WarmupLoad}}</td>
+                                            <td>{{ registro.WarmupLoadIncrease}}</td>
+                                            <td>{{ registro.TrainingDuration}}</td>
+                                            <td>{{ registro.TrainingLoad}}</td>
+                                            <td>{{ registro.RelativeDecrease}}</td>
+                                            <td>{{ registro.AlarmLimit}}</td>
+                                            <td>{{ registro.LoadLimit}}</td>
+                                            <td>{{ registro.NIBPDuration}}</td>
+                                            <td>{{ registro.Warmup1Time}}</td>
+                                            <td>{{ registro.RestingPulse}}</td>
+                                            <td>{{ registro.RestingBloodPressure}}</td>
+                                            <td>{{ registro.Warmup2Time}}</td>
+                                            <td>{{ registro.TrainingTime}}</td>
+                                            <td>{{ registro.StressPulse}}</td>
+                                            <td>{{ registro.StressAvgPulse}}</td>
+                                            <td>{{ registro.StressBloodPressure}}</td>
+                                            <td>{{ registro.Recovery1Time}}</td>
+                                            <td>{{ registro.RecoveryPulse}}</td>
+                                            <td>{{ registro.RecoveryBloodPressure}}</td>
+                                            <td>{{ registro.Recovery2Time}}</td>
+                                            <td>{{ registro.LoadValues}}</td>
+                                            <td>{{ registro.BeginCons}}</td>
+                                            <td>{{ registro.EndCons}}</td>
+                                            <td>{{ registro.Maximum}}</td>
+                                            <td>{{ registro.Minimum}}</td>
+                                            <td>{{ registro.Joule}}</td>
+                                            <td>{{ registro.AverageLoad}}</td>
+                                            <td>{{ registro.JouleBeats}}</td>
+                                            <td>{{ registro.VO2Max}}</td>
+                                            <td>{{ registro.Borgscale}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <span class="clearfix"></span>
+            </div>
+        </div>
+    </div>
+</section>

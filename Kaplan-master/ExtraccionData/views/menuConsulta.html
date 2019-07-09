@@ -1,0 +1,931 @@
+﻿<div ng-include="menu.header.url"></div>
+<section id="suggestions" class="doted-bg1">
+    <div class="container-fluid" ng-class="{hidden: loading}">
+        <!-- Row -->
+        <div class="row">
+            <div class="col-md-12">
+                <form class="form-horizontal" name="frmRegistrosMedicos" id="contact" role="form" ng-disabled="true">
+                    <div class="section-title text-center mb20">
+                        <h2 class="animated hidden-xs" data-animation="bounceInLeft">Listado Fichas Medicas</h2>
+                        <p class="text-blue animated hidden-xs" data-animation="bounceInLeft">
+                            <a href="" ng-click="Export()">Exportar Datos <i class="fa fa-download fa-2x hidden-xs" aria-hidden="true"></i></a>
+                        </p>
+                    </div>
+                    <span class="clearfix"></span>
+                    <div class="row" ng-class="{hidden: loading}">
+                        <div class="col-xs-12">
+                            <div class="table-responsive" >
+                                <table class="table table-bordered table-condensed" style="background-color:#fcfdfee6; font-size:12px">
+                                    <thead>
+                                        <tr>
+                                            <th style="text-align:center; min-width:100px"><input class="form-control input-sm input-filtro" id="id_paciente" ng-model="id_paciente" placeholder="id_paciente" style="width: 100%;" ng-style="id_paciente? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:110px"><input class="form-control input-sm input-filtro" id="numero_ficha " ng-model="numero_ficha " placeholder="numero_ficha " style="width: 100%;" ng-style="numero_ficha ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:100px"><input class="form-control input-sm input-filtro" id="sexo " ng-model="sexo " placeholder="sexo " style="width: 100%;" ng-style="sexo ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:250px"><input class="form-control input-sm input-filtro" id="situacion_laboral " ng-model="situacion_laboral " placeholder="situacion_laboral " style="width: 100%;" ng-style="situacion_laboral ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:100px"><input class="form-control input-sm input-filtro" id="peso_actual " ng-model="peso_actual " placeholder="peso_actual " style="width: 100%;" ng-style="peso_actual ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:100px"><input class="form-control input-sm input-filtro" id="talla" ng-model="talla" placeholder="talla" style="width: 100%;" ng-style="talla? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:150px"><input class="form-control input-sm input-filtro" id="masa_grasa_corporal " ng-model="masa_grasa_corporal " placeholder="masa_grasa_corporal " style="width: 100%;" ng-style="masa_grasa_corporal ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:110px"><input class="form-control input-sm input-filtro" id="masa_magra " ng-model="masa_magra " placeholder="masa_magra " style="width: 100%;" ng-style="masa_magra ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:110px"><input class="form-control input-sm input-filtro" id="indice_cintura " ng-model="indice_cintura " placeholder="indice_cintura " style="width: 100%;" ng-style="indice_cintura ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:100px"><input class="form-control input-sm input-filtro" id="MNA " ng-model="MNA " placeholder="MNA " style="width: 100%;" ng-style="MNA ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:120px"><input class="form-control input-sm input-filtro" id="peso_habitual " ng-model="peso_habitual " placeholder="peso_habitual " style="width: 100%;" ng-style="peso_habitual ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:130px"><input class="form-control input-sm input-filtro" id="masa_magra_porc " ng-model="masa_magra_porc " placeholder="masa_magra_porc " style="width: 100%;" ng-style="masa_magra_porc ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:110px"><input class="form-control input-sm input-filtro" id="grasa_viceral " ng-model="grasa_viceral " placeholder="grasa_viceral " style="width: 100%;" ng-style="grasa_viceral ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:110px"><input class="form-control input-sm input-filtro" id="porc_cintura " ng-model="porc_cintura " placeholder="porc_cintura " style="width: 100%;" ng-style="porc_cintura ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:250px"><input class="form-control input-sm input-filtro" id="cribaje " ng-model="cribaje " placeholder="cribaje " style="width: 100%;" ng-style="cribaje ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:250px"><input class="form-control input-sm input-filtro" id="apetito " ng-model="apetito " placeholder="apetito " style="width: 100%;" ng-style="apetito ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:250px"><input class="form-control input-sm input-filtro" id="alergia_alimentaria " ng-model="alergia_alimentaria " placeholder="alergia_alimentaria " style="width: 100%;" ng-style="alergia_alimentaria ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:250px"><input class="form-control input-sm input-filtro" id="preferencia_alimentaria " ng-model="preferencia_alimentaria " placeholder="preferencia_alimentaria " style="width: 100%;" ng-style="preferencia_alimentaria ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:250px"><input class="form-control input-sm input-filtro" id="intolerancia_alimentaria " ng-model="intolerancia_alimentaria " placeholder="intolerancia_alimentaria " style="width: 100%;" ng-style="intolerancia_alimentaria ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:250px"><input class="form-control input-sm input-filtro" id="aversaciones_alimentaria" ng-model="aversaciones_alimentaria" placeholder="aversaciones_alimentaria" style="width: 100%;" ng-style="aversaciones_alimentaria? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:250px"><input class="form-control input-sm input-filtro" id="consumo_suplemento " ng-model="consumo_suplemento " placeholder="consumo_suplemento " style="width: 100%;" ng-style="consumo_suplemento ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:120px"><input class="form-control input-sm input-filtro" id="hora_desayuno " ng-model="hora_desayuno " placeholder="hora_desayuno " style="width: 100%;" ng-style="hora_desayuno ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:250px"><input class="form-control input-sm input-filtro" id="gramaje_desayuno " ng-model="gramaje_desayuno " placeholder="gramaje_desayuno " style="width: 100%;" ng-style="gramaje_desayuno ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:120px"><input class="form-control input-sm input-filtro" id="hora_colacion " ng-model="hora_colacion " placeholder="hora_colacion " style="width: 100%;" ng-style="hora_colacion ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:250px"><input class="form-control input-sm input-filtro" id="gramaje_colacion " ng-model="gramaje_colacion " placeholder="gramaje_colacion " style="width: 100%;" ng-style="gramaje_colacion ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:120px"><input class="form-control input-sm input-filtro" id="hora_almuerzo " ng-model="hora_almuerzo " placeholder="hora_almuerzo " style="width: 100%;" ng-style="hora_almuerzo ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:250px"><input class="form-control input-sm input-filtro" id="gramaje_almuerzo " ng-model="gramaje_almuerzo " placeholder="gramaje_almuerzo " style="width: 100%;" ng-style="gramaje_almuerzo ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:120px"><input class="form-control input-sm input-filtro" id="hora_picoteo " ng-model="hora_picoteo " placeholder="hora_picoteo " style="width: 100%;" ng-style="hora_picoteo ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:250px"><input class="form-control input-sm input-filtro" id="gramaje_picoteo" ng-model="gramaje_picoteo" placeholder="gramaje_picoteo" style="width: 100%;" ng-style="gramaje_picoteo? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:120px"><input class="form-control input-sm input-filtro" id="hora_once " ng-model="hora_once " placeholder="hora_once " style="width: 100%;" ng-style="hora_once ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:250px"><input class="form-control input-sm input-filtro" id="gramaje_once " ng-model="gramaje_once " placeholder="gramaje_once " style="width: 100%;" ng-style="gramaje_once ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:120px"><input class="form-control input-sm input-filtro" id="hora_cena " ng-model="hora_cena " placeholder="hora_cena " style="width: 100%;" ng-style="hora_cena ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:250px"><input class="form-control input-sm input-filtro" id="gramaje_cena " ng-model="gramaje_cena " placeholder="gramaje_cena " style="width: 100%;" ng-style="gramaje_cena ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:120px"><input class="form-control input-sm input-filtro" id="hora_snack " ng-model="hora_snack " placeholder="hora_snack " style="width: 100%;" ng-style="hora_snack ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:250px"><input class="form-control input-sm input-filtro" id="gramaje_snack " ng-model="gramaje_snack " placeholder="gramaje_snack " style="width: 100%;" ng-style="gramaje_snack ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:250px"><input class="form-control input-sm input-filtro" id="ingesta_ali_observacion " ng-model="ingesta_ali_observacion " placeholder="ingesta_ali_observacion " style="width: 100%;" ng-style="ingesta_ali_observacion ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:250px"><input class="form-control input-sm input-filtro" id="diagnostico_nutricional_observacion " ng-model="diagnostico_nutricional_observacion " placeholder="diagnostico_nutricional_observacion " style="width: 100%;" ng-style="diagnostico_nutricional_observacion ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:100px"><input class="form-control input-sm input-filtro" id="geb " ng-model="geb " placeholder="geb " style="width: 100%;" ng-style="geb ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:100px"><input class="form-control input-sm input-filtro" id="energia " ng-model="energia " placeholder="energia " style="width: 100%;" ng-style="energia ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:100px"><input class="form-control input-sm input-filtro" id="FA " ng-model="FA " placeholder="FA " style="width: 100%;" ng-style="FA ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:100px"><input class="form-control input-sm input-filtro" id="proteina " ng-model="proteina " placeholder="proteina " style="width: 100%;" ng-style="proteina ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:100px"><input class="form-control input-sm input-filtro" id="lipidos " ng-model="lipidos " placeholder="lipidos " style="width: 100%;" ng-style="lipidos ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:180px"><input class="form-control input-sm input-filtro" id="aporte_alimentacion_KCAL " ng-model="aporte_alimentacion_KCAL " placeholder="aporte_alimentacion_KCAL " style="width: 100%;" ng-style="aporte_alimentacion_KCAL ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:180px"><input class="form-control input-sm input-filtro" id="aporte_alimentacion_cho" ng-model="aporte_alimentacion_cho" placeholder="aporte_alimentacion_cho" style="width: 100%;" ng-style="aporte_alimentacion_cho? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:180px"><input class="form-control input-sm input-filtro" id="aporte_alimentacion_lip " ng-model="aporte_alimentacion_lip " placeholder="aporte_alimentacion_lip " style="width: 100%;" ng-style="aporte_alimentacion_lip ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:180px"><input class="form-control input-sm input-filtro" id="aporte_alimentacion_prot" ng-model="aporte_alimentacion_prot" placeholder="aporte_alimentacion_prot" style="width: 100%;" ng-style="aporte_alimentacion_prot? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:250px"><input class="form-control input-sm input-filtro" id="prescripcion_dietetica " ng-model="prescripcion_dietetica " placeholder="prescripcion_dietetica " style="width: 100%;" ng-style="prescripcion_dietetica ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:250px"><input class="form-control input-sm input-filtro" id="indicaciones_generales " ng-model="indicaciones_generales " placeholder="indicaciones_generales " style="width: 100%;" ng-style="indicaciones_generales ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:250px"><input class="form-control input-sm input-filtro" id="diagnostico_nutricional_integrado " ng-model="diagnostico_nutricional_integrado " placeholder="diagnostico_nutricional_integrado " style="width: 100%;" ng-style="diagnostico_nutricional_integrado ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:250px"><input class="form-control input-sm input-filtro" id="objetivo_alimentario " ng-model="objetivo_alimentario " placeholder="objetivo_alimentario " style="width: 100%;" ng-style="objetivo_alimentario ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:250px"><input class="form-control input-sm input-filtro" id="intervencion_nutricional " ng-model="intervencion_nutricional " placeholder="intervencion_nutricional " style="width: 100%;" ng-style="intervencion_nutricional ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:250px"><input class="form-control input-sm input-filtro" id="consumo_fruta " ng-model="consumo_fruta " placeholder="consumo_fruta " style="width: 100%;" ng-style="consumo_fruta ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:250px"><input class="form-control input-sm input-filtro" id="consumo_verdura " ng-model="consumo_verdura " placeholder="consumo_verdura " style="width: 100%;" ng-style="consumo_verdura ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:250px"><input class="form-control input-sm input-filtro" id="consumo_lacteos " ng-model="consumo_lacteos " placeholder="consumo_lacteos " style="width: 100%;" ng-style="consumo_lacteos ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:250px"><input class="form-control input-sm input-filtro" id="consumo_carne " ng-model="consumo_carne " placeholder="consumo_carne " style="width: 100%;" ng-style="consumo_carne ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:250px"><input class="form-control input-sm input-filtro" id="consumo_grasas_azucar" ng-model="consumo_grasas_azucar" placeholder="consumo_grasas_azucar" style="width: 100%;" ng-style="consumo_grasas_azucar? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:250px"><input class="form-control input-sm input-filtro" id="consumo_legumbre " ng-model="consumo_legumbre " placeholder="consumo_legumbre " style="width: 100%;" ng-style="consumo_legumbre ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:250px"><input class="form-control input-sm input-filtro" id="consumo_pescado" ng-model="consumo_pescado" placeholder="consumo_pescado" style="width: 100%;" ng-style="consumo_pescado? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:250px"><input class="form-control input-sm input-filtro" id="consumo_sodio " ng-model="consumo_sodio " placeholder="consumo_sodio " style="width: 100%;" ng-style="consumo_sodio ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:250px"><input class="form-control input-sm input-filtro" id="consumo_liquido " ng-model="consumo_liquido " placeholder="consumo_liquido " style="width: 100%;" ng-style="consumo_liquido ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:250px"><input class="form-control input-sm input-filtro" id="sintomatologia_prevalente " ng-model="sintomatologia_prevalente " placeholder="sintomatologia_prevalente " style="width: 100%;" ng-style="sintomatologia_prevalente ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:250px"><input class="form-control input-sm input-filtro" id="derivacion_aps " ng-model="derivacion_aps " placeholder="derivacion_aps " style="width: 100%;" ng-style="derivacion_aps ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:250px"><input class="form-control input-sm input-filtro" id="apoyo_social_significativo " ng-model="apoyo_social_significativo " placeholder="apoyo_social_significativo " style="width: 100%;" ng-style="apoyo_social_significativo ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:250px"><input class="form-control input-sm input-filtro" id="problemas_sociales " ng-model="problemas_sociales " placeholder="problemas_sociales " style="width: 100%;" ng-style="problemas_sociales ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:250px"><input class="form-control input-sm input-filtro" id="personalidad_tipo_a" ng-model="personalidad_tipo_a" placeholder="personalidad_tipo_a" style="width: 100%;" ng-style="personalidad_tipo_a? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:250px"><input class="form-control input-sm input-filtro" id="trastorno_mental_diagnosticado " ng-model="trastorno_mental_diagnosticado " placeholder="trastorno_mental_diagnosticado " style="width: 100%;" ng-style="trastorno_mental_diagnosticado ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:250px"><input class="form-control input-sm input-filtro" id="trauma_post_operativo" ng-model="trauma_post_operativo" placeholder="trauma_post_operativo" style="width: 100%;" ng-style="trauma_post_operativo? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:250px"><input class="form-control input-sm input-filtro" id="conciencia_factor_riesgo " ng-model="conciencia_factor_riesgo " placeholder="conciencia_factor_riesgo " style="width: 100%;" ng-style="conciencia_factor_riesgo ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:250px"><input class="form-control input-sm input-filtro" id="dificultades_respuesta_estres" ng-model="dificultades_respuesta_estres" placeholder="dificultades_respuesta_estres" style="width: 100%;" ng-style="dificultades_respuesta_estres? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:250px"><input class="form-control input-sm input-filtro" id="ingreso_taller" ng-model="ingreso_taller" placeholder="ingreso_taller" style="width: 100%;" ng-style="ingreso_taller? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:250px"><input class="form-control input-sm input-filtro" id="tratamiento " ng-model="tratamiento " placeholder="tratamiento " style="width: 100%;" ng-style="tratamiento ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:250px"><input class="form-control input-sm input-filtro" id="observacion " ng-model="observacion " placeholder="observacion " style="width: 100%;" ng-style="observacion ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:160px"><input class="form-control input-sm input-filtro" id="funcion_fisica_ingreso " ng-model="funcion_fisica_ingreso " placeholder="funcion_fisica_ingreso " style="width: 100%;" ng-style="funcion_fisica_ingreso ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:160px"><input class="form-control input-sm input-filtro" id="funcion_fisica_egreso " ng-model="funcion_fisica_egreso " placeholder="funcion_fisica_egreso " style="width: 100%;" ng-style="funcion_fisica_egreso ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:160px"><input class="form-control input-sm input-filtro" id="rol_fisico_ingreso " ng-model="rol_fisico_ingreso " placeholder="rol_fisico_ingreso " style="width: 100%;" ng-style="rol_fisico_ingreso ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:160px"><input class="form-control input-sm input-filtro" id="rol_fisico_egreso " ng-model="rol_fisico_egreso " placeholder="rol_fisico_egreso " style="width: 100%;" ng-style="rol_fisico_egreso ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:160px"><input class="form-control input-sm input-filtro" id="dolor_corporal_ingreso " ng-model="dolor_corporal_ingreso " placeholder="dolor_corporal_ingreso " style="width: 100%;" ng-style="dolor_corporal_ingreso ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:160px"><input class="form-control input-sm input-filtro" id="dolor_corporal_egreso" ng-model="dolor_corporal_egreso" placeholder="dolor_corporal_egreso" style="width: 100%;" ng-style="dolor_corporal_egreso? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:160px"><input class="form-control input-sm input-filtro" id="salud_general_ingreso " ng-model="salud_general_ingreso " placeholder="salud_general_ingreso " style="width: 100%;" ng-style="salud_general_ingreso ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:160px"><input class="form-control input-sm input-filtro" id="salud_general_egreso " ng-model="salud_general_egreso " placeholder="salud_general_egreso " style="width: 100%;" ng-style="salud_general_egreso ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:160px"><input class="form-control input-sm input-filtro" id="vitalidad_ingreso " ng-model="vitalidad_ingreso " placeholder="vitalidad_ingreso " style="width: 100%;" ng-style="vitalidad_ingreso ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:160px"><input class="form-control input-sm input-filtro" id="vitalidad_egreso " ng-model="vitalidad_egreso " placeholder="vitalidad_egreso " style="width: 100%;" ng-style="vitalidad_egreso ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:160px"><input class="form-control input-sm input-filtro" id="funcion_social_ingreso " ng-model="funcion_social_ingreso " placeholder="funcion_social_ingreso " style="width: 100%;" ng-style="funcion_social_ingreso ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:160px"><input class="form-control input-sm input-filtro" id="funcion_social_egreso" ng-model="funcion_social_egreso" placeholder="funcion_social_egreso" style="width: 100%;" ng-style="funcion_social_egreso? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:160px"><input class="form-control input-sm input-filtro" id="rol_emocional_ingreso " ng-model="rol_emocional_ingreso " placeholder="rol_emocional_ingreso " style="width: 100%;" ng-style="rol_emocional_ingreso ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:160px"><input class="form-control input-sm input-filtro" id="rol_emocional_egreso " ng-model="rol_emocional_egreso " placeholder="rol_emocional_egreso " style="width: 100%;" ng-style="rol_emocional_egreso ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:160px"><input class="form-control input-sm input-filtro" id="salud_mental_ingreso " ng-model="salud_mental_ingreso " placeholder="salud_mental_ingreso " style="width: 100%;" ng-style="salud_mental_ingreso ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:160px"><input class="form-control input-sm input-filtro" id="salud_mental_egreso " ng-model="salud_mental_egreso " placeholder="salud_mental_egreso " style="width: 100%;" ng-style="salud_mental_egreso ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:250px"><input class="form-control input-sm input-filtro" id="observacion_sf36 " ng-model="observacion_sf36 " placeholder="observacion_sf36 " style="width: 100%;" ng-style="observacion_sf36 ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:160px"><input class="form-control input-sm input-filtro" id="ansiedad_ingreso " ng-model="ansiedad_ingreso " placeholder="ansiedad_ingreso " style="width: 100%;" ng-style="ansiedad_ingreso ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:160px"><input class="form-control input-sm input-filtro" id="ansiedad_egreso" ng-model="ansiedad_egreso" placeholder="ansiedad_egreso" style="width: 100%;" ng-style="ansiedad_egreso? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:160px"><input class="form-control input-sm input-filtro" id="depresion_ingreso " ng-model="depresion_ingreso " placeholder="depresion_ingreso " style="width: 100%;" ng-style="depresion_ingreso ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:160px"><input class="form-control input-sm input-filtro" id="depresion_egreso " ng-model="depresion_egreso " placeholder="depresion_egreso " style="width: 100%;" ng-style="depresion_egreso ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:160px"><input class="form-control input-sm input-filtro" id="subescala_a_ingreso " ng-model="subescala_a_ingreso " placeholder="subescala_a_ingreso " style="width: 100%;" ng-style="subescala_a_ingreso ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:160px"><input class="form-control input-sm input-filtro" id="subescala_a_egreso " ng-model="subescala_a_egreso " placeholder="subescala_a_egreso " style="width: 100%;" ng-style="subescala_a_egreso ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:160px"><input class="form-control input-sm input-filtro" id="subescala_b_ingreso " ng-model="subescala_b_ingreso " placeholder="subescala_b_ingreso " style="width: 100%;" ng-style="subescala_b_ingreso ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:160px"><input class="form-control input-sm input-filtro" id="subescala_b_egreso " ng-model="subescala_b_egreso " placeholder="subescala_b_egreso " style="width: 100%;" ng-style="subescala_b_egreso ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:250px"><input class="form-control input-sm input-filtro" id="observacion_escala_ansiedad" ng-model="observacion_escala_ansiedad" placeholder="observacion_escala_ansiedad" style="width: 100%;" ng-style="observacion_escala_ansiedad? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:250px"><input class="form-control input-sm input-filtro" id="antecedentes_plan_psico " ng-model="antecedentes_plan_psico " placeholder="antecedentes_plan_psico " style="width: 100%;" ng-style="antecedentes_plan_psico ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:250px"><input class="form-control input-sm input-filtro" id="objetivos_plan_psico " ng-model="objetivos_plan_psico " placeholder="objetivos_plan_psico " style="width: 100%;" ng-style="objetivos_plan_psico ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:250px"><input class="form-control input-sm input-filtro" id="diagnosticos_plan_psico " ng-model="diagnosticos_plan_psico " placeholder="diagnosticos_plan_psico " style="width: 100%;" ng-style="diagnosticos_plan_psico ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:250px"><input class="form-control input-sm input-filtro" id="intervencion_plan_psico " ng-model="intervencion_plan_psico " placeholder="intervencion_plan_psico " style="width: 100%;" ng-style="intervencion_plan_psico ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:250px"><input class="form-control input-sm input-filtro" id="evaluacion_plan_psico " ng-model="evaluacion_plan_psico " placeholder="evaluacion_plan_psico " style="width: 100%;" ng-style="evaluacion_plan_psico ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:250px"><input class="form-control input-sm input-filtro" id="evolucion_plan_psico " ng-model="evolucion_plan_psico " placeholder="evolucion_plan_psico " style="width: 100%;" ng-style="evolucion_plan_psico ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:140px"><input class="form-control input-sm input-filtro" id="ergo_fecha_ingreso " ng-model="ergo_fecha_ingreso " placeholder="ergo_fecha_ingreso " style="width: 100%;" ng-style="ergo_fecha_ingreso ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:140px"><input class="form-control input-sm input-filtro" id="ergo_fecha_egreso " ng-model="ergo_fecha_egreso " placeholder="ergo_fecha_egreso " style="width: 100%;" ng-style="ergo_fecha_egreso ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:150px"><input class="form-control input-sm input-filtro" id="ergo_VO2L_ingreso " ng-model="ergo_VO2L_ingreso " placeholder="ergo_VO2L_ingreso " style="width: 100%;" ng-style="ergo_VO2L_ingreso ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:150px"><input class="form-control input-sm input-filtro" id="ergo_VO2L_egreso " ng-model="ergo_VO2L_egreso " placeholder="ergo_VO2L_egreso " style="width: 100%;" ng-style="ergo_VO2L_egreso ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:150px"><input class="form-control input-sm input-filtro" id="ergo_VO2ML_ingreso " ng-model="ergo_VO2ML_ingreso " placeholder="ergo_VO2ML_ingreso " style="width: 100%;" ng-style="ergo_VO2ML_ingreso ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:150px"><input class="form-control input-sm input-filtro" id="ergo_VO2ML_egreso" ng-model="ergo_VO2ML_egreso" placeholder="ergo_VO2ML_egreso" style="width: 100%;" ng-style="ergo_VO2ML_egreso? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:150px"><input class="form-control input-sm input-filtro" id="ergo_FCMAX_ingreso " ng-model="ergo_FCMAX_ingreso " placeholder="ergo_FCMAX_ingreso " style="width: 100%;" ng-style="ergo_FCMAX_ingreso ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:150px"><input class="form-control input-sm input-filtro" id="ergo_FCMAX_egreso " ng-model="ergo_FCMAX_egreso " placeholder="ergo_FCMAX_egreso " style="width: 100%;" ng-style="ergo_FCMAX_egreso ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:150px"><input class="form-control input-sm input-filtro" id="ergo_pulso_ingreso " ng-model="ergo_pulso_ingreso " placeholder="ergo_pulso_ingreso " style="width: 100%;" ng-style="ergo_pulso_ingreso ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:150px"><input class="form-control input-sm input-filtro" id="ergo_pulso_egreso" ng-model="ergo_pulso_egreso" placeholder="ergo_pulso_egreso" style="width: 100%;" ng-style="ergo_pulso_egreso? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:150px"><input class="form-control input-sm input-filtro" id="ergo_VE_ingreso " ng-model="ergo_VE_ingreso " placeholder="ergo_VE_ingreso " style="width: 100%;" ng-style="ergo_VE_ingreso ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:150px"><input class="form-control input-sm input-filtro" id="ergo_VE_egreso " ng-model="ergo_VE_egreso " placeholder="ergo_VE_egreso " style="width: 100%;" ng-style="ergo_VE_egreso ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:150px"><input class="form-control input-sm input-filtro" id="ergo_METS_ingreso " ng-model="ergo_METS_ingreso " placeholder="ergo_METS_ingreso " style="width: 100%;" ng-style="ergo_METS_ingreso ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:150px"><input class="form-control input-sm input-filtro" id="ergo_METS_egreso " ng-model="ergo_METS_egreso " placeholder="ergo_METS_egreso " style="width: 100%;" ng-style="ergo_METS_egreso ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:150px"><input class="form-control input-sm input-filtro" id="shuttle_fecha_ingreso " ng-model="shuttle_fecha_ingreso " placeholder="shuttle_fecha_ingreso " style="width: 100%;" ng-style="shuttle_fecha_ingreso ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:150px"><input class="form-control input-sm input-filtro" id="shuttle_fecha_egreso " ng-model="shuttle_fecha_egreso " placeholder="shuttle_fecha_egreso " style="width: 100%;" ng-style="shuttle_fecha_egreso ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:160px"><input class="form-control input-sm input-filtro" id="shuttle_metros_ingreso" ng-model="shuttle_metros_ingreso" placeholder="shuttle_metros_ingreso" style="width: 100%;" ng-style="shuttle_metros_ingreso? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:160px"><input class="form-control input-sm input-filtro" id="shuttle_metros_egreso " ng-model="shuttle_metros_egreso " placeholder="shuttle_metros_egreso " style="width: 100%;" ng-style="shuttle_metros_egreso ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:180px"><input class="form-control input-sm input-filtro" id="shuttle_nivelCOMP_ingreso " ng-model="shuttle_nivelCOMP_ingreso " placeholder="shuttle_nivelCOMP_ingreso " style="width: 100%;" ng-style="shuttle_nivelCOMP_ingreso ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:180px"><input class="form-control input-sm input-filtro" id="shuttle_nivelCOMP_egreso " ng-model="shuttle_nivelCOMP_egreso " placeholder="shuttle_nivelCOMP_egreso " style="width: 100%;" ng-style="shuttle_nivelCOMP_egreso ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:160px"><input class="form-control input-sm input-filtro" id="shuttle_VO2ML_ingreso " ng-model="shuttle_VO2ML_ingreso " placeholder="shuttle_VO2ML_ingreso " style="width: 100%;" ng-style="shuttle_VO2ML_ingreso ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:160px"><input class="form-control input-sm input-filtro" id="shuttle_VO2ML_egreso " ng-model="shuttle_VO2ML_egreso " placeholder="shuttle_VO2ML_egreso " style="width: 100%;" ng-style="shuttle_VO2ML_egreso ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:160px"><input class="form-control input-sm input-filtro" id="shuttle_METS_ingreso " ng-model="shuttle_METS_ingreso " placeholder="shuttle_METS_ingreso " style="width: 100%;" ng-style="shuttle_METS_ingreso ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:160px"><input class="form-control input-sm input-filtro" id="shuttle_METS_egreso" ng-model="shuttle_METS_egreso" placeholder="shuttle_METS_egreso" style="width: 100%;" ng-style="shuttle_METS_egreso? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:160px"><input class="form-control input-sm input-filtro" id="shuttle_FCMAX_ingreso " ng-model="shuttle_FCMAX_ingreso " placeholder="shuttle_FCMAX_ingreso " style="width: 100%;" ng-style="shuttle_FCMAX_ingreso ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:160px"><input class="form-control input-sm input-filtro" id="shuttle_FCMAX_egreso " ng-model="shuttle_FCMAX_egreso " placeholder="shuttle_FCMAX_egreso " style="width: 100%;" ng-style="shuttle_FCMAX_egreso ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:160px"><input class="form-control input-sm input-filtro" id="shuttle_FCMT_ingreso " ng-model="shuttle_FCMT_ingreso " placeholder="shuttle_FCMT_ingreso " style="width: 100%;" ng-style="shuttle_FCMT_ingreso ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:160px"><input class="form-control input-sm input-filtro" id="shuttle_FCMT_egreso " ng-model="shuttle_FCMT_egreso " placeholder="shuttle_FCMT_egreso " style="width: 100%;" ng-style="shuttle_FCMT_egreso ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:180px"><input class="form-control input-sm input-filtro" id="shuttle_METSMAX_ingreso " ng-model="shuttle_METSMAX_ingreso " placeholder="shuttle_METSMAX_ingreso " style="width: 100%;" ng-style="shuttle_METSMAX_ingreso ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:180px"><input class="form-control input-sm input-filtro" id="shuttle_METSMAX_egreso" ng-model="shuttle_METSMAX_egreso" placeholder="shuttle_METSMAX_egreso" style="width: 100%;" ng-style="shuttle_METSMAX_egreso? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:160px"><input class="form-control input-sm input-filtro" id="fecha_evolucion_ingreso  " ng-model="fecha_evolucion_ingreso  " placeholder="fecha_evolucion_ingreso  " style="width: 100%;" ng-style="fecha_evolucion_ingreso  ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:250px"><input class="form-control input-sm input-filtro" id="musculo_esqueletica_evolucion_ingreso " ng-model="musculo_esqueletica_evolucion_ingreso " placeholder="musculo_esqueletica_evolucion_ingreso " style="width: 100%;" ng-style="musculo_esqueletica_evolucion_ingreso ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:250px"><input class="form-control input-sm input-filtro" id="observacion_evolucion_ingreso " ng-model="observacion_evolucion_ingreso " placeholder="observacion_evolucion_ingreso " style="width: 100%;" ng-style="observacion_evolucion_ingreso ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:160px"><input class="form-control input-sm input-filtro" id="fecha_evolucion_egreso " ng-model="fecha_evolucion_egreso " placeholder="fecha_evolucion_egreso " style="width: 100%;" ng-style="fecha_evolucion_egreso ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:250px"><input class="form-control input-sm input-filtro" id="musculo_esqueletica_evolucion_egreso " ng-model="musculo_esqueletica_evolucion_egreso " placeholder="musculo_esqueletica_evolucion_egreso " style="width: 100%;" ng-style="musculo_esqueletica_evolucion_egreso ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:250px"><input class="form-control input-sm input-filtro" id="observacion_evolucion_egreso" ng-model="observacion_evolucion_egreso" placeholder="observacion_evolucion_egreso" style="width: 100%;" ng-style="observacion_evolucion_egreso? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:250px"><input class="form-control input-sm input-filtro" id="ejercicio_aerobico" ng-model="ejercicio_aerobico" placeholder="ejercicio_aerobico" style="width: 100%;" ng-style="ejercicio_aerobico? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:250px"><input class="form-control input-sm input-filtro" id="ejercicio_sobrecarga " ng-model="ejercicio_sobrecarga " placeholder="ejercicio_sobrecarga " style="width: 100%;" ng-style="ejercicio_sobrecarga ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:250px"><input class="form-control input-sm input-filtro" id="entrenamiento_funcional " ng-model="entrenamiento_funcional " placeholder="entrenamiento_funcional " style="width: 100%;" ng-style="entrenamiento_funcional ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:250px"><input class="form-control input-sm input-filtro" id="habitos_cardio" ng-model="habitos_cardio" placeholder="habitos_cardio" style="width: 100%;" ng-style="habitos_cardio? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:250px"><input class="form-control input-sm input-filtro" id="DiagnosticoKinesico " ng-model="DiagnosticoKinesico " placeholder="DiagnosticoKinesico " style="width: 100%;" ng-style="DiagnosticoKinesico ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:250px"><input class="form-control input-sm input-filtro" id="ObjetivoKinesico" ng-model="ObjetivoKinesico" placeholder="ObjetivoKinesico" style="width: 100%;" ng-style="ObjetivoKinesico? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:250px"><input class="form-control input-sm input-filtro" id="diagnostico_medico " ng-model="diagnostico_medico " placeholder="diagnostico_medico " style="width: 100%;" ng-style="diagnostico_medico ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:250px"><input class="form-control input-sm input-filtro" id="CX_PROCED " ng-model="CX_PROCED " placeholder="CX_PROCED " style="width: 100%;" ng-style="CX_PROCED ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:180px"><input class="form-control input-sm input-filtro" id="diagnostico_medico_fecha " ng-model="diagnostico_medico_fecha " placeholder="diagnostico_medico_fecha " style="width: 100%;" ng-style="diagnostico_medico_fecha ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:150px"><input class="form-control input-sm input-filtro" id="CX_PROCED_fecha " ng-model="CX_PROCED_fecha " placeholder="CX_PROCED_fecha " style="width: 100%;" ng-style="CX_PROCED_fecha ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:100px"><input class="form-control input-sm input-filtro" id="fecha_alta " ng-model="fecha_alta " placeholder="fecha_alta " style="width: 100%;" ng-style="fecha_alta ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:250px"><input class="form-control input-sm input-filtro" id="controles " ng-model="controles " placeholder="controles " style="width: 100%;" ng-style="controles ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:250px"><input class="form-control input-sm input-filtro" id="procedencia  " ng-model="procedencia  " placeholder="procedencia  " style="width: 100%;" ng-style="procedencia  ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:250px"><input class="form-control input-sm input-filtro" id="tipo_evaluacion  " ng-model="tipo_evaluacion  " placeholder="tipo_evaluacion  " style="width: 100%;" ng-style="tipo_evaluacion  ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:250px"><input class="form-control input-sm input-filtro" id="herida_cx" ng-model="herida_cx" placeholder="herida_cx" style="width: 100%;" ng-style="herida_cx? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:250px"><input class="form-control input-sm input-filtro" id="intervencion " ng-model="intervencion " placeholder="intervencion " style="width: 100%;" ng-style="intervencion ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:250px"><input class="form-control input-sm input-filtro" id="HTA  " ng-model="HTA  " placeholder="HTA  " style="width: 100%;" ng-style="HTA  ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:250px"><input class="form-control input-sm input-filtro" id="DM  " ng-model="DM  " placeholder="DM  " style="width: 100%;" ng-style="DM  ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:250px"><input class="form-control input-sm input-filtro" id="DLP " ng-model="DLP " placeholder="DLP " style="width: 100%;" ng-style="DLP ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:250px"><input class="form-control input-sm input-filtro" id="SED " ng-model="SED " placeholder="SED " style="width: 100%;" ng-style="SED ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:250px"><input class="form-control input-sm input-filtro" id="SP_OB " ng-model="SP_OB " placeholder="SP_OB " style="width: 100%;" ng-style="SP_OB ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:250px"><input class="form-control input-sm input-filtro" id="TB " ng-model="TB " placeholder="TB " style="width: 100%;" ng-style="TB ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:250px"><input class="form-control input-sm input-filtro" id="OH " ng-model="OH " placeholder="OH " style="width: 100%;" ng-style="OH ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:250px"><input class="form-control input-sm input-filtro" id="AF " ng-model="AF " placeholder="AF " style="width: 100%;" ng-style="AF ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:250px"><input class="form-control input-sm input-filtro" id="Estres " ng-model="Estres " placeholder="Estres " style="width: 100%;" ng-style="Estres ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:250px"><input class="form-control input-sm input-filtro" id="Medicamento" ng-model="Medicamento" placeholder="Medicamento" style="width: 100%;" ng-style="Medicamento? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:250px"><input class="form-control input-sm input-filtro" id="antecedentes_relevantes_anamnesis " ng-model="antecedentes_relevantes_anamnesis " placeholder="antecedentes_relevantes_anamnesis " style="width: 100%;" ng-style="antecedentes_relevantes_anamnesis ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:250px"><input class="form-control input-sm input-filtro" id="patron_respiratorio_anamnesis " ng-model="patron_respiratorio_anamnesis " placeholder="patron_respiratorio_anamnesis " style="width: 100%;" ng-style="patron_respiratorio_anamnesis ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:250px"><input class="form-control input-sm input-filtro" id="regimen_hiposodico_anamnesis " ng-model="regimen_hiposodico_anamnesis " placeholder="regimen_hiposodico_anamnesis " style="width: 100%;" ng-style="regimen_hiposodico_anamnesis ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:250px"><input class="form-control input-sm input-filtro" id="fruta_verdura_anamnesis " ng-model="fruta_verdura_anamnesis " placeholder="fruta_verdura_anamnesis " style="width: 100%;" ng-style="fruta_verdura_anamnesis ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:250px"><input class="form-control input-sm input-filtro" id="agua_anamnesis " ng-model="agua_anamnesis " placeholder="agua_anamnesis " style="width: 100%;" ng-style="agua_anamnesis ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:250px"><input class="form-control input-sm input-filtro" id="bebida_nec_anamnesis" ng-model="bebida_nec_anamnesis" placeholder="bebida_nec_anamnesis" style="width: 100%;" ng-style="bebida_nec_anamnesis? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:250px"><input class="form-control input-sm input-filtro" id="grasas_anamnesis " ng-model="grasas_anamnesis " placeholder="grasas_anamnesis " style="width: 100%;" ng-style="grasas_anamnesis ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:250px"><input class="form-control input-sm input-filtro" id="diuresis_anamnesis  " ng-model="diuresis_anamnesis  " placeholder="diuresis_anamnesis  " style="width: 100%;" ng-style="diuresis_anamnesis  ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:250px"><input class="form-control input-sm input-filtro" id="deposicion_anamnesis " ng-model="deposicion_anamnesis " placeholder="deposicion_anamnesis " style="width: 100%;" ng-style="deposicion_anamnesis ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:250px"><input class="form-control input-sm input-filtro" id="tb_anamnesis " ng-model="tb_anamnesis " placeholder="tb_anamnesis " style="width: 100%;" ng-style="tb_anamnesis ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:250px"><input class="form-control input-sm input-filtro" id="tb_a_anamnesis " ng-model="tb_a_anamnesis " placeholder="tb_a_anamnesis " style="width: 100%;" ng-style="tb_a_anamnesis ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:250px"><input class="form-control input-sm input-filtro" id="EA_anamnesis " ng-model="EA_anamnesis " placeholder="EA_anamnesis " style="width: 100%;" ng-style="EA_anamnesis ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:250px"><input class="form-control input-sm input-filtro" id="sueno_nocturno_anamnesis " ng-model="sueno_nocturno_anamnesis " placeholder="sueno_nocturno_anamnesis " style="width: 100%;" ng-style="sueno_nocturno_anamnesis ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:250px"><input class="form-control input-sm input-filtro" id="sueno_a_nocturno_anamnesis" ng-model="sueno_a_nocturno_anamnesis" placeholder="sueno_a_nocturno_anamnesis" style="width: 100%;" ng-style="sueno_a_nocturno_anamnesis? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:250px"><input class="form-control input-sm input-filtro" id="sueno_b_nocturno_anamnesis " ng-model="sueno_b_nocturno_anamnesis " placeholder="sueno_b_nocturno_anamnesis " style="width: 100%;" ng-style="sueno_b_nocturno_anamnesis ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:250px"><input class="form-control input-sm input-filtro" id="motivacion_anamnesis " ng-model="motivacion_anamnesis " placeholder="motivacion_anamnesis " style="width: 100%;" ng-style="motivacion_anamnesis ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:250px"><input class="form-control input-sm input-filtro" id="AVD_anamnesis " ng-model="AVD_anamnesis " placeholder="AVD_anamnesis " style="width: 100%;" ng-style="AVD_anamnesis ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:250px"><input class="form-control input-sm input-filtro" id="actividades_recreativas_anamnesis " ng-model="actividades_recreativas_anamnesis " placeholder="actividades_recreativas_anamnesis " style="width: 100%;" ng-style="actividades_recreativas_anamnesis ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:250px"><input class="form-control input-sm input-filtro" id="cabeza_examen_fisico " ng-model="cabeza_examen_fisico " placeholder="cabeza_examen_fisico " style="width: 100%;" ng-style="cabeza_examen_fisico ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:250px"><input class="form-control input-sm input-filtro" id="cuello_examen_fisico " ng-model="cuello_examen_fisico " placeholder="cuello_examen_fisico " style="width: 100%;" ng-style="cuello_examen_fisico ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:250px"><input class="form-control input-sm input-filtro" id="torax_examen_fisico" ng-model="torax_examen_fisico" placeholder="torax_examen_fisico" style="width: 100%;" ng-style="torax_examen_fisico? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:250px"><input class="form-control input-sm input-filtro" id="torax_a_examen_fisico " ng-model="torax_a_examen_fisico " placeholder="torax_a_examen_fisico " style="width: 100%;" ng-style="torax_a_examen_fisico ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:250px"><input class="form-control input-sm input-filtro" id="torax_b_examen_fisico " ng-model="torax_b_examen_fisico " placeholder="torax_b_examen_fisico " style="width: 100%;" ng-style="torax_b_examen_fisico ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:250px"><input class="form-control input-sm input-filtro" id="torax_c_examen_fisico " ng-model="torax_c_examen_fisico " placeholder="torax_c_examen_fisico " style="width: 100%;" ng-style="torax_c_examen_fisico ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:250px"><input class="form-control input-sm input-filtro" id="abdomen_examen_fisico " ng-model="abdomen_examen_fisico " placeholder="abdomen_examen_fisico " style="width: 100%;" ng-style="abdomen_examen_fisico ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:250px"><input class="form-control input-sm input-filtro" id="abdomen_a_examen_fisico " ng-model="abdomen_a_examen_fisico " placeholder="abdomen_a_examen_fisico " style="width: 100%;" ng-style="abdomen_a_examen_fisico ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:250px"><input class="form-control input-sm input-filtro" id="EESS_examen_fisico " ng-model="EESS_examen_fisico " placeholder="EESS_examen_fisico " style="width: 100%;" ng-style="EESS_examen_fisico ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:250px"><input class="form-control input-sm input-filtro" id="llen_cap_examen_fisico" ng-model="llen_cap_examen_fisico" placeholder="llen_cap_examen_fisico" style="width: 100%;" ng-style="llen_cap_examen_fisico? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:250px"><input class="form-control input-sm input-filtro" id="EEII_examen_fisico  " ng-model="EEII_examen_fisico  " placeholder="EEII_examen_fisico  " style="width: 100%;" ng-style="EEII_examen_fisico  ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:130px"><input class="form-control input-sm input-filtro" id="PA_examen_fisico  " ng-model="PA_examen_fisico  " placeholder="PA_examen_fisico  " style="width: 100%;" ng-style="PA_examen_fisico  ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:130px"><input class="form-control input-sm input-filtro" id="fc_examen_fisico  " ng-model="fc_examen_fisico  " placeholder="fc_examen_fisico  " style="width: 100%;" ng-style="fc_examen_fisico  ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:130px"><input class="form-control input-sm input-filtro" id="sat_examen_fisico  " ng-model="sat_examen_fisico  " placeholder="sat_examen_fisico  " style="width: 100%;" ng-style="sat_examen_fisico  ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:160px"><input class="form-control input-sm input-filtro" id="glicemia_examen_fisico " ng-model="glicemia_examen_fisico " placeholder="glicemia_examen_fisico " style="width: 100%;" ng-style="glicemia_examen_fisico ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:250px"><input class="form-control input-sm input-filtro" id="adherencia_farma_valoracion " ng-model="adherencia_farma_valoracion " placeholder="adherencia_farma_valoracion " style="width: 100%;" ng-style="adherencia_farma_valoracion ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:250px"><input class="form-control input-sm input-filtro" id="respiracion_valoracion  " ng-model="respiracion_valoracion  " placeholder="respiracion_valoracion  " style="width: 100%;" ng-style="respiracion_valoracion  ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:250px"><input class="form-control input-sm input-filtro" id="respiracion_obs_valoracion " ng-model="respiracion_obs_valoracion " placeholder="respiracion_obs_valoracion " style="width: 100%;" ng-style="respiracion_obs_valoracion ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:250px"><input class="form-control input-sm input-filtro" id="alimentacion_valoracion" ng-model="alimentacion_valoracion" placeholder="alimentacion_valoracion" style="width: 100%;" ng-style="alimentacion_valoracion? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:250px"><input class="form-control input-sm input-filtro" id="alimentacion_obs_valoracion " ng-model="alimentacion_obs_valoracion " placeholder="alimentacion_obs_valoracion " style="width: 100%;" ng-style="alimentacion_obs_valoracion ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:250px"><input class="form-control input-sm input-filtro" id="eliminacion_valoracion  " ng-model="eliminacion_valoracion  " placeholder="eliminacion_valoracion  " style="width: 100%;" ng-style="eliminacion_valoracion  ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:250px"><input class="form-control input-sm input-filtro" id="eliminacion_obs_valoracion " ng-model="eliminacion_obs_valoracion " placeholder="eliminacion_obs_valoracion " style="width: 100%;" ng-style="eliminacion_obs_valoracion ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:250px"><input class="form-control input-sm input-filtro" id="descanso_valoracion " ng-model="descanso_valoracion " placeholder="descanso_valoracion " style="width: 100%;" ng-style="descanso_valoracion ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:250px"><input class="form-control input-sm input-filtro" id="descanso_obs_valoracion " ng-model="descanso_obs_valoracion " placeholder="descanso_obs_valoracion " style="width: 100%;" ng-style="descanso_obs_valoracion ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:250px"><input class="form-control input-sm input-filtro" id="higiene_valoracion " ng-model="higiene_valoracion " placeholder="higiene_valoracion " style="width: 100%;" ng-style="higiene_valoracion ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:250px"><input class="form-control input-sm input-filtro" id="higiene_obs_valoracion" ng-model="higiene_obs_valoracion" placeholder="higiene_obs_valoracion" style="width: 100%;" ng-style="higiene_obs_valoracion? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:250px"><input class="form-control input-sm input-filtro" id="actividades_valoracion  " ng-model="actividades_valoracion  " placeholder="actividades_valoracion  " style="width: 100%;" ng-style="actividades_valoracion  ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:250px"><input class="form-control input-sm input-filtro" id="actividades_obs_valoracion" ng-model="actividades_obs_valoracion" placeholder="actividades_obs_valoracion" style="width: 100%;" ng-style="actividades_obs_valoracion? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:250px"><input class="form-control input-sm input-filtro" id="vestirse_valoracion  " ng-model="vestirse_valoracion  " placeholder="vestirse_valoracion  " style="width: 100%;" ng-style="vestirse_valoracion  ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:250px"><input class="form-control input-sm input-filtro" id="vestirse_obs_valoracion  " ng-model="vestirse_obs_valoracion  " placeholder="vestirse_obs_valoracion  " style="width: 100%;" ng-style="vestirse_obs_valoracion  ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:250px"><input class="form-control input-sm input-filtro" id="comunicarse_valoracion " ng-model="comunicarse_valoracion " placeholder="comunicarse_valoracion " style="width: 100%;" ng-style="comunicarse_valoracion ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:250px"><input class="form-control input-sm input-filtro" id="comunicarse_obs_valoracion " ng-model="comunicarse_obs_valoracion " placeholder="comunicarse_obs_valoracion " style="width: 100%;" ng-style="comunicarse_obs_valoracion ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:250px"><input class="form-control input-sm input-filtro" id="auto_realizacion_valoracion" ng-model="auto_realizacion_valoracion" placeholder="auto_realizacion_valoracion" style="width: 100%;" ng-style="auto_realizacion_valoracion? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:250px"><input class="form-control input-sm input-filtro" id="auto_realizacion_obs_valoracion  " ng-model="auto_realizacion_obs_valoracion  " placeholder="auto_realizacion_obs_valoracion  " style="width: 100%;" ng-style="auto_realizacion_obs_valoracion  ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:250px"><input class="form-control input-sm input-filtro" id="objetivo_plan_enfermeria " ng-model="objetivo_plan_enfermeria " placeholder="objetivo_plan_enfermeria " style="width: 100%;" ng-style="objetivo_plan_enfermeria ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:250px"><input class="form-control input-sm input-filtro" id="diagnostico_plan_enfermeria " ng-model="diagnostico_plan_enfermeria " placeholder="diagnostico_plan_enfermeria " style="width: 100%;" ng-style="diagnostico_plan_enfermeria ? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                            <th style="text-align:center; min-width:250px"><input class="form-control input-sm input-filtro" id="intervencion_plan_enfermeria" ng-model="intervencion_plan_enfermeria" placeholder="intervencion_plan_enfermeria" style="width: 100%;" ng-style="intervencion_plan_enfermeria? { 'border':'2px solid #50a3e4'}  : {} " /></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr dir-paginate="registro in Registros | itemsPerPage: 1000 |  filter: {id_paciente : id_paciente} | filter: {numero_ficha  : numero_ficha } | filter: {sexo  : sexo } | filter: {situacion_laboral  : situacion_laboral } | filter: {peso_actual  : peso_actual } | filter: {talla : talla} | filter: {masa_grasa_corporal  : masa_grasa_corporal } | filter: {masa_magra  : masa_magra } | filter: {indice_cintura  : indice_cintura } | filter: {MNA  : MNA } | filter: {peso_habitual  : peso_habitual } | filter: {masa_magra_porc  : masa_magra_porc } | filter: {grasa_viceral  : grasa_viceral } | filter: {porc_cintura  : porc_cintura } | filter: {cribaje  : cribaje } | filter: {apetito  : apetito } | filter: {alergia_alimentaria  : alergia_alimentaria } | filter: {preferencia_alimentaria  : preferencia_alimentaria } | filter: {intolerancia_alimentaria  : intolerancia_alimentaria } | filter: {aversaciones_alimentaria : aversaciones_alimentaria} | filter: {consumo_suplemento  : consumo_suplemento } | filter: {hora_desayuno  : hora_desayuno } | filter: {gramaje_desayuno  : gramaje_desayuno } | filter: {hora_colacion  : hora_colacion } | filter: {gramaje_colacion  : gramaje_colacion } | filter: {hora_almuerzo  : hora_almuerzo } | filter: {gramaje_almuerzo  : gramaje_almuerzo } | filter: {hora_picoteo  : hora_picoteo } | filter: {gramaje_picoteo : gramaje_picoteo} | filter: {hora_once  : hora_once } | filter: {gramaje_once  : gramaje_once } | filter: {hora_cena  : hora_cena } | filter: {gramaje_cena  : gramaje_cena } | filter: {hora_snack  : hora_snack } | filter: {gramaje_snack  : gramaje_snack } | filter: {ingesta_ali_observacion  : ingesta_ali_observacion } | filter: {diagnostico_nutricional_observacion  : diagnostico_nutricional_observacion } | filter: {geb  : geb } | filter: {energia  : energia } | filter: {FA  : FA } | filter: {proteina  : proteina } | filter: {lipidos  : lipidos } | filter: {aporte_alimentacion_KCAL  : aporte_alimentacion_KCAL } | filter: {aporte_alimentacion_cho : aporte_alimentacion_cho} | filter: {aporte_alimentacion_lip  : aporte_alimentacion_lip } | filter: {aporte_alimentacion_prot : aporte_alimentacion_prot} | filter: {prescripcion_dietetica  : prescripcion_dietetica } | filter: {indicaciones_generales  : indicaciones_generales } | filter: {diagnostico_nutricional_integrado  : diagnostico_nutricional_integrado } | filter: {objetivo_alimentario  : objetivo_alimentario } | filter: {intervencion_nutricional  : intervencion_nutricional } | filter: {consumo_fruta  : consumo_fruta } | filter: {consumo_verdura  : consumo_verdura } | filter: {consumo_lacteos  : consumo_lacteos } | filter: {consumo_carne  : consumo_carne } | filter: {consumo_grasas_azucar : consumo_grasas_azucar} | filter: {consumo_legumbre  : consumo_legumbre } | filter: {consumo_pescado : consumo_pescado} | filter: {consumo_sodio  : consumo_sodio } | filter: {consumo_liquido  : consumo_liquido } | filter: {sintomatologia_prevalente  : sintomatologia_prevalente } | filter: {derivacion_aps  : derivacion_aps } | filter: {apoyo_social_significativo  : apoyo_social_significativo } | filter: {problemas_sociales  : problemas_sociales } | filter: {personalidad_tipo_a : personalidad_tipo_a} | filter: {trastorno_mental_diagnosticado  : trastorno_mental_diagnosticado } | filter: {trauma_post_operativo : trauma_post_operativo} | filter: {conciencia_factor_riesgo  : conciencia_factor_riesgo } | filter: {dificultades_respuesta_estres : dificultades_respuesta_estres} | filter: {ingreso_taller : ingreso_taller} | filter: {tratamiento  : tratamiento } | filter: {observacion  : observacion } | filter: {funcion_fisica_ingreso  : funcion_fisica_ingreso } | filter: {funcion_fisica_egreso  : funcion_fisica_egreso } | filter: {rol_fisico_ingreso  : rol_fisico_ingreso } | filter: {rol_fisico_egreso  : rol_fisico_egreso } | filter: {dolor_corporal_ingreso  : dolor_corporal_ingreso } | filter: {dolor_corporal_egreso : dolor_corporal_egreso} | filter: {salud_general_ingreso  : salud_general_ingreso } | filter: {salud_general_egreso  : salud_general_egreso } | filter: {vitalidad_ingreso  : vitalidad_ingreso } | filter: {vitalidad_egreso  : vitalidad_egreso } | filter: {funcion_social_ingreso  : funcion_social_ingreso } | filter: {funcion_social_egreso : funcion_social_egreso} | filter: {rol_emocional_ingreso  : rol_emocional_ingreso } | filter: {rol_emocional_egreso  : rol_emocional_egreso } | filter: {salud_mental_ingreso  : salud_mental_ingreso } | filter: {salud_mental_egreso  : salud_mental_egreso } | filter: {observacion_sf36  : observacion_sf36 } | filter: {ansiedad_ingreso  : ansiedad_ingreso } | filter: {ansiedad_egreso : ansiedad_egreso} | filter: {depresion_ingreso  : depresion_ingreso } | filter: {depresion_egreso  : depresion_egreso } | filter: {subescala_a_ingreso  : subescala_a_ingreso } | filter: {subescala_a_egreso  : subescala_a_egreso } | filter: {subescala_b_ingreso  : subescala_b_ingreso } | filter: {subescala_b_egreso  : subescala_b_egreso } | filter: {observacion_escala_ansiedad : observacion_escala_ansiedad} | filter: {antecedentes_plan_psico  : antecedentes_plan_psico } | filter: {objetivos_plan_psico  : objetivos_plan_psico } | filter: {diagnosticos_plan_psico  : diagnosticos_plan_psico } | filter: {intervencion_plan_psico  : intervencion_plan_psico } | filter: {evaluacion_plan_psico  : evaluacion_plan_psico } | filter: {evolucion_plan_psico  : evolucion_plan_psico } | filter: {ergo_fecha_ingreso  : ergo_fecha_ingreso } | filter: {ergo_fecha_egreso  : ergo_fecha_egreso } | filter: {ergo_VO2L_ingreso  : ergo_VO2L_ingreso } | filter: {ergo_VO2L_egreso  : ergo_VO2L_egreso } | filter: {ergo_VO2ML_ingreso  : ergo_VO2ML_ingreso } | filter: {ergo_VO2ML_egreso : ergo_VO2ML_egreso} | filter: {ergo_FCMAX_ingreso  : ergo_FCMAX_ingreso } | filter: {ergo_FCMAX_egreso  : ergo_FCMAX_egreso } | filter: {ergo_pulso_ingreso  : ergo_pulso_ingreso } | filter: {ergo_pulso_egreso : ergo_pulso_egreso} | filter: {ergo_VE_ingreso  : ergo_VE_ingreso } | filter: {ergo_VE_egreso  : ergo_VE_egreso } | filter: {ergo_METS_ingreso  : ergo_METS_ingreso } | filter: {ergo_METS_egreso  : ergo_METS_egreso } | filter: {shuttle_fecha_ingreso  : shuttle_fecha_ingreso } | filter: {shuttle_fecha_egreso  : shuttle_fecha_egreso } | filter: {shuttle_metros_ingreso : shuttle_metros_ingreso} | filter: {shuttle_metros_egreso  : shuttle_metros_egreso } | filter: {shuttle_nivelCOMP_ingreso  : shuttle_nivelCOMP_ingreso } | filter: {shuttle_nivelCOMP_egreso  : shuttle_nivelCOMP_egreso } | filter: {shuttle_VO2ML_ingreso  : shuttle_VO2ML_ingreso } | filter: {shuttle_VO2ML_egreso  : shuttle_VO2ML_egreso } | filter: {shuttle_METS_ingreso  : shuttle_METS_ingreso } | filter: {shuttle_METS_egreso : shuttle_METS_egreso} | filter: {shuttle_FCMAX_ingreso  : shuttle_FCMAX_ingreso } | filter: {shuttle_FCMAX_egreso  : shuttle_FCMAX_egreso } | filter: {shuttle_FCMT_ingreso  : shuttle_FCMT_ingreso } | filter: {shuttle_FCMT_egreso  : shuttle_FCMT_egreso } | filter: {shuttle_METSMAX_ingreso  : shuttle_METSMAX_ingreso } | filter: {shuttle_METSMAX_egreso : shuttle_METSMAX_egreso} | filter: {fecha_evolucion_ingreso   : fecha_evolucion_ingreso  } | filter: {musculo_esqueletica_evolucion_ingreso  : musculo_esqueletica_evolucion_ingreso } | filter: {observacion_evolucion_ingreso  : observacion_evolucion_ingreso } | filter: {fecha_evolucion_egreso  : fecha_evolucion_egreso } | filter: {musculo_esqueletica_evolucion_egreso  : musculo_esqueletica_evolucion_egreso } | filter: {observacion_evolucion_egreso : observacion_evolucion_egreso} | filter: {ejercicio_aerobico : ejercicio_aerobico} | filter: {ejercicio_sobrecarga  : ejercicio_sobrecarga } | filter: {entrenamiento_funcional  : entrenamiento_funcional } | filter: {habitos_cardio : habitos_cardio} | filter: {idDiagnosticoKinesico  : idDiagnosticoKinesico } | filter: {DiagnosticoKinesico  : DiagnosticoKinesico } | filter: {idObjetivoKinesico  : idObjetivoKinesico } | filter: {ObjetivoKinesico : ObjetivoKinesico} | filter: {diagnostico_medico  : diagnostico_medico } | filter: {CX_PROCED  : CX_PROCED } | filter: {diagnostico_medico_fecha  : diagnostico_medico_fecha } | filter: {CX_PROCED_fecha  : CX_PROCED_fecha } | filter: {fecha_alta  : fecha_alta } | filter: {controles  : controles } | filter: {procedencia   : procedencia  } | filter: {tipo_evaluacion   : tipo_evaluacion  } | filter: {herida_cx : herida_cx} | filter: {intervencion  : intervencion } | filter: {HTA   : HTA  } | filter: {DM   : DM  } | filter: {DLP  : DLP } | filter: {SED  : SED } | filter: {SP_OB  : SP_OB } | filter: {TB  : TB } | filter: {OH  : OH } | filter: {AF  : AF } | filter: {Estres  : Estres } | filter: {idMedicamento  : idMedicamento } | filter: {Medicamento : Medicamento} | filter: {antecedentes_relevantes_anamnesis  : antecedentes_relevantes_anamnesis } | filter: {patron_respiratorio_anamnesis  : patron_respiratorio_anamnesis } | filter: {regimen_hiposodico_anamnesis  : regimen_hiposodico_anamnesis } | filter: {fruta_verdura_anamnesis  : fruta_verdura_anamnesis } | filter: {agua_anamnesis  : agua_anamnesis } | filter: {bebida_nec_anamnesis : bebida_nec_anamnesis} | filter: {grasas_anamnesis  : grasas_anamnesis } | filter: {diuresis_anamnesis   : diuresis_anamnesis  } | filter: {deposicion_anamnesis  : deposicion_anamnesis } | filter: {tb_anamnesis  : tb_anamnesis } | filter: {tb_a_anamnesis  : tb_a_anamnesis } | filter: {EA_anamnesis  : EA_anamnesis } | filter: {sueno_nocturno_anamnesis  : sueno_nocturno_anamnesis } | filter: {sueno_a_nocturno_anamnesis : sueno_a_nocturno_anamnesis} | filter: {sueno_b_nocturno_anamnesis  : sueno_b_nocturno_anamnesis } | filter: {motivacion_anamnesis  : motivacion_anamnesis } | filter: {AVD_anamnesis  : AVD_anamnesis } | filter: {actividades_recreativas_anamnesis  : actividades_recreativas_anamnesis } | filter: {cabeza_examen_fisico  : cabeza_examen_fisico } | filter: {cuello_examen_fisico  : cuello_examen_fisico } | filter: {torax_examen_fisico : torax_examen_fisico} | filter: {torax_a_examen_fisico  : torax_a_examen_fisico } | filter: {torax_b_examen_fisico  : torax_b_examen_fisico } | filter: {torax_c_examen_fisico  : torax_c_examen_fisico } | filter: {abdomen_examen_fisico  : abdomen_examen_fisico } | filter: {abdomen_a_examen_fisico  : abdomen_a_examen_fisico } | filter: {EESS_examen_fisico  : EESS_examen_fisico } | filter: {llen_cap_examen_fisico : llen_cap_examen_fisico} | filter: {EEII_examen_fisico   : EEII_examen_fisico  } | filter: {PA_examen_fisico   : PA_examen_fisico  } | filter: {fc_examen_fisico   : fc_examen_fisico  } | filter: {sat_examen_fisico   : sat_examen_fisico  } | filter: {glicemia_examen_fisico  : glicemia_examen_fisico } | filter: {adherencia_farma_valoracion  : adherencia_farma_valoracion } | filter: {respiracion_valoracion   : respiracion_valoracion  } | filter: {respiracion_obs_valoracion  : respiracion_obs_valoracion } | filter: {alimentacion_valoracion : alimentacion_valoracion} | filter: {alimentacion_obs_valoracion  : alimentacion_obs_valoracion } | filter: {eliminacion_valoracion   : eliminacion_valoracion  } | filter: {eliminacion_obs_valoracion  : eliminacion_obs_valoracion } | filter: {descanso_valoracion  : descanso_valoracion } | filter: {descanso_obs_valoracion  : descanso_obs_valoracion } | filter: {higiene_valoracion  : higiene_valoracion } | filter: {higiene_obs_valoracion : higiene_obs_valoracion} | filter: {actividades_valoracion   : actividades_valoracion  } | filter: {actividades_obs_valoracion : actividades_obs_valoracion} | filter: {vestirse_valoracion   : vestirse_valoracion  } | filter: {vestirse_obs_valoracion   : vestirse_obs_valoracion  } | filter: {comunicarse_valoracion  : comunicarse_valoracion } | filter: {comunicarse_obs_valoracion  : comunicarse_obs_valoracion } | filter: {auto_realizacion_valoracion : auto_realizacion_valoracion} | filter: {auto_realizacion_obs_valoracion   : auto_realizacion_obs_valoracion  } | filter: {objetivo_plan_enfermeria  : objetivo_plan_enfermeria } | filter: {iddiagnostico_plan_enfermeria  : iddiagnostico_plan_enfermeria } | filter: {diagnostico_plan_enfermeria  : diagnostico_plan_enfermeria } | filter: {idintervencion_plan_enfermeria   : idintervencion_plan_enfermeria  } | filter: {intervencion_plan_enfermeria : intervencion_plan_enfermeria}" pagination-id="pag_reg">
+                                            <td style="text-align:center;">{{ registro.id_paciente}}</td>
+                                            <td style="text-align:center;">{{ registro.numero_ficha }}</td>
+                                            <td>{{ registro.sexo }}</td>
+                                            <td>{{ registro.situacion_laboral }}</td>
+                                            <td style="text-align:center;">{{ registro.peso_actual }}</td>
+                                            <td style="text-align:center;">{{ registro.talla}}</td>
+                                            <td style="text-align:center;">{{ registro.masa_grasa_corporal }}</td>
+                                            <td style="text-align:center;">{{ registro.masa_magra }}</td>
+                                            <td style="text-align:center;">{{ registro.indice_cintura }}</td>
+                                            <td style="text-align:center;">{{ registro.MNA }}</td>
+                                            <td style="text-align:center;">{{ registro.peso_habitual }}</td>
+                                            <td style="text-align:center;">{{ registro.masa_magra_porc }}</td>
+                                            <td style="text-align:center;">{{ registro.grasa_viceral }}</td>
+                                            <td style="text-align:center;">{{ registro.porc_cintura }}</td>
+                                            <td>{{ registro.cribaje }}</td>
+                                            <td>{{ registro.apetito }}</td>
+                                            <td>{{ registro.alergia_alimentaria }}</td>
+                                            <td>{{ registro.preferencia_alimentaria }}</td>
+                                            <td>{{ registro.intolerancia_alimentaria }}</td>
+                                            <td>{{ registro.aversaciones_alimentaria}}</td>
+                                            <td>{{ registro.consumo_suplemento }}</td>
+                                            <td style="text-align:center;">{{ registro.hora_desayuno }}</td>
+                                            <td>{{ registro.gramaje_desayuno }}</td>
+                                            <td style="text-align:center;">{{ registro.hora_colacion }}</td>
+                                            <td>{{ registro.gramaje_colacion }}</td>
+                                            <td style="text-align:center;">{{ registro.hora_almuerzo }}</td>
+                                            <td>{{ registro.gramaje_almuerzo }}</td>
+                                            <td style="text-align:center;">{{ registro.hora_picoteo }}</td>
+                                            <td>{{ registro.gramaje_picoteo}}</td>
+                                            <td style="text-align:center;">{{ registro.hora_once }}</td>
+                                            <td>{{ registro.gramaje_once }}</td>
+                                            <td style="text-align:center;">{{ registro.hora_cena }}</td>
+                                            <td>{{ registro.gramaje_cena }}</td>
+                                            <td style="text-align:center;">{{ registro.hora_snack }}</td>
+                                            <td>{{ registro.gramaje_snack }}</td>
+                                            <td>{{ registro.ingesta_ali_observacion }}</td>
+                                            <td>{{ registro.diagnostico_nutricional_observacion }}</td>
+                                            <td style="text-align:center;">{{ registro.geb }}</td>
+                                            <td style="text-align:center;">{{ registro.energia }}</td>
+                                            <td style="text-align:center;">{{ registro.FA }}</td>
+                                            <td style="text-align:center;">{{ registro.proteina }}</td>
+                                            <td style="text-align:center;">{{ registro.lipidos }}</td>
+                                            <td style="text-align:center;">{{ registro.aporte_alimentacion_KCAL }}</td>
+                                            <td style="text-align:center;">{{ registro.aporte_alimentacion_cho}}</td>
+                                            <td style="text-align:center;">{{ registro.aporte_alimentacion_lip }}</td>
+                                            <td style="text-align:center;">{{ registro.aporte_alimentacion_prot}}</td>
+                                            <td>{{ registro.prescripcion_dietetica }}</td>
+                                            <td>{{ registro.indicaciones_generales }}</td>
+                                            <td>{{ registro.diagnostico_nutricional_integrado }}</td>
+                                            <td>{{ registro.objetivo_alimentario }}</td>
+                                            <td>{{ registro.intervencion_nutricional }}</td>
+                                            <td>{{ registro.consumo_fruta }}</td>
+                                            <td>{{ registro.consumo_verdura }}</td>
+                                            <td>{{ registro.consumo_lacteos }}</td>
+                                            <td>{{ registro.consumo_carne }}</td>
+                                            <td>{{ registro.consumo_grasas_azucar}}</td>
+                                            <td>{{ registro.consumo_legumbre }}</td>
+                                            <td>{{ registro.consumo_pescado}}</td>
+                                            <td>{{ registro.consumo_sodio }}</td>
+                                            <td>{{ registro.consumo_liquido }}</td>
+                                            <td>{{ registro.sintomatologia_prevalente }}</td>
+                                            <td>{{ registro.derivacion_aps }}</td>
+                                            <td>{{ registro.apoyo_social_significativo }}</td>
+                                            <td>{{ registro.problemas_sociales }}</td>
+                                            <td>{{ registro.personalidad_tipo_a}}</td>
+                                            <td>{{ registro.trastorno_mental_diagnosticado }}</td>
+                                            <td>{{ registro.trauma_post_operativo}}</td>
+                                            <td>{{ registro.conciencia_factor_riesgo }}</td>
+                                            <td>{{ registro.dificultades_respuesta_estres}}</td>
+                                            <td>{{ registro.ingreso_taller}}</td>
+                                            <td>{{ registro.tratamiento }}</td>
+                                            <td>{{ registro.observacion }}</td>
+                                            <td style="text-align:center;">{{ registro.funcion_fisica_ingreso }}</td>
+                                            <td style="text-align:center;">{{ registro.funcion_fisica_egreso }}</td>
+                                            <td style="text-align:center;">{{ registro.rol_fisico_ingreso }}</td>
+                                            <td style="text-align:center;">{{ registro.rol_fisico_egreso }}</td>
+                                            <td style="text-align:center;">{{ registro.dolor_corporal_ingreso }}</td>
+                                            <td style="text-align:center;">{{ registro.dolor_corporal_egreso}}</td>
+                                            <td style="text-align:center;">{{ registro.salud_general_ingreso }}</td>
+                                            <td style="text-align:center;">{{ registro.salud_general_egreso }}</td>
+                                            <td style="text-align:center;">{{ registro.vitalidad_ingreso }}</td>
+                                            <td style="text-align:center;">{{ registro.vitalidad_egreso }}</td>
+                                            <td style="text-align:center;">{{ registro.funcion_social_ingreso }}</td>
+                                            <td style="text-align:center;">{{ registro.funcion_social_egreso}}</td>
+                                            <td style="text-align:center;">{{ registro.rol_emocional_ingreso }}</td>
+                                            <td style="text-align:center;">{{ registro.rol_emocional_egreso }}</td>
+                                            <td style="text-align:center;">{{ registro.salud_mental_ingreso }}</td>
+                                            <td style="text-align:center;">{{ registro.salud_mental_egreso }}</td>
+                                            <td>{{ registro.observacion_sf36 }}</td>
+                                            <td style="text-align:center;">{{ registro.ansiedad_ingreso }}</td>
+                                            <td style="text-align:center;">{{ registro.ansiedad_egreso}}</td>
+                                            <td style="text-align:center;">{{ registro.depresion_ingreso }}</td>
+                                            <td style="text-align:center;">{{ registro.depresion_egreso }}</td>
+                                            <td style="text-align:center;">{{ registro.subescala_a_ingreso }}</td>
+                                            <td style="text-align:center;">{{ registro.subescala_a_egreso }}</td>
+                                            <td style="text-align:center;">{{ registro.subescala_b_ingreso }}</td>
+                                            <td style="text-align:center;">{{ registro.subescala_b_egreso }}</td>
+                                            <td>{{ registro.observacion_escala_ansiedad}}</td>
+                                            <td>{{ registro.antecedentes_plan_psico }}</td>
+                                            <td>{{ registro.objetivos_plan_psico }}</td>
+                                            <td>{{ registro.diagnosticos_plan_psico }}</td>
+                                            <td>{{ registro.intervencion_plan_psico }}</td>
+                                            <td>{{ registro.evaluacion_plan_psico }}</td>
+                                            <td>{{ registro.evolucion_plan_psico }}</td>
+                                            <td style="text-align:center;">{{ registro.ergo_fecha_ingreso }}</td>
+                                            <td style="text-align:center;">{{ registro.ergo_fecha_egreso }}</td>
+                                            <td style="text-align:center;">{{ registro.ergo_VO2L_ingreso }}</td>
+                                            <td style="text-align:center;">{{ registro.ergo_VO2L_egreso }}</td>
+                                            <td style="text-align:center;">{{ registro.ergo_VO2ML_ingreso }}</td>
+                                            <td style="text-align:center;">{{ registro.ergo_VO2ML_egreso}}</td>
+                                            <td style="text-align:center;">{{ registro.ergo_FCMAX_ingreso }}</td>
+                                            <td style="text-align:center;">{{ registro.ergo_FCMAX_egreso }}</td>
+                                            <td style="text-align:center;">{{ registro.ergo_pulso_ingreso }}</td>
+                                            <td style="text-align:center;">{{ registro.ergo_pulso_egreso}}</td>
+                                            <td style="text-align:center;">{{ registro.ergo_VE_ingreso }}</td>
+                                            <td style="text-align:center;">{{ registro.ergo_VE_egreso }}</td>
+                                            <td style="text-align:center;">{{ registro.ergo_METS_ingreso }}</td>
+                                            <td style="text-align:center;">{{ registro.ergo_METS_egreso }}</td>
+                                            <td style="text-align:center;">{{ registro.shuttle_fecha_ingreso }}</td>
+                                            <td style="text-align:center;">{{ registro.shuttle_fecha_egreso }}</td>
+                                            <td style="text-align:center;">{{ registro.shuttle_metros_ingreso}}</td>
+                                            <td style="text-align:center;">{{ registro.shuttle_metros_egreso }}</td>
+                                            <td style="text-align:center;">{{ registro.shuttle_nivelCOMP_ingreso }}</td>
+                                            <td style="text-align:center;">{{ registro.shuttle_nivelCOMP_egreso }}</td>
+                                            <td style="text-align:center;">{{ registro.shuttle_VO2ML_ingreso }}</td>
+                                            <td style="text-align:center;">{{ registro.shuttle_VO2ML_egreso }}</td>
+                                            <td style="text-align:center;">{{ registro.shuttle_METS_ingreso }}</td>
+                                            <td style="text-align:center;">{{ registro.shuttle_METS_egreso}}</td>
+                                            <td style="text-align:center;">{{ registro.shuttle_FCMAX_ingreso }}</td>
+                                            <td style="text-align:center;">{{ registro.shuttle_FCMAX_egreso }}</td>
+                                            <td style="text-align:center;">{{ registro.shuttle_FCMT_ingreso }}</td>
+                                            <td style="text-align:center;">{{ registro.shuttle_FCMT_egreso }}</td>
+                                            <td style="text-align:center;">{{ registro.shuttle_METSMAX_ingreso }}</td>
+                                            <td style="text-align:center;">{{ registro.shuttle_METSMAX_egreso}}</td>
+                                            <td style="text-align:center;">{{ registro.fecha_evolucion_ingreso  }}</td>
+                                            <td>{{ registro.musculo_esqueletica_evolucion_ingreso }}</td>
+                                            <td>{{ registro.observacion_evolucion_ingreso }}</td>
+                                            <td style="text-align:center;">{{ registro.fecha_evolucion_egreso }}</td>
+                                            <td>{{ registro.musculo_esqueletica_evolucion_egreso }}</td>
+                                            <td>{{ registro.observacion_evolucion_egreso}}</td>
+                                            <td>{{ registro.ejercicio_aerobico}}</td>
+                                            <td>{{ registro.ejercicio_sobrecarga }}</td>
+                                            <td>{{ registro.entrenamiento_funcional }}</td>
+                                            <td>{{ registro.habitos_cardio}}</td>
+                                            <td>{{ registro.DiagnosticoKinesico }}</td>
+                                            <td>{{ registro.ObjetivoKinesico}}</td>
+                                            <td>{{ registro.diagnostico_medico }}</td>
+                                            <td>{{ registro.CX_PROCED }}</td>
+                                            <td style="text-align:center;">{{ registro.diagnostico_medico_fecha }}</td>
+                                            <td style="text-align:center;">{{ registro.CX_PROCED_fecha }}</td>
+                                            <td style="text-align:center;">{{ registro.fecha_alta }}</td>
+                                            <td>{{ registro.controles }}</td>
+                                            <td>{{ registro.procedencia  }}</td>
+                                            <td>{{ registro.tipo_evaluacion  }}</td>
+                                            <td>{{ registro.herida_cx}}</td>
+                                            <td>{{ registro.intervencion }}</td>
+                                            <td>{{ registro.HTA  }}</td>
+                                            <td>{{ registro.DM  }}</td>
+                                            <td>{{ registro.DLP }}</td>
+                                            <td>{{ registro.SED }}</td>
+                                            <td>{{ registro.SP_OB }}</td>
+                                            <td>{{ registro.TB }}</td>
+                                            <td>{{ registro.OH }}</td>
+                                            <td>{{ registro.AF }}</td>
+                                            <td>{{ registro.Estres }}</td>
+                                            <td>{{ registro.Medicamento}}</td>
+                                            <td>{{ registro.antecedentes_relevantes_anamnesis }}</td>
+                                            <td>{{ registro.patron_respiratorio_anamnesis }}</td>
+                                            <td>{{ registro.regimen_hiposodico_anamnesis }}</td>
+                                            <td>{{ registro.fruta_verdura_anamnesis }}</td>
+                                            <td>{{ registro.agua_anamnesis }}</td>
+                                            <td>{{ registro.bebida_nec_anamnesis}}</td>
+                                            <td>{{ registro.grasas_anamnesis }}</td>
+                                            <td>{{ registro.diuresis_anamnesis  }}</td>
+                                            <td>{{ registro.deposicion_anamnesis }}</td>
+                                            <td>{{ registro.tb_anamnesis }}</td>
+                                            <td>{{ registro.tb_a_anamnesis }}</td>
+                                            <td>{{ registro.EA_anamnesis }}</td>
+                                            <td>{{ registro.sueno_nocturno_anamnesis }}</td>
+                                            <td>{{ registro.sueno_a_nocturno_anamnesis}}</td>
+                                            <td>{{ registro.sueno_b_nocturno_anamnesis }}</td>
+                                            <td>{{ registro.motivacion_anamnesis }}</td>
+                                            <td>{{ registro.AVD_anamnesis }}</td>
+                                            <td>{{ registro.actividades_recreativas_anamnesis }}</td>
+                                            <td>{{ registro.cabeza_examen_fisico }}</td>
+                                            <td>{{ registro.cuello_examen_fisico }}</td>
+                                            <td>{{ registro.torax_examen_fisico}}</td>
+                                            <td>{{ registro.torax_a_examen_fisico }}</td>
+                                            <td>{{ registro.torax_b_examen_fisico }}</td>
+                                            <td>{{ registro.torax_c_examen_fisico }}</td>
+                                            <td>{{ registro.abdomen_examen_fisico }}</td>
+                                            <td>{{ registro.abdomen_a_examen_fisico }}</td>
+                                            <td>{{ registro.EESS_examen_fisico }}</td>
+                                            <td>{{ registro.llen_cap_examen_fisico}}</td>
+                                            <td>{{ registro.EEII_examen_fisico  }}</td>
+                                            <td style="text-align:center;">{{ registro.PA_examen_fisico  }}</td>
+                                            <td style="text-align:center;">{{ registro.fc_examen_fisico  }}</td>
+                                            <td style="text-align:center;">{{ registro.sat_examen_fisico  }}</td>
+                                            <td style="text-align:center;">{{ registro.glicemia_examen_fisico }}</td>
+                                            <td>{{ registro.adherencia_farma_valoracion }}</td>
+                                            <td>{{ registro.respiracion_valoracion  }}</td>
+                                            <td>{{ registro.respiracion_obs_valoracion }}</td>
+                                            <td>{{ registro.alimentacion_valoracion}}</td>
+                                            <td>{{ registro.alimentacion_obs_valoracion }}</td>
+                                            <td>{{ registro.eliminacion_valoracion  }}</td>
+                                            <td>{{ registro.eliminacion_obs_valoracion }}</td>
+                                            <td>{{ registro.descanso_valoracion }}</td>
+                                            <td>{{ registro.descanso_obs_valoracion }}</td>
+                                            <td>{{ registro.higiene_valoracion }}</td>
+                                            <td>{{ registro.higiene_obs_valoracion}}</td>
+                                            <td>{{ registro.actividades_valoracion  }}</td>
+                                            <td>{{ registro.actividades_obs_valoracion}}</td>
+                                            <td>{{ registro.vestirse_valoracion  }}</td>
+                                            <td>{{ registro.vestirse_obs_valoracion  }}</td>
+                                            <td>{{ registro.comunicarse_valoracion }}</td>
+                                            <td>{{ registro.comunicarse_obs_valoracion }}</td>
+                                            <td>{{ registro.auto_realizacion_valoracion}}</td>
+                                            <td>{{ registro.auto_realizacion_obs_valoracion  }}</td>
+                                            <td>{{ registro.objetivo_plan_enfermeria }}</td>
+                                            <td>{{ registro.diagnostico_plan_enfermeria }}</td>
+                                            <td>{{ registro.intervencion_plan_enfermeria}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <dir-pagination-controls pagination-id="pag_reg" boundary-links="true" direction-links="true">	</dir-pagination-controls>
+                                <table id="paraReporte" class="table table-bordered table-condensed" style="background-color:#fcfdfeb3; font-size:12px"" ng-show="false">
+                                    <thead>
+                                        <tr>
+                                            <th>id_paciente </th>
+                                            <th>numero_ficha </th>
+                                            <th>sexo </th>
+                                            <th>situacion_laboral </th>
+                                            <th>peso_actual </th>
+                                            <th>talla</th>
+                                            <th>masa_grasa_corporal </th>
+                                            <th>masa_magra </th>
+                                            <th>indice_cintura </th>
+                                            <th>MNA </th>
+                                            <th>peso_habitual </th>
+                                            <th>masa_magra_porc </th>
+                                            <th>grasa_viceral </th>
+                                            <th>porc_cintura </th>
+                                            <th>cribaje </th>
+                                            <th>apetito </th>
+                                            <th>alergia_alimentaria </th>
+                                            <th>preferencia_alimentaria </th>
+                                            <th>intolerancia_alimentaria </th>
+                                            <th>aversaciones_alimentaria</th>
+                                            <th>consumo_suplemento </th>
+                                            <th>hora_desayuno </th>
+                                            <th>gramaje_desayuno </th>
+                                            <th>hora_colacion </th>
+                                            <th>gramaje_colacion </th>
+                                            <th>hora_almuerzo </th>
+                                            <th>gramaje_almuerzo </th>
+                                            <th>hora_picoteo </th>
+                                            <th>gramaje_picoteo</th>
+                                            <th>hora_once </th>
+                                            <th>gramaje_once </th>
+                                            <th>hora_cena </th>
+                                            <th>gramaje_cena </th>
+                                            <th>hora_snack </th>
+                                            <th>gramaje_snack </th>
+                                            <th>ingesta_ali_observacion </th>
+                                            <th>diagnostico_nutricional_observacion </th>
+                                            <th>geb </th>
+                                            <th>energia </th>
+                                            <th>FA </th>
+                                            <th>proteina </th>
+                                            <th>lipidos </th>
+                                            <th>aporte_alimentacion_KCAL </th>
+                                            <th>aporte_alimentacion_cho</th>
+                                            <th>aporte_alimentacion_lip </th>
+                                            <th>aporte_alimentacion_prot</th>
+                                            <th>prescripcion_dietetica </th>
+                                            <th>indicaciones_generales </th>
+                                            <th>diagnostico_nutricional_integrado </th>
+                                            <th>objetivo_alimentario </th>
+                                            <th>intervencion_nutricional </th>
+                                            <th>consumo_fruta </th>
+                                            <th>consumo_verdura </th>
+                                            <th>consumo_lacteos </th>
+                                            <th>consumo_carne </th>
+                                            <th>consumo_grasas_azucar</th>
+                                            <th>consumo_legumbre </th>
+                                            <th>consumo_pescado</th>
+                                            <th>consumo_sodio </th>
+                                            <th>consumo_liquido </th>
+                                            <th>sintomatologia_prevalente </th>
+                                            <th>derivacion_aps </th>
+                                            <th>apoyo_social_significativo </th>
+                                            <th>problemas_sociales </th>
+                                            <th>personalidad_tipo_a</th>
+                                            <th>trastorno_mental_diagnosticado </th>
+                                            <th>trauma_post_operativo</th>
+                                            <th>conciencia_factor_riesgo </th>
+                                            <th>dificultades_respuesta_estres</th>
+                                            <th>ingreso_taller</th>
+                                            <th>tratamiento </th>
+                                            <th>observacion </th>
+                                            <th>funcion_fisica_ingreso </th>
+                                            <th>funcion_fisica_egreso </th>
+                                            <th>rol_fisico_ingreso </th>
+                                            <th>rol_fisico_egreso </th>
+                                            <th>dolor_corporal_ingreso </th>
+                                            <th>dolor_corporal_egreso</th>
+                                            <th>salud_general_ingreso </th>
+                                            <th>salud_general_egreso </th>
+                                            <th>vitalidad_ingreso </th>
+                                            <th>vitalidad_egreso </th>
+                                            <th>funcion_social_ingreso </th>
+                                            <th>funcion_social_egreso</th>
+                                            <th>rol_emocional_ingreso </th>
+                                            <th>rol_emocional_egreso </th>
+                                            <th>salud_mental_ingreso </th>
+                                            <th>salud_mental_egreso </th>
+                                            <th>observacion_sf36 </th>
+                                            <th>ansiedad_ingreso </th>
+                                            <th>ansiedad_egreso</th>
+                                            <th>depresion_ingreso </th>
+                                            <th>depresion_egreso </th>
+                                            <th>subescala_a_ingreso </th>
+                                            <th>subescala_a_egreso </th>
+                                            <th>subescala_b_ingreso </th>
+                                            <th>subescala_b_egreso </th>
+                                            <th>observacion_escala_ansiedad</th>
+                                            <th>antecedentes_plan_psico </th>
+                                            <th>objetivos_plan_psico </th>
+                                            <th>diagnosticos_plan_psico </th>
+                                            <th>intervencion_plan_psico </th>
+                                            <th>evaluacion_plan_psico </th>
+                                            <th>evolucion_plan_psico </th>
+                                            <th>ergo_fecha_ingreso </th>
+                                            <th>ergo_fecha_egreso </th>
+                                            <th>ergo_VO2L_ingreso </th>
+                                            <th>ergo_VO2L_egreso </th>
+                                            <th>ergo_VO2ML_ingreso </th>
+                                            <th>ergo_VO2ML_egreso</th>
+                                            <th>ergo_FCMAX_ingreso </th>
+                                            <th>ergo_FCMAX_egreso </th>
+                                            <th>ergo_pulso_ingreso </th>
+                                            <th>ergo_pulso_egreso</th>
+                                            <th>ergo_VE_ingreso </th>
+                                            <th>ergo_VE_egreso </th>
+                                            <th>ergo_METS_ingreso </th>
+                                            <th>ergo_METS_egreso </th>
+                                            <th>shuttle_fecha_ingreso </th>
+                                            <th>shuttle_fecha_egreso </th>
+                                            <th>shuttle_metros_ingreso</th>
+                                            <th>shuttle_metros_egreso </th>
+                                            <th>shuttle_nivelCOMP_ingreso </th>
+                                            <th>shuttle_nivelCOMP_egreso </th>
+                                            <th>shuttle_VO2ML_ingreso </th>
+                                            <th>shuttle_VO2ML_egreso </th>
+                                            <th>shuttle_METS_ingreso </th>
+                                            <th>shuttle_METS_egreso</th>
+                                            <th>shuttle_FCMAX_ingreso </th>
+                                            <th>shuttle_FCMAX_egreso </th>
+                                            <th>shuttle_FCMT_ingreso </th>
+                                            <th>shuttle_FCMT_egreso </th>
+                                            <th>shuttle_METSMAX_ingreso </th>
+                                            <th>shuttle_METSMAX_egreso</th>
+                                            <th>fecha_evolucion_ingreso  </th>
+                                            <th>musculo_esqueletica_evolucion_ingreso </th>
+                                            <th>observacion_evolucion_ingreso </th>
+                                            <th>fecha_evolucion_egreso </th>
+                                            <th>musculo_esqueletica_evolucion_egreso </th>
+                                            <th>observacion_evolucion_egreso</th>
+                                            <th>ejercicio_aerobico</th>
+                                            <th>ejercicio_sobrecarga </th>
+                                            <th>entrenamiento_funcional </th>
+                                            <th>habitos_cardio</th>
+                                            <th>DiagnosticoKinesico </th>
+                                            <th>ObjetivoKinesico</th>
+                                            <th>diagnostico_medico </th>
+                                            <th>CX_PROCED </th>
+                                            <th>diagnostico_medico_fecha </th>
+                                            <th>CX_PROCED_fecha </th>
+                                            <th>fecha_alta </th>
+                                            <th>controles </th>
+                                            <th>procedencia  </th>
+                                            <th>tipo_evaluacion  </th>
+                                            <th>herida_cx</th>
+                                            <th>intervencion </th>
+                                            <th>HTA  </th>
+                                            <th>DM  </th>
+                                            <th>DLP </th>
+                                            <th>SED </th>
+                                            <th>SP_OB </th>
+                                            <th>TB </th>
+                                            <th>OH </th>
+                                            <th>AF </th>
+                                            <th>Estres </th>
+                                            <th>Medicamento</th>
+                                            <th>antecedentes_relevantes_anamnesis </th>
+                                            <th>patron_respiratorio_anamnesis </th>
+                                            <th>regimen_hiposodico_anamnesis </th>
+                                            <th>fruta_verdura_anamnesis </th>
+                                            <th>agua_anamnesis </th>
+                                            <th>bebida_nec_anamnesis</th>
+                                            <th>grasas_anamnesis </th>
+                                            <th>diuresis_anamnesis  </th>
+                                            <th>deposicion_anamnesis </th>
+                                            <th>tb_anamnesis </th>
+                                            <th>tb_a_anamnesis </th>
+                                            <th>EA_anamnesis </th>
+                                            <th>sueno_nocturno_anamnesis </th>
+                                            <th>sueno_a_nocturno_anamnesis</th>
+                                            <th>sueno_b_nocturno_anamnesis </th>
+                                            <th>motivacion_anamnesis </th>
+                                            <th>AVD_anamnesis </th>
+                                            <th>actividades_recreativas_anamnesis </th>
+                                            <th>cabeza_examen_fisico </th>
+                                            <th>cuello_examen_fisico </th>
+                                            <th>torax_examen_fisico</th>
+                                            <th>torax_a_examen_fisico </th>
+                                            <th>torax_b_examen_fisico </th>
+                                            <th>torax_c_examen_fisico </th>
+                                            <th>abdomen_examen_fisico </th>
+                                            <th>abdomen_a_examen_fisico </th>
+                                            <th>EESS_examen_fisico </th>
+                                            <th>llen_cap_examen_fisico</th>
+                                            <th>EEII_examen_fisico  </th>
+                                            <th>PA_examen_fisico  </th>
+                                            <th>fc_examen_fisico  </th>
+                                            <th>sat_examen_fisico  </th>
+                                            <th>glicemia_examen_fisico </th>
+                                            <th>adherencia_farma_valoracion </th>
+                                            <th>respiracion_valoracion  </th>
+                                            <th>respiracion_obs_valoracion </th>
+                                            <th>alimentacion_valoracion</th>
+                                            <th>alimentacion_obs_valoracion </th>
+                                            <th>eliminacion_valoracion  </th>
+                                            <th>eliminacion_obs_valoracion </th>
+                                            <th>descanso_valoracion </th>
+                                            <th>descanso_obs_valoracion </th>
+                                            <th>higiene_valoracion </th>
+                                            <th>higiene_obs_valoracion</th>
+                                            <th>actividades_valoracion  </th>
+                                            <th>actividades_obs_valoracion</th>
+                                            <th>vestirse_valoracion  </th>
+                                            <th>vestirse_obs_valoracion  </th>
+                                            <th>comunicarse_valoracion </th>
+                                            <th>comunicarse_obs_valoracion </th>
+                                            <th>auto_realizacion_valoracion</th>
+                                            <th>auto_realizacion_obs_valoracion  </th>
+                                            <th>objetivo_plan_enfermeria </th>
+                                            <th>diagnostico_plan_enfermeria </th>
+                                            <th>intervencion_plan_enfermeria</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="registro in Registros | filter: {id_paciente : id_paciente} | filter: {numero_ficha  : numero_ficha } | filter: {sexo  : sexo } | filter: {situacion_laboral  : situacion_laboral } | filter: {peso_actual  : peso_actual } | filter: {talla : talla} | filter: {masa_grasa_corporal  : masa_grasa_corporal } | filter: {masa_magra  : masa_magra } | filter: {indice_cintura  : indice_cintura } | filter: {MNA  : MNA } | filter: {peso_habitual  : peso_habitual } | filter: {masa_magra_porc  : masa_magra_porc } | filter: {grasa_viceral  : grasa_viceral } | filter: {porc_cintura  : porc_cintura } | filter: {cribaje  : cribaje } | filter: {apetito  : apetito } | filter: {alergia_alimentaria  : alergia_alimentaria } | filter: {preferencia_alimentaria  : preferencia_alimentaria } | filter: {intolerancia_alimentaria  : intolerancia_alimentaria } | filter: {aversaciones_alimentaria : aversaciones_alimentaria} | filter: {consumo_suplemento  : consumo_suplemento } | filter: {hora_desayuno  : hora_desayuno } | filter: {gramaje_desayuno  : gramaje_desayuno } | filter: {hora_colacion  : hora_colacion } | filter: {gramaje_colacion  : gramaje_colacion } | filter: {hora_almuerzo  : hora_almuerzo } | filter: {gramaje_almuerzo  : gramaje_almuerzo } | filter: {hora_picoteo  : hora_picoteo } | filter: {gramaje_picoteo : gramaje_picoteo} | filter: {hora_once  : hora_once } | filter: {gramaje_once  : gramaje_once } | filter: {hora_cena  : hora_cena } | filter: {gramaje_cena  : gramaje_cena } | filter: {hora_snack  : hora_snack } | filter: {gramaje_snack  : gramaje_snack } | filter: {ingesta_ali_observacion  : ingesta_ali_observacion } | filter: {diagnostico_nutricional_observacion  : diagnostico_nutricional_observacion } | filter: {geb  : geb } | filter: {energia  : energia } | filter: {FA  : FA } | filter: {proteina  : proteina } | filter: {lipidos  : lipidos } | filter: {aporte_alimentacion_KCAL  : aporte_alimentacion_KCAL } | filter: {aporte_alimentacion_cho : aporte_alimentacion_cho} | filter: {aporte_alimentacion_lip  : aporte_alimentacion_lip } | filter: {aporte_alimentacion_prot : aporte_alimentacion_prot} | filter: {prescripcion_dietetica  : prescripcion_dietetica } | filter: {indicaciones_generales  : indicaciones_generales } | filter: {diagnostico_nutricional_integrado  : diagnostico_nutricional_integrado } | filter: {objetivo_alimentario  : objetivo_alimentario } | filter: {intervencion_nutricional  : intervencion_nutricional } | filter: {consumo_fruta  : consumo_fruta } | filter: {consumo_verdura  : consumo_verdura } | filter: {consumo_lacteos  : consumo_lacteos } | filter: {consumo_carne  : consumo_carne } | filter: {consumo_grasas_azucar : consumo_grasas_azucar} | filter: {consumo_legumbre  : consumo_legumbre } | filter: {consumo_pescado : consumo_pescado} | filter: {consumo_sodio  : consumo_sodio } | filter: {consumo_liquido  : consumo_liquido } | filter: {sintomatologia_prevalente  : sintomatologia_prevalente } | filter: {derivacion_aps  : derivacion_aps } | filter: {apoyo_social_significativo  : apoyo_social_significativo } | filter: {problemas_sociales  : problemas_sociales } | filter: {personalidad_tipo_a : personalidad_tipo_a} | filter: {trastorno_mental_diagnosticado  : trastorno_mental_diagnosticado } | filter: {trauma_post_operativo : trauma_post_operativo} | filter: {conciencia_factor_riesgo  : conciencia_factor_riesgo } | filter: {dificultades_respuesta_estres : dificultades_respuesta_estres} | filter: {ingreso_taller : ingreso_taller} | filter: {tratamiento  : tratamiento } | filter: {observacion  : observacion } | filter: {funcion_fisica_ingreso  : funcion_fisica_ingreso } | filter: {funcion_fisica_egreso  : funcion_fisica_egreso } | filter: {rol_fisico_ingreso  : rol_fisico_ingreso } | filter: {rol_fisico_egreso  : rol_fisico_egreso } | filter: {dolor_corporal_ingreso  : dolor_corporal_ingreso } | filter: {dolor_corporal_egreso : dolor_corporal_egreso} | filter: {salud_general_ingreso  : salud_general_ingreso } | filter: {salud_general_egreso  : salud_general_egreso } | filter: {vitalidad_ingreso  : vitalidad_ingreso } | filter: {vitalidad_egreso  : vitalidad_egreso } | filter: {funcion_social_ingreso  : funcion_social_ingreso } | filter: {funcion_social_egreso : funcion_social_egreso} | filter: {rol_emocional_ingreso  : rol_emocional_ingreso } | filter: {rol_emocional_egreso  : rol_emocional_egreso } | filter: {salud_mental_ingreso  : salud_mental_ingreso } | filter: {salud_mental_egreso  : salud_mental_egreso } | filter: {observacion_sf36  : observacion_sf36 } | filter: {ansiedad_ingreso  : ansiedad_ingreso } | filter: {ansiedad_egreso : ansiedad_egreso} | filter: {depresion_ingreso  : depresion_ingreso } | filter: {depresion_egreso  : depresion_egreso } | filter: {subescala_a_ingreso  : subescala_a_ingreso } | filter: {subescala_a_egreso  : subescala_a_egreso } | filter: {subescala_b_ingreso  : subescala_b_ingreso } | filter: {subescala_b_egreso  : subescala_b_egreso } | filter: {observacion_escala_ansiedad : observacion_escala_ansiedad} | filter: {antecedentes_plan_psico  : antecedentes_plan_psico } | filter: {objetivos_plan_psico  : objetivos_plan_psico } | filter: {diagnosticos_plan_psico  : diagnosticos_plan_psico } | filter: {intervencion_plan_psico  : intervencion_plan_psico } | filter: {evaluacion_plan_psico  : evaluacion_plan_psico } | filter: {evolucion_plan_psico  : evolucion_plan_psico } | filter: {ergo_fecha_ingreso  : ergo_fecha_ingreso } | filter: {ergo_fecha_egreso  : ergo_fecha_egreso } | filter: {ergo_VO2L_ingreso  : ergo_VO2L_ingreso } | filter: {ergo_VO2L_egreso  : ergo_VO2L_egreso } | filter: {ergo_VO2ML_ingreso  : ergo_VO2ML_ingreso } | filter: {ergo_VO2ML_egreso : ergo_VO2ML_egreso} | filter: {ergo_FCMAX_ingreso  : ergo_FCMAX_ingreso } | filter: {ergo_FCMAX_egreso  : ergo_FCMAX_egreso } | filter: {ergo_pulso_ingreso  : ergo_pulso_ingreso } | filter: {ergo_pulso_egreso : ergo_pulso_egreso} | filter: {ergo_VE_ingreso  : ergo_VE_ingreso } | filter: {ergo_VE_egreso  : ergo_VE_egreso } | filter: {ergo_METS_ingreso  : ergo_METS_ingreso } | filter: {ergo_METS_egreso  : ergo_METS_egreso } | filter: {shuttle_fecha_ingreso  : shuttle_fecha_ingreso } | filter: {shuttle_fecha_egreso  : shuttle_fecha_egreso } | filter: {shuttle_metros_ingreso : shuttle_metros_ingreso} | filter: {shuttle_metros_egreso  : shuttle_metros_egreso } | filter: {shuttle_nivelCOMP_ingreso  : shuttle_nivelCOMP_ingreso } | filter: {shuttle_nivelCOMP_egreso  : shuttle_nivelCOMP_egreso } | filter: {shuttle_VO2ML_ingreso  : shuttle_VO2ML_ingreso } | filter: {shuttle_VO2ML_egreso  : shuttle_VO2ML_egreso } | filter: {shuttle_METS_ingreso  : shuttle_METS_ingreso } | filter: {shuttle_METS_egreso : shuttle_METS_egreso} | filter: {shuttle_FCMAX_ingreso  : shuttle_FCMAX_ingreso } | filter: {shuttle_FCMAX_egreso  : shuttle_FCMAX_egreso } | filter: {shuttle_FCMT_ingreso  : shuttle_FCMT_ingreso } | filter: {shuttle_FCMT_egreso  : shuttle_FCMT_egreso } | filter: {shuttle_METSMAX_ingreso  : shuttle_METSMAX_ingreso } | filter: {shuttle_METSMAX_egreso : shuttle_METSMAX_egreso} | filter: {fecha_evolucion_ingreso   : fecha_evolucion_ingreso  } | filter: {musculo_esqueletica_evolucion_ingreso  : musculo_esqueletica_evolucion_ingreso } | filter: {observacion_evolucion_ingreso  : observacion_evolucion_ingreso } | filter: {fecha_evolucion_egreso  : fecha_evolucion_egreso } | filter: {musculo_esqueletica_evolucion_egreso  : musculo_esqueletica_evolucion_egreso } | filter: {observacion_evolucion_egreso : observacion_evolucion_egreso} | filter: {ejercicio_aerobico : ejercicio_aerobico} | filter: {ejercicio_sobrecarga  : ejercicio_sobrecarga } | filter: {entrenamiento_funcional  : entrenamiento_funcional } | filter: {habitos_cardio : habitos_cardio} | filter: {idDiagnosticoKinesico  : idDiagnosticoKinesico } | filter: {DiagnosticoKinesico  : DiagnosticoKinesico } | filter: {idObjetivoKinesico  : idObjetivoKinesico } | filter: {ObjetivoKinesico : ObjetivoKinesico} | filter: {diagnostico_medico  : diagnostico_medico } | filter: {CX_PROCED  : CX_PROCED } | filter: {diagnostico_medico_fecha  : diagnostico_medico_fecha } | filter: {CX_PROCED_fecha  : CX_PROCED_fecha } | filter: {fecha_alta  : fecha_alta } | filter: {controles  : controles } | filter: {procedencia   : procedencia  } | filter: {tipo_evaluacion   : tipo_evaluacion  } | filter: {herida_cx : herida_cx} | filter: {intervencion  : intervencion } | filter: {HTA   : HTA  } | filter: {DM   : DM  } | filter: {DLP  : DLP } | filter: {SED  : SED } | filter: {SP_OB  : SP_OB } | filter: {TB  : TB } | filter: {OH  : OH } | filter: {AF  : AF } | filter: {Estres  : Estres } | filter: {idMedicamento  : idMedicamento } | filter: {Medicamento : Medicamento} | filter: {antecedentes_relevantes_anamnesis  : antecedentes_relevantes_anamnesis } | filter: {patron_respiratorio_anamnesis  : patron_respiratorio_anamnesis } | filter: {regimen_hiposodico_anamnesis  : regimen_hiposodico_anamnesis } | filter: {fruta_verdura_anamnesis  : fruta_verdura_anamnesis } | filter: {agua_anamnesis  : agua_anamnesis } | filter: {bebida_nec_anamnesis : bebida_nec_anamnesis} | filter: {grasas_anamnesis  : grasas_anamnesis } | filter: {diuresis_anamnesis   : diuresis_anamnesis  } | filter: {deposicion_anamnesis  : deposicion_anamnesis } | filter: {tb_anamnesis  : tb_anamnesis } | filter: {tb_a_anamnesis  : tb_a_anamnesis } | filter: {EA_anamnesis  : EA_anamnesis } | filter: {sueno_nocturno_anamnesis  : sueno_nocturno_anamnesis } | filter: {sueno_a_nocturno_anamnesis : sueno_a_nocturno_anamnesis} | filter: {sueno_b_nocturno_anamnesis  : sueno_b_nocturno_anamnesis } | filter: {motivacion_anamnesis  : motivacion_anamnesis } | filter: {AVD_anamnesis  : AVD_anamnesis } | filter: {actividades_recreativas_anamnesis  : actividades_recreativas_anamnesis } | filter: {cabeza_examen_fisico  : cabeza_examen_fisico } | filter: {cuello_examen_fisico  : cuello_examen_fisico } | filter: {torax_examen_fisico : torax_examen_fisico} | filter: {torax_a_examen_fisico  : torax_a_examen_fisico } | filter: {torax_b_examen_fisico  : torax_b_examen_fisico } | filter: {torax_c_examen_fisico  : torax_c_examen_fisico } | filter: {abdomen_examen_fisico  : abdomen_examen_fisico } | filter: {abdomen_a_examen_fisico  : abdomen_a_examen_fisico } | filter: {EESS_examen_fisico  : EESS_examen_fisico } | filter: {llen_cap_examen_fisico : llen_cap_examen_fisico} | filter: {EEII_examen_fisico   : EEII_examen_fisico  } | filter: {PA_examen_fisico   : PA_examen_fisico  } | filter: {fc_examen_fisico   : fc_examen_fisico  } | filter: {sat_examen_fisico   : sat_examen_fisico  } | filter: {glicemia_examen_fisico  : glicemia_examen_fisico } | filter: {adherencia_farma_valoracion  : adherencia_farma_valoracion } | filter: {respiracion_valoracion   : respiracion_valoracion  } | filter: {respiracion_obs_valoracion  : respiracion_obs_valoracion } | filter: {alimentacion_valoracion : alimentacion_valoracion} | filter: {alimentacion_obs_valoracion  : alimentacion_obs_valoracion } | filter: {eliminacion_valoracion   : eliminacion_valoracion  } | filter: {eliminacion_obs_valoracion  : eliminacion_obs_valoracion } | filter: {descanso_valoracion  : descanso_valoracion } | filter: {descanso_obs_valoracion  : descanso_obs_valoracion } | filter: {higiene_valoracion  : higiene_valoracion } | filter: {higiene_obs_valoracion : higiene_obs_valoracion} | filter: {actividades_valoracion   : actividades_valoracion  } | filter: {actividades_obs_valoracion : actividades_obs_valoracion} | filter: {vestirse_valoracion   : vestirse_valoracion  } | filter: {vestirse_obs_valoracion   : vestirse_obs_valoracion  } | filter: {comunicarse_valoracion  : comunicarse_valoracion } | filter: {comunicarse_obs_valoracion  : comunicarse_obs_valoracion } | filter: {auto_realizacion_valoracion : auto_realizacion_valoracion} | filter: {auto_realizacion_obs_valoracion   : auto_realizacion_obs_valoracion  } | filter: {objetivo_plan_enfermeria  : objetivo_plan_enfermeria } | filter: {iddiagnostico_plan_enfermeria  : iddiagnostico_plan_enfermeria } | filter: {diagnostico_plan_enfermeria  : diagnostico_plan_enfermeria } | filter: {idintervencion_plan_enfermeria   : idintervencion_plan_enfermeria  } | filter: {intervencion_plan_enfermeria : intervencion_plan_enfermeria}">
+                                            <td>{{ registro.id_paciente}}</td>
+                                            <td>{{ registro.numero_ficha }}</td>
+                                            <td>{{ registro.sexo }}</td>
+                                            <td>{{ registro.situacion_laboral }}</td>
+                                            <td>{{ registro.peso_actual }}</td>
+                                            <td>{{ registro.talla}}</td>
+                                            <td>{{ registro.masa_grasa_corporal }}</td>
+                                            <td>{{ registro.masa_magra }}</td>
+                                            <td>{{ registro.indice_cintura }}</td>
+                                            <td>{{ registro.MNA }}</td>
+                                            <td>{{ registro.peso_habitual }}</td>
+                                            <td>{{ registro.masa_magra_porc }}</td>
+                                            <td>{{ registro.grasa_viceral }}</td>
+                                            <td>{{ registro.porc_cintura }}</td>
+                                            <td>{{ registro.cribaje }}</td>
+                                            <td>{{ registro.apetito }}</td>
+                                            <td>{{ registro.alergia_alimentaria }}</td>
+                                            <td>{{ registro.preferencia_alimentaria }}</td>
+                                            <td>{{ registro.intolerancia_alimentaria }}</td>
+                                            <td>{{ registro.aversaciones_alimentaria}}</td>
+                                            <td>{{ registro.consumo_suplemento }}</td>
+                                            <td>{{ registro.hora_desayuno }}</td>
+                                            <td>{{ registro.gramaje_desayuno }}</td>
+                                            <td>{{ registro.hora_colacion }}</td>
+                                            <td>{{ registro.gramaje_colacion }}</td>
+                                            <td>{{ registro.hora_almuerzo }}</td>
+                                            <td>{{ registro.gramaje_almuerzo }}</td>
+                                            <td>{{ registro.hora_picoteo }}</td>
+                                            <td>{{ registro.gramaje_picoteo}}</td>
+                                            <td>{{ registro.hora_once }}</td>
+                                            <td>{{ registro.gramaje_once }}</td>
+                                            <td>{{ registro.hora_cena }}</td>
+                                            <td>{{ registro.gramaje_cena }}</td>
+                                            <td>{{ registro.hora_snack }}</td>
+                                            <td>{{ registro.gramaje_snack }}</td>
+                                            <td>{{ registro.ingesta_ali_observacion }}</td>
+                                            <td>{{ registro.diagnostico_nutricional_observacion }}</td>
+                                            <td>{{ registro.geb }}</td>
+                                            <td>{{ registro.energia }}</td>
+                                            <td>{{ registro.FA }}</td>
+                                            <td>{{ registro.proteina }}</td>
+                                            <td>{{ registro.lipidos }}</td>
+                                            <td>{{ registro.aporte_alimentacion_KCAL }}</td>
+                                            <td>{{ registro.aporte_alimentacion_cho}}</td>
+                                            <td>{{ registro.aporte_alimentacion_lip }}</td>
+                                            <td>{{ registro.aporte_alimentacion_prot}}</td>
+                                            <td>{{ registro.prescripcion_dietetica }}</td>
+                                            <td>{{ registro.indicaciones_generales }}</td>
+                                            <td>{{ registro.diagnostico_nutricional_integrado }}</td>
+                                            <td>{{ registro.objetivo_alimentario }}</td>
+                                            <td>{{ registro.intervencion_nutricional }}</td>
+                                            <td>{{ registro.consumo_fruta }}</td>
+                                            <td>{{ registro.consumo_verdura }}</td>
+                                            <td>{{ registro.consumo_lacteos }}</td>
+                                            <td>{{ registro.consumo_carne }}</td>
+                                            <td>{{ registro.consumo_grasas_azucar}}</td>
+                                            <td>{{ registro.consumo_legumbre }}</td>
+                                            <td>{{ registro.consumo_pescado}}</td>
+                                            <td>{{ registro.consumo_sodio }}</td>
+                                            <td>{{ registro.consumo_liquido }}</td>
+                                            <td>{{ registro.sintomatologia_prevalente }}</td>
+                                            <td>{{ registro.derivacion_aps }}</td>
+                                            <td>{{ registro.apoyo_social_significativo }}</td>
+                                            <td>{{ registro.problemas_sociales }}</td>
+                                            <td>{{ registro.personalidad_tipo_a}}</td>
+                                            <td>{{ registro.trastorno_mental_diagnosticado }}</td>
+                                            <td>{{ registro.trauma_post_operativo}}</td>
+                                            <td>{{ registro.conciencia_factor_riesgo }}</td>
+                                            <td>{{ registro.dificultades_respuesta_estres}}</td>
+                                            <td>{{ registro.ingreso_taller}}</td>
+                                            <td>{{ registro.tratamiento }}</td>
+                                            <td>{{ registro.observacion }}</td>
+                                            <td>{{ registro.funcion_fisica_ingreso }}</td>
+                                            <td>{{ registro.funcion_fisica_egreso }}</td>
+                                            <td>{{ registro.rol_fisico_ingreso }}</td>
+                                            <td>{{ registro.rol_fisico_egreso }}</td>
+                                            <td>{{ registro.dolor_corporal_ingreso }}</td>
+                                            <td>{{ registro.dolor_corporal_egreso}}</td>
+                                            <td>{{ registro.salud_general_ingreso }}</td>
+                                            <td>{{ registro.salud_general_egreso }}</td>
+                                            <td>{{ registro.vitalidad_ingreso }}</td>
+                                            <td>{{ registro.vitalidad_egreso }}</td>
+                                            <td>{{ registro.funcion_social_ingreso }}</td>
+                                            <td>{{ registro.funcion_social_egreso}}</td>
+                                            <td>{{ registro.rol_emocional_ingreso }}</td>
+                                            <td>{{ registro.rol_emocional_egreso }}</td>
+                                            <td>{{ registro.salud_mental_ingreso }}</td>
+                                            <td>{{ registro.salud_mental_egreso }}</td>
+                                            <td>{{ registro.observacion_sf36 }}</td>
+                                            <td>{{ registro.ansiedad_ingreso }}</td>
+                                            <td>{{ registro.ansiedad_egreso}}</td>
+                                            <td>{{ registro.depresion_ingreso }}</td>
+                                            <td>{{ registro.depresion_egreso }}</td>
+                                            <td>{{ registro.subescala_a_ingreso }}</td>
+                                            <td>{{ registro.subescala_a_egreso }}</td>
+                                            <td>{{ registro.subescala_b_ingreso }}</td>
+                                            <td>{{ registro.subescala_b_egreso }}</td>
+                                            <td>{{ registro.observacion_escala_ansiedad}}</td>
+                                            <td>{{ registro.antecedentes_plan_psico }}</td>
+                                            <td>{{ registro.objetivos_plan_psico }}</td>
+                                            <td>{{ registro.diagnosticos_plan_psico }}</td>
+                                            <td>{{ registro.intervencion_plan_psico }}</td>
+                                            <td>{{ registro.evaluacion_plan_psico }}</td>
+                                            <td>{{ registro.evolucion_plan_psico }}</td>
+                                            <td>{{ registro.ergo_fecha_ingreso }}</td>
+                                            <td>{{ registro.ergo_fecha_egreso }}</td>
+                                            <td>{{ registro.ergo_VO2L_ingreso }}</td>
+                                            <td>{{ registro.ergo_VO2L_egreso }}</td>
+                                            <td>{{ registro.ergo_VO2ML_ingreso }}</td>
+                                            <td>{{ registro.ergo_VO2ML_egreso}}</td>
+                                            <td>{{ registro.ergo_FCMAX_ingreso }}</td>
+                                            <td>{{ registro.ergo_FCMAX_egreso }}</td>
+                                            <td>{{ registro.ergo_pulso_ingreso }}</td>
+                                            <td>{{ registro.ergo_pulso_egreso}}</td>
+                                            <td>{{ registro.ergo_VE_ingreso }}</td>
+                                            <td>{{ registro.ergo_VE_egreso }}</td>
+                                            <td>{{ registro.ergo_METS_ingreso }}</td>
+                                            <td>{{ registro.ergo_METS_egreso }}</td>
+                                            <td>{{ registro.shuttle_fecha_ingreso }}</td>
+                                            <td>{{ registro.shuttle_fecha_egreso }}</td>
+                                            <td>{{ registro.shuttle_metros_ingreso}}</td>
+                                            <td>{{ registro.shuttle_metros_egreso }}</td>
+                                            <td>{{ registro.shuttle_nivelCOMP_ingreso }}</td>
+                                            <td>{{ registro.shuttle_nivelCOMP_egreso }}</td>
+                                            <td>{{ registro.shuttle_VO2ML_ingreso }}</td>
+                                            <td>{{ registro.shuttle_VO2ML_egreso }}</td>
+                                            <td>{{ registro.shuttle_METS_ingreso }}</td>
+                                            <td>{{ registro.shuttle_METS_egreso}}</td>
+                                            <td>{{ registro.shuttle_FCMAX_ingreso }}</td>
+                                            <td>{{ registro.shuttle_FCMAX_egreso }}</td>
+                                            <td>{{ registro.shuttle_FCMT_ingreso }}</td>
+                                            <td>{{ registro.shuttle_FCMT_egreso }}</td>
+                                            <td>{{ registro.shuttle_METSMAX_ingreso }}</td>
+                                            <td>{{ registro.shuttle_METSMAX_egreso}}</td>
+                                            <td>{{ registro.fecha_evolucion_ingreso  }}</td>
+                                            <td>{{ registro.musculo_esqueletica_evolucion_ingreso }}</td>
+                                            <td>{{ registro.observacion_evolucion_ingreso }}</td>
+                                            <td>{{ registro.fecha_evolucion_egreso }}</td>
+                                            <td>{{ registro.musculo_esqueletica_evolucion_egreso }}</td>
+                                            <td>{{ registro.observacion_evolucion_egreso}}</td>
+                                            <td>{{ registro.ejercicio_aerobico}}</td>
+                                            <td>{{ registro.ejercicio_sobrecarga }}</td>
+                                            <td>{{ registro.entrenamiento_funcional }}</td>
+                                            <td>{{ registro.habitos_cardio}}</td>
+                                            <td>{{ registro.DiagnosticoKinesico }}</td>
+                                            <td>{{ registro.ObjetivoKinesico}}</td>
+                                            <td>{{ registro.diagnostico_medico }}</td>
+                                            <td>{{ registro.CX_PROCED }}</td>
+                                            <td>{{ registro.diagnostico_medico_fecha }}</td>
+                                            <td>{{ registro.CX_PROCED_fecha }}</td>
+                                            <td>{{ registro.fecha_alta }}</td>
+                                            <td>{{ registro.controles }}</td>
+                                            <td>{{ registro.procedencia  }}</td>
+                                            <td>{{ registro.tipo_evaluacion  }}</td>
+                                            <td>{{ registro.herida_cx}}</td>
+                                            <td>{{ registro.intervencion }}</td>
+                                            <td>{{ registro.HTA  }}</td>
+                                            <td>{{ registro.DM  }}</td>
+                                            <td>{{ registro.DLP }}</td>
+                                            <td>{{ registro.SED }}</td>
+                                            <td>{{ registro.SP_OB }}</td>
+                                            <td>{{ registro.TB }}</td>
+                                            <td>{{ registro.OH }}</td>
+                                            <td>{{ registro.AF }}</td>
+                                            <td>{{ registro.Estres }}</td>
+                                            <td>{{ registro.Medicamento}}</td>
+                                            <td>{{ registro.antecedentes_relevantes_anamnesis }}</td>
+                                            <td>{{ registro.patron_respiratorio_anamnesis }}</td>
+                                            <td>{{ registro.regimen_hiposodico_anamnesis }}</td>
+                                            <td>{{ registro.fruta_verdura_anamnesis }}</td>
+                                            <td>{{ registro.agua_anamnesis }}</td>
+                                            <td>{{ registro.bebida_nec_anamnesis}}</td>
+                                            <td>{{ registro.grasas_anamnesis }}</td>
+                                            <td>{{ registro.diuresis_anamnesis  }}</td>
+                                            <td>{{ registro.deposicion_anamnesis }}</td>
+                                            <td>{{ registro.tb_anamnesis }}</td>
+                                            <td>{{ registro.tb_a_anamnesis }}</td>
+                                            <td>{{ registro.EA_anamnesis }}</td>
+                                            <td>{{ registro.sueno_nocturno_anamnesis }}</td>
+                                            <td>{{ registro.sueno_a_nocturno_anamnesis}}</td>
+                                            <td>{{ registro.sueno_b_nocturno_anamnesis }}</td>
+                                            <td>{{ registro.motivacion_anamnesis }}</td>
+                                            <td>{{ registro.AVD_anamnesis }}</td>
+                                            <td>{{ registro.actividades_recreativas_anamnesis }}</td>
+                                            <td>{{ registro.cabeza_examen_fisico }}</td>
+                                            <td>{{ registro.cuello_examen_fisico }}</td>
+                                            <td>{{ registro.torax_examen_fisico}}</td>
+                                            <td>{{ registro.torax_a_examen_fisico }}</td>
+                                            <td>{{ registro.torax_b_examen_fisico }}</td>
+                                            <td>{{ registro.torax_c_examen_fisico }}</td>
+                                            <td>{{ registro.abdomen_examen_fisico }}</td>
+                                            <td>{{ registro.abdomen_a_examen_fisico }}</td>
+                                            <td>{{ registro.EESS_examen_fisico }}</td>
+                                            <td>{{ registro.llen_cap_examen_fisico}}</td>
+                                            <td>{{ registro.EEII_examen_fisico  }}</td>
+                                            <td>{{ registro.PA_examen_fisico  }}</td>
+                                            <td>{{ registro.fc_examen_fisico  }}</td>
+                                            <td>{{ registro.sat_examen_fisico  }}</td>
+                                            <td>{{ registro.glicemia_examen_fisico }}</td>
+                                            <td>{{ registro.adherencia_farma_valoracion }}</td>
+                                            <td>{{ registro.respiracion_valoracion  }}</td>
+                                            <td>{{ registro.respiracion_obs_valoracion }}</td>
+                                            <td>{{ registro.alimentacion_valoracion}}</td>
+                                            <td>{{ registro.alimentacion_obs_valoracion }}</td>
+                                            <td>{{ registro.eliminacion_valoracion  }}</td>
+                                            <td>{{ registro.eliminacion_obs_valoracion }}</td>
+                                            <td>{{ registro.descanso_valoracion }}</td>
+                                            <td>{{ registro.descanso_obs_valoracion }}</td>
+                                            <td>{{ registro.higiene_valoracion }}</td>
+                                            <td>{{ registro.higiene_obs_valoracion}}</td>
+                                            <td>{{ registro.actividades_valoracion  }}</td>
+                                            <td>{{ registro.actividades_obs_valoracion}}</td>
+                                            <td>{{ registro.vestirse_valoracion  }}</td>
+                                            <td>{{ registro.vestirse_obs_valoracion  }}</td>
+                                            <td>{{ registro.comunicarse_valoracion }}</td>
+                                            <td>{{ registro.comunicarse_obs_valoracion }}</td>
+                                            <td>{{ registro.auto_realizacion_valoracion}}</td>
+                                            <td>{{ registro.auto_realizacion_obs_valoracion  }}</td>
+                                            <td>{{ registro.objetivo_plan_enfermeria }}</td>
+                                            <td>{{ registro.diagnostico_plan_enfermeria }}</td>
+                                            <td>{{ registro.intervencion_plan_enfermeria}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <span class="clearfix"></span>
+            </div>
+        </div>
+    </div>
+</section>

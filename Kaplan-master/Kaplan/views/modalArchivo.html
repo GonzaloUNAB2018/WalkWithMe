@@ -1,0 +1,41 @@
+﻿<div class="modal fade" id="timeTableModal" tabindex="-1" role="dialog" aria-labelledby="Book">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Nueva Carga de Archivo Ergo</h4>
+            </div>
+            <div class="modal-body">
+                <form name="frmCargaArchivo" ng-submit="registrarArchivo()" role="form" ng-disabled="true">                    
+                    <div class="row mb10" ng-class="{hidden: loading}">                        
+                        <div class="col-sm-6">
+                            <h2 class="animated" data-animation="bounceInLeft">Plan:</h2>
+                            <select ng-model="Plan.Id" class="form-control" required aria-required="true" name="plan" id="plan" ng-disabled="Sesion.Id !== undefined && Plan.Id !== undefined" data-ng-options="plan.Id as plan.Nombre for plan in Planes" ng-change="CambioPlan(Plan.Id)">
+                                <option value="">Seleccione</option>
+                            </select>
+                        </div>
+                        <div class="col-sm-6">
+                            <h2 class="animated" data-animation="bounceInLeft">Sesiones:</h2>
+                            <select ng-model="Sesion.Id" class="form-control" required aria-required="true" name="sesion" id="sesion" data-ng-options="sesion.Id as sesion.Nombre for sesion in Sesiones" ng-change="CambiarSesion(Sesion.Id)">
+                                <option value="">Seleccione</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <label class="control-label pull-right" for="Descripcion">Archivo Ergo</label>
+                        </div>
+                        <div class="col-sm-10">
+                            <input type="file" id="ergoFile" name="ergoFile" file-model="ergoFile" required accept="application/vnd.ms-excel, .obj"/>
+                        </div>
+                    </div>   
+                    <div class="row">
+                        <div class="col-sm-3 pull-right">
+                            <button id="btnGuardar" type="submit" class="btn blue medium" data-loading-text="<i class='fa fa-spinner fa-spin'></i> Guardando ...">Cargar</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,27 @@
+﻿<div class="modal fade" id="timeTableModal" tabindex="-1" role="dialog" aria-labelledby="Book" ng-class="{hidden: loading}">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Reporte Evolución del Paciente</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-sm-4">
+                        <label class="control-label pull-right" for="plan">Seleccione Plan</label>
+                    </div>
+                    <div class="col-sm-6">
+                        <select ng-model="Plan.Id" class="form-control" required aria-required="true" name="plan" id="plan" data-ng-options="plan.Id as plan.Nombre for plan in Planes" ng-change="CambioPlan(Plan.Id)">
+                            <option value="">Seleccione</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-3 pull-right">
+                        <!--<button id="btnGuardar" type="submit" class="btn blue medium" data-loading-text="<i class='fa fa-spinner fa-spin'></i> Guardando ...">Guardar</button>-->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,63 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.24720.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "Kaplan", "Kaplan\Kaplan.vbproj", "{097F06BA-789C-4674-86B7-3FC2BA37A967}"
+EndProject
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "Agenda", "Agenda\Agenda.vbproj", "{9C52F765-3641-4988-9F8E-C82FECD369EA}"
+EndProject
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "Prototipo", "Prototipo\Prototipo.vbproj", "{539A9B2C-ADB5-41E6-9ADE-3C6B3BC41BCF}"
+EndProject
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "ExtraccionData", "ExtraccionData\ExtraccionData.vbproj", "{D450DBEF-4CC3-45F8-A84E-17D6D299B098}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Script BD", "Script BD", "{9E5DCD70-C062-435E-822A-9A17F3816D6E}"
+	ProjectSection(SolutionItems) = preProject
+		..\..\kaplan Produccion Definitivo.sql = ..\..\kaplan Produccion Definitivo.sql
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{097F06BA-789C-4674-86B7-3FC2BA37A967}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{097F06BA-789C-4674-86B7-3FC2BA37A967}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{097F06BA-789C-4674-86B7-3FC2BA37A967}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{097F06BA-789C-4674-86B7-3FC2BA37A967}.Debug|x86.Build.0 = Debug|Any CPU
+		{097F06BA-789C-4674-86B7-3FC2BA37A967}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{097F06BA-789C-4674-86B7-3FC2BA37A967}.Release|Any CPU.Build.0 = Release|Any CPU
+		{097F06BA-789C-4674-86B7-3FC2BA37A967}.Release|x86.ActiveCfg = Release|Any CPU
+		{097F06BA-789C-4674-86B7-3FC2BA37A967}.Release|x86.Build.0 = Release|Any CPU
+		{9C52F765-3641-4988-9F8E-C82FECD369EA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9C52F765-3641-4988-9F8E-C82FECD369EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9C52F765-3641-4988-9F8E-C82FECD369EA}.Debug|x86.ActiveCfg = Debug|x86
+		{9C52F765-3641-4988-9F8E-C82FECD369EA}.Debug|x86.Build.0 = Debug|x86
+		{9C52F765-3641-4988-9F8E-C82FECD369EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9C52F765-3641-4988-9F8E-C82FECD369EA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9C52F765-3641-4988-9F8E-C82FECD369EA}.Release|x86.ActiveCfg = Release|x86
+		{9C52F765-3641-4988-9F8E-C82FECD369EA}.Release|x86.Build.0 = Release|x86
+		{539A9B2C-ADB5-41E6-9ADE-3C6B3BC41BCF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{539A9B2C-ADB5-41E6-9ADE-3C6B3BC41BCF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{539A9B2C-ADB5-41E6-9ADE-3C6B3BC41BCF}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{539A9B2C-ADB5-41E6-9ADE-3C6B3BC41BCF}.Debug|x86.Build.0 = Debug|Any CPU
+		{539A9B2C-ADB5-41E6-9ADE-3C6B3BC41BCF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{539A9B2C-ADB5-41E6-9ADE-3C6B3BC41BCF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{539A9B2C-ADB5-41E6-9ADE-3C6B3BC41BCF}.Release|x86.ActiveCfg = Release|Any CPU
+		{539A9B2C-ADB5-41E6-9ADE-3C6B3BC41BCF}.Release|x86.Build.0 = Release|Any CPU
+		{D450DBEF-4CC3-45F8-A84E-17D6D299B098}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D450DBEF-4CC3-45F8-A84E-17D6D299B098}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D450DBEF-4CC3-45F8-A84E-17D6D299B098}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{D450DBEF-4CC3-45F8-A84E-17D6D299B098}.Debug|x86.Build.0 = Debug|Any CPU
+		{D450DBEF-4CC3-45F8-A84E-17D6D299B098}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D450DBEF-4CC3-45F8-A84E-17D6D299B098}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D450DBEF-4CC3-45F8-A84E-17D6D299B098}.Release|x86.ActiveCfg = Release|Any CPU
+		{D450DBEF-4CC3-45F8-A84E-17D6D299B098}.Release|x86.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

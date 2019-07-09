@@ -1,0 +1,59 @@
+﻿<section id="suggestions" class="doted-bg1" ng-controller="inicioController">
+    <div class="container">
+        <div class="row mb50">
+            <div class="col-md-6">
+                <div class="section-title mb20">
+                    <p class="text-blue animated" data-animation="bounceInLeft">Bienvenido a Fundación Kaplan</p>
+                    <h2 class="animated" data-animation="bounceInLeft">Ficha Médica</h2>
+                </div>
+                <p>La Ficha Médica fue diseñada para registrar el historial médico de los pacientes en un medio electrónico, con el objetivo de estructurar de manera completa y profesional los antecedentes clínicos del paciente</p>
+                <blockquote>
+                    <p>Seleccione el Nombre del paciente, una vez validado, se desplegara todas las opciones necesarias podra navegar las distintas fichas del paciente.</p>
+                </blockquote>
+            </div>
+            <div class="col-md-6 pull-bottom">
+                <div class="row mb10" style="margin-top: 15%;">
+                    <div class="form-group">
+                        <div class="col-sm-2">
+                            <label class="control-label" for="pacienteFiltro">Nombre</label>
+                        </div>
+                        <div class="col-sm-6">
+                            <select ng-disabled="rutvalido" ng-model="PacienteFiltro.ID" ng-change="FiltrarPaciente(PacienteFiltro.ID)" ng-init="PacienteFiltro.ID=Rut" class="js-example-basic-single form-control" name="pacienteFiltro" id="pacienteFiltro" data-ng-options="pacienteFiltro.ID as pacienteFiltro.Nombre for pacienteFiltro in PacientesFiltro">
+                                <option value="">Paciente</option>
+                            </select>
+                            <script ng-disabled="rutvalido" type="text/javascript">$(document).ready(function () { $('.js-example-basic-single').select2(); });</script>
+                        </div>
+                    </div>
+                </div>
+                <!--<div class="row mb10">
+                    <div class="form-group">
+                        <div class="col-sm-2">
+                            <label class="control-label" for="rut">Rut</label>
+                        </div>
+                        <div class="col-sm-3">
+                            <input type="number" class="form-control" id="rut" name="rut" required placeholder="Rut" min="0" ng-maxlength="8" ng-disabled="rutvalido" ng-model="Paciente.Persona.Rut">
+                        </div>
+                        <div class="col-sm-1">
+                            <label class="control-label" for="dv">Dv</label>
+                        </div>
+                        <div class="col-sm-2">
+                            <input type="text" class="form-control" id="dv" name="dv" required placeholder="DV" ng-disabled="rutvalido" maxlength="1" ng-model="Paciente.Persona.Dv">
+                        </div>
+                    </div>
+                </div>-->
+                <div class="row mb10">
+                    <div class="form-group">
+                        <div class="col-sm-7 pull-right">
+                            <!--<a class="btn small" id="btnBuscar" ng-click="frmPaciente.rut.$invalid || frmPaciente.dv.$invalid || getRut()" role="button" data-loading-text="<i class='fa fa-spinner fa-spin'></i> Buscando ..." ng-if="!rutvalido">
+                                Buscar
+                            </a>-->
+                            <a class="btn border small" ng-click="Limpiar()" role="button" ng-if="rutvalido">
+                                Limpiar <!--data-target="#collapseDataPaciente"-->
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

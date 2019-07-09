@@ -1,0 +1,186 @@
+﻿<div ng-include="especialista.header.url"></div>
+
+<!--<section class="gardient-bg-small hidden-xs">
+    <div class="container">
+        <h1 class="pull-left">Especialista</h1>
+        <div class="pull-right">
+            <ol class="breadcrumb">
+                <li><a href="#!calendario">Home</a></li>
+                <li class="active">Mantenedor Especialista</li>
+            </ol>
+        </div>
+    </div>
+</section>-->
+
+<section id="suggestions" class="doted-bg1">
+    <!-- Container -->
+    <div class="container effect8  nopadding">
+        <!-- Row -->
+        <div class="row">
+            <div class="col-md-12">
+                <!-- Tab panes -->
+                <div class="tab-content">
+                    <div role="tabpanel" class="tab-pane fade in active" id="home-tab">
+                        <form class="form-horizontal mb20" name="frmEspecialista" id="contact" ng-submit="registrarEspecialista()" role="form" ng-disabled="true">
+                            <div class="section-title text-center">
+                                <h2 class="animated hidden-xs" data-animation="bounceInLeft">Especialistas</h2>
+                                <p class="text-blue animated hidden-xs" data-animation="bounceInLeft">
+                                    Listado Especialistas
+                                </p>
+                                <a class="btn small pull-left mb40" ng-click="Nuevo()" role="button">
+                                    Nuevo Especialista
+                                </a>
+                            </div>
+
+                            <span class="clearfix"></span>
+                            <div ng-class="{hidden: !loading}">
+                                <h5>Cargando Especialistas... <i class="fa fa-users hidden-xs" aria-hidden="true"></i></h5>
+                                <div class="progress">
+                                    <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%; background-color: #32b8da;">
+                                        <span class="sr-only">Cargando datos...</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row" ng-class="{hidden: loading}">
+                                <div class="col-xs-12">
+                                    <div class="table-responsive">
+                                        <table class="table table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th>Rut</th>
+                                                    <th>Nombre</th>
+                                                    <th>Fecha Nac.</th>
+                                                    <th>Movil</th>
+                                                    <th>Teléfono</th>
+                                                    <th>Email</th>
+                                                    <th>Especialidad</th>
+                                                    <th>Acción</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr dir-paginate="especialista in Especialistas | itemsPerPage: 6" pagination-id="pag_especialista">
+                                                    <td>{{especialista.Persona.Rut}}-{{especialista.Persona.Dv}}</td>
+                                                    <td>{{especialista.Persona.Nombre}} {{especialista.Persona.Paterno}} {{especialista.Persona.Materno}}</td>
+                                                    <td>{{especialista.Persona.FechaNacString}}</td>
+                                                    <td>{{especialista.Persona.Movil}}</td>
+                                                    <td>{{especialista.Persona.Telefono}}</td>
+                                                    <td>{{especialista.Persona.Email}}</td>
+                                                    <td>{{especialista.Especialidad.Nombre}}</td>
+                                                    <td><button type="button" title="Modificar" class="btn small-xs blue" ng-click="Modificar(especialista.Persona.Rut)" aria-label="Left Align"><i class="fa fa-edit"></i></button></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <dir-pagination-controls pagination-id="pag_especialista"  boundary-links="true" direction-links="true">	</dir-pagination-controls>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="collapse" id="collapseDataEspecialista" tabindex="-1">
+                                <div class="section-title text-center">
+                                    <p class="text-blue mb40 animated hidden-xs" data-animation="bounceInLeft">
+                                        Nuevo Especialista
+                                    </p>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-2">
+                                        <label class="control-label" for="rut">Rut</label>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <input type="number" class="form-control" required id="rut" placeholder="Rut Especialista" min="0" ng-disabled="rutvalido" ng-blur="getRut()" ng-model="Especialista.Persona.Rut">
+                                    </div>
+                                    <div class="col-sm-1">
+                                        <label class="control-label" for="dv">Dv</label>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <input type="text" class="form-control" required id="dv" placeholder="Digito Verificador" ng-disabled="rutvalido" maxlength="1" ng-change="getRut()" ng-model="Especialista.Persona.Dv">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-2">
+                                        <label class="control-label" for="nombre">Nombre</label>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <input type="text" class="form-control" required id="nombre" placeholder="Nombre Especialista" ng-model="Especialista.Persona.Nombre" maxlength="250">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-2">
+                                        <label class="control-label" for="nombre">A. Paterno</label>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <input type="text" class="form-control" required id="paterno" placeholder="A. Paterno Especialista" ng-model="Especialista.Persona.Paterno" maxlength="200">
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <label class="control-label" for="paterno">A. Materno</label>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <input type="text" class="form-control" required id="materno" placeholder="A. Paterno Especialista" ng-model="Especialista.Persona.Materno" maxlength="200">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-2">
+                                        <label class="control-label" for="edad">Fecha Nacimiento</label>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <input moment-picker="Fecha1" today="true" required ng-model="Especialista.Persona.FechaNac" max-view="day" format="DD/MM/YYYY" start-view="month" locale="es" class="form-control" placeholder="Fecha Nacimiento">
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <label class="control-label" for="sexo">Sexo</label>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="form-check">
+                                            <select class="form-control" required aria-required="true" name="sexo" id="sexo" data-ng-options="tipoSexo.ID as tipoSexo.Nombre for tipoSexo in TipoSexos" ng-model="Especialista.Persona.Sexo.ID">
+                                                <option value="">Seleccione</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-2">
+                                        <label class="control-label" for="movil">Movil</label>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <input type="number" class="form-control" id="movil" required placeholder="Movil Especialista" ng-model="Especialista.Persona.Movil">
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <label class="control-label" for="telefono">Teléfono</label>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <input type="number" class="form-control" id="telefono" required placeholder="Teléfono Especialista" ng-model="Especialista.Persona.Telefono">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-2">
+                                        <label class="control-label" for="email">Email</label>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <input type="email" class="form-control" id="email" required placeholder="Email Especialista" ng-model="Especialista.Persona.Email" maxlength="100">
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <label class="control-label" for="especialidad">Especialidad</label>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="form-check">
+                                            <select class="form-control" required aria-required="true" name="especialidad" id="especialidad" data-ng-options="tipoEspecialidad.ID as tipoEspecialidad.Nombre for tipoEspecialidad in TipoEspecialidades" ng-model="Especialista.Especialidad.ID">
+                                                <option value="">Seleccione</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-12 text-right">
+                                        <button id="btnGuardar" type="submit" ng-show="!Mod" class="btn blue medium" data-loading-text="<i class='fa fa-spinner fa-spin'></i> Guardando ...">Guardar</button>
+                                        <button id="btnModificar" type="submit" ng-show="Mod" class="btn blue medium" data-loading-text="<i class='fa fa-spinner fa-spin'></i> Modificando ...">Modificar</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                        <span class="clearfix"></span>
+                    </div>
+                </div>
+            </div>
+            <!-- ./end Tab Content -->
+        </div>
+    </div>
+    <!-- ./end Row -->
+    <!-- ./end Container -->
+</section>

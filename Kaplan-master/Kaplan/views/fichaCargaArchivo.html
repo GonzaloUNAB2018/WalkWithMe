@@ -1,0 +1,60 @@
+﻿<section id="suggestions" class="doted-bg1" ng-controller="fichaCargaArchivoController">
+    <div class="container effect8  nopadding">
+        <!-- Row -->
+        <div class="row">
+            <div class="col-md-12">
+                <!-- Tab panes -->
+                <div class="tab-content">
+                    <div role="tabpanel" class="tab-pane fade in active" id="home-tab">
+                        <form class="form-horizontal mb20" name="frmRegistrosMedicos" id="contact" role="form" ng-disabled="true">
+                            <div class="section-title text-center">
+                                <h2 class="animated hidden-xs" data-animation="bounceInLeft">Archivos Ergo y Electro</h2>
+                                <p class="text-blue animated hidden-xs" data-animation="bounceInLeft">
+                                    Listado Archivos Ergo y Electro 
+                                </p>
+                                <a class="btn small pull-left mb40" ng-click="NuevoArchivo()" role="button">
+                                    Nuevo Archivo
+                                </a>
+                            </div>
+                            <span class="clearfix"></span>
+                            <div class="row" ng-class="{hidden: loading}">
+                                <div class="col-xs-12">
+                                    <div class="table-responsive">
+                                        <table class="table table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th>F. Registro</th>
+                                                    <th>F. Reserva</th>
+                                                    <th>Plan</th>
+                                                    <th>Especialista</th>
+                                                    <th>Evaluación</th>
+                                                    <th style="text-align:center">Ver</th>                                                    
+                                                    <!--<th style="text-align:center">Eliminar</th>-->
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr dir-paginate="archivo in Archivos | itemsPerPage: 20" pagination-id="pag_archivos">
+                                                    <td>{{archivo.FechaRegistroString}}</td>
+                                                    <td>{{archivo.FechaReservaString}}</td>
+                                                    <td>{{archivo.Plan}}</td>                                                    
+                                                    <td>{{archivo.Especialista}}</td>                                                    
+                                                    <td ng-if="archivo.Tipo=='Excel'">Ergo</td>
+                                                    <td ng-if="archivo.Tipo=='Texto'">Kine</td>      
+                                                    <td align="center"><button type="button" title="Descargar" class="btn small-xs blue" ng-click="Descargar(archivo.Id, archivo.Tipo)" aria-label="Center Align"><i class="fa fa-download"></i></button></td>
+                                                    <!--<td align="center"><button type="button" title="Eliminar" class="btn small-xs" ng-click="Eliminar(archivo.Id)" aria-label="Center Align"><i class="fa fa-remove"></i></button></td>-->
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <dir-pagination-controls pagination-id="pag_archivos" boundary-links="true" direction-links="true">	</dir-pagination-controls>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                        <span class="clearfix"></span>
+                    </div>
+                </div>
+            </div>
+            <!-- ./end Tab Content -->
+        </div>
+    </div>
+</section>

@@ -1,0 +1,68 @@
+﻿<div ng-include="especialistaMisHoras.header.url"></div>
+
+<section id="department-single" class="doted-bg1">
+    <div class="container effect8 nopadding">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="tab-content">
+                    <div role="tabpanel" class="tab-pane fade in active" id="home-tab">
+                        <h3 class="text-blue mt10">Mis Horas Disponibles</h3>
+                        <p>Menú para indicar los dias y horas disponibles para el agendamiento de las sesiones de los pacientes.</p>
+                        <div class="department-prices">
+                            <div class="row">
+                                <form class="form-horizontal" name="frmAusencia" ng-submit="registrarAtencion()" role="form" ng-disabled="true">
+                                    <div class="col-md-1">
+
+                                    </div>
+                                    <div class="col-md-4">
+                                        <h4>Dias</h4>
+                                        <select class="form-control" required aria-required="true" name="Dia" id="Dia" data-ng-options="tipodia.ID as tipodia.Nombre for tipodia in TipoDias" ng-model="AtencionHora.Dia.ID">
+                                            <option value="">Seleccione</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <h4>Horas</h4>
+                                        <select class="form-control" required aria-required="true" name="Hora" id="Hora" data-ng-options="tipohora.ID as tipohora.Nombre for tipohora in TipoHoras" ng-model="AtencionHora.Hora.ID">
+                                            <option value="">Seleccione</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <button id="btnGuardar" style="margin-top:50%" type="submit" class="btn  blue medium" data-loading-text="<i class='fa fa-spinner fa-spin'></i> Guardando ...">Guardar</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <span class="clearfix"></span>
+                        <section id="doctor-profile" class="mt30">
+                            <div class="row">
+                                <div class="col-xs-12 col-md-5 col-md-offset-3">
+                                    <div class="table-responsive">
+                                        <table class="table table-striped">
+                                            <thead>
+                                                <tr></tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr dir-paginate="atencion in AtencionHoras | itemsPerPage: 8" pagination-id="pag_atencion" ng-mouseover="row = $index" ng-mouseleave="row = -1">
+                                                    <td>{{atencion.Dia.Nombre}}</td>
+                                                    <td>{{atencion.Hora.Nombre}}</td>
+                                                    <td>
+                                                        <div class="btn-group btn-group-xs" ng-show="row == $index">
+                                                            <button type="button" class="btn border small-xs" ng-click="eliminarAtencion(atencion.Id)" title="Eliminar Hora de Atencion" aria-label="Left Align"><i class="fa fa-remove"></i></button>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <dir-pagination-controls pagination-id="pag_atencion" boundary-links="true" direction-links="true">	</dir-pagination-controls>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                        <span class="clearfix"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+

@@ -1,0 +1,66 @@
+﻿<nav class="navbar navbar-default navbar-dark" role="navigation" style="padding-top:0">
+    <!-- Top Bar -->
+    <div class="top-bar dark">
+        <!-- Container -->
+        <div class="container-fluid">
+            <!-- Row -->
+            <div class="row mb50">
+                <div class="col-lg-6 pull-right col-sm-6 pull-right col-md-6 col-xs-12">
+                    <div class="dropdown pull-right">
+                        <span class="dropdown-toggle" id="dropdownLang" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"><i class="fa fa-user-circle-o" style="color:#fff"></i> {{Nombres}} <span class="caret"></span></span>
+                        <ul class="dropdown-menu pull-right" aria-labelledby="dropdownLang">
+                            <li><a href="">Rol: {{NombreEspecialidad}}</a></li>
+                            <li><a href="" ng-click="CerrarSesion()">Cerrar Sesión</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div> <!-- ./end Row -->
+        </div> <!-- ./end Container -->
+    </div>
+    <!-- End / Top Bar -->
+    <!-- Nav -->
+    <nav class="navbar navbar-default navbar-dark" role="navigation">
+        <div class="container-fluid">
+            <!-- LOGO -->
+            <a class="navbar-brand page-scroll" href="" style="line-height: normal"><i class="fa fa-heartbeat hidden-xs" aria-hidden="true"></i> Fundación <span class="text-light">Kaplan</span></a>
+            <!-- END / LOGO -->
+
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse navbar-ex1-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <!-- Hidden li included to remove active class from about link when scrolled up past about section -->
+                    <li class="hidden">
+                        <a class="page-scroll" href="#page-top"></a>
+                    </li>
+                    <li>
+                        <a href="#!menu">Consulta Fichas <i class="fa fa-stethoscope fa-2x hidden-xs" aria-hidden="true"></i></a>
+                    </li>
+                    <li>
+                        <a href="#!menuErgo">Consultas ERGO <i class="fa fa-medkit fa-2x hidden-xs" aria-hidden="true"></i></a>
+                    </li>
+                    <li class="dropdown">
+                        <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Consultas Maquinas Kine. <i class="fa fa-bicycle fa-2x hidden-xs" aria-hidden="true"></i></a>
+                        <ul class="dropdown-menu dropdown-menu-left">
+                            <li><a href="#!menuMaquina">Consulta Electro</a></li>
+                            <li><a href="#!menuMaquinaCons">Consulta Electro Constant</a></li>
+                            <li><a href="#!menuMaquinaImpu">Consulta Electro Impulse</a></li>
+                            <li><a href="#!menuMaquinaTread">Consulta Electro Treadmill</a></li>
+                        </ul>
+                    </li>
+                    <li>   
+                </ul> <!-- END / NAVBAR RIGHT -->
+            </div>
+        </div> <!-- END CONTAINER -->
+    </nav>
+    <!-- ./end Nav -->
+</nav>

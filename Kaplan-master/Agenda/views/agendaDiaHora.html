@@ -1,0 +1,50 @@
+﻿<div class="modal fade" id="timeTableModal" tabindex="-1" role="dialog" aria-labelledby="Book">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Reservas día {{fecha | date:'dd MMMM yyyy'}}</h4>
+            </div>
+            <div class="modal-body">
+                <form name="frmObservacion" ng-submit="GuardarObservacion()" role="form" ng-disabled="true">
+                    <div ng-class="{hidden: !loading}">
+                        <h5>Cargando Reservas... <i class="fa fa-users hidden-xs" aria-hidden="true"></i></h5>
+                        <div class="progress">
+                            <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%; background-color: #32b8da;">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" ng-class="{hidden: loading}">
+                        <div class="col-xs-12 col-md-12">
+                            <button type="button" class="btn blue medium" ng-click="nuevaReserva()">&nbsp;Nueva Reserva</button>
+                        </div>
+                        <div class="col-md-12">
+                            <table class="table table-striped">
+                                <thead align="center">
+                                    <tr>
+                                        <!--<th style="text-align:center;">Rut</th>-->
+                                        <th style="text-align:center;">Paciente</th>
+                                        <th style="text-align:center;">Especialidad</th>
+                                        <th style="text-align:center;">Especialista</th>
+                                        <!--<th style="text-align:center;">Tipo</th>-->
+                                        <th style="text-align:center;">Estado</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="reserva in Reservas">
+                                        <!--<td>{{reserva.Paciente.Persona.Rut}}-{{reserva.Paciente.Persona.Dv}}</td>-->
+                                        <td>{{reserva.Paciente.Persona.Nombre}} {{reserva.Paciente.Persona.Paterno}} {{reserva.Paciente.Persona.Materno}}</td>
+                                        <td>{{reserva.Especialista.Especialidad.Nombre}}</td>
+                                        <td>{{reserva.Especialista.Persona.Nombre}} {{reserva.Especialista.Persona.Paterno}} {{reserva.Especialista.Persona.Materno}}</td>
+                                        <!--<td>{{reserva.Tipo.Nombre}}</td>-->
+                                        <td>{{reserva.Estado.Nombre}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

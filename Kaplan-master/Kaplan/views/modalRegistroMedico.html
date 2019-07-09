@@ -1,0 +1,37 @@
+﻿<div class="modal fade" id="timeTableModal" tabindex="-1" role="dialog" aria-labelledby="Book">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Nuevo Ingreso de Registro Médico</h4>
+            </div>
+            <div class="modal-body">
+                <form name="frmmodalRegistroMedico" ng-submit="registrarRegistro()" role="form" ng-disabled="true">
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <label class="control-label pull-right" for="registro">Registro Médico</label>
+                        </div>
+                        <div class="col-sm-10">
+                            <textarea ng-model="RegistroMedico.Registro" class="form-control" id="registro" rows="4" placeholder="Ingrese el registro médico" required aria-required="true" ng-disabled="FormEditabe" maxlength="500"></textarea>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <label class="control-label pull-right" for="Descripcion">Receptor del Mensaje</label>
+                        </div>
+                        <div class="col-sm-10">
+                            <select ng-model="RegistroMedico.idEspecialidadReceptor.ID" class="form-control" required aria-required="true" name="especialidad" id="especialidad" data-ng-options="especialidad.ID as especialidad.Nombre for especialidad in Especialidades">
+                                <option value="">Seleccione</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-3 pull-right">
+                            <button id="btnGuardar" type="submit" class="btn blue medium" data-loading-text="<i class='fa fa-spinner fa-spin'></i> Guardando ...">Guardar</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

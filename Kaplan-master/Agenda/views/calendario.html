@@ -1,0 +1,110 @@
+﻿<div ng-include="calendario.header.url"></div>
+
+<section id="timetable" class="doted-bg1">
+    <!-- Container -->
+    <div class="container nopadding">
+        <div ng-class="{hidden: !loading}">
+            <h5>Cargando Semana... <i class="fa fa-calendar hidden-xs" aria-hidden="true"></i></h5>
+            <div class="progress">
+                <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%; background-color: #32b8da;">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+            </div>    
+            <div class="col-md-2 col-xs-6" style="text-align: right">
+                <h3>Semana</h3>
+            </div>        
+            <div class="col-md-2  col-xs-6">
+                <input moment-picker="FechaSemana" today="true" ng-model="FechaSemana" change="cargarSemana(FechaSemana)" max-view="day" format="DD/MM/YYYY" start-view="month" locale="es" class="form-control" placeholder="Semana" style="color:#07a7e3; border-color:#07a7e3">
+            </div>
+            <div class="col-md-4">
+            </div>
+        </div>
+        <hr />
+        <!-- Row -->
+        <div class="row" ng-class="{hidden: loading}">
+            <div class="col-md-12">
+                <div class="tab">
+                    <table border="0" cellpadding="0" cellspacing="0">
+                        <tr class="days" style="background-color:#4c6575; color:#fff;">
+                            <th class="text-center" style="border-color: #b0bbc3">Hora</th>
+                            <th class="text-center" style="border-color: #b0bbc3">Lunes</th>
+                            <th class="text-center" style="border-color: #b0bbc3">Martes</th>
+                            <th class="text-center" style="border-color: #b0bbc3">Miércoles</th>
+                            <th class="text-center" style="border-color: #b0bbc3">Jueves</th>
+                            <th class="text-center" style="border-color: #b0bbc3">Viernes</th>
+                            <th class="text-center" style="border-color: #b0bbc3">Sábado</th>
+                        </tr>
+                        <tr ng-repeat="dia in Dias">
+                            <td class="time" style="background-color:#4c6575; color:#fff">{{dia.Hora}}</td>
+                            <td ng-class="dia.Lunes > 0 ? 'timetable-col green' : 'timetable-col'">
+                                <h6 ng-if="dia.Lunes > 0">{{dia.Lunes}} Paciente Agendado</h6>
+                                <div class="booking-tooltip">
+                                    <p>Ver Detalle</p>
+                                    <button class="btn small cal" ng-click="VerDetalleHora(FechaSemana, 1, dia.Hora, dia.Lunes)">+</button>
+                                </div>
+                            </td>
+                            <td ng-class="dia.Martes > 0 ? 'timetable-col green' : 'timetable-col'">
+                                <h6 ng-if="dia.Martes > 0">{{dia.Martes}} Paciente Agendado</h6>
+                                <div class="booking-tooltip">
+                                    <p>Ver Detalle</p>
+                                    <button class="btn small cal" ng-click="VerDetalleHora(FechaSemana, 2, dia.Hora, dia.Martes)">+</button>
+                                </div>
+                            </td>
+                            <td ng-class="dia.Miercoles > 0 ? 'timetable-col green' : 'timetable-col'">
+                                <h6 ng-if="dia.Miercoles > 0">{{dia.Miercoles}} Paciente Agendado</h6>
+                                <div class="booking-tooltip">
+                                    <p>Ver Detalle</p>
+                                    <button class="btn small cal" ng-click="VerDetalleHora(FechaSemana, 3, dia.Hora, dia.Miercoles)">+</button>
+                                </div>
+                            </td>
+                            <td ng-class="dia.Jueves > 0 ? 'timetable-col green' : 'timetable-col'">
+                                <h6 ng-if="dia.Jueves > 0">{{dia.Jueves}} Paciente Agendado</h6>
+                                <div class="booking-tooltip">
+                                    <p>Ver Detalle</p>
+                                    <button class="btn small cal" ng-click="VerDetalleHora(FechaSemana, 4, dia.Hora, dia.Jueves)">+</button>
+                                </div>
+                            </td>
+                            <td ng-class="dia.Viernes > 0 ? 'timetable-col green' : 'timetable-col'">
+                                <h6 ng-if="dia.Viernes > 0">{{dia.Viernes}} Paciente Agendado</h6>
+                                <div class="booking-tooltip">
+                                    <p>Ver Detalle</p>
+                                    <button class="btn small cal" ng-click="VerDetalleHora(FechaSemana, 5, dia.Hora, dia.Viernes)">+</button>
+                                </div>
+                            </td>
+                            <td ng-class="dia.Sabado > 0 ? 'timetable-col green' : 'timetable-col'">
+                                <h6 ng-if="dia.Sabado > 0">{{dia.Sabado}} Paciente Agendado</h6>
+                                <div class="booking-tooltip">
+                                    <p>Ver Detalle</p>
+                                    <button class="btn small cal" ng-click="VerDetalleHora(FechaSemana, 6, dia.Hora, dia.Sabado)">+</button>
+                                </div>
+                            </td>
+                        </tr>
+
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="modal fade" id="events-modal">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            <h3 class="modal-title">Event</h3>
+                        </div>
+                        <div class="modal-body" style="height: 400px">
+                        </div>
+                        <div class="modal-footer">
+                            <a href="#" data-dismiss="modal" class="btn">Close</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- ./end Row -->
+    </div>
+    <!-- ./end Container -->
+</section>

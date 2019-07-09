@@ -1,0 +1,43 @@
+﻿<div class="modal fade" id="timeTableModal" tabindex="-1" role="dialog" aria-labelledby="Book">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Nueva Licencia</h4>
+            </div>
+            <div class="modal-body">
+                <form name="frmReserva" ng-submit="registrarLicencia()" role="form" ng-disabled="true">
+                    <div class="form-group">
+                        <div class="col-sm-2">
+                            <label class="control-label" for="Inicio">Inicio</label>
+                        </div>
+                        <div class="col-sm-4">
+                            <input moment-picker="inicio" today="true" ng-model="Licencia.Inicio" max-view="day" format="DD/MM/YYYY" start-view="month" locale="es" class="form-control" placeholder="Inicio Licencia">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-2 short-div">
+                            <label class="control-label" for="Termino">Termino</label>
+                        </div>
+                        <div class="col-sm-4">
+                            <input moment-picker="termino" today="true" ng-model="Licencia.Termino" max-view="day" format="DD/MM/YYYY" min-date="Licencia.Inicio" start-view="month" locale="es" class="form-control" placeholder="Termino Licencia">
+                        </div>
+                    </div>                   
+                    <div class="form-group">
+                        <div class="col-sm-2">
+                            <label class="control-label" for="Inicio">Observación</label>
+                        </div>
+                        <div class="col-sm-10">
+                            <textarea class="form-control" rows="4" ng-model="Licencia.Observacion" maxlength="250"></textarea>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12 text-right">
+                            <button id="btnGuardar" type="submit" class="btn blue medium" data-loading-text="<i class='fa fa-spinner fa-spin'></i> Guardando ...">Registrar Licencia</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

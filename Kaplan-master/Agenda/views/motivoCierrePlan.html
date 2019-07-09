@@ -1,0 +1,66 @@
+﻿<div ng-include="motivoCierrePlan.header.url"></div>
+
+<section id="department-single" class="doted-bg1">
+    <div class="container effect8 nopadding">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="tab-content">
+                    <div role="tabpanel" class="tab-pane fade in active" id="home-tab">
+                        <h3 class="text-blue mt10">Configuración de Motivos Cierre Plan</h3>
+                        <p>Menú para configurar los motivos correspondientes al cierre de plan</p>                                                                        
+                        <span class="clearfix"></span>
+                        <section id="doctor-profile" class="mt30">
+                            <div class="row">
+                                <div class="col-xs-12 col-md-5 col-md-offset-3">
+                                    <div class="table-responsive">
+                                        <table class="table table-striped">
+                                            <thead>
+                                                <tr>
+                                                    <th>Motivo</th>
+                                                    <th>Estado</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr dir-paginate="motivoCierrePlan in MotivosCierrePlan | itemsPerPage: 8" pagination-id="pag_atencion" ng-mouseover="row = $index" ng-mouseleave="row = -1">
+                                                <!--<tr ng-repeat="motivoCierrePlan in MotivosCierrePlan">-->
+                                                    <td>{{motivoCierrePlan.Nombre}}</td>
+                                                    <td>{{motivoCierrePlan.EstadoString}}</td>
+                                                    <td>
+                                                        <div class="btn-group btn-group-xs" ng-show="row == $index">
+                                                            <button type="button" class="btn border small-xs" ng-click="eliminarMotivo(motivoCierrePlan.Id)" title="Eliminar Motivo" aria-label="Left Align"><i class="fa fa-remove"></i></button>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <dir-pagination-controls pagination-id="pag_atencion" boundary-links="true" direction-links="true">	</dir-pagination-controls>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                        <span class="clearfix"></span>
+                        <div class="department-prices">
+                            <div class="row">
+                                <form class="form-horizontal" name="frmAusencia" ng-submit="registrarMotivo()" role="form" ng-disabled="true">
+                                    <div class="col-md-1">
+
+                                    </div>
+                                    <div class="col-md-1">
+                                        <label class="control-label" for="nombre">Motivo</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <input type="text" class="form-control" id="motivo" placeholder="Motivo Cierre Plan" ng-model="MotivoCierre.Nombre" maxlength="100">
+                                    </div>
+                                    <div class="col-md-4">
+                                        <button id="btnGuardar" type="submit" class="btn  blue small" data-loading-text="<i class='fa fa-spinner fa-spin'></i> Guardando ...">Guardar</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
