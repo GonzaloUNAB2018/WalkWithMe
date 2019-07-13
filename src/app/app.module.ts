@@ -15,6 +15,11 @@ import { RegisterPageModule } from '../pages/register/register.module';
 import { ResetPassPageModule } from '../pages/reset-pass/reset-pass.module';
 import { InitialPageModule } from '../pages/initial/initial.module';
 
+//FIREBASE
+import {firebase} from './firebase.module';
+import { AngularFireModule } from '@angular/fire';
+import { AngularFireDatabaseModule } from '@angular/fire/database';
+import { AngularFireAuthModule } from '@angular/fire/auth';
 
 
 @NgModule({
@@ -26,6 +31,9 @@ import { InitialPageModule } from '../pages/initial/initial.module';
     TabsPage
   ],
   imports: [
+    AngularFireModule.initializeApp(firebase),
+    AngularFireDatabaseModule,
+    AngularFireAuthModule,
     LoginPageModule,
     RegisterPageModule,
     ResetPassPageModule,
