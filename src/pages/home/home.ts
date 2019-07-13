@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, LoadingController } from 'ionic-angular';
+import { AngularFireAuth } from '@angular/fire/auth';
+import { InitialPage } from '../initial/initial';
 
 @Component({
   selector: 'page-home',
@@ -7,8 +9,26 @@ import { NavController } from 'ionic-angular';
 })
 export class HomePage {
 
-  constructor(public navCtrl: NavController) {
+  constructor(
+    public navCtrl: NavController,
+    public loadingCtrl: LoadingController,
+    private afAuth: AngularFireAuth
+    ) {
 
   }
 
+  logout(){
+    this.afAuth.auth.signOut().then(()=>{
+      this.presentLoading();
+      this.navCtrl.setRoot(InitialPage)
+    })
+  }
+
+  presentLoading() {
+    const loader = this.loadingCtrl.create({
+      content: "Please wait...",
+      duration: 3000
+    });
+    loader.present();
+  }
 }

@@ -10,17 +10,21 @@
   <ion-title align="center" padding-top>REGISTRO DE NUEVO USUARIO</ion-title>
   <ion-list>
     <ion-item padding>
-      <ion-label stacked>Fone Number</ion-label>
-      <ion-input type="num" maxlength="9" minlength="9" placeholder="Los 9 dígitos de su celular"></ion-input>
+      <ion-label stacked>Email</ion-label>
+      <ion-input type="email" placeholder="Ingese su correo electrónico" [(ngModel)]="user.email"></ion-input>
     </ion-item>
     <ion-item padding>
-      <ion-label floating>Contraseña</ion-label>
-      <ion-input type="password"></ion-input>
+      <ion-label stacked>Contraseña</ion-label>
+      <ion-input type="password" placeholder="Ingese 6 números o letras" [(ngModel)]="user.password" maxlength="6"></ion-input>
     </ion-item>
     <ion-item padding>
-      <ion-label floating>Repita Contraseña</ion-label>
-      <ion-input type="password"></ion-input>
+      <ion-label stacked>Repita Pin</ion-label>
+      <ion-input type="password" placeholder="Repita los 6 números o letras" [(ngModel)]="user.confirm_password" maxlength="6"></ion-input>
     </ion-item>
   </ion-list>
+
+  <button ion-button round full color="secondary" (click)="registre()">
+      Sign In
+  </button>
 
 </ion-content>
