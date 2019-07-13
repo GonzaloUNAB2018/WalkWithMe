@@ -7,7 +7,7 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>Initial</ion-title>
+    <ion-title align="center">WALK WITH ME</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -16,16 +16,19 @@
 <ion-content padding>
   <ion-card>
     <ion-card-content>
-      <h3 align="center">WELCOME TO WALK WITH ME</h3>
+      <h3 align="center">WELCOME</h3>
       <ion-title align="center">KAPLAN</ion-title>
     </ion-card-content>
   </ion-card>
   <ion-card>
     <ion-card-content padding>
-      <button ion-button full (click)="toLoginPage()">LOGIN</button>
-      <button ion-button full color="danger">REGISTRE</button>
-      <button ion-button full color="secondary">RESET PASSWORD</button>
+      <button ion-button full round (click)="toLoginPage()">INICIE SESIÓN</button>
+      <br>
+      <button ion-button full round color="danger" (click)="toRegisterPage()">REGISTRESE</button>
     </ion-card-content>
   </ion-card>
+
+  <br>
+  <p color="primary" align="center">¿OLVIDÓ SU CONTRASEÑA?</p>
 
 </ion-content>
