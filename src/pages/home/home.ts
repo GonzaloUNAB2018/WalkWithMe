@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, LoadingController } from 'ionic-angular';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { InitialPage } from '../initial/initial';
+import { ConfigurationPage } from '../configuration/configuration';
 
 @Component({
   selector: 'page-home',
@@ -30,5 +31,9 @@ export class HomePage {
       duration: 3000
     });
     loader.present();
+  }
+
+  toOptionPage(){
+    this.navCtrl.push(ConfigurationPage)
   }
 }

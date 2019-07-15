@@ -1,18 +1,54 @@
-<ion-header>
-  <ion-navbar>
-    <ion-title>Home</ion-title>
-  </ion-navbar>
-</ion-header>
-
 <ion-content padding>
-  <button ion-button color="danger" (click)="logout()"></button>
-  <h2>Welcome to Ionic!</h2>
-  <p>
-    This starter project comes with simple tabs-based layout for apps
-    that are going to primarily use a Tabbed UI.
-  </p>
-  <p>
-    Take a look at the <code>src/pages/</code> directory to add or change tabs,
-    update any existing page or create new pages.
-  </p>
+
+  <ion-navbar padding>
+    
+    <ion-buttons>
+      <button ion-button icon-only (click)="logout()"><ion-icon name="log-out" class="navbar-logo"></ion-icon></button>
+    </ion-buttons>
+    <ion-buttons end>
+      <button ion-button icon-only><ion-icon name="contacts" class="navbar-logo"></ion-icon></button>
+      <button ion-button icon-only (click)="toOptionPage()"><ion-icon name="options" class="navbar-logo"></ion-icon></button>
+    </ion-buttons>
+  </ion-navbar>
+  <!--ion-icon class="icon-right-options" name="options"></ion-icon>
+  <ion-icon class="icon-right-contacts" name="contacts"></ion-icon-->
+  
+  <ion-card padding class="sup-card">
+    <ion-grid>
+      <ion-row>
+        <ion-col col-3>
+          <ion-icon name="power" class="sup-icon"></ion-icon>
+        </ion-col>
+        <ion-col col-9>
+          <button ion-button large full round color="primary">
+            <p class="button-text"><b>INICIE SUPERVISIÓN</b></p>
+          </button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-card>
+
+  <div>
+    <p class="clock">00:00:00</p>
+  </div>
+
+  <ion-card class="contactos-card" padding>
+    <div>
+      <p class="listado">Contactos de emergencia</p>
+    </div>
+    <ion-list>
+      <button ion-item>
+        <p class="contactos">Contacto 1</p>
+      </button>
+      <button ion-item>
+        <p class="contactos">Contacto 2</p>
+      </button>
+    </ion-list>
+  </ion-card>
+
 </ion-content>
+<ion-footer>
+  <div align="center">
+    <img class="logo-kaplan" src="./assets/imgs/logo-kaplan.png">
+  </div>
+</ion-footer>

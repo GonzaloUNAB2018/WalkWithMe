@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-an
 import { AngularFireAuth } from '@angular/fire/auth';
 import { User } from '../../models/user';
 import { HomePage } from '../home/home';
+import { TabsPage } from '../tabs/tabs';
 
 /**
  * Generated class for the LoginPage page.
@@ -37,7 +38,7 @@ export class LoginPage {
   login(){
     this.afAuth.auth.signInWithEmailAndPassword(this.user.email, this.user.password).then(()=>{
       this.presentLoading();
-      this.navCtrl.setRoot(HomePage);
+      this.navCtrl.setRoot(TabsPage);
     })
   }
 

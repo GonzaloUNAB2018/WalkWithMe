@@ -20,6 +20,7 @@ import {firebase} from './firebase.module';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { AngularFireAuthModule } from '@angular/fire/auth';
+import { ConfigurationPageModule } from '../pages/configuration/configuration.module';
 
 
 @NgModule({
@@ -38,6 +39,7 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
     RegisterPageModule,
     ResetPassPageModule,
     InitialPageModule,
+    ConfigurationPageModule,
     BrowserModule,
     IonicModule.forRoot(MyApp)
   ],
