@@ -36,6 +36,12 @@ page-home {
         color: color($colors, primary)
     }
 
+    .sup-icon-red{
+        font-size: 65px;
+        text-align: center;
+        color: color($colors, danger)
+    }
+
     .button-text{
         font-size: 17px;
         color: color($colors, light);
@@ -92,6 +98,10 @@ page-home {
 
     .logo-kaplan{
         width: 170px;
+    }
+
+    .color{
+        color: color($colors, light)
     }
 
 }

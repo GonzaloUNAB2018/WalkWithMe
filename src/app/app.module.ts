@@ -10,6 +10,11 @@ import { TabsPage } from '../pages/tabs/tabs';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import { DeviceMotion } from '@ionic-native/device-motion/ngx';
+import { Sensors } from '@ionic-native/sensors/ngx'
+
+
+//Pages
 import { LoginPageModule } from '../pages/login/login.module';
 import { RegisterPageModule } from '../pages/register/register.module';
 import { ResetPassPageModule } from '../pages/reset-pass/reset-pass.module';
@@ -54,7 +59,9 @@ import { ConfigurationPageModule } from '../pages/configuration/configuration.mo
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    DeviceMotion,
+    Sensors
   ]
 })
 export class AppModule {}
