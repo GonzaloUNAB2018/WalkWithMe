@@ -9,6 +9,10 @@ import { InitialPage } from '../pages/initial/initial';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { HomePage } from '../pages/home/home';
 
+import { SQLite } from '@ionic-native/sqlite';
+import { TasksService } from '../providers/tasks-service/tasks-service';
+
+
 @Component({
   templateUrl: 'app.html'
 })
@@ -16,24 +20,44 @@ export class MyApp {
   rootPage:any = InitialPage;
 
   constructor(
-    platform: Platform,
-    statusBar: StatusBar,
-    splashScreen: SplashScreen,
-    private afAuth: AngularFireAuth
+    public platform: Platform,
+    public statusBar: StatusBar,
+    public splashScreen: SplashScreen,
+    public tasksService: TasksService,
+    public sqlite: SQLite,
+    private afAuth: AngularFireAuth,
     ) {
       
-    afAuth.auth.onAuthStateChanged(user=>{
-      if(user){
-        this.rootPage = HomePage
-      }else{
-        this.rootPage = InitialPage
-      }
+      this.afAuth.auth.onAuthStateChanged(user=>{
+        if(user){
+          this.rootPage = HomePage
+        }else{
+          this.rootPage = InitialPage
+        }
+      });
+      this.platform.ready().then(() => {
+        this.statusBar.styleDefault();
+        this.createDatabase();
     });
-    platform.ready().then(() => {
-      // Okay, so the platform is ready and our plugins are available.
-      // Here you can do any higher level native things you might need.
-      statusBar.styleDefault();
-      splashScreen.hide();
+
+       
+  }
+
+  private createDatabase(){
+    this.sqlite.create({
+      name: 'data.db',
+      location: 'default' // the location field is required
+    })
+    .then((db) => {
+      this.tasksService.setDatabase(db);
+      return this.tasksService.createTable();
+    })
+    .then(() =>{
+      this.splashScreen.hide();
+      //this.rootPage = 'HomePage';
+    })
+    .catch(error =>{
+      console.error(error);
     });
   }
 }

@@ -5,6 +5,7 @@
       <button ion-button icon-only (click)="logout()"><ion-icon name="log-out" class="navbar-logo"></ion-icon></button>
     </ion-buttons>
     <ion-buttons end>
+      <button ion-button icon-only (click)="openAlertNewTask()"><ion-icon name="add" class="navbar-logo"></ion-icon></button>
       <button ion-button icon-only><ion-icon name="contacts" class="navbar-logo"></ion-icon></button>
       <button ion-button icon-only (click)="toOptionPage()"><ion-icon name="options" class="navbar-logo"></ion-icon></button>
     </ion-buttons>
@@ -72,7 +73,26 @@
     </div>
   <img src="{{warning}}">
 
-  <ion-card class="contactos-card" padding>
+
+  <ion-list>
+    <ion-item *ngIf="tasks.length == 0"> 
+      Empty
+    </ion-item>
+    <ion-item-sliding *ngFor="let task of tasks; let i = id">
+      <ion-item >
+        <ion-label>{{ task.id }} {{task.type}} </ion-label>
+        <!--ion-checkbox (ionChange)="updateTask( task, i )" [checked]="task.completed"></ion-checkbox-->
+      </ion-item>
+      <ion-item-options side="right" icon-left>
+        <button ion-button color="danger" (click)="deleteTask(task, i)">
+          <ion-icon name="trash"></ion-icon>
+          Delete
+        </button>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+
+  <!--ion-card class="contactos-card" padding>
     <div>
       <p class="listado">Contactos de emergencia</p>
     </div>
@@ -84,6 +104,6 @@
         <p class="contactos">Contacto 2</p>
       </button>
     </ion-list>
-  </ion-card>
+  </ion-card-->
 
 </ion-content>

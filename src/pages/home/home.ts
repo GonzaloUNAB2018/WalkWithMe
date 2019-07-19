@@ -5,6 +5,10 @@ import { InitialPage } from '../initial/initial';
 import { ConfigurationPage } from '../configuration/configuration';
 //import { Observable } from 'rxjs';
 
+import { TasksService } from '../../providers/tasks-service/tasks-service';
+
+
+
 declare var sensors;
 
 
@@ -13,6 +17,16 @@ declare var sensors;
   templateUrl: 'home.html'
 })
 export class HomePage {
+
+  tasks: any[] = [];
+
+  jumpdata: any = {
+    id: null,
+    type: null,
+    x: null,
+    y: null,
+    z: null
+  };
 
   subscription: any;
 
@@ -59,14 +73,103 @@ export class HomePage {
     public navCtrl: NavController,
     public loadingCtrl: LoadingController,
     private afAuth: AngularFireAuth,
-    private alertCtrl: AlertController
+    private alertCtrl: AlertController,
+    public tasksService: TasksService
+
     ) {
 
       this.proximity = 8;
+      
 
        
       
   }
+
+  ionViewDidLoad(){
+    this.getAllTasks();
+    
+  }
+
+
+
+  getAllTasks(){
+    this.tasksService.getAll()
+    .then(tasks => {
+      this.tasks = tasks;
+      if(this.tasks.length!=0){
+        console.log(this.tasks)
+      }else{
+        console.log('No List')
+      }
+    })
+    .catch( error => {
+      console.error( error );
+    });
+  }
+
+  openAlertNewTask(){
+    let alert = this.alertCtrl.create({
+      title: 'Crear tarea',
+      message: 'escribe el nombre de la tarea',
+      inputs: [
+        {
+          name: 'title',
+          placeholder: 'Digitar nueva tarea.',
+        }
+      ],
+      buttons: [
+        {
+          text: 'Cancelar',
+          handler: () =>{
+            console.log('cancelar');
+          }
+        },
+        {
+          text: 'Crear',
+          handler: (data)=>{ 
+            data.id = Date.now();
+            data.completed = false;
+            console.log(data.id, data.title, data.completed);
+            this.tasksService.create(data)
+            .then(response => {
+              this.tasks.unshift( data );
+              console.log(data);
+              console.log(this.tasks)
+            })
+            .catch( error => {
+              console.error( error );
+            })
+          }
+        }
+      ]
+    });
+    alert.present();
+  }
+
+  updateTask(task, index){
+    task = Object.assign({}, task);
+    task.completed = !task.completed;
+    this.tasksService.update(task)
+    .then( response => {
+      this.tasks[index] = task;
+    })
+    .catch( error => {
+      console.error( error );
+    })
+  }
+
+  deleteTask(task: any, index){
+    this.tasksService.delete(task)
+    .then(response => {
+      console.log( response );
+      this.tasks.splice(index, 1);
+    })
+    .catch( error => {
+      console.error( error );
+    })
+  }
+  
+  
 
   logout(){
     this.afAuth.auth.signOut().then(()=>{
@@ -125,6 +228,7 @@ export class HomePage {
           }, 1000)
         }
       });
+      
     }, 100);
     
   }
@@ -187,14 +291,27 @@ export class HomePage {
         this.l_accX = values[0];
         this.l_accY = values[1];
         this.l_accZ = values[2];
-        if(this.l_accY>this.n_l_accY){
+        console.log(this.l_accX, this.l_accY, this.l_accZ);
+        var data = {
+          id : Date.now(),
+          type : 'Saltos',
+          x : this.l_accX,
+          y : this.l_accY,
+          z : this.l_accZ
+        }
+        this.tasksService.create(data).then(response => {
+          this.tasks.unshift( data );
+          console.log(data);
+          console.log(this.tasks)
+        })
+        /*if(this.l_accY>this.n_l_accY){
           this.n_l_accY = 100;
           this.numJump = this.numJump+1;
           setTimeout(()=>{
             this.n_l_accY = 2
           }, 1000);
-        }
-      })
+        };*/
+      })    
     }, 100);
 
   }

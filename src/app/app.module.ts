@@ -12,6 +12,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { DeviceMotion } from '@ionic-native/device-motion/ngx';
 import { Sensors } from '@ionic-native/sensors/ngx'
+import { SQLite } from '@ionic-native/sqlite';
 
 
 //Pages
@@ -26,6 +27,7 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { ConfigurationPageModule } from '../pages/configuration/configuration.module';
+import { TasksService } from '../providers/tasks-service/tasks-service';
 
 
 @NgModule({
@@ -61,7 +63,9 @@ import { ConfigurationPageModule } from '../pages/configuration/configuration.mo
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     DeviceMotion,
-    Sensors
+    Sensors,
+    TasksService,
+    SQLite
   ]
 })
 export class AppModule {}
