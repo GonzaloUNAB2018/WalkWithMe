@@ -1,9 +1,14 @@
 page-initial {
 
     ion-content{
-        background-image: url(../assets/imgs/fondo.jpg);
+        //background-color: darkslategrey;
+        //background-image: url(../assets/imgs/fondo.jpg);
         background-size: 130%;
         background-position: center
+    }
+
+    .content.content-md{
+        background-color: darkslategrey;
     }
 
     .forgotPass{

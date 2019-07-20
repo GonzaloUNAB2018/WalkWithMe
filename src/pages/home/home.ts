@@ -6,11 +6,9 @@ import { ConfigurationPage } from '../configuration/configuration';
 //import { Observable } from 'rxjs';
 
 import { TasksService } from '../../providers/tasks-service/tasks-service';
-
-
+import { SQLite } from '@ionic-native/sqlite';
 
 declare var sensors;
-
 
 @Component({
   selector: 'page-home',
@@ -27,13 +25,9 @@ export class HomePage {
     y: null,
     z: null
   };
-
   subscription: any;
-
   accelerationData: any;
-
   proximity:number;
-
   warning: string;
 
   supervisionButton : boolean = true;
@@ -74,14 +68,12 @@ export class HomePage {
     public loadingCtrl: LoadingController,
     private afAuth: AngularFireAuth,
     private alertCtrl: AlertController,
-    public tasksService: TasksService
+    public tasksService: TasksService,
+    public sqlite: SQLite,
 
     ) {
 
       this.proximity = 8;
-      
-
-       
       
   }
 
@@ -89,8 +81,6 @@ export class HomePage {
     this.getAllTasks();
     
   }
-
-
 
   getAllTasks(){
     this.tasksService.getAll()
@@ -107,7 +97,7 @@ export class HomePage {
     });
   }
 
-  openAlertNewTask(){
+  /*openAlertNewTask(){
     let alert = this.alertCtrl.create({
       title: 'Crear tarea',
       message: 'escribe el nombre de la tarea',
@@ -144,7 +134,7 @@ export class HomePage {
       ]
     });
     alert.present();
-  }
+  }*/
 
   updateTask(task, index){
     task = Object.assign({}, task);
@@ -169,22 +159,14 @@ export class HomePage {
     })
   }
   
-  
-
   logout(){
     this.afAuth.auth.signOut().then(()=>{
-      this.presentLoading();
+      this.loadLogout();
       this.navCtrl.setRoot(InitialPage)
     })
   }
 
-  presentLoading() {
-    const loader = this.loadingCtrl.create({
-      content: "Please wait...",
-      duration: 3000
-    });
-    loader.present();
-  }
+  
 
   toOptionPage(){
     this.navCtrl.push(ConfigurationPage)
@@ -192,9 +174,7 @@ export class HomePage {
 
 
   initSupervision(){
-
-    this.initSensor();    
- 
+    this.initSensor();
   }
 
   
@@ -283,7 +263,7 @@ export class HomePage {
     this.disabled_ca = true;
     this.disableSup_button = true;
 
-    this.presentLoading();
+    this.loadInitGetData();
     sensors.enableSensor("LINEAR_ACCELERATION");
     console.log('Se inicia Saltos');
     setInterval(() => {
@@ -304,15 +284,50 @@ export class HomePage {
           console.log(data);
           console.log(this.tasks)
         })
-        /*if(this.l_accY>this.n_l_accY){
-          this.n_l_accY = 100;
-          this.numJump = this.numJump+1;
-          setTimeout(()=>{
-            this.n_l_accY = 2
-          }, 1000);
-        };*/
       })    
     }, 100);
+
+  }
+
+  clearDb(){
+
+    let alert = this.alertCtrl.create({
+      title: 'ELIMINAR DATOS',
+      message: '¿Está seguro que desea borrar los datos?',
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          handler: () => {
+            console.log('Se cancela borrado');
+          }
+        },
+        {
+          text: 'OK',
+          handler: () => {
+            this.loadDeleteDB();
+            this.sqlite.deleteDatabase(
+              {
+                name: 'data.db',
+                location: 'default' // the location field is required
+              }
+            );
+            this.sqlite.create({
+              name: 'data.db',
+              location: 'default' // the location field is required
+            })
+            .then((db) => {
+              this.tasksService.setDatabase(db);
+              return this.tasksService.createTable().then(()=>{
+                this.getAllTasks();
+              })
+            })
+            console.log('Datos borrados');
+          }
+        }
+      ]
+    });
+    alert.present();
 
   }
 
@@ -322,7 +337,7 @@ export class HomePage {
     this.disabled_se = false;
     this.disabled_ca = false;
     this.disableSup_button = false;
-    this.presentLoading();
+    this.loadStopGetData();
     sensors.disableSensor();
   }
 
@@ -349,7 +364,7 @@ export class HomePage {
     this.disabled_sa = true;
     this.disableSup_button = true;
 
-    this.presentLoading();
+    this.loadInitGetData();
     sensors.enableSensor("STEP_COUNTER");
     //console.log('Se inicia Saltos');
 
@@ -367,6 +382,38 @@ export class HomePage {
     this.disabled_se = false;
     this.disabled_sa = false;
     this.disableSup_button = false;
+  }
+
+  loadInitGetData() {
+    const loader = this.loadingCtrl.create({
+      content: "Iniciando toma de datos...",
+      duration: 1000
+    });
+    loader.present();
+  }
+
+  loadStopGetData() {
+    const loader = this.loadingCtrl.create({
+      content: "Finalizando toma de datos...",
+      duration: 500
+    });
+    loader.present();
+  }
+
+  loadDeleteDB() {
+    const loader = this.loadingCtrl.create({
+      content: "Borrando Datos",
+      duration: 1000
+    });
+    loader.present();
+  }
+
+  loadLogout() {
+    const loader = this.loadingCtrl.create({
+      content: "Cerrando Sesión",
+      duration: 2000
+    });
+    loader.present();
   }
   
 }

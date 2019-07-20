@@ -5,7 +5,7 @@
       <button ion-button icon-only (click)="logout()"><ion-icon name="log-out" class="navbar-logo"></ion-icon></button>
     </ion-buttons>
     <ion-buttons end>
-      <button ion-button icon-only (click)="openAlertNewTask()"><ion-icon name="add" class="navbar-logo"></ion-icon></button>
+      <button ion-button icon-only (click)="clearDb()"><ion-icon name="trash" class="navbar-logo"></ion-icon></button>
       <button ion-button icon-only><ion-icon name="contacts" class="navbar-logo"></ion-icon></button>
       <button ion-button icon-only (click)="toOptionPage()"><ion-icon name="options" class="navbar-logo"></ion-icon></button>
     </ion-buttons>
@@ -36,30 +36,78 @@
   <div padding-right>
     <ion-grid>
       <ion-row>
-        <ion-col col-3 align="center">
+        <ion-col col-6 align="center">
+          <ion-card button class="icon_card_button" *ngIf="button_salto&&!disabled_sa" color="primary" (click)="initJump()">
+            <img src="./assets/imgs/jump.png" width="30px">
+          </ion-card>
+          <ion-card button class="icon_card_button" *ngIf="!button_salto&&!disabled_sa" color="danger" (click)="stopJump()">
+            <img src="./assets/imgs/jump.png" width="30px">
+          </ion-card>
+          <ion-card button class="icon_card_button" *ngIf="button_salto&&disabled_sa" color="primary" disabled>
+            <img src="./assets/imgs/jump.png" width="30px">
+          </ion-card>
+          <p class="color">Saltos</p>
+        </ion-col>
+        <ion-col col-6 align="center">
+          <ion-card button class="icon_card_button" *ngIf="button_abd&&!disabled_ab" color="primary" (click)="initAbd()" disabled>
+            <img src="./assets/imgs/ABS.png" width="30px">
+          </ion-card>
+          <ion-card button class="icon_card_button" *ngIf="!button_abd&&!disabled_ab" color="danger" (click)="stopAbd()" disabled>
+            <img src="./assets/imgs/ABS.png" width="30px">
+          </ion-card>
+          <ion-card button class="icon_card_button" *ngIf="button_abd&&disabled_ab" color="primary" disabled>
+            <img src="./assets/imgs/ABS.png" width="30px">
+          </ion-card>
+          <p class="color">Abdominales</p>
+        </ion-col>
+        <ion-col col-6 align="center">
+          <ion-card button class="icon_card_button" *ngIf="button_sent&&!disabled_se" color="primary" (click)="initSent()" disabled>
+            <img src="./assets/imgs/squat.png" width="30px">
+          </ion-card>
+          <ion-card button class="icon_card_button" *ngIf="!button_sent&&!disabled_se" color="danger" (click)="stopSent()" disabled>
+            <img src="./assets/imgs/squat.png" width="30px">
+          </ion-card>
+          <ion-card button class="icon_card_button" *ngIf="button_sent&&disabled_se" color="primary" disabled>
+            <img src="./assets/imgs/squat.png" width="30px">
+          </ion-card>
+          <p class="color">Sentadillas</p>
+        </ion-col>
+        <ion-col col-6 align="center">
+          <ion-card button class="icon_card_button" *ngIf="button_cam&&!disabled_ca" color="primary" (click)="initCam()">
+            <img src="./assets/imgs/walk.png" width="30px">
+          </ion-card>
+          <ion-card button class="icon_card_button" *ngIf="!button_cam&&!disabled_ca" color="danger" (click)="stopCam()">
+            <img src="./assets/imgs/walk.png" width="30px">
+          </ion-card>
+          <ion-card button class="icon_card_button" *ngIf="button_cam&&disabled_ca" color="primary" disabled>
+            <img src="./assets/imgs/walk.png" width="30px">
+          </ion-card>
+          <p class="color">Caminata</p>
+        </ion-col>
+        <!--ion-col col-6 align="center">
           <button ion-button round *ngIf="button_salto&&!disabled_sa" color="primary" (click)="initJump()">SA</button>
           <button ion-button round *ngIf="!button_salto&&!disabled_sa" color="danger" (click)="stopJump()">SA</button>
           <button ion-button round *ngIf="button_salto&&disabled_sa" color="primary" disabled>SA</button>
           <p class="color">Saltos</p>
         </ion-col>
-        <ion-col col-3 align="center">
+        <ion-col col-6 align="center">
           <button ion-button round *ngIf="button_abd&&!disabled_ab" color="primary" (click)="initAbd()" disabled>AB</button>
           <button ion-button round *ngIf="!button_abd&&!disabled_ab" color="danger" (click)="stopAbd()" disabled>AB</button>
           <button ion-button round *ngIf="button_abd&&disabled_ab" color="primary" disabled>AB</button>
           <p class="color">Abdominales</p>
         </ion-col>
-        <ion-col col-3 align="center">
+        <ion-col col-6 align="center">
           <button ion-button round *ngIf="button_sent&&!disabled_se" color="primary" (click)="initSent()" disabled>SE</button>
           <button ion-button round *ngIf="!button_sent&&!disabled_se" color="danger" (click)="stopSent()" disabled>SE</button>
           <button ion-button round *ngIf="button_sent&&disabled_se" color="primary" disabled>SE</button>
           <p class="color">Sentadillas</p>
         </ion-col>
-        <ion-col col-3 align="center">
+        <ion-col col-6 align="center">
           <button ion-button round *ngIf="button_cam&&!disabled_ca" color="primary" (click)="initCam()">CA</button>
           <button ion-button round *ngIf="!button_cam&&!disabled_ca" color="danger" (click)="stopCam()">CA</button>
           <button ion-button round *ngIf="button_cam&&disabled_ca" color="primary" disabled>CA</button>
           <p class="color">Caminata</p>
-        </ion-col>
+        </ion-col-->
       </ion-row>
     </ion-grid>
   </div>
@@ -83,12 +131,12 @@
         <ion-label>{{ task.id }} {{task.type}} </ion-label>
         <!--ion-checkbox (ionChange)="updateTask( task, i )" [checked]="task.completed"></ion-checkbox-->
       </ion-item>
-      <ion-item-options side="right" icon-left>
+      <!--ion-item-options side="right" icon-left>
         <button ion-button color="danger" (click)="deleteTask(task, i)">
           <ion-icon name="trash"></ion-icon>
           Delete
         </button>
-      </ion-item-options>
+      </ion-item-options-->
     </ion-item-sliding>
   </ion-list>
 
