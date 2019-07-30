@@ -13,7 +13,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { DeviceMotion } from '@ionic-native/device-motion/ngx';
 import { Sensors } from '@ionic-native/sensors/ngx'
 import { SQLite } from '@ionic-native/sqlite';
-
+import { Geolocation } from '@ionic-native/geolocation';
 
 //Pages
 import { LoginPageModule } from '../pages/login/login.module';
@@ -65,7 +65,8 @@ import { TasksService } from '../providers/tasks-service/tasks-service';
     DeviceMotion,
     Sensors,
     TasksService,
-    SQLite
+    SQLite,
+    Geolocation
   ]
 })
 export class AppModule {}

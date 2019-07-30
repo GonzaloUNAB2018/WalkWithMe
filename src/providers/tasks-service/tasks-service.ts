@@ -20,8 +20,8 @@ export class TasksService {
   }
 
   create(task: any){
-    let sql = 'INSERT INTO tasks(id, type, x, y, z) VALUES(?,?,?,?,?)';
-    return this.db.executeSql(sql, [task.id, task.type, task.x, task.y, task.z]);
+    let sql = 'INSERT INTO tasks(id, type, x, y, z, stps, lat, lng) VALUES(?,?,?,?,?,?,?,?)';
+    return this.db.executeSql(sql, [task.id, task.type, task.x, task.y, task.z, task.steps, task.lat, task.lng]);
   }
 
   /*create(task: any){
@@ -30,7 +30,7 @@ export class TasksService {
   }*/
 
   createTable(){
-    let sql = 'CREATE TABLE IF NOT EXISTS tasks(id NUMBER, type TEXT, x NUMBER, y NUMBER, z NUMBER)';
+    let sql = 'CREATE TABLE IF NOT EXISTS tasks(id NUMBER, type TEXT, x NUMBER, y NUMBER, z NUMBER, steps NUMBER, lat NUMBER, lng NUMBER)';
     return this.db.executeSql(sql, []);
   }
 
@@ -53,8 +53,8 @@ export class TasksService {
   }
 
   update(task: any){
-    let sql = 'UPDATE tasks SET id=?, type=?, x=?, y=?, WHERE z=?';
-    return this.db.executeSql(sql, [task.id, task.type, task.x, task.y, task.z]);
+    let sql = 'UPDATE tasks SET id=?, type=?, x=?, y=?, z=?, steps=?, lat=?, WHERE lng=?';
+    return this.db.executeSql(sql, [task.id, task.type, task.x, task.y, task.z, task.steps, task.lat, task.lng]);
   }
 
 }

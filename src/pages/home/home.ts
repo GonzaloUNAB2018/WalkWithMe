@@ -3,10 +3,9 @@ import { NavController, LoadingController, AlertController } from 'ionic-angular
 import { AngularFireAuth } from '@angular/fire/auth';
 import { InitialPage } from '../initial/initial';
 import { ConfigurationPage } from '../configuration/configuration';
-//import { Observable } from 'rxjs';
-
 import { TasksService } from '../../providers/tasks-service/tasks-service';
 import { SQLite } from '@ionic-native/sqlite';
+import { Geolocation } from '@ionic-native/geolocation';
 
 declare var sensors;
 
@@ -54,7 +53,7 @@ export class HomePage {
 
   public n_l_accY: number = 2;
 
-  public stepValue : any;
+  public stepValue : any = 0;
 
   n=35;
   numJump=0;
@@ -63,6 +62,17 @@ export class HomePage {
   n2: number = 10;
   n3: number = 10;
 
+  //GEOLOCATION
+  watch = this.geolocation.watchPosition({
+    //maximumAge: 0,
+    //timeout: 100,
+    enableHighAccuracy: true
+  });
+  watching : any;
+
+  lat: number;
+  lng: number;
+
   constructor(
     public navCtrl: NavController,
     public loadingCtrl: LoadingController,
@@ -70,6 +80,7 @@ export class HomePage {
     private alertCtrl: AlertController,
     public tasksService: TasksService,
     public sqlite: SQLite,
+    private geolocation: Geolocation
 
     ) {
 
@@ -97,44 +108,6 @@ export class HomePage {
     });
   }
 
-  /*openAlertNewTask(){
-    let alert = this.alertCtrl.create({
-      title: 'Crear tarea',
-      message: 'escribe el nombre de la tarea',
-      inputs: [
-        {
-          name: 'title',
-          placeholder: 'Digitar nueva tarea.',
-        }
-      ],
-      buttons: [
-        {
-          text: 'Cancelar',
-          handler: () =>{
-            console.log('cancelar');
-          }
-        },
-        {
-          text: 'Crear',
-          handler: (data)=>{ 
-            data.id = Date.now();
-            data.completed = false;
-            console.log(data.id, data.title, data.completed);
-            this.tasksService.create(data)
-            .then(response => {
-              this.tasks.unshift( data );
-              console.log(data);
-              console.log(this.tasks)
-            })
-            .catch( error => {
-              console.error( error );
-            })
-          }
-        }
-      ]
-    });
-    alert.present();
-  }*/
 
   updateTask(task, index){
     task = Object.assign({}, task);
@@ -173,6 +146,240 @@ export class HomePage {
   }
 
 
+  ////////// +++++++++ JUMP +++++++++ //////////
+  
+  initJump(){
+
+    this.button_salto = false;
+    this.disabled_ab = true;
+    this.disabled_se = true;
+    this.disabled_ca = true;
+    this.disableSup_button = true;
+
+    this.loadInitGetData();
+    sensors.enableSensor("LINEAR_ACCELERATION");
+    console.log('Se inicia Saltos');
+    setInterval(() => {
+      sensors.getState((values) => {
+        this.l_accX = values[0];
+        this.l_accY = values[1];
+        this.l_accZ = values[2];
+        this.stepValue = 0;
+        console.log(this.l_accX, this.l_accY, this.l_accZ);
+        var data = {
+          id : Date.now(),
+          type : 'Saltos',
+          x : this.l_accX,
+          y : this.l_accY,
+          z : this.l_accZ,
+          steps : this.stepValue,
+          lat : 0,
+          lng : 0
+        }
+        this.tasksService.create(data).then(response => {
+          this.tasks.unshift( data );
+          console.log(data);
+          console.log(this.tasks)
+        })
+      })    
+    }, 100);
+
+  }
+
+  stopJump(){
+    this.button_salto = true;
+    this.disabled_ab = false;
+    this.disabled_se = false;
+    this.disabled_ca = false;
+    this.disableSup_button = false;
+    this.loadStopGetData();
+    sensors.disableSensor();
+  }
+
+  
+
+  initAbd(){
+
+  }
+
+  stopAbd(){
+
+  }
+
+  initSent(){
+
+  }
+
+  stopSent(){
+
+  }
+  
+
+  initCam(){
+    this.button_cam = false;
+    this.disabled_ab = true;
+    this.disabled_se = true;
+    this.disabled_sa = true;
+    this.disableSup_button = true;
+
+    this.loadInitGetData();
+    sensors.enableSensor("STEP_COUNTER");
+
+    console.log('Se inicia Caminata');
+    this.watching = this.watch.subscribe((data) => {
+      
+
+      this.lat = data.coords.latitude;
+      this.lng = data.coords.longitude;
+
+      console.log(this.lat, this.lng);
+      
+      ;
+
+    
+
+    /*console.log('Se inicia Caminata');
+    setInterval(() => {
+      sensors.getState((values) => {
+        this.stepValue = values[0];
+        console.log(this.stepValue, this.lat, this.lng);
+        var data = {
+          id : Date.now(),
+          type : 'Caminata',
+          x : 0,
+          y : 0,
+          z : 0,
+          lat : this.lat,
+          lng : this.lng
+        }
+        this.tasksService.create(data).then(response => {
+          this.tasks.unshift( data );
+          console.log(data);
+          console.log(this.tasks)
+        })
+      })    
+    }, 100);*/
+
+  });
+
+  setInterval(() => {
+    sensors.getState((values)=>{
+      this.stepValue = values[0];
+      console.log(this.stepValue, this.lat, this.lng);
+      var data = {
+        id : Date.now(),
+        type : 'Caminata',
+        x : 0,
+        y : 0,
+        z : 0,
+        steps : this.stepValue,
+        lat : this.lat,
+        lng : this.lng
+    }
+    this.tasksService.create(data).then(response => {
+      this.tasks.unshift( data );
+      console.log(data);
+      console.log(this.tasks)
+    })
+    
+  // data can be a set of coordinates, or an error (if an error occurred).
+  // data.coords.latitude
+  // data.coords.longitude
+  })  
+  }, 100);
+}
+
+  stopCam(){
+    this.button_cam = true;
+    this.disabled_ab = false;
+    this.disabled_se = false;
+    this.disabled_sa = false;
+    this.disableSup_button = false;
+
+    this.watching.unsubscribe();
+
+    this.loadStopGetData();
+
+  }
+
+  loadInitGetData() {
+    const loader = this.loadingCtrl.create({
+      content: "Iniciando toma de datos...",
+      duration: 1000
+    });
+    loader.present();
+  }
+
+  loadStopGetData() {
+    const loader = this.loadingCtrl.create({
+      content: "Finalizando toma de datos...",
+      duration: 500
+    });
+    loader.present();
+  }
+
+  loadDeleteDB() {
+    const loader = this.loadingCtrl.create({
+      content: "Borrando Datos",
+      duration: 1000
+    });
+    loader.present();
+  }
+
+  loadLogout() {
+    const loader = this.loadingCtrl.create({
+      content: "Cerrando Sesión",
+      duration: 2000
+    });
+    loader.present();
+  }
+
+
+  ////////// +++++++++ LIMPIEZA DE BASE DE DATOS +++++++++ //////////
+
+  clearDb(){
+
+    let alert = this.alertCtrl.create({
+      title: 'ELIMINAR DATOS',
+      message: '¿Está seguro que desea borrar los datos?',
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          handler: () => {
+            console.log('Se cancela borrado');
+          }
+        },
+        {
+          text: 'OK',
+          handler: () => {
+            this.loadDeleteDB();
+            this.sqlite.deleteDatabase(
+              {
+                name: 'data.db',
+                location: 'default' // the location field is required
+              }
+            );
+            this.sqlite.create({
+              name: 'data.db',
+              location: 'default' // the location field is required
+            })
+            .then((db) => {
+              this.tasksService.setDatabase(db);
+              return this.tasksService.createTable().then(()=>{
+                this.getAllTasks();
+              })
+            })
+            console.log('Datos borrados');
+          }
+        }
+      ]
+    });
+    alert.present();
+
+  }
+
+  ///////////// **** SUPERVISIÓN DE CAIDA **** /////////////
   initSupervision(){
     this.initSensor();
   }
@@ -255,165 +462,7 @@ export class HomePage {
     alert.present();
   }
 
-  initJump(){
 
-    this.button_salto = false;
-    this.disabled_ab = true;
-    this.disabled_se = true;
-    this.disabled_ca = true;
-    this.disableSup_button = true;
-
-    this.loadInitGetData();
-    sensors.enableSensor("LINEAR_ACCELERATION");
-    console.log('Se inicia Saltos');
-    setInterval(() => {
-      sensors.getState((values) => {
-        this.l_accX = values[0];
-        this.l_accY = values[1];
-        this.l_accZ = values[2];
-        console.log(this.l_accX, this.l_accY, this.l_accZ);
-        var data = {
-          id : Date.now(),
-          type : 'Saltos',
-          x : this.l_accX,
-          y : this.l_accY,
-          z : this.l_accZ
-        }
-        this.tasksService.create(data).then(response => {
-          this.tasks.unshift( data );
-          console.log(data);
-          console.log(this.tasks)
-        })
-      })    
-    }, 100);
-
-  }
-
-  clearDb(){
-
-    let alert = this.alertCtrl.create({
-      title: 'ELIMINAR DATOS',
-      message: '¿Está seguro que desea borrar los datos?',
-      buttons: [
-        {
-          text: 'Cancel',
-          role: 'cancel',
-          handler: () => {
-            console.log('Se cancela borrado');
-          }
-        },
-        {
-          text: 'OK',
-          handler: () => {
-            this.loadDeleteDB();
-            this.sqlite.deleteDatabase(
-              {
-                name: 'data.db',
-                location: 'default' // the location field is required
-              }
-            );
-            this.sqlite.create({
-              name: 'data.db',
-              location: 'default' // the location field is required
-            })
-            .then((db) => {
-              this.tasksService.setDatabase(db);
-              return this.tasksService.createTable().then(()=>{
-                this.getAllTasks();
-              })
-            })
-            console.log('Datos borrados');
-          }
-        }
-      ]
-    });
-    alert.present();
-
-  }
-
-  stopJump(){
-    this.button_salto = true;
-    this.disabled_ab = false;
-    this.disabled_se = false;
-    this.disabled_ca = false;
-    this.disableSup_button = false;
-    this.loadStopGetData();
-    sensors.disableSensor();
-  }
-
-  initAbd(){
-
-  }
-
-  stopAbd(){
-
-  }
-
-  initSent(){
-
-  }
-
-  stopSent(){
-
-  }
-
-  initCam(){
-    this.button_cam = false;
-    this.disabled_ab = true;
-    this.disabled_se = true;
-    this.disabled_sa = true;
-    this.disableSup_button = true;
-
-    this.loadInitGetData();
-    sensors.enableSensor("STEP_COUNTER");
-    //console.log('Se inicia Saltos');
-
-    setInterval(() => {
-      sensors.getState((values) => {
-        this.stepValue = values[0];
-      })
-    }, 100);
-
-  }
-
-  stopCam(){
-    this.button_cam = true;
-    this.disabled_ab = false;
-    this.disabled_se = false;
-    this.disabled_sa = false;
-    this.disableSup_button = false;
-  }
-
-  loadInitGetData() {
-    const loader = this.loadingCtrl.create({
-      content: "Iniciando toma de datos...",
-      duration: 1000
-    });
-    loader.present();
-  }
-
-  loadStopGetData() {
-    const loader = this.loadingCtrl.create({
-      content: "Finalizando toma de datos...",
-      duration: 500
-    });
-    loader.present();
-  }
-
-  loadDeleteDB() {
-    const loader = this.loadingCtrl.create({
-      content: "Borrando Datos",
-      duration: 1000
-    });
-    loader.present();
-  }
-
-  loadLogout() {
-    const loader = this.loadingCtrl.create({
-      content: "Cerrando Sesión",
-      duration: 2000
-    });
-    loader.present();
-  }
+  /////////////////////////////////////////////////////////////////////////////////
   
 }
