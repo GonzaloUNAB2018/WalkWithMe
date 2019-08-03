@@ -20,7 +20,7 @@ export class TasksService {
   }
 
   create(task: any){
-    let sql = 'INSERT INTO tasks(id, type, x, y, z, stps, lat, lng) VALUES(?,?,?,?,?,?,?,?)';
+    let sql = 'INSERT INTO tasks(id, type, x, y, z, steps, lat, lng) VALUES(?,?,?,?,?,?,?,?)';
     return this.db.executeSql(sql, [task.id, task.type, task.x, task.y, task.z, task.steps, task.lat, task.lng]);
   }
 

@@ -37,9 +37,12 @@
     <ion-grid>
       <ion-row>
         <ion-col col-6 align="center">
-          <ion-card button class="icon_card_button" *ngIf="button_salto&&!disabled_sa" color="primary" (click)="initJump()">
+          <ion-card button class="icon_card_button" *ngIf="button_salto&&!disabled_sa" color="primary" (click)="toJumpPage()">
             <img src="./assets/imgs/jump.png" width="30px">
           </ion-card>
+          <!--ion-card button class="icon_card_button" *ngIf="button_salto&&!disabled_sa" color="primary" (click)="initJump()">
+            <img src="./assets/imgs/jump.png" width="30px">
+          </ion-card-->
           <ion-card button class="icon_card_button" *ngIf="!button_salto&&!disabled_sa" color="danger" (click)="stopJump()">
             <img src="./assets/imgs/jump.png" width="30px">
           </ion-card>
@@ -73,10 +76,13 @@
           <p class="color">Sentadillas</p>
         </ion-col>
         <ion-col col-6 align="center">
-          <ion-card button class="icon_card_button" *ngIf="button_cam&&!disabled_ca" color="primary" (click)="initCam()">
+          <ion-card button class="icon_card_button" *ngIf="button_cam&&!disabled_ca" color="primary" (click)="toStepsPage()">
             <img src="./assets/imgs/walk.png" width="30px">
           </ion-card>
-          <ion-card button class="icon_card_button" *ngIf="!button_cam&&!disabled_ca" color="danger" (click)="stopCam()">
+          <!--ion-card button class="icon_card_button" *ngIf="button_cam&&!disabled_ca" color="primary" (click)="initSteps()">
+            <img src="./assets/imgs/walk.png" width="30px">
+          </ion-card-->
+          <ion-card button class="icon_card_button" *ngIf="!button_cam&&!disabled_ca" color="danger" (click)="stopSteps()">
             <img src="./assets/imgs/walk.png" width="30px">
           </ion-card>
           <ion-card button class="icon_card_button" *ngIf="button_cam&&disabled_ca" color="primary" disabled>
@@ -122,23 +128,34 @@
   <img src="{{warning}}">
 
 
-  <ion-list>
-    <ion-item *ngIf="tasks.length == 0"> 
-      Empty
-    </ion-item>
-    <ion-item-sliding *ngFor="let task of tasks; let i = id">
-      <ion-item >
-        <ion-label>{{ task.id }} {{task.type}} </ion-label>
-        <!--ion-checkbox (ionChange)="updateTask( task, i )" [checked]="task.completed"></ion-checkbox-->
-      </ion-item>
-      <!--ion-item-options side="right" icon-left>
-        <button ion-button color="danger" (click)="deleteTask(task, i)">
-          <ion-icon name="trash"></ion-icon>
-          Delete
-        </button>
-      </ion-item-options-->
-    </ion-item-sliding>
-  </ion-list>
+  <!--ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-list>
+          <ion-item *ngIf="step_tasks.length == 0"> 
+            Empty
+          </ion-item>
+          <ion-item-sliding *ngFor="let step_task of step_tasks; let i = id">
+            <ion-item >
+              <ion-label>{{ step_task.id }} {{step_task.type}} </ion-label>
+            </ion-item>
+          </ion-item-sliding>
+        </ion-list>
+      </ion-col>
+      <ion-col>
+        <ion-list>
+          <ion-item *ngIf="jump_tasks.length == 0"> 
+            Empty
+          </ion-item>
+          <ion-item-sliding *ngFor="let jump_task of jump_tasks; let i = id">
+            <ion-item >
+              <ion-label>{{ jump_task.id }} {{jump_task.type}} </ion-label>
+            </ion-item>
+          </ion-item-sliding>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+  </ion-grid-->
 
   <!--ion-card class="contactos-card" padding>
     <div>

@@ -11,6 +11,8 @@ import { HomePage } from '../pages/home/home';
 
 import { SQLite } from '@ionic-native/sqlite';
 import { TasksService } from '../providers/tasks-service/tasks-service';
+import { StepsDbProvider } from '../providers/steps-db/steps-db';
+import { JumpDbProvider } from '../providers/jump-db/jump-db';
 
 
 @Component({
@@ -24,6 +26,8 @@ export class MyApp {
     public statusBar: StatusBar,
     public splashScreen: SplashScreen,
     public tasksService: TasksService,
+    public stepsDbService: StepsDbProvider,
+    public jumpDbService: JumpDbProvider,
     public sqlite: SQLite,
     private afAuth: AngularFireAuth,
     ) {
@@ -49,8 +53,9 @@ export class MyApp {
       location: 'default' // the location field is required
     })
     .then((db) => {
-      this.tasksService.setDatabase(db);
-      return this.tasksService.createTable();
+      this.jumpDbService.setDatabase(db);
+      this.stepsDbService.setDatabase(db);
+      return this.jumpDbService.createTable() && this.stepsDbService.createTable();
     })
     .then(() =>{
       this.splashScreen.hide();
