@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import { BackgroundMode } from '@ionic-native/background-mode';
 
 import { TabsPage } from '../pages/tabs/tabs';
 import { LoginPage } from '../pages/login/login';
@@ -30,6 +31,7 @@ export class MyApp {
     public jumpDbService: JumpDbProvider,
     public sqlite: SQLite,
     private afAuth: AngularFireAuth,
+    private backgroundMode: BackgroundMode, 
     ) {
       
       this.afAuth.auth.onAuthStateChanged(user=>{
@@ -41,6 +43,7 @@ export class MyApp {
       });
       this.platform.ready().then(() => {
         this.statusBar.styleDefault();
+        this.backgroundMode.enable();
         this.createDatabase();
     });
 

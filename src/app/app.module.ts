@@ -15,6 +15,7 @@ import { Sensors } from '@ionic-native/sensors'
 import { SQLite } from '@ionic-native/sqlite';
 import { Geolocation } from '@ionic-native/geolocation';
 import { Stepcounter } from '@ionic-native/stepcounter';
+import { BackgroundMode } from '@ionic-native/background-mode';
 
 //Pages
 import { LoginPageModule } from '../pages/login/login.module';
@@ -33,6 +34,8 @@ import { ConfigurationPageModule } from '../pages/configuration/configuration.mo
 import { TasksService } from '../providers/tasks-service/tasks-service';
 import { StepsDbProvider } from '../providers/steps-db/steps-db';
 import { JumpDbProvider } from '../providers/jump-db/jump-db';
+import { LoadDatabasePageModule } from '../pages/load-database/load-database.module';
+import { AnguarFireProvider } from '../providers/anguar-fire/anguar-fire';
 
 
 @NgModule({
@@ -54,6 +57,7 @@ import { JumpDbProvider } from '../providers/jump-db/jump-db';
     CaminataPageModule,
     SaltosPageModule,
     ConfigurationPageModule,
+    LoadDatabasePageModule,
     BrowserModule,
     IonicModule.forRoot(MyApp)
   ],
@@ -76,7 +80,9 @@ import { JumpDbProvider } from '../providers/jump-db/jump-db';
     Geolocation,
     StepsDbProvider,
     JumpDbProvider,
-    Stepcounter
+    Stepcounter,
+    AnguarFireProvider,
+    BackgroundMode,
   ]
 })
 export class AppModule {}

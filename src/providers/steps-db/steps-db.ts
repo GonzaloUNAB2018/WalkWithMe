@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+//import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { SQLiteObject } from '@ionic-native/sqlite';
 
@@ -20,12 +20,12 @@ export class StepsDbProvider {
   }
 
   create(steps_task: any){
-    let sql_steps = 'INSERT INTO steps_tasks(id, type, steps, lat, lng) VALUES(?,?,?,?,?)';
-    return this.stepsdb.executeSql(sql_steps, [steps_task.id, steps_task.type, steps_task.steps, steps_task.lat, steps_task.lng]);
+    let sql_steps = 'INSERT INTO steps_tasks(id, time, type, steps, lat, lng) VALUES(?,?,?,?,?,?)';
+    return this.stepsdb.executeSql(sql_steps, [steps_task.id, steps_task.time, steps_task.type, steps_task.steps, steps_task.lat, steps_task.lng]);
   }
 
   createTable(){
-    let sql_steps = 'CREATE TABLE IF NOT EXISTS steps_tasks(id NUMBER, type TEXT, steps NUMBER, lat NUMBER, lng NUMBER)';
+    let sql_steps = 'CREATE TABLE IF NOT EXISTS steps_tasks(id NUMBER, time TIMESTAMP, type TEXT, steps NUMBER, lat NUMBER, lng NUMBER)';
     return this.stepsdb.executeSql(sql_steps, []);
   }
 
@@ -48,8 +48,8 @@ export class StepsDbProvider {
   }
 
   update(steps_task: any){
-    let sql_steps = 'UPDATE steps_tasks SET id=?, type=?, steps=?, lat=?, WHERE lng=?';
-    return this.stepsdb.executeSql(sql_steps, [steps_task.id, steps_task.type, steps_task.steps, steps_task.lat, steps_task.lng]);
+    let sql_steps = 'UPDATE steps_tasks SET id=?, time=?, type=?, steps=?, lat=?, WHERE lng=?';
+    return this.stepsdb.executeSql(sql_steps, [steps_task.id, steps_task.time, steps_task.type, steps_task.steps, steps_task.lat, steps_task.lng]);
   }
 
 }

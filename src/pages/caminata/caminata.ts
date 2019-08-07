@@ -4,24 +4,13 @@ import { Geolocation } from '@ionic-native/geolocation';
 import { StepsDbProvider } from '../../providers/steps-db/steps-db';
 import { Stepcounter } from '@ionic-native/stepcounter';
 
-declare var sensors
-//declare var interval
-
-/**
- * Generated class for the CaminataPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
-
 @IonicPage()
 @Component({
   selector: 'page-caminata',
   templateUrl: 'caminata.html',
 })
 export class CaminataPage {
-
-  //stepValue : any;
+  
   lat: number = 0;
   lng: number = 0;
   steps_tasks: any[] = [];
@@ -33,6 +22,14 @@ export class CaminataPage {
     this.onInterval()
   }, 100);
 
+
+  start: any;
+  diff: any;
+  end : any;
+  timerID: number;
+  document = Document;
+  now: string;
+
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -40,13 +37,11 @@ export class CaminataPage {
     private geolocation: Geolocation,
     private stepsDbService: StepsDbProvider,
     private stepcounter: Stepcounter
-    //private sensors: Sensors
     ) {
     
   }
 
   ionViewDidLoad() {
-    //console.log('ionViewDidLoad CaminataPage');
     this.initSteps();
   }
 
@@ -57,7 +52,6 @@ export class CaminataPage {
   initSteps(){
 
     this.loadInitGetData();
-    //sensors.enableSensor("STEP_COUNTER");
     console.log('Se inicia Caminata');
     
     this.subscription = this.geolocation.watchPosition().subscribe(co=>{
@@ -119,12 +113,30 @@ export class CaminataPage {
     loader.present();
   }
 
+  time(){
+    var today = new Date();
+    var ss = String(today.getSeconds());
+    var mi = String(today.getMinutes());
+    var hh = String(today.getHours());
+    var dd = String(today.getDate());
+    var mm = String(today.getMonth() + 1); //January is 0!
+    var yyyy = today.getFullYear();
+
+    this.now = dd+'/'+mm+'/'+yyyy+' - '+hh+':'+mi+':'+ss;
+
+    //console.log(this.now);
+  }
+
   onInterval(){
     this.stepcounter.getStepCount().then(steps=>{
       this.steps = steps;
-    })
+    });
+    
+    this.time();
+
     var data_steps ={
       id : Date.now(),
+      time: this.now,
       type : 'Caminata',
       steps : this.steps,
       lat : this.lat,

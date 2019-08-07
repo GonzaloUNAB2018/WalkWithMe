@@ -1,17 +1,17 @@
 import { Component } from '@angular/core';
-import { NavController, LoadingController, AlertController } from 'ionic-angular';
+import { NavController, LoadingController, AlertController, ToastController } from 'ionic-angular';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { InitialPage } from '../initial/initial';
 import { ConfigurationPage } from '../configuration/configuration';
 import { TasksService } from '../../providers/tasks-service/tasks-service';
 import { SQLite } from '@ionic-native/sqlite';
-import { Geolocation } from '@ionic-native/geolocation';
 import { StepsDbProvider } from '../../providers/steps-db/steps-db';
 import { CaminataPage } from '../caminata/caminata';
 import { SaltosPage } from '../saltos/saltos';
 import { JumpDbProvider } from '../../providers/jump-db/jump-db';
+import { LoadDatabasePage } from '../load-database/load-database';
+//import { AngularFireDatabase } from '@angular/fire/database';
 
-//declare var sensors;
 
 @Component({
   selector: 'page-home',
@@ -22,84 +22,50 @@ export class HomePage {
   jump_tasks: any[] = [];
   steps_tasks: any[] = [];
 
-  jumpdata: any = {
-    id: null,
-    type: null,
-    x: null,
-    y: null,
-    z: null
-  };
-  subscription: any;
-  accelerationData: any;
-  proximity:number;
   warning: string;
 
   supervisionButton : boolean = true;
-  button_salto: boolean = true;
-  button_abd: boolean = true;
-  button_sent: boolean = true;
-  button_cam: boolean = true;
   disabled_sa: boolean = false;
   disabled_ab: boolean = false;
   disabled_se: boolean = false;
   disabled_ca: boolean = false;
-  disableSup_button: boolean = false;
 
-  public xOrient:any;
-  public yOrient:any;
-  public zOrient:any;
-  public timestamp:any;
   public accX:any;
   public accY:any;
   public accZ:any;
-  public l_accX: any;
-  public l_accY: any;
-  public l_accZ: any;
-
-  public n_l_accY: number = 2;
-
-  //public stepValue : any = 0;
 
   n=35;
-  numJump=0;
 
   n1: number = -3;
   n2: number = 10;
   n3: number = 10;
 
-  //GEOLOCATION
-  watch = this.geolocation.watchPosition({
-    //maximumAge: 0,
-    //timeout: 100,
-    enableHighAccuracy: true
-  });
-  watching : any;
-
   lat: number;
   lng: number;
 
-  steps: any;
+  steps_entries: number = 0;
+  steps_entries_boolean: boolean = false;
+  jumps_entries: number = 0;
+  jumps_entries_boolean: boolean = false;
 
   constructor(
     public navCtrl: NavController,
     public loadingCtrl: LoadingController,
     private afAuth: AngularFireAuth,
     private alertCtrl: AlertController,
+    public toastCtrl: ToastController,
     public tasksService: TasksService,
     public stepsDbService: StepsDbProvider,
     public jumpDbService: JumpDbProvider,
     public sqlite: SQLite,
-    private geolocation: Geolocation
-
+    //private afDb: AngularFireDatabase,
     ) {
-
-      this.proximity = 8;
       
   }
 
   ionViewDidLoad(){
     this.getAllTasks();
-    
+    this.loadInitGetData();
   }
 
   getAllTasks(){
@@ -107,9 +73,12 @@ export class HomePage {
     .then(jump_tasks => {
       this.jump_tasks = jump_tasks;
       if(this.jump_tasks.length!=0){
-        console.log(this.jump_tasks)
+        this.jumps_entries = this.jump_tasks.length;
+        this.jumps_entries_boolean = true;
+        console.log('Existen '+this.jumps_entries+' por sincronizar');
       }else{
-        console.log('No Steps List')
+        console.log('No existen datos por sincronizar');
+        this.jumps_entries_boolean = false;
       }
     })
     .catch( error => {
@@ -119,9 +88,12 @@ export class HomePage {
     .then(steps_tasks => {
       this.steps_tasks = steps_tasks;
       if(this.steps_tasks.length!=0){
-        console.log(this.steps_tasks)
+        this.steps_entries = this.steps_tasks.length
+        this.steps_entries_boolean = true;
+        console.log('Existen '+this.steps_entries+' por sincronizar')
       }else{
-        console.log('No Steps List')
+        console.log('No existen datos por sincronizar');
+        this.steps_entries_boolean = false;
       }
     })
     .catch( error => {
@@ -189,7 +161,7 @@ export class HomePage {
 
   loadInitGetData() {
     const loader = this.loadingCtrl.create({
-      content: "Iniciando toma de datos...",
+      content: "Recuperando datos...",
       duration: 1000
     });
     loader.present();
@@ -208,7 +180,21 @@ export class HomePage {
       content: "Borrando Datos",
       duration: 1000
     });
-    loader.present();
+    loader.present().then(()=>{
+      
+        const toast = this.toastCtrl.create({
+          message: 'Base de datos borrada',
+          duration: 1000,
+          position: 'bottom'
+        });
+    
+        toast.onDidDismiss(() => {
+          console.log('Dismissed toast');
+        });
+    
+        toast.present()
+      
+    })
   }
 
   loadLogout() {
@@ -238,7 +224,7 @@ export class HomePage {
         {
           text: 'OK',
           handler: () => {
-            this.loadDeleteDB();
+            
             this.sqlite.deleteDatabase(
               {
                 name: 'data.db',
@@ -254,14 +240,16 @@ export class HomePage {
               this.stepsDbService.setDatabase(db);
               return this.tasksService.createTable() && this.stepsDbService.createTable().then(()=>{
                 this.getAllTasks();
-              });
+              }).then(()=>{
+                this.loadDeleteDB();
+              })
             })
             console.log('Datos borrados');
           }
         }
       ]
     });
-    alert.present();
+    alert.present()
 
   }
 
@@ -348,6 +336,10 @@ export class HomePage {
       ]
     });
     alert.present();
+  }
+
+  loadDb(){
+    this.navCtrl.push(LoadDatabasePage);
   }
 
 
