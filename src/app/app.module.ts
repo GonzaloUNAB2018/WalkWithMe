@@ -24,6 +24,7 @@ import { ResetPassPageModule } from '../pages/reset-pass/reset-pass.module';
 import { InitialPageModule } from '../pages/initial/initial.module';
 import { CaminataPageModule } from '../pages/caminata/caminata.module';
 import { SaltosPageModule } from '../pages/saltos/saltos.module';
+import { AbdominalesPageModule } from '../pages/abdominales/abdominales.module';
 
 //FIREBASE
 import {firebase} from './firebase.module';
@@ -34,6 +35,7 @@ import { ConfigurationPageModule } from '../pages/configuration/configuration.mo
 import { TasksService } from '../providers/tasks-service/tasks-service';
 import { StepsDbProvider } from '../providers/steps-db/steps-db';
 import { JumpDbProvider } from '../providers/jump-db/jump-db';
+import { ABSDbProvider } from '../providers/ABS-db/ABSs-db';
 import { LoadDatabasePageModule } from '../pages/load-database/load-database.module';
 import { AnguarFireProvider } from '../providers/anguar-fire/anguar-fire';
 
@@ -56,6 +58,7 @@ import { AnguarFireProvider } from '../providers/anguar-fire/anguar-fire';
     InitialPageModule,
     CaminataPageModule,
     SaltosPageModule,
+    AbdominalesPageModule,
     ConfigurationPageModule,
     LoadDatabasePageModule,
     BrowserModule,
@@ -79,6 +82,7 @@ import { AnguarFireProvider } from '../providers/anguar-fire/anguar-fire';
     SQLite,
     Geolocation,
     StepsDbProvider,
+    ABSDbProvider,
     JumpDbProvider,
     Stepcounter,
     AnguarFireProvider,

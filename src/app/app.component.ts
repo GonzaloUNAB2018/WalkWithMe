@@ -11,6 +11,7 @@ import { SQLite } from '@ionic-native/sqlite';
 import { TasksService } from '../providers/tasks-service/tasks-service';
 import { StepsDbProvider } from '../providers/steps-db/steps-db';
 import { JumpDbProvider } from '../providers/jump-db/jump-db';
+import { ABSDbProvider } from '../providers/ABS-db/ABSs-db';
 
 
 @Component({
@@ -26,6 +27,7 @@ export class MyApp {
     public tasksService: TasksService,
     public stepsDbService: StepsDbProvider,
     public jumpDbService: JumpDbProvider,
+    public ABSDbService: ABSDbProvider,
     public sqlite: SQLite,
     private afAuth: AngularFireAuth,
     private backgroundMode: BackgroundMode, 
@@ -55,7 +57,8 @@ export class MyApp {
     .then((db) => {
       this.jumpDbService.setDatabase(db);
       this.stepsDbService.setDatabase(db);
-      return this.jumpDbService.createTable() && this.stepsDbService.createTable();
+      this.ABSDbService.setDatabase(db);
+      return this.jumpDbService.createTable() && this.stepsDbService.createTable() && this.ABSDbService.createTable();
     })
     .then(() =>{
       this.splashScreen.hide();

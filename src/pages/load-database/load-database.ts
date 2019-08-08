@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController, ToastController, LoadingController } from 'ionic-angular';
+import { ABSDbProvider } from '../../providers/ABS-db/ABSs-db';
 import { JumpDbProvider } from '../../providers/jump-db/jump-db';
 import { StepsDbProvider } from '../../providers/steps-db/steps-db';
 import { AngularFireDatabase } from '@angular/fire/database';
@@ -16,11 +17,14 @@ export class LoadDatabasePage {
 
   jump_tasks: any[] = [];
   steps_tasks: any[] = [];
+  ABS_tasks: any[] = [];
 
   steps_entries: number = 0;
   steps_entries_boolean: boolean = false;
   jumps_entries: number = 0;
   jumps_entries_boolean: boolean = false;
+  ABSs_entries: number = 0;
+  ABSs_entries_boolean: boolean = false;
 
   uid: any; 
 
@@ -31,6 +35,7 @@ export class LoadDatabasePage {
     public toastCtrl: ToastController,
     public loadingCtrl: LoadingController,
     public jumpDbService: JumpDbProvider,
+    public ABSDbService: ABSDbProvider,
     public stepsDbService: StepsDbProvider,
     private afDb: AngularFireDatabase,
     private afAuth: AngularFireAuth
@@ -142,11 +147,26 @@ export class LoadDatabasePage {
     .catch( error => {
       console.error( error );
     });
+    this.ABSDbService.getAll()
+    .then(ABS_tasks => {
+      this.ABS_tasks = ABS_tasks;
+      console.log(this.ABS_tasks);
+      if(this.ABS_tasks.length!=0){
+        this.ABSs_entries = this.ABS_tasks.length;
+        this.ABSs_entries_boolean = true;
+      }else{
+        console.log('No existen datos por sincronizar');
+        this.ABSs_entries_boolean = false;
+      }
+    })
+    .catch( error => {
+      console.error( error );
+    });
   }
 
 
   loadDBFirebase(){
-    if(this.steps_tasks.length!=0||this.jump_tasks.length!=0){
+    if(this.steps_tasks.length!=0||this.ABS_tasks.length!=0||this.jump_tasks.length!=0){
       for(var s = 0;s<this.steps_entries;s++) { 
         console.log(this.steps_tasks[s].time);
         this.afDb.object('Pacientes/'+this.uid+'/Ejercicios/Caminata/'+this.steps_tasks[s].id).update(this.steps_tasks[s]);
@@ -154,6 +174,10 @@ export class LoadDatabasePage {
       for(var j = 0;j<this.jumps_entries;j++) { 
         console.log(this.jump_tasks[j].time);
         this.afDb.object('Pacientes/'+this.uid+'/Ejercicios/Saltos/'+this.jump_tasks[j].id).update(this.jump_tasks[j]);
+      }
+      for(var a = 0;a<this.ABSs_entries;a++) { 
+        console.log(this.ABS_tasks[a].time);
+        this.afDb.object('Pacientes/'+this.uid+'/Ejercicios/Abdominales/'+this.ABS_tasks[a].id).update(this.ABS_tasks[a]);
       }
     }else{
       alert('Nada que sincronizar');

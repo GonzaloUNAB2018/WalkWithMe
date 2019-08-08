@@ -10,6 +10,7 @@ import { CaminataPage } from '../caminata/caminata';
 import { SaltosPage } from '../saltos/saltos';
 import { JumpDbProvider } from '../../providers/jump-db/jump-db';
 import { LoadDatabasePage } from '../load-database/load-database';
+import { AbdominalesPage } from '../abdominales/abdominales';
 //import { AngularFireDatabase } from '@angular/fire/database';
 
 
@@ -155,6 +156,10 @@ export class HomePage {
 
   toJumpPage(){
     this.navCtrl.push(SaltosPage);
+  }
+
+  toABSPage(){
+    this.navCtrl.push(AbdominalesPage);
   }
 
   
