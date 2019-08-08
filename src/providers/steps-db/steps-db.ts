@@ -1,17 +1,12 @@
-//import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { SQLiteObject } from '@ionic-native/sqlite';
 
 @Injectable()
 export class StepsDbProvider {
 
-  // public properties
-
   stepsdb: SQLiteObject = null;
 
   constructor() {}
-
-  // public methods
 
   setDatabase(stepsdb: SQLiteObject){
     if(this.stepsdb === null){

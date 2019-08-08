@@ -3,9 +3,6 @@ import { Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { BackgroundMode } from '@ionic-native/background-mode';
-
-import { TabsPage } from '../pages/tabs/tabs';
-import { LoginPage } from '../pages/login/login';
 import { InitialPage } from '../pages/initial/initial';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { HomePage } from '../pages/home/home';

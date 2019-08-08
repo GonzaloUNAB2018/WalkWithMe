@@ -2,10 +2,8 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController, ToastController, LoadingController } from 'ionic-angular';
 import { JumpDbProvider } from '../../providers/jump-db/jump-db';
 import { StepsDbProvider } from '../../providers/steps-db/steps-db';
-import { AngularFireDatabase, AngularFireList } from '@angular/fire/database';
+import { AngularFireDatabase } from '@angular/fire/database';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
 
 
 
@@ -24,12 +22,7 @@ export class LoadDatabasePage {
   jumps_entries: number = 0;
   jumps_entries_boolean: boolean = false;
 
-  uid: any;
-
-  //example
-  itemsRef: AngularFireList<any>;
-  items: Observable<any[]>;
- 
+  uid: any; 
 
   constructor(
     public navCtrl: NavController,
@@ -43,13 +36,6 @@ export class LoadDatabasePage {
     private afAuth: AngularFireAuth
     ) {
       this.uid = this.afAuth.auth.currentUser.uid;
-      /*this.itemsRef = afDb.list('messages');
-    // Use snapshotChanges().map() to store the key
-    this.items = this.itemsRef.snapshotChanges().pipe(
-      map(changes => 
-        changes.map(c => ({ key: c.payload.key, ...c.payload.val() }))
-      )
-    );*/
   }
 
   ionViewDidLoad() {
@@ -133,7 +119,6 @@ export class LoadDatabasePage {
       if(this.jump_tasks.length!=0){
         this.jumps_entries = this.jump_tasks.length;
         this.jumps_entries_boolean = true;
-        console.log('Existen '+this.jumps_entries+' por sincronizar')
       }else{
         console.log('No existen datos por sincronizar');
         this.jumps_entries_boolean = false;
@@ -148,9 +133,7 @@ export class LoadDatabasePage {
       console.log(this.steps_tasks);
       if(this.steps_tasks.length!=0){
         this.steps_entries = this.steps_tasks.length
-        this.steps_entries_boolean = true;
-        //console.log('Existen '+this.steps_entries+' por sincronizar');
-        
+        this.steps_entries_boolean = true;        
       }else{
         console.log('No existen datos por sincronizar');
         this.steps_entries_boolean = false;
@@ -163,18 +146,17 @@ export class LoadDatabasePage {
 
 
   loadDBFirebase(){
-    if(this.steps_tasks.length!=0){
-      //var n = this.steps_tasks.length;
-      for(var i = 0;i<this.steps_entries;i++) { 
-        //this.steps_entries[i]
-        //console.log(this.steps_tasks[i].id);
-        console.log(this.steps_tasks[i].time);
-        this.afDb.object('Pacientes/'+this.uid+'/Ejercicios/Caminata/'+this.steps_tasks[i].id).update(this.steps_tasks[i]);
-
-     }
-      //this.getItem(23);
+    if(this.steps_tasks.length!=0||this.jump_tasks.length!=0){
+      for(var s = 0;s<this.steps_entries;s++) { 
+        console.log(this.steps_tasks[s].time);
+        this.afDb.object('Pacientes/'+this.uid+'/Ejercicios/Caminata/'+this.steps_tasks[s].id).update(this.steps_tasks[s]);
+      }
+      for(var j = 0;j<this.jumps_entries;j++) { 
+        console.log(this.jump_tasks[j].time);
+        this.afDb.object('Pacientes/'+this.uid+'/Ejercicios/Saltos/'+this.jump_tasks[j].id).update(this.jump_tasks[j]);
+      }
     }else{
-      alert('Nada que sincronizar')
+      alert('Nada que sincronizar');
     }
     
   }

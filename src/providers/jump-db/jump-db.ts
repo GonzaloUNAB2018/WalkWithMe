@@ -1,17 +1,12 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { SQLiteObject } from '@ionic-native/sqlite';
 
 @Injectable()
 export class JumpDbProvider {
 
-   // public properties
-
    jumpsdb: SQLiteObject = null;
 
    constructor() {}
- 
-   // public methods
  
    setDatabase(jumpsdb: SQLiteObject){
      if(this.jumpsdb === null){
@@ -19,19 +14,19 @@ export class JumpDbProvider {
      }
    }
  
-   create(jump_task: any){
-     let sql_jumps = 'INSERT INTO jumps_tasks(id, type, x, y, z) VALUES(?,?,?,?,?)';
-     return this.jumpsdb.executeSql(sql_jumps, [jump_task.id, jump_task.type, jump_task.x, jump_task.y, jump_task.z]);
+   create(jumps_task: any){
+     let sql_jumps = 'INSERT INTO jumps_tasks(id, time, type, x, y, z) VALUES(?,?,?,?,?,?)';
+     return this.jumpsdb.executeSql(sql_jumps, [jumps_task.id, jumps_task.time, jumps_task.type, jumps_task.x, jumps_task.y, jumps_task.z]);
    }
  
    createTable(){
-     let sql_jumps = 'CREATE TABLE IF NOT EXISTS jumps_tasks(id NUMBER, type TEXT, x NUMBER, y NUMBER, z NUMBER)';
+     let sql_jumps = 'CREATE TABLE IF NOT EXISTS jumps_tasks(id NUMBER, time TIMESTAMP, type TEXT, x NUMBER, y NUMBER, z NUMBER)';
      return this.jumpsdb.executeSql(sql_jumps, []);
    }
  
-   delete(jump_task: any){
+   delete(jumps_task: any){
      let sql_jumps = 'DELETE FROM jumps_tasks WHERE id=?';
-     return this.jumpsdb.executeSql(sql_jumps, [jump_task.id]);
+     return this.jumpsdb.executeSql(sql_jumps, [jumps_task.id]);
    }
  
    getAll(){
@@ -47,9 +42,9 @@ export class JumpDbProvider {
      .catch(error => Promise.reject(error));
    }
  
-   update(jump_task: any){
-     let sql_jumps = 'UPDATE jumps_tasks SET id=?, type=?, x=?, y=?, WHERE z=?';
-     return this.jumpsdb.executeSql(sql_jumps, [jump_task.id, jump_task.type, jump_task.x, jump_task.y, jump_task.z]);
+   update(jumps_task: any){
+     let sql_jumps = 'UPDATE jumps_tasks SET id=?, time=?, type=?, x=?, y=?, WHERE z=?';
+     return this.jumpsdb.executeSql(sql_jumps, [jumps_task.id, jumps_task.time, jumps_task.type, jumps_task.x, jumps_task.y, jumps_task.z]);
    }
 
 }

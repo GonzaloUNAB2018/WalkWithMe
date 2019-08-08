@@ -3,12 +3,6 @@ import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-an
 import { JumpDbProvider } from '../../providers/jump-db/jump-db';
 
 declare var sensors;
-/**
- * Generated class for the SaltosPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 
 @IonicPage()
 @Component({
@@ -23,6 +17,9 @@ export class SaltosPage {
   public l_accZ: any;
 
   jumps_tasks : any [] = []
+  now: string;
+
+  i : any;
 
   constructor(
     public navCtrl: NavController, 
@@ -41,34 +38,39 @@ export class SaltosPage {
     this.stopJump()
   }
 
-  initJump(){
+  time(){
+    var today = new Date();
+    var ss = String(today.getSeconds());
+    var mi = String(today.getMinutes());
+    var hh = String(today.getHours());
+    var dd = String(today.getDate());
+    var mm = String(today.getMonth() + 1); //January is 0!
+    var yyyy = today.getFullYear();
 
-    //var sensors;
-    //this.button_salto = false;
-    //this.disabled_ab = true;
-    //this.disabled_se = true;
-    //this.disabled_ca = true;
-    //this.disableSup_button = true;
+    this.now = dd+'/'+mm+'/'+yyyy+' - '+hh+':'+mi+':'+ss;
+    console.log(this.now)
+
+  }
+
+  initJump(){
 
     this.loadInitGetData();
     sensors.enableSensor("LINEAR_ACCELERATION");
     console.log('Se inicia Saltos');
-    setInterval(() => {
+    this.i = setInterval(() => {
+      this.time();
       sensors.getState((values) => {
         this.l_accX = values[0];
         this.l_accY = values[1];
         this.l_accZ = values[2];
-        //this.stepValue = 0;
         console.log(this.l_accX, this.l_accY, this.l_accZ);
         var data_jump = {
           id : Date.now(),
+          time: this.now,
           type : 'Saltos',
           x : this.l_accX,
           y : this.l_accY,
           z : this.l_accZ,
-          steps : 0,
-          lat : 0,
-          lng : 0
         }
         this.jumpsDbService.create(data_jump).then(response => {
           this.jumps_tasks.unshift( data_jump );
@@ -81,14 +83,9 @@ export class SaltosPage {
   }
 
   stopJump(){
-    //var sensors;
-    //this.button_salto = true;
-    //this.disabled_ab = false;
-    //this.disabled_se = false;
-    //this.disabled_ca = false;
-    //this.disableSup_button = false;
     this.loadStopGetData();
     sensors.disableSensor();
+    clearInterval(this.i);
   }
 
   toHomePage(){
