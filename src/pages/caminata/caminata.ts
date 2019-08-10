@@ -28,7 +28,8 @@ export class CaminataPage {
   end : any;
   timerID: number;
   document = Document;
-  now: string;
+  hour: string;
+  date: string;
 
   constructor(
     public navCtrl: NavController,
@@ -122,7 +123,10 @@ export class CaminataPage {
     var mm = String(today.getMonth() + 1); //January is 0!
     var yyyy = today.getFullYear();
 
-    this.now = dd+'/'+mm+'/'+yyyy+' - '+hh+':'+mi+':'+ss;
+    this.date = yyyy+'-'+mm+'-'+dd;
+    this.hour = hh+':'+mi;
+
+    //this.now = dd+'/'+mm+'/'+yyyy+' - '+hh+':'+mi+':'+ss;
 
     //console.log(this.now);
   }
@@ -136,7 +140,8 @@ export class CaminataPage {
 
     var data_steps ={
       id : Date.now(),
-      time: this.now,
+      date : this.date,
+      time: this.hour,
       type : 'Caminata',
       steps : this.steps,
       lat : this.lat,

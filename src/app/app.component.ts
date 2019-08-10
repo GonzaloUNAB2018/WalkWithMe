@@ -51,7 +51,7 @@ export class MyApp {
 
   private createDatabase(){
     this.sqlite.create({
-      name: 'data.db',
+      name: 'data1.db',
       location: 'default' // the location field is required
     })
     .then((db) => {

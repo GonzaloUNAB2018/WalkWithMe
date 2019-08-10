@@ -232,12 +232,12 @@ export class HomePage {
             
             this.sqlite.deleteDatabase(
               {
-                name: 'data.db',
+                name: 'data1.db',
                 location: 'default' // the location field is required
               }
             );
             this.sqlite.create({
-              name: 'data.db',
+              name: 'data1.db',
               location: 'default' // the location field is required
             })
             .then((db) => {
