@@ -6,6 +6,9 @@
 
   <button ion-button full round large color="primary" (click)="syncDb()">SINCRONIZAR</button>
 
+  <p align="center">Existen {{totalDataOnFirebase}} datos sincronizados</p>
+  <p align="center"> Caminata: {{totalSteps}}, Saltos: {{totalJumps}}, Abdominales: {{totalABS}} </p>
+
   <!--ion-card>
     <ion-list>
       <ion-item *ngFor="let steps_task of steps_tasks">

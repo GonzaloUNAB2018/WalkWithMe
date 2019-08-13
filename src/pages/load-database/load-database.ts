@@ -5,6 +5,7 @@ import { JumpDbProvider } from '../../providers/jump-db/jump-db';
 import { StepsDbProvider } from '../../providers/steps-db/steps-db';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { AngularFireAuth } from '@angular/fire/auth';
+import { Observable } from 'rxjs';
 
 
 
@@ -28,6 +29,14 @@ export class LoadDatabasePage {
 
   uid: any; 
 
+  fbSteps : Observable<any[]>;
+  totalSteps: number;
+  fbJumps : Observable<any[]>;
+  totalJumps: number;
+  fbABS : Observable<any[]>;
+  totalABS: number;
+  totalDataOnFirebase: number;
+
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -41,6 +50,26 @@ export class LoadDatabasePage {
     private afAuth: AngularFireAuth
     ) {
       this.uid = this.afAuth.auth.currentUser.uid;
+
+      this.fbSteps=this.afDb.list('Pacientes/'+this.uid+'/Ejercicios/Caminata').valueChanges();
+      this.fbJumps=this.afDb.list('Pacientes/'+this.uid+'/Ejercicios/Saltos').valueChanges();
+      this.fbABS=this.afDb.list('Pacientes/'+this.uid+'/Ejercicios/Abdominales').valueChanges();
+
+
+      this.fbSteps.subscribe(num1=>{
+        this.totalSteps = num1.length;
+        console.log(this.totalSteps)
+      });
+      this.fbJumps.subscribe(num2=>{
+        this.totalJumps = num2.length;
+        console.log(this.totalJumps)
+      });
+      this.fbABS.subscribe(num3=>{
+        this.totalABS = num3.length;
+        console.log(this.totalABS)
+      })
+
+      this.totalDataOnFirebase = this.totalSteps+this.totalJumps+this.totalABS;
   }
 
   ionViewDidLoad() {

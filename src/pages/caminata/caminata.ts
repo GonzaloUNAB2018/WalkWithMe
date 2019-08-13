@@ -13,6 +13,8 @@ export class CaminataPage {
   
   lat: number = 0;
   lng: number = 0;
+  alt: number = 0;
+  speed: number = 0;
   steps_tasks: any[] = [];
   startingOffset = 0;
   steps: number = 0;
@@ -58,6 +60,8 @@ export class CaminataPage {
     this.subscription = this.geolocation.watchPosition().subscribe(co=>{
       this.lat = co.coords.latitude;
       this.lng = co.coords.longitude;
+      this.alt = co.coords.altitude;
+      this.speed = co.coords.speed;
     })
 
     
@@ -116,7 +120,9 @@ export class CaminataPage {
 
   time(){
     var today = new Date();
+    var seg = Number(today.getSeconds());
     var ss = String(today.getSeconds());
+    var min = Number(today.getMinutes());
     var mi = String(today.getMinutes());
     var hh = String(today.getHours());
     var dd = String(today.getDate());
@@ -124,11 +130,16 @@ export class CaminataPage {
     var yyyy = today.getFullYear();
 
     this.date = yyyy+'-'+mm+'-'+dd;
-    this.hour = hh+':'+mi;
 
-    //this.now = dd+'/'+mm+'/'+yyyy+' - '+hh+':'+mi+':'+ss;
+    if(min>=0&&min<10){
+      mi = 0+mi
+    }
 
-    //console.log(this.now);
+    if(seg>=0&&seg<10){
+      ss = 0+ss
+    }
+
+    this.hour = hh+':'+mi+':'+ss;
   }
 
   onInterval(){
@@ -138,6 +149,10 @@ export class CaminataPage {
     
     this.time();
 
+    if(this.speed === null){
+      this.speed = 0;
+    }
+
     var data_steps ={
       id : Date.now(),
       date : this.date,
@@ -145,7 +160,9 @@ export class CaminataPage {
       type : 'Caminata',
       steps : this.steps,
       lat : this.lat,
-      lng : this.lng
+      lng : this.lng,
+      alt : this.alt,
+      speed : this.speed,
     };
     this.stepsDbService.create(data_steps).then(response => {
       this.steps_tasks.unshift( data_steps );
