@@ -20,6 +20,43 @@ export class AnguarFireProvider {
     console.log('Hello AnguarFireProvider Provider');
   }
 
+  public getSteps(uid){
+    return this.afDb.list('Pacientes/'+uid+'/Ejercicios/Caminata');
+  }
+
+  public getABSs(uid){
+    return this.afDb.list('Pacientes/'+uid+'/Ejercicios/Abdominales');
+  }
+
+  public getJumps(uid){
+    return this.afDb.list('Pacientes/'+uid+'/Ejercicios/Saltos');
+  }
+
+  public deleteDataBase(uid){
+    this.afDb.database.ref('Pacientes/'+uid+'/Ejercicios/').remove();
+  }
+
+  /*public getPet(uid, id){
+    return this.afDb.object('Profile/'+uid+'/Pets/'+id);
+  }
+
+  public createPet(uid, pet){
+    this.afDb.database.ref('Profile/'+uid+'/Pets/'+pet.id).set(pet);
+  }
+
+  public savePet(uid, pet){
+    this.afDb.database.ref('Profile/'+uid+'/Pets/'+pet.id).update(pet);
+  }
+
+  public deletePet(uid, pet){
+    this.afDb.database.ref('Profile/'+uid+'/Pets/'+pet.id).remove();
+  }
+
+  public getPetLost(uid, id){
+    return this.afDb.object('Profile/'+uid+'/Pets/'+id+'/lost')
+  }*/
+
+
   
 
 }

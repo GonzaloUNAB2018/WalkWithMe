@@ -38,6 +38,7 @@ import { JumpDbProvider } from '../providers/jump-db/jump-db';
 import { ABSDbProvider } from '../providers/ABS-db/ABSs-db';
 import { LoadDatabasePageModule } from '../pages/load-database/load-database.module';
 import { AnguarFireProvider } from '../providers/anguar-fire/anguar-fire';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -49,6 +50,7 @@ import { AnguarFireProvider } from '../providers/anguar-fire/anguar-fire';
     TabsPage
   ],
   imports: [
+    HttpClientModule,
     AngularFireModule.initializeApp(firebase),
     AngularFireDatabaseModule,
     AngularFireAuthModule,
@@ -87,6 +89,7 @@ import { AnguarFireProvider } from '../providers/anguar-fire/anguar-fire';
     Stepcounter,
     AnguarFireProvider,
     BackgroundMode,
+
   ]
 })
 export class AppModule {}

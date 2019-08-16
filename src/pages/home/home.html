@@ -6,7 +6,7 @@
     </ion-buttons>
     <ion-buttons end>
       <button ion-button icon-only (click)="loadDb()"><ion-icon name="cloud-upload" class="navbar-logo"></ion-icon></button>
-      <button ion-button icon-only (click)="clearDb()"><ion-icon name="trash" class="navbar-logo"></ion-icon></button>
+      <!--button ion-button icon-only (click)="clearDb()"><ion-icon name="trash" class="navbar-logo"></ion-icon></button-->
       <button ion-button icon-only><ion-icon name="contacts" class="navbar-logo"></ion-icon></button>
       <button ion-button icon-only (click)="toOptionPage()"><ion-icon name="options" class="navbar-logo"></ion-icon></button>
     </ion-buttons>
@@ -42,11 +42,9 @@
         <ion-col col-6 align="center">
           <ion-card button class="icon_card_button" *ngIf="!disabled_sa" color="primary" (click)="toJumpPage()">
             <img src="./assets/imgs/jump.png" width="30px">
-            <p>{{jumps_entries}} datos por sincronizar</p>
           </ion-card>
           <ion-card button class="icon_card_button" *ngIf="disabled_sa" color="primary" disabled>
             <img src="./assets/imgs/jump.png" width="30px">
-            <p>{{jumps_entries}} datos por sincronizar</p>
           </ion-card>
           <p class="color">Saltos</p>
         </ion-col>
@@ -71,35 +69,13 @@
         <ion-col col-6 align="center">
           <ion-card button class="icon_card_button" *ngIf="!disabled_ca" color="primary" (click)="toStepsPage()">
             <img src="./assets/imgs/walk.png" width="30px">
-          <p>{{steps_entries}} datos por sincronizar</p>
           </ion-card>
           <ion-card button class="icon_card_button" *ngIf="disabled_ca" color="primary" disabled>
             <img src="./assets/imgs/walk.png" width="30px">
-          <p>{{steps_entries}} datos por sincronizar</p>
           </ion-card>
           <p class="color">Caminata</p>
         </ion-col>
       </ion-row>
     </ion-grid>
   </div>
-
-  <ion-list padding>
-    <ion-item *ngIf="jumps_entries_boolean">
-      <p>Ejercicios de Saltos</p>
-      <p>Existen {{jumps_entries}} datos por sincronizar</p>
-    </ion-item>
-    <ion-item *ngIf="!jumps_entries_boolean">
-      <p>Ejercicios de Saltos</p>
-      <p>Sin datos por sincronizar</p>
-    </ion-item>
-    <ion-item *ngIf="steps_entries_boolean">
-      <p>Ejercicios de Caminata</p>
-      <p>Existen {{steps_entries}} datos por sincronizar</p>
-    </ion-item>
-    <ion-item *ngIf="!steps_entries_boolean">
-      <p>Ejercicios de Caminata</p>
-      <p>Sin datos por sincronizar</p>
-    </ion-item>
-  </ion-list>
-
 </ion-content>

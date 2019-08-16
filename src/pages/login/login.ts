@@ -3,7 +3,6 @@ import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-an
 import { AngularFireAuth } from '@angular/fire/auth';
 import { User } from '../../models/user';
 import { HomePage } from '../home/home';
-import { TabsPage } from '../tabs/tabs';
 
 /**
  * Generated class for the LoginPage page.

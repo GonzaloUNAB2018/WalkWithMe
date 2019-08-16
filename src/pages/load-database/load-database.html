@@ -6,15 +6,22 @@
 
   <button ion-button full round large color="primary" (click)="syncDb()">SINCRONIZAR</button>
 
-  <p align="center">Existen {{totalDataOnFirebase}} datos sincronizados</p>
-  <p align="center"> Caminata: {{totalSteps}}, Saltos: {{totalJumps}}, Abdominales: {{totalABS}} </p>
+  <!--p *ngIf="open1&&open2&&open3" align="center">Existen {{totalDataOnFirebase}} en la nube</p-->
+  <p *ngIf="
+  openSteps1||
+  openSteps2||
+  openABS1||
+  openABS2||
+  openJumps1||
+  openJumps2
+  " align="center">Datos que faltan por cargar:</p>
 
-  <!--ion-card>
-    <ion-list>
-      <ion-item *ngFor="let steps_task of steps_tasks">
-        <p>{{steps_task.type}}</p> <p>{{steps_task.steps}}</p>
-      </ion-item>
-    </ion-list>
-  </ion-card-->
+  <p *ngIf="openSteps1" align="center">Caminata: {{totalSteps}} mediciones</p>
+  <p *ngIf="openSteps2" align="center">Sin registros de datos de caminata</p>
+  <p *ngIf="openABS1" align="center">Saltos: {{totalJumps}} mediciones</p>
+  <p *ngIf="openABS2" align="center">Sin registros de datos de saltos</p>
+  <p *ngIf="openJumps1" align="center">Abdominales: {{totalABS}} mediciones</p>
+  <p *ngIf="openJumps2" align="center">Sin registros de datos de Abdominales</p>
+  <!--p *ngIf="open1&&open2&&open3" align="center">{{diference}} total por sincronizar </p-->
 
 </ion-content>

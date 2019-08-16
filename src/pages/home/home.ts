@@ -65,8 +65,8 @@ export class HomePage {
   }
 
   ionViewDidLoad(){
-    this.getAllTasks();
-    this.loadInitGetData();
+    //this.getAllTasks();
+    //this.loadInitGetData();
   }
 
   getAllTasks(){
