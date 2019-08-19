@@ -10,8 +10,8 @@ import { TabsPage } from '../pages/tabs/tabs';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
-import { DeviceMotion } from '@ionic-native/device-motion/ngx';
-import { Sensors } from '@ionic-native/sensors'
+import { DeviceMotion } from '@ionic-native/device-motion';
+//import { Sensors } from '@ionic-native/sensors'
 import { SQLite } from '@ionic-native/sqlite';
 import { Geolocation } from '@ionic-native/geolocation';
 import { Stepcounter } from '@ionic-native/stepcounter';
@@ -79,7 +79,7 @@ import { HttpClientModule } from '@angular/common/http';
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     DeviceMotion,
-    Sensors,
+    //Sensors,
     TasksService,
     SQLite,
     Geolocation,
@@ -89,7 +89,6 @@ import { HttpClientModule } from '@angular/common/http';
     Stepcounter,
     AnguarFireProvider,
     BackgroundMode,
-
   ]
 })
 export class AppModule {}

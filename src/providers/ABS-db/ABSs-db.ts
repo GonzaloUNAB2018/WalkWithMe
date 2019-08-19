@@ -15,12 +15,12 @@ export class ABSDbProvider {
    }
  
    create(ABSs_task: any){
-     let sql_ABSs = 'INSERT INTO ABSs_tasks(id, time, type, x, y, z) VALUES(?,?,?,?,?,?)';
-     return this.ABSsdb.executeSql(sql_ABSs, [ABSs_task.id, ABSs_task.time, ABSs_task.type, ABSs_task.x, ABSs_task.y, ABSs_task.z]);
+     let sql_ABSs = 'INSERT INTO ABSs_tasks(id, date, time, type, x, y, z) VALUES(?,?,?,?,?,?,?)';
+     return this.ABSsdb.executeSql(sql_ABSs, [ABSs_task.id, ABSs_task.date, ABSs_task.time, ABSs_task.type, ABSs_task.x, ABSs_task.y, ABSs_task.z]);
    }
  
    createTable(){
-     let sql_ABSs = 'CREATE TABLE IF NOT EXISTS ABSs_tasks(id NUMBER, time TIMESTAMP, type TEXT, x NUMBER, y NUMBER, z NUMBER)';
+     let sql_ABSs = 'CREATE TABLE IF NOT EXISTS ABSs_tasks(id NUMBER, date TEXT, time TEXT, type TEXT, x NUMBER, y NUMBER, z NUMBER)';
      return this.ABSsdb.executeSql(sql_ABSs, []);
    }
  
@@ -43,8 +43,8 @@ export class ABSDbProvider {
    }
  
    update(ABSs_task: any){
-     let sql_ABSs = 'UPDATE ABSs_tasks SET id=?, time=?, type=?, x=?, y=?, WHERE z=?';
-     return this.ABSsdb.executeSql(sql_ABSs, [ABSs_task.id, ABSs_task.time, ABSs_task.type, ABSs_task.x, ABSs_task.y, ABSs_task.z]);
+     let sql_ABSs = 'UPDATE ABSs_tasks SET id=?, date=?, time=?, type=?, x=?, y=?, WHERE z=?';
+     return this.ABSsdb.executeSql(sql_ABSs, [ABSs_task.id, ABSs_task.date, ABSs_task.time, ABSs_task.type, ABSs_task.x, ABSs_task.y, ABSs_task.z]);
    }
 
 }

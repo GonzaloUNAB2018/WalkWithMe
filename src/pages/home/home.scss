@@ -112,4 +112,12 @@ page-home {
         padding-right: 5px;
     }
 
+    .chrono{
+        font-family: 'Times New Roman', Times, serif;
+        font-size: 10vw;
+        color: #ffffff;
+        text-shadow: 3px 2px color($colors, primary);
+        text-align: center;
+    }
+
 }

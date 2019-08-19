@@ -1,18 +1,22 @@
-<!--
-  Generated template for the SaltosPage page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
-<ion-header>
-
+<ion-content padding>
   <ion-navbar>
-    <ion-title>Saltos</ion-title>
   </ion-navbar>
 
-</ion-header>
+  
+  
+  <div padding-left padding-right>
+    <p class="text" *ngIf="cdown_ok">¡Cuenta atrás!</p>
+    <p class="text" *ngIf="!cdown_ok">Ejecutando Saltos</p>
+  </div>
 
-
-<ion-content padding>
+  
   <button ion-button full round large color="danger" (click)="toHomePage()">STOP</button>
+
+  <div padding-left padding-right>
+    <p class="chrono" *ngIf="cdown_ok"> {{cdown_ss}} </p>
+    <p class="chrono" *ngIf="!cdown_ok"> {{hh}} : {{minutos}} : {{segundos}} : {{ms}} </p>
+    <p class="data" *ngIf="!cdown_ok">X: {{l_accX}}</p>
+    <p class="data" *ngIf="!cdown_ok">Y: {{l_accY}}</p>
+    <p class="data" *ngIf="!cdown_ok">Z: {{l_accZ}}</p>
+  </div>
 </ion-content>

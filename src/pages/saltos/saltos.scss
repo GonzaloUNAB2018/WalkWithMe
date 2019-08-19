@@ -1,3 +1,60 @@
 page-saltos {
 
+
+    .data{
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 4vw;
+        color: #bdbdbd;
+        //text-shadow: 3px 2px color($colors, primary);
+        text-align: left;
+    }
+
+    .text{
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 7vw;
+        color: #bdbdbd;
+        //text-shadow: 3px 2px color($colors, primary);
+        text-align: left;
+    }
+    
+    .chrono{
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 10vw;
+        color: #bdbdbd;
+        //text-shadow: 3px 2px color($colors, primary);
+        text-align: center;
+    }
+
+    .steps{
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 13vw;
+        color: #bdbdbd;
+        //text-shadow: 3px 2px color($colors, primary);
+        text-align: center;
+    }
+
+    .content.content-md{
+        background-color: darkslategrey;
+    }
+
+    .item.item-block.item-md,
+    .toolbar-background.toolbar-background-md{
+        background-color: transparent;
+    }
+
+
+    .item-text{
+        color: color($colors, light);
+        font-size: 15px;
+    }
+
+    .title{
+        color: color($colors, light);
+        font-size: 25px;
+    }
+
+    .back-button-icon.icon.icon-md.back-button-icon-md.ion-md-arrow-back{
+        color: color($colors, light);
+    }
+
 }

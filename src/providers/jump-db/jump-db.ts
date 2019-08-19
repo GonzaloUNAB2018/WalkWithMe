@@ -15,12 +15,12 @@ export class JumpDbProvider {
    }
  
    create(jumps_task: any){
-     let sql_jumps = 'INSERT INTO jumps_tasks(id, time, type, x, y, z) VALUES(?,?,?,?,?,?)';
-     return this.jumpsdb.executeSql(sql_jumps, [jumps_task.id, jumps_task.time, jumps_task.type, jumps_task.x, jumps_task.y, jumps_task.z]);
+     let sql_jumps = 'INSERT INTO jumps_tasks(id, date, time, type, x, y, z) VALUES(?,?,?,?,?,?,?)';
+     return this.jumpsdb.executeSql(sql_jumps, [jumps_task.id, jumps_task.date, jumps_task.time, jumps_task.type, jumps_task.x, jumps_task.y, jumps_task.z]);
    }
  
    createTable(){
-     let sql_jumps = 'CREATE TABLE IF NOT EXISTS jumps_tasks(id NUMBER, time TIMESTAMP, type TEXT, x NUMBER, y NUMBER, z NUMBER)';
+     let sql_jumps = 'CREATE TABLE IF NOT EXISTS jumps_tasks(id NUMBER, date TEXT, time TEXT, type TEXT, x NUMBER, y NUMBER, z NUMBER)';
      return this.jumpsdb.executeSql(sql_jumps, []);
    }
  
@@ -43,8 +43,8 @@ export class JumpDbProvider {
    }
  
    update(jumps_task: any){
-     let sql_jumps = 'UPDATE jumps_tasks SET id=?, time=?, type=?, x=?, y=?, WHERE z=?';
-     return this.jumpsdb.executeSql(sql_jumps, [jumps_task.id, jumps_task.time, jumps_task.type, jumps_task.x, jumps_task.y, jumps_task.z]);
+     let sql_jumps = 'UPDATE jumps_tasks SET id=?, date=?, time=?, type=?, x=?, y=?, WHERE z=?';
+     return this.jumpsdb.executeSql(sql_jumps, [jumps_task.id, jumps_task.date, jumps_task.time, jumps_task.type, jumps_task.x, jumps_task.y, jumps_task.z]);
    }
 
 }

@@ -14,6 +14,7 @@ import { JumpDbProvider } from '../providers/jump-db/jump-db';
 import { ABSDbProvider } from '../providers/ABS-db/ABSs-db';
 
 
+
 @Component({
   templateUrl: 'app.html'
 })
@@ -32,6 +33,7 @@ export class MyApp {
     private afAuth: AngularFireAuth,
     private backgroundMode: BackgroundMode, 
     ) {
+      
       
       this.afAuth.auth.onAuthStateChanged(user=>{
         if(user){

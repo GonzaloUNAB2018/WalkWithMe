@@ -26,7 +26,7 @@ export class LoadDatabasePage {
   ABSs_entries_boolean: boolean = false;
   total_entries: number = 0;
 
-  uid=this.afAuth.auth.currentUser.uid; 
+  uid: any = null; 
 
   fbSteps : any[];
   totalSteps: number = 0;
@@ -46,6 +46,10 @@ export class LoadDatabasePage {
   openJumps2: boolean = false;
   diference: number = 0;
 
+  button1: boolean = false;
+  button2: boolean = false;
+  button3: boolean = false;
+
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -59,6 +63,8 @@ export class LoadDatabasePage {
     private afDb: AngularFireDatabase,
     private afAuth: AngularFireAuth
     ) {
+
+      this.uid = this.afAuth.auth.currentUser.uid;
       
   }
 
@@ -68,12 +74,14 @@ export class LoadDatabasePage {
   }
 
   getDataFromFirebase(){
+    this.loadNewSync();
     this.afService.getSteps(this.uid).valueChanges().subscribe(steps=>{
       this.fbSteps=steps;
       if(this.fbSteps.length!=null){
         this.steps = this.fbSteps.length;
         console.log('Existen '+this.steps+' sincronizados');
         this.getSteps(this.steps);
+        this.button1= true;
       }
     });
     this.afService.getJumps(this.uid).valueChanges().subscribe(jumps=>{
@@ -82,6 +90,7 @@ export class LoadDatabasePage {
         this.jumps = this.fbJumps.length;
         console.log('Existen '+this.jumps+' sincronizados');
         this.getJumps(this.jumps);
+        this.button2=true;
       }
     });
     this.afService.getABSs(this.uid).valueChanges().subscribe(ABS=>{
@@ -90,6 +99,7 @@ export class LoadDatabasePage {
         this.ABS = this.fbABS.length;
         console.log('Existen '+this.ABS+' sincronizados');
         this.getABS(this.ABS);
+        this.button3 = true;
       }
     });
   }
@@ -244,7 +254,7 @@ export class LoadDatabasePage {
   load(){
     const loading = this.loadingCtrl.create({
        content: 'Please wait...',
-       duration: 1000
+       duration: 2000
      });
   
      loading.present();
@@ -253,6 +263,15 @@ export class LoadDatabasePage {
       this.okToast();
       loading.dismiss();
     }, 1300);
+  }
+
+  loadNewSync(){
+    const loading = this.loadingCtrl.create({
+       content: 'Please wait...',
+       duration: 2000
+     });
+  
+     loading.present();
   }
 
   loadDBFirebase(){

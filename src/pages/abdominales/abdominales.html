@@ -1,19 +1,24 @@
-<ion-header>
-
-  <ion-navbar>
-    <ion-title>Caminata</ion-title>
-  </ion-navbar>
-
-</ion-header>
-
-
 <ion-content padding>
 
-  <button ion-button full round large color="danger" (click)="toHomePage()">STOP</button>
-
-  <!--ion-card padding>
-    <p> {{steps}} </p>
-  </ion-card-->
+    <ion-navbar>
+    </ion-navbar>
+  
+    
+    <div padding-left padding-right>
+      <p class="text" *ngIf="cdown_ok">¡Cuenta atrás!</p>
+      <p class="text" *ngIf="!cdown_ok">Ejecutando Abdominales</p>
+    </div>
+  
+    
+    <button ion-button full round large color="danger" (click)="toHomePage()">STOP</button>
+  
+    <div padding-left padding-right>
+      <p class="chrono" *ngIf="cdown_ok"> {{cdown_ss}} </p>
+      <p class="chrono" *ngIf="!cdown_ok"> {{hh}} : {{minutos}} : {{segundos}} : {{ms}} </p>
+      <p class="data" *ngIf="!cdown_ok">X: {{l_accX}}</p>
+      <p class="data" *ngIf="!cdown_ok">Y: {{l_accY}}</p>
+      <p class="data" *ngIf="!cdown_ok">Z: {{l_accZ}}</p>
+    </div>
 
 
 </ion-content>
