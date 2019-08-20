@@ -277,14 +277,29 @@ export class LoadDatabasePage {
   loadDBFirebase(){
     if(this.steps_tasks.length!=0||this.ABS_tasks.length!=0||this.jump_tasks.length!=0){
       for(var s = 0;s<this.steps_entries;s++) { 
+        var stepsinfo = {
+          tipo: 'Caminata',
+          id: '001'
+        }
+        this.afService.updateStepsInfo(this.uid, stepsinfo)
         console.log(this.steps_tasks[s].time);
         this.afDb.object('Pacientes/'+this.uid+'/Ejercicios/Caminata/'+this.steps_tasks[s].id).update(this.steps_tasks[s]);
       }
       for(var j = 0;j<this.jumps_entries;j++) { 
+        var jumpsinfo = {
+          tipo: 'Saltos',
+          id: '002'
+        }
+        this.afService.updateJumpInfo(this.uid, jumpsinfo)
         console.log(this.jump_tasks[j].time);
         this.afDb.object('Pacientes/'+this.uid+'/Ejercicios/Saltos/'+this.jump_tasks[j].id).update(this.jump_tasks[j]);
       }
-      for(var a = 0;a<this.ABSs_entries;a++) { 
+      for(var a = 0;a<this.ABSs_entries;a++) {
+        var ABSinfo = {
+          tipo: 'Abdominales',
+          id: '003'
+        }
+        this.afService.updateABSInfo(this.uid, ABSinfo)
         console.log(this.ABS_tasks[a].time);
         this.afDb.object('Pacientes/'+this.uid+'/Ejercicios/Abdominales/'+this.ABS_tasks[a].id).update(this.ABS_tasks[a]);
       }

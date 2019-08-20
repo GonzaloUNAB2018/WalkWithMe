@@ -8,4 +8,6 @@ export class User {
     surname: string;
     region: string;
     city: string;
+    nickName: string;
+    uid: string;
 }

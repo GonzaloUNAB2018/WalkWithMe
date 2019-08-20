@@ -36,6 +36,22 @@ export class AnguarFireProvider {
     this.afDb.database.ref('Pacientes/'+uid+'/Ejercicios/').remove();
   }
 
+  updateUserData(uid, user){
+    this.afDb.database.ref('Pacientes/'+uid+'/User_Info').set(user);
+  }
+
+  updateJumpInfo(uid, info){
+    this.afDb.database.ref('Pacientes/'+uid+'/Ejercicios/Saltos').update(info);
+  }
+
+  updateABSInfo(uid, info){
+    this.afDb.database.ref('Pacientes/'+uid+'/Ejercicios/Abdominales').update(info);
+  }
+
+  updateStepsInfo(uid, info){
+    this.afDb.database.ref('Pacientes/'+uid+'/Ejercicios/Caminata').update(info);
+  }
+
   /*public getPet(uid, id){
     return this.afDb.object('Profile/'+uid+'/Pets/'+id);
   }

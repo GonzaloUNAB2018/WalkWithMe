@@ -11,6 +11,8 @@ import { SaltosPage } from '../saltos/saltos';
 import { JumpDbProvider } from '../../providers/jump-db/jump-db';
 import { LoadDatabasePage } from '../load-database/load-database';
 import { AbdominalesPage } from '../abdominales/abdominales';
+import { User } from '../../models/user';
+import { AnguarFireProvider } from '../../providers/anguar-fire/anguar-fire';
 //import { AngularFireDatabase } from '@angular/fire/database';
 
 
@@ -49,6 +51,10 @@ export class HomePage {
   jumps_entries: number = 0;
   jumps_entries_boolean: boolean = false;
 
+  afUser = this.afAuth.auth.currentUser
+  user = {} as User;
+  uid: any;
+
   constructor(
     public navCtrl: NavController,
     public loadingCtrl: LoadingController,
@@ -59,6 +65,7 @@ export class HomePage {
     public stepsDbService: StepsDbProvider,
     public jumpDbService: JumpDbProvider,
     public sqlite: SQLite,
+    public afProvider: AnguarFireProvider
     //private afDb: AngularFireDatabase,
     ) {
       
@@ -67,6 +74,13 @@ export class HomePage {
   ionViewDidLoad(){
     //this.getAllTasks();
     //this.loadInitGetData();
+    this.uid = this.afUser.uid;
+    this.user.nickName = this.afUser.displayName;
+    if(this.user.nickName===null){
+      this.alertaNuevoUsuario()
+    }else{
+      console.log(this.user.nickName)
+    }
   }
 
   getAllTasks(){
@@ -175,6 +189,16 @@ export class HomePage {
   loadStopGetData() {
     const loader = this.loadingCtrl.create({
       content: "Finalizando toma de datos...",
+      duration: 500
+    });
+    loader.present();
+  }
+
+  
+
+  loadUpdateUserData() {
+    const loader = this.loadingCtrl.create({
+      content: "Actualizando datos...",
       duration: 500
     });
     loader.present();
@@ -347,6 +371,50 @@ export class HomePage {
     this.navCtrl.push(LoadDatabasePage);
   }
 
+  alertaNuevoUsuario() {
+       const alert = this.alertCtrl.create({
+         title: 'Complete los datos',
+         inputs: [
+           {
+             name: 'nickName',
+             placeholder: 'Ingrese un Nombre o Sobrenombre'
+           },
+           {
+             name: 'RUN',
+             placeholder: 'Ingrese RUN sin Dígito Verificador',
+             type: 'number'
+           }
+         ],
+         buttons: [
+           {
+             text: 'Cancel',
+             role: 'cancel',
+             handler: data => {
+               console.log('Cancel clicked');
+               this.navCtrl.setRoot(InitialPage);
+             }
+           },
+           {
+             text: 'Ok',
+             handler: data => {
+              this.user.nickName = data.nickName,
+              this.user.run = data.RUN
+              this.updateUser();
+             }
+          }
+         ]
+       });
+      alert.present();
+    }
+
+    updateUser(){
+      this.afAuth.auth.currentUser.updateProfile({
+        displayName: this.user.nickName
+      });
+      this.user.uid = this.uid;
+      this.afProvider.updateUserData(this.uid, this.user);
+      this.loadUpdateUserData();
+    }
 
   /////////////////////////////////////////////////////////////////////////////////
   
