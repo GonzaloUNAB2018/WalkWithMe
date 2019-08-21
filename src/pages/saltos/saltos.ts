@@ -13,9 +13,9 @@ import { DeviceMotion, DeviceMotionAccelerationData } from '@ionic-native/device
 export class SaltosPage {
 
   
-  public l_accX: any;
-  public l_accY: any;
-  public l_accZ: any;
+  public l_accX: any = 0;
+  public l_accY: any = 0;
+  public l_accZ: any = 0;
 
   jumps_tasks : any [] = []
 
