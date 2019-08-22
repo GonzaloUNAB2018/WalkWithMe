@@ -21,15 +21,15 @@ export class AnguarFireProvider {
   }
 
   public getSteps(uid){
-    return this.afDb.list('Pacientes/'+uid+'/Ejercicios/Caminata');
+    return this.afDb.list('Pacientes/'+uid+'/Ejercicios/Caminata/Datos/');
   }
 
   public getABSs(uid){
-    return this.afDb.list('Pacientes/'+uid+'/Ejercicios/Abdominales');
+    return this.afDb.list('Pacientes/'+uid+'/Ejercicios/Abdominales/Datos/');
   }
 
   public getJumps(uid){
-    return this.afDb.list('Pacientes/'+uid+'/Ejercicios/Saltos');
+    return this.afDb.list('Pacientes/'+uid+'/Ejercicios/Saltos/Datos/');
   }
 
   public deleteDataBase(uid){
@@ -50,6 +50,10 @@ export class AnguarFireProvider {
 
   updateStepsInfo(uid, info){
     this.afDb.database.ref('Pacientes/'+uid+'/Ejercicios/Caminata').update(info);
+  }
+
+  public requiereUpdateApp(){
+    return this.afDb.object('Update/')
   }
 
   /*public getPet(uid, id){

@@ -5,12 +5,10 @@
   <p class="title" padding>Sincronice su actividad</p>
 
   <button ion-button full round large color="primary"  
-  *ngIf="
-  button1&&button2&&button3
-  "
+  
   (click)="syncDb()">SINCRONIZAR</button>
 
-  <button 
+  <!--button 
   ion-button 
   full 
   round 
@@ -19,25 +17,32 @@
   *ngIf="
   !button1&&!button2&&!button3
   "
-  disabled >SINCRONIZAR</button>
+  disabled >SINCRONIZAR</button-->
 
   <br>
+
+  <p class="item-text">Cargue los datos guardados en su smartphone</p>
+
+  <div id="myProgress">
+    <div id="myBar"></div>
+  </div>
   <!--p *ngIf="open1&&open2&&open3" align="center">Existen {{totalDataOnFirebase}} en la nube</p-->
-  <p *ngIf="
+  <!--p *ngIf="
   openSteps1||
   openSteps2||
   openABS1||
   openABS2||
   openJumps1||
   openJumps2
-  " align="center" class="text">Datos que faltan por cargar:</p>
+  " align="center" class="text">Datos que faltan por cargar:</p-->
 
-  <p *ngIf="openSteps1" align="center" class="text">Caminata: {{totalSteps}} mediciones</p>
+  <!--p *ngIf="openSteps1" align="center" class="text">Caminata: {{totalSteps}} mediciones</p>
   <p *ngIf="openSteps2" align="center" class="text">Sin registros de datos de caminata</p>
   <p *ngIf="openABS1" align="center" class="text">Saltos: {{totalJumps}} mediciones</p>
   <p *ngIf="openABS2" align="center" class="text">Sin registros de datos de saltos</p>
   <p *ngIf="openJumps1" align="center" class="text">Abdominales: {{totalABS}} mediciones</p>
-  <p *ngIf="openJumps2" align="center" class="text">Sin registros de datos de Abdominales</p>
+  <p *ngIf="openJumps2" align="center" class="text">Sin registros de datos de Abdominales</p-->
   <!--p *ngIf="open1&&open2&&open3" align="center">{{diference}} total por sincronizar </p-->
+
 
 </ion-content>

@@ -7,6 +7,7 @@ import { AngularFireDatabase } from '@angular/fire/database';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AnguarFireProvider } from '../../providers/anguar-fire/anguar-fire';
 
+
 @IonicPage()
 @Component({
   selector: 'page-load-database',
@@ -46,9 +47,10 @@ export class LoadDatabasePage {
   openJumps2: boolean = false;
   diference: number = 0;
 
-  button1: boolean = false;
-  button2: boolean = false;
-  button3: boolean = false;
+  loadingBar: boolean = false;
+  
+
+  loadSteps: number = 0;
 
   constructor(
     public navCtrl: NavController,
@@ -70,56 +72,22 @@ export class LoadDatabasePage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad LoadDatabasePage');
-    this.getDataFromFirebase();
+    this.getAll();
   }
 
-  getDataFromFirebase(){
-    this.loadNewSync();
-    this.afService.getSteps(this.uid).valueChanges().subscribe(steps=>{
-      this.fbSteps=steps;
-      if(this.fbSteps.length!=null){
-        this.steps = this.fbSteps.length;
-        console.log('Existen '+this.steps+' sincronizados');
-        this.getSteps(this.steps);
-        this.button1= true;
-      }
-    });
-    this.afService.getJumps(this.uid).valueChanges().subscribe(jumps=>{
-      this.fbJumps=jumps;
-      if(this.fbJumps.length!=null){
-        this.jumps = this.fbJumps.length;
-        console.log('Existen '+this.jumps+' sincronizados');
-        this.getJumps(this.jumps);
-        this.button2=true;
-      }
-    });
-    this.afService.getABSs(this.uid).valueChanges().subscribe(ABS=>{
-      this.fbABS = ABS;
-      if(this.fbABS.length!=null){
-        this.ABS = this.fbABS.length;
-        console.log('Existen '+this.ABS+' sincronizados');
-        this.getABS(this.ABS);
-        this.button3 = true;
-      }
-    });
+  getAll(){
+    this.getABS();
+    this.getJumps();
+    this.getSteps();
   }
 
-  totalData(){
-    this.totalDataOnFirebase = this.ABS+this.jumps+this.steps;
-    this.total_entries = this.jumps_entries+this.steps_entries+this.ABSs_entries;
-    this.diference = this.total_entries - this.totalDataOnFirebase
-    console.log('El total de datos por sincronizar son: '+this.diference)
-  }
-
-  getABS(ABS){
+  getABS(){
     this.ABSDbService.getAll()
     .then(ABS_tasks => {
       this.ABS_tasks = ABS_tasks;
       if(this.ABS_tasks.length!=0){
         this.ABSs_entries = this.ABS_tasks.length;
         this.ABSs_entries_boolean = true;
-        this.totalABS=this.ABSs_entries-ABS;
-        console.log('Faltan '+this.ABSs_entries+'+'+ABS+'='+this.totalSteps);
         this.openABS1 = true
       }else{
         console.log('No existen datos de abdominales por sincronizar');
@@ -133,15 +101,13 @@ export class LoadDatabasePage {
     });
   }
 
-  getSteps(steps){
+  getSteps(){
     this.stepsDbService.getAll()
     .then(steps_tasks => {
       this.steps_tasks = steps_tasks;
       if(this.steps_tasks.length!=0){
         this.steps_entries = this.steps_tasks.length
         this.steps_entries_boolean = true;
-        this.totalSteps=this.steps_entries-steps;
-        console.log('Faltan '+this.steps_entries+'+'+steps+'='+this.totalSteps);
         this.openSteps1 = true;
       }else{
         console.log('No existen datos de caminata por sincronizar');
@@ -155,15 +121,13 @@ export class LoadDatabasePage {
     });
   }
 
-  getJumps(jumps){
+  getJumps(){
     this.jumpDbService.getAll()
     .then(jump_tasks => {
       this.jump_tasks = jump_tasks;
       if(this.jump_tasks.length!=0){
         this.jumps_entries = this.jump_tasks.length;
         this.jumps_entries_boolean = true;
-        this.totalJumps=this.jumps_entries-this.jumps;
-        console.log('Faltan '+this.jumps_entries+'+'+jumps+'='+this.totalJumps);
         this.openJumps1 = true
       }else{
         console.log('No existen datos de saltos por sincronizar');
@@ -175,6 +139,68 @@ export class LoadDatabasePage {
     .catch( error => {
       console.error( error );
     });
+  }
+
+  loadDBFirebase(){
+    if(this.steps_tasks.length!=0||this.ABS_tasks.length!=0||this.jump_tasks.length!=0){
+      console.log(this.steps_tasks.length+this.ABS_tasks.length+this.jump_tasks.length)
+      for(var s = 0;s<this.steps_entries;s++) { 
+        console.log(this.steps_tasks[s].time);
+        this.afDb.object('Pacientes/'+this.uid+'/Ejercicios/Caminata/Datos/'+this.steps_tasks[s].id).update(this.steps_tasks[s]);
+      }
+      for(var j = 0;j<this.jumps_entries;j++) { 
+        console.log(this.jump_tasks[j].time);
+        this.afDb.object('Pacientes/'+this.uid+'/Ejercicios/Saltos/Datos/'+this.jump_tasks[j].id).update(this.jump_tasks[j]);
+      }
+      for(var a = 0;a<this.ABSs_entries;a++) {
+        console.log(this.ABS_tasks[a].time);
+        this.afDb.object('Pacientes/'+this.uid+'/Ejercicios/Abdominales/Datos/'+this.ABS_tasks[a].id).update(this.ABS_tasks[a]);
+      }
+      this.move();
+      //this.getDataFromFirebase();
+      if(this.steps_tasks.length===0){
+
+      }else{
+        var stepsinfo = {
+          tipo: 'Caminata',
+          id: '001'
+        }
+        this.afService.updateStepsInfo(this.uid, stepsinfo);
+      }
+      if(this.jump_tasks.length===0){
+
+      }else{
+        var jumpsinfo = {
+          tipo: 'Saltos',
+          id: '002'
+        }
+        this.afService.updateJumpInfo(this.uid, jumpsinfo);
+      }
+      if(this.ABS_tasks.length===0){
+
+      }else{
+        var ABSinfo = {
+          tipo: 'Abdominales',
+          id: '003'
+        }
+        this.afService.updateABSInfo(this.uid, ABSinfo);
+      }
+    }else{
+      alert('Nada que sincronizar');
+    }    
+  }
+
+  move(){
+    var elem = document.getElementById('myBar');
+    var width = 1;
+    var id = setInterval(()=>{
+      if (width >= 100) {
+        clearInterval(id);
+      } else {
+        width++; 
+        elem.style.width = width + '%'; 
+      }  
+    }, 10);
   }
 
   syncDb(){
@@ -193,15 +219,8 @@ export class LoadDatabasePage {
         {
           text: 'OK',
           handler: () => {
-            if(this.totalABS>0||this.totalJumps>0||this.totalSteps>0){
-              this.load();
               this.loadDBFirebase();
-              console.log('Datos sincronizados');
-            }else{
-              this.noLoadToast()
-              console.log('Sin datos por sincronicar');
-
-            }
+              this.loadingBar = true;
           }
         }
       ]
@@ -274,39 +293,6 @@ export class LoadDatabasePage {
      loading.present();
   }
 
-  loadDBFirebase(){
-    if(this.steps_tasks.length!=0||this.ABS_tasks.length!=0||this.jump_tasks.length!=0){
-      for(var s = 0;s<this.steps_entries;s++) { 
-        var stepsinfo = {
-          tipo: 'Caminata',
-          id: '001'
-        }
-        this.afService.updateStepsInfo(this.uid, stepsinfo)
-        console.log(this.steps_tasks[s].time);
-        this.afDb.object('Pacientes/'+this.uid+'/Ejercicios/Caminata/'+this.steps_tasks[s].id).update(this.steps_tasks[s]);
-      }
-      for(var j = 0;j<this.jumps_entries;j++) { 
-        var jumpsinfo = {
-          tipo: 'Saltos',
-          id: '002'
-        }
-        this.afService.updateJumpInfo(this.uid, jumpsinfo)
-        console.log(this.jump_tasks[j].time);
-        this.afDb.object('Pacientes/'+this.uid+'/Ejercicios/Saltos/'+this.jump_tasks[j].id).update(this.jump_tasks[j]);
-      }
-      for(var a = 0;a<this.ABSs_entries;a++) {
-        var ABSinfo = {
-          tipo: 'Abdominales',
-          id: '003'
-        }
-        this.afService.updateABSInfo(this.uid, ABSinfo)
-        console.log(this.ABS_tasks[a].time);
-        this.afDb.object('Pacientes/'+this.uid+'/Ejercicios/Abdominales/'+this.ABS_tasks[a].id).update(this.ABS_tasks[a]);
-      }
-      this.getDataFromFirebase();
-    }else{
-      alert('Nada que sincronizar');
-    }    
-  }  
+  
 
 }

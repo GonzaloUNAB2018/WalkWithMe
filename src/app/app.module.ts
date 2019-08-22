@@ -39,6 +39,7 @@ import { ABSDbProvider } from '../providers/ABS-db/ABSs-db';
 import { LoadDatabasePageModule } from '../pages/load-database/load-database.module';
 import { AnguarFireProvider } from '../providers/anguar-fire/anguar-fire';
 import { HttpClientModule } from '@angular/common/http';
+import {ProgressBarModule} from "angular-progress-bar"
 
 
 @NgModule({
@@ -64,7 +65,8 @@ import { HttpClientModule } from '@angular/common/http';
     ConfigurationPageModule,
     LoadDatabasePageModule,
     BrowserModule,
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp),
+    ProgressBarModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [

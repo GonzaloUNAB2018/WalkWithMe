@@ -13,6 +13,7 @@ import { LoadDatabasePage } from '../load-database/load-database';
 import { AbdominalesPage } from '../abdominales/abdominales';
 import { User } from '../../models/user';
 import { AnguarFireProvider } from '../../providers/anguar-fire/anguar-fire';
+//import { url } from 'inspector';
 //import { AngularFireDatabase } from '@angular/fire/database';
 
 
@@ -55,6 +56,9 @@ export class HomePage {
   user = {} as User;
   uid: any;
 
+  requiereUpdate: any;
+  versionApp = '0.0.8.9'
+
   constructor(
     public navCtrl: NavController,
     public loadingCtrl: LoadingController,
@@ -72,8 +76,6 @@ export class HomePage {
   }
 
   ionViewDidLoad(){
-    //this.getAllTasks();
-    //this.loadInitGetData();
     this.uid = this.afUser.uid;
     this.user.nickName = this.afUser.displayName;
     if(this.user.nickName===null){
@@ -81,77 +83,20 @@ export class HomePage {
     }else{
       console.log(this.user.nickName)
     }
-  }
-
-  getAllTasks(){
-    this.jumpDbService.getAll()
-    .then(jump_tasks => {
-      this.jump_tasks = jump_tasks;
-      if(this.jump_tasks.length!=0){
-        this.jumps_entries = this.jump_tasks.length;
-        this.jumps_entries_boolean = true;
-        console.log('Existen '+this.jumps_entries+' por sincronizar');
+    this.afProvider.requiereUpdateApp().valueChanges().subscribe(requiereUpdate=>{
+      this.requiereUpdate = requiereUpdate;
+      if(this.requiereUpdate.requiere===0){
+        
       }else{
-        console.log('No existen datos por sincronizar');
-        this.jumps_entries_boolean = false;
+        if(this.versionApp === '0.0.8.9'){
+
+        }else{
+          this.requiereUpdateAppFunction()
+        }
       }
     })
-    .catch( error => {
-      console.error( error );
-    });
-    this.stepsDbService.getAll()
-    .then(steps_tasks => {
-      this.steps_tasks = steps_tasks;
-      if(this.steps_tasks.length!=0){
-        this.steps_entries = this.steps_tasks.length
-        this.steps_entries_boolean = true;
-        console.log('Existen '+this.steps_entries+' por sincronizar')
-      }else{
-        console.log('No existen datos por sincronizar');
-        this.steps_entries_boolean = false;
-      }
-    })
-    .catch( error => {
-      console.error( error );
-    });
   }
 
-
-  updateTask(jump_task:any, steps_task: any, index){
-    this.jumpDbService.update(jump_task)
-    .then( response => {
-      this.jump_tasks[index] = jump_task;
-    })
-    .catch( error => {
-      console.error( error );
-    });
-    this.stepsDbService.update(steps_task)
-    .then( response => {
-      this.steps_tasks[index] = steps_task;
-    })
-    .catch( error => {
-      console.error( error );
-    })
-  }
-
-  deleteTask(jumps_task: any, steps_task: any, index){
-    this.jumpDbService.delete(jumps_task)
-    .then(response => {
-      console.log( response );
-      this.jump_tasks.splice(index, 1);
-    })
-    .catch( error => {
-      console.error( error );
-    })
-    this.stepsDbService.delete(steps_task)
-    .then(response => {
-      console.log( response );
-      this.steps_tasks.splice(index, 1);
-    })
-    .catch( error => {
-      console.error( error );
-    })
-  }
   
   logout(){
     this.afAuth.auth.signOut().then(()=>{
@@ -178,24 +123,6 @@ export class HomePage {
 
   
 
-  loadInitGetData() {
-    const loader = this.loadingCtrl.create({
-      content: "Recuperando datos...",
-      duration: 1000
-    });
-    loader.present();
-  }
-
-  loadStopGetData() {
-    const loader = this.loadingCtrl.create({
-      content: "Finalizando toma de datos...",
-      duration: 500
-    });
-    loader.present();
-  }
-
-  
-
   loadUpdateUserData() {
     const loader = this.loadingCtrl.create({
       content: "Actualizando datos...",
@@ -204,27 +131,6 @@ export class HomePage {
     loader.present();
   }
 
-  loadDeleteDB() {
-    const loader = this.loadingCtrl.create({
-      content: "Borrando Datos",
-      duration: 1000
-    });
-    loader.present().then(()=>{
-      
-        const toast = this.toastCtrl.create({
-          message: 'Base de datos borrada',
-          duration: 1000,
-          position: 'bottom'
-        });
-    
-        toast.onDidDismiss(() => {
-          console.log('Dismissed toast');
-        });
-    
-        toast.present()
-      
-    })
-  }
 
   loadLogout() {
     const loader = this.loadingCtrl.create({
@@ -237,43 +143,23 @@ export class HomePage {
 
   ////////// +++++++++ LIMPIEZA DE BASE DE DATOS +++++++++ //////////
 
-  clearDb(){
+  requiereUpdateAppFunction(){
 
     let alert = this.alertCtrl.create({
-      title: 'ELIMINAR DATOS',
-      message: '¿Está seguro que desea borrar los datos?',
+      title: 'Actualice la aplicación',
+      message: 'Se requiere actualizar la aplicación',
       buttons: [
         {
           text: 'Cancel',
           role: 'cancel',
           handler: () => {
-            console.log('Se cancela borrado');
+            this.navCtrl.setRoot(InitialPage)
           }
         },
         {
           text: 'OK',
           handler: () => {
-            
-            this.sqlite.deleteDatabase(
-              {
-                name: 'data1.db',
-                location: 'default' // the location field is required
-              }
-            );
-            this.sqlite.create({
-              name: 'data1.db',
-              location: 'default' // the location field is required
-            })
-            .then((db) => {
-              this.tasksService.setDatabase(db);
-              this.stepsDbService.setDatabase(db);
-              return this.tasksService.createTable() && this.stepsDbService.createTable().then(()=>{
-                this.getAllTasks();
-              }).then(()=>{
-                this.loadDeleteDB();
-              })
-            })
-            console.log('Datos borrados');
+            window.open("https://github.com/GonzaloUNAB2018/WalkWithMe/tree/master/apk");
           }
         }
       ]
