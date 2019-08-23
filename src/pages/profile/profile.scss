@@ -1,0 +1,25 @@
+page-profile {
+    .content.content-md{
+        background-color: darkslategrey;
+    }
+
+    .item.item-block.item-md,
+    .toolbar-background.toolbar-background-md{
+        background-color: transparent;
+    }
+
+
+    .item-text{
+        color: color($colors, light);
+        font-size: 15px;
+    }
+
+    .title{
+        color: color($colors, light);
+        font-size: 25px;
+    }
+
+    .back-button-icon.icon.icon-md.back-button-icon-md.ion-md-arrow-back{
+        color: color($colors, light);
+    }
+}

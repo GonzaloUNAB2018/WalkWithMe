@@ -2,11 +2,10 @@ import { NgModule, ErrorHandler } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
+import { HttpClientModule } from '@angular/common/http';
+import { ProgressBarModule } from "angular-progress-bar"
 
-import { AboutPage } from '../pages/about/about';
-import { ContactPage } from '../pages/contact/contact';
-import { HomePage } from '../pages/home/home';
-import { TabsPage } from '../pages/tabs/tabs';
+
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -16,8 +15,23 @@ import { SQLite } from '@ionic-native/sqlite';
 import { Geolocation } from '@ionic-native/geolocation';
 import { Stepcounter } from '@ionic-native/stepcounter';
 import { BackgroundMode } from '@ionic-native/background-mode';
+//FIREBASE
+import {firebase} from './firebase.module';
+import { AngularFireModule } from '@angular/fire';
+import { AngularFireDatabaseModule } from '@angular/fire/database';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+
+//Providers
+import { TasksService } from '../providers/tasks-service/tasks-service';
+import { StepsDbProvider } from '../providers/steps-db/steps-db';
+import { JumpDbProvider } from '../providers/jump-db/jump-db';
+import { ABSDbProvider } from '../providers/ABS-db/ABSs-db';
+import { AnguarFireProvider } from '../providers/anguar-fire/anguar-fire';
 
 //Pages
+import { AboutPage } from '../pages/about/about';
+import { ContactPage } from '../pages/contact/contact';
+import { HomePage } from '../pages/home/home';
 import { LoginPageModule } from '../pages/login/login.module';
 import { RegisterPageModule } from '../pages/register/register.module';
 import { ResetPassPageModule } from '../pages/reset-pass/reset-pass.module';
@@ -25,21 +39,10 @@ import { InitialPageModule } from '../pages/initial/initial.module';
 import { CaminataPageModule } from '../pages/caminata/caminata.module';
 import { SaltosPageModule } from '../pages/saltos/saltos.module';
 import { AbdominalesPageModule } from '../pages/abdominales/abdominales.module';
-
-//FIREBASE
-import {firebase} from './firebase.module';
-import { AngularFireModule } from '@angular/fire';
-import { AngularFireDatabaseModule } from '@angular/fire/database';
-import { AngularFireAuthModule } from '@angular/fire/auth';
 import { ConfigurationPageModule } from '../pages/configuration/configuration.module';
-import { TasksService } from '../providers/tasks-service/tasks-service';
-import { StepsDbProvider } from '../providers/steps-db/steps-db';
-import { JumpDbProvider } from '../providers/jump-db/jump-db';
-import { ABSDbProvider } from '../providers/ABS-db/ABSs-db';
 import { LoadDatabasePageModule } from '../pages/load-database/load-database.module';
-import { AnguarFireProvider } from '../providers/anguar-fire/anguar-fire';
-import { HttpClientModule } from '@angular/common/http';
-import {ProgressBarModule} from "angular-progress-bar"
+import { ProfilePageModule } from '../pages/profile/profile.module';
+
 
 
 @NgModule({
@@ -48,7 +51,6 @@ import {ProgressBarModule} from "angular-progress-bar"
     AboutPage,
     ContactPage,
     HomePage,
-    TabsPage
   ],
   imports: [
     HttpClientModule,
@@ -64,6 +66,7 @@ import {ProgressBarModule} from "angular-progress-bar"
     AbdominalesPageModule,
     ConfigurationPageModule,
     LoadDatabasePageModule,
+    ProfilePageModule,
     BrowserModule,
     IonicModule.forRoot(MyApp),
     ProgressBarModule
@@ -74,7 +77,6 @@ import {ProgressBarModule} from "angular-progress-bar"
     AboutPage,
     ContactPage,
     HomePage,
-    TabsPage
   ],
   providers: [
     StatusBar,

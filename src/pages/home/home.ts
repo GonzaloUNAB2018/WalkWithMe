@@ -13,8 +13,7 @@ import { LoadDatabasePage } from '../load-database/load-database';
 import { AbdominalesPage } from '../abdominales/abdominales';
 import { User } from '../../models/user';
 import { AnguarFireProvider } from '../../providers/anguar-fire/anguar-fire';
-//import { url } from 'inspector';
-//import { AngularFireDatabase } from '@angular/fire/database';
+import { ProfilePage } from '../profile/profile';
 
 
 @Component({
@@ -57,7 +56,7 @@ export class HomePage {
   uid: any;
 
   requiereUpdate: any;
-  versionApp = '0.0.8.9'
+  versionApp = '0.0.9'
 
   constructor(
     public navCtrl: NavController,
@@ -69,7 +68,7 @@ export class HomePage {
     public stepsDbService: StepsDbProvider,
     public jumpDbService: JumpDbProvider,
     public sqlite: SQLite,
-    public afProvider: AnguarFireProvider
+    public afProvider: AnguarFireProvider,
     //private afDb: AngularFireDatabase,
     ) {
       
@@ -81,32 +80,69 @@ export class HomePage {
     if(this.user.nickName===null){
       this.alertaNuevoUsuario()
     }else{
-      console.log(this.user.nickName)
+      //console.log(this.user.nickName);
+      this.toast(this.user.nickName)
     }
     this.afProvider.requiereUpdateApp().valueChanges().subscribe(requiereUpdate=>{
       this.requiereUpdate = requiereUpdate;
-      if(this.requiereUpdate.requiere===0){
-        
+      if(this.requiereUpdate.requiere==='0.0.9'){
+        console.log('No requiere actualizar')
       }else{
-        if(this.versionApp === '0.0.8.9'){
-
-        }else{
-          this.requiereUpdateAppFunction()
-        }
+        this.requiereUpdateAppFunction()
       }
-    })
+    });
+    
   }
 
   
   logout(){
-    this.afAuth.auth.signOut().then(()=>{
-      this.loadLogout();
-      this.navCtrl.setRoot(InitialPage)
-    })
+    let alert = this.alertCtrl.create({
+      title: 'Cerrar sesión',
+      message: 'Saldrá de la sesión de la aplicación',
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          handler: () => {
+            
+          }
+        },
+        {
+          text: 'OK',
+          handler: () => {
+            this.loadLogout();
+            this.afAuth.auth.signOut().then(()=>{
+              this.navCtrl.setRoot(InitialPage)
+            })
+          }
+        }
+      ]
+    });
+    alert.present()
+    
+  }
+
+  toast(nickName){
+    const toast = this.toastCtrl.create({
+           message: 'Bienvenido '+nickName,
+           duration: 2000,
+           position: 'bottom'
+         });
+      
+         toast.onDidDismiss(() => {
+           console.log('Dismissed toast');
+         });
+      
+         toast.present();
   }
 
   toOptionPage(){
     this.navCtrl.push(ConfigurationPage)
+  }
+
+  toProfilePage(){
+    alert('Página de Perfil de Usuario en desarrollo')
+    //this.navCtrl.push(ProfilePage, {uid: this.uid, nickName: this.user.nickName})
   }
 
   toStepsPage(){
@@ -147,13 +183,15 @@ export class HomePage {
 
     let alert = this.alertCtrl.create({
       title: 'Actualice la aplicación',
-      message: 'Se requiere actualizar la aplicación',
+      message: 'Su versión es '+this.versionApp+', actualice la aplicación a la versión '+this.requiereUpdate.requiere,
       buttons: [
         {
           text: 'Cancel',
           role: 'cancel',
           handler: () => {
-            this.navCtrl.setRoot(InitialPage)
+            this.afAuth.auth.signOut().then(()=>{
+              this.navCtrl.setRoot(InitialPage);
+            })
           }
         },
         {

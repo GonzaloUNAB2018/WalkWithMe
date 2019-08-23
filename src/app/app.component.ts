@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { Platform } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { Platform, Nav } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { BackgroundMode } from '@ionic-native/background-mode';
@@ -19,7 +19,9 @@ import { ABSDbProvider } from '../providers/ABS-db/ABSs-db';
   templateUrl: 'app.html'
 })
 export class MyApp {
-  rootPage:any = InitialPage;
+  @ViewChild(Nav) nav: Nav;
+
+  //rootPage:any = InitialPage;
 
   constructor(
     public platform: Platform,
@@ -35,17 +37,18 @@ export class MyApp {
     ) {
       
       
-      this.afAuth.auth.onAuthStateChanged(user=>{
-        if(user){
-          this.rootPage = HomePage
-        }else{
-          this.rootPage = InitialPage
-        }
-      });
+      
       this.platform.ready().then(() => {
         this.statusBar.styleDefault();
         this.backgroundMode.enable();
         this.createDatabase();
+        this.afAuth.auth.onAuthStateChanged(user=>{
+          if(user){
+            this.nav.setRoot(HomePage);
+          }else{
+            this.nav.setRoot(InitialPage);
+          }
+        });
     });
 
        

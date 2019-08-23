@@ -22,7 +22,7 @@ export class CaminataPage {
   
   interval: any = setInterval(()=>{
     this.onInterval()
-  }, 100);
+  }, 500);
 
 
   start: any;

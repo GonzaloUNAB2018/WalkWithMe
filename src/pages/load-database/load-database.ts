@@ -50,7 +50,8 @@ export class LoadDatabasePage {
   loadingBar: boolean = false;
   
 
-  loadSteps: number = 0;
+  loadInfo: string = "";
+  okLoad: boolean;
 
   constructor(
     public navCtrl: NavController,
@@ -141,8 +142,63 @@ export class LoadDatabasePage {
     });
   }
 
-  loadDBFirebase(){
+  loadDBFirebase(okLoad: boolean){
     if(this.steps_tasks.length!=0||this.ABS_tasks.length!=0||this.jump_tasks.length!=0){
+      
+      okLoad = true;
+      
+    }else{
+      okLoad = false;
+      alert('Nada que sincronizar');
+    };
+  }
+
+  move(){
+    var elem = document.getElementById('myBar');
+    var width = 1;
+    var id = setInterval(()=>{
+      if (width >= 100) {
+        clearInterval(id);
+        this.loadInfo = 'Datos sincronizados exitosamente'
+      } else {
+        width++; 
+        elem.style.width = width + '%'; 
+      }  
+    }, 10);
+  }
+
+
+  syncDb(){
+    let alert = this.alertCtrl.create({
+      title: 'SINCRONIZAR INFORMACION',
+      message: 'Se sincronizará sus datos',
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          handler: () => {
+            this.cancelToast();
+            console.log('Se cancela borrado');
+          }
+        },
+        {
+          text: 'OK',
+          handler: () => {
+            setTimeout(()=>{
+              this.okLoadToDatabase();
+            },300);
+          }
+        }
+      ]
+    });
+    alert.present();
+  }
+
+  okLoadToDatabase(){
+    this.loadDBFirebase(this.okLoad);
+    if(this.okLoad=true){
+      this.move();
+      this.loadInfo = 'Sincronizando datos...'
       console.log(this.steps_tasks.length+this.ABS_tasks.length+this.jump_tasks.length)
       for(var s = 0;s<this.steps_entries;s++) { 
         console.log(this.steps_tasks[s].time);
@@ -156,8 +212,6 @@ export class LoadDatabasePage {
         console.log(this.ABS_tasks[a].time);
         this.afDb.object('Pacientes/'+this.uid+'/Ejercicios/Abdominales/Datos/'+this.ABS_tasks[a].id).update(this.ABS_tasks[a]);
       }
-      this.move();
-      //this.getDataFromFirebase();
       if(this.steps_tasks.length===0){
 
       }else{
@@ -186,46 +240,8 @@ export class LoadDatabasePage {
         this.afService.updateABSInfo(this.uid, ABSinfo);
       }
     }else{
-      alert('Nada que sincronizar');
-    }    
-  }
 
-  move(){
-    var elem = document.getElementById('myBar');
-    var width = 1;
-    var id = setInterval(()=>{
-      if (width >= 100) {
-        clearInterval(id);
-      } else {
-        width++; 
-        elem.style.width = width + '%'; 
-      }  
-    }, 10);
-  }
-
-  syncDb(){
-    let alert = this.alertCtrl.create({
-      title: 'SINCRONIZAR INFORMACION',
-      message: 'Se sincronizará sus datos',
-      buttons: [
-        {
-          text: 'Cancel',
-          role: 'cancel',
-          handler: () => {
-            this.cancelToast();
-            console.log('Se cancela borrado');
-          }
-        },
-        {
-          text: 'OK',
-          handler: () => {
-              this.loadDBFirebase();
-              this.loadingBar = true;
-          }
-        }
-      ]
-    });
-    alert.present();
+    }
   }
 
   cancelToast() {

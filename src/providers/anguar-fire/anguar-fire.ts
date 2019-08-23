@@ -36,9 +36,7 @@ export class AnguarFireProvider {
     this.afDb.database.ref('Pacientes/'+uid+'/Ejercicios/').remove();
   }
 
-  updateUserData(uid, user){
-    this.afDb.database.ref('Pacientes/'+uid+'/User_Info').set(user);
-  }
+  
 
   updateJumpInfo(uid, info){
     this.afDb.database.ref('Pacientes/'+uid+'/Ejercicios/Saltos').update(info);
@@ -54,6 +52,14 @@ export class AnguarFireProvider {
 
   public requiereUpdateApp(){
     return this.afDb.object('Update/')
+  }
+
+  public getUserInfo(uid){
+    return this.afDb.object('Pacientes/'+uid+'/User_Info')
+  }
+
+  updateUserData(uid, user){
+    this.afDb.database.ref('Pacientes/'+uid+'/User_Info').set(user);
   }
 
   /*public getPet(uid, id){

@@ -151,33 +151,7 @@ export class SaltosPage {
         console.log(this.jumps_tasks)
       })
             
-    },100)
-
-    /*this.loadInitGetData();
-    sensors.enableSensor("LINEAR_ACCELERATION");
-    console.log('Se inicia Saltos');
-    this.i = setInterval(() => {
-      this.time();
-      sensors.getState((values) => {
-        this.l_accX = values[0];
-        this.l_accY = values[1];
-        this.l_accZ = values[2];
-        console.log(this.l_accX, this.l_accY, this.l_accZ);
-        var data_jump = {
-          id : Date.now(),
-          time: this.now,
-          type : 'Saltos',
-          x : this.l_accX,
-          y : this.l_accY,
-          z : this.l_accZ,
-        }
-        this.jumpsDbService.create(data_jump).then(response => {
-          this.jumps_tasks.unshift( data_jump );
-          console.log(data_jump);
-          console.log(this.jumps_tasks)
-        })
-      })    
-    }, 100);*/
+    },200)
 
   }
 

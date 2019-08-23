@@ -2,17 +2,17 @@
 
   <ion-navbar padding>
     <ion-buttons>
-      <button ion-button icon-only (click)="logout()"><ion-icon name="log-out" class="navbar-logo"></ion-icon></button>
+      <button ion-button icon-only (click)="logout()"><ion-icon name="power" class="navbar-logo"></ion-icon></button>
     </ion-buttons>
     <ion-buttons end>
       <button ion-button icon-only (click)="loadDb()"><ion-icon name="cloud-upload" class="navbar-logo"></ion-icon></button>
       <!--button ion-button icon-only (click)="clearDb()"><ion-icon name="trash" class="navbar-logo"></ion-icon></button-->
-      <button ion-button icon-only><ion-icon name="contacts" class="navbar-logo"></ion-icon></button>
+      <button ion-button icon-only (click)="toProfilePage()"><ion-icon name="person" class="navbar-logo"></ion-icon></button>
       <button ion-button icon-only (click)="toOptionPage()"><ion-icon name="options" class="navbar-logo"></ion-icon></button>
     </ion-buttons>
   </ion-navbar>
   
-  <ion-card padding class="sup-card">
+  <!--ion-card padding class="sup-card">
     <ion-grid>
       <ion-row>
         <ion-col col-3>
@@ -32,7 +32,7 @@
         </ion-col>
       </ion-row>
     </ion-grid>
-  </ion-card>
+  </ion-card-->
   
   <img src="{{warning}}">
 

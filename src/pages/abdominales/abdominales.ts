@@ -152,38 +152,9 @@ export class AbdominalesPage {
         console.log(data_ABS);
         console.log(this.ABSs_tasks)
       })
-
-      
             
-    },100)
+    },500)
 
-    /*this.loadInitGetData();
-    sensors.enableSensor("LINEAR_ACCELERATION");
-    console.log('Se inicia Abdominales');
-    this.i = setInterval(() => {
-      this.time();
-      sensors.getState((values) => {
-        this.l_accX = values[0];
-        this.l_accY = values[1];
-        this.l_accZ = values[2];
-        console.log(this.l_accX, this.l_accY, this.l_accZ);
-        var data_ABS = {
-          id : Date.now(),
-          time: this.now,
-          type : 'Abdominales',
-          x : this.l_accX,
-          y : this.l_accY,
-          z : this.l_accZ,
-        }
-        this.ABSsDbService.create(data_ABS).then(response => {
-          this.ABSs_tasks.unshift( data_ABS );
-          console.log(data_ABS);
-          console.log(this.ABSs_tasks)
-        })
-      })    
-    }, 100);*/
-
-  
   }
 
   stopABS(){
