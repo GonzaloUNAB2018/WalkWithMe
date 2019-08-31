@@ -14,7 +14,7 @@
 
   <div padding-left padding-right>
     <p class="chrono" *ngIf="cdown_ok"> {{cdown_ss}} </p>
-    <p class="chrono" *ngIf="!cdown_ok"> {{hh}} : {{minutos}} : {{segundos}} : {{ms}} </p>
+    <p class="chrono" *ngIf="!cdown_ok" id="time">00:00</p>
     <p class="data" *ngIf="!cdown_ok">X: {{l_accX}}</p>
     <p class="data" *ngIf="!cdown_ok">Y: {{l_accY}}</p>
     <p class="data" *ngIf="!cdown_ok">Z: {{l_accZ}}</p>

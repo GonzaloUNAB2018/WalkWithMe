@@ -16,40 +16,79 @@ export class SaltosPage {
   public l_accX: any = 0;
   public l_accY: any = 0;
   public l_accZ: any = 0;
-
   jumps_tasks : any [] = []
-
+  private interval: any;
+  private seconds: number = 0;
+  public time: string = '00:00';
+  public showSeconds: boolean = true;
   i : any;
-  hh: number = 0;
-  mm: number = 0;
-  minutos: string = "00";
-  ss: number = 0;
-  segundos: string = "00";
-  ms: number = 0;
-  chrono: any;
   cdown_ok: boolean;
   cdown: any;
   cdown_ss: number = 5;
   date: string;
   hour: string;
+  w: any;
 
   constructor(
     public navCtrl: NavController, 
     public navParams: NavParams,
     public loadingCtrl: LoadingController,
     private jumpsDbService: JumpDbProvider,
-    private deviceMotion: DeviceMotion
+    private deviceMotion: DeviceMotion,
     ) {
+
+      
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad SaltosPage');
     this.countDown()
   }
 
   ionViewWillLeave(){
-    this.stopJump();
-    this.stopCrono();
+    this.stop();
+  }
+
+  start() {
+    this.time = '00:00'
+    this.interval = window.setInterval(() => {
+      this.seconds++;
+      this.time = this.getTimeFormatted();
+      document.getElementById('time').innerHTML=this.time;
+    }, 1000);
+  }
+
+  stop() {
+    window.clearInterval(this.interval);
+    this.seconds = 0;
+  }
+
+  getTimeFormatted() {
+    var hours   = Math.floor(this.seconds / 3600);
+    var minutes = Math.floor((this.seconds - (hours * 3600)) / 60);
+    var seconds = this.seconds - (hours * 3600) - (minutes * 60);
+
+    var hours_st = hours.toString();
+    var minutes_st = minutes.toString();
+    var seconds_st = seconds.toString();
+    if (hours   < 10) {
+      hours_st   = "0" + hours.toString();
+    }
+    if (minutes < 10) {
+      minutes_st = "0" + minutes.toString();
+    }
+    if (seconds < 10) {
+      seconds_st = "0" + seconds.toString();
+    }
+
+    var formatted_time = '';
+    if (hours > 0) {
+      formatted_time += hours_st + ':';
+    }
+    formatted_time += minutes_st;
+    if (this.showSeconds) {
+      formatted_time += ':' + seconds_st;
+    }
+    return formatted_time;
   }
 
   countDown(){
@@ -58,7 +97,7 @@ export class SaltosPage {
       this.cdown_ss=this.cdown_ss-1;
       if(this.cdown_ss<1){
         this.stopCountDown();
-        this.chronometer();
+        this.start();
         this.initJump();
         this.cdown_ok=false;
       }
@@ -69,40 +108,7 @@ export class SaltosPage {
     clearInterval(this.cdown);
   }
 
-  chronometer() {
-    this.chrono = setInterval(()=>{
-      this.ms=this.ms+1;
-      if(this.ms===10){
-        this.ms=0;
-        this.ss=this.ss+1;
-        if(this.ss>=0&&this.ss<10){
-          this.segundos='0'+this.ss;
-        }else if(this.ss===60){
-          this.ss=0;
-          this.segundos='0'+this.ss;
-          this.mm=this.mm+1;
-          if(this.mm>=0&&this.mm<10){
-            this.minutos='0'+this.mm;
-          }else if(this.mm===0){
-            this.hh=this.hh+1;
-            this.mm=0;
-            this.minutos='0'+this.mm;
-          }else{
-            this.minutos=String(this.mm)
-          };
-        }else{
-          this.segundos=String(this.ss);
-        }
-        
-      };
-    },100);
-  }
-
-  stopCrono(){
-    clearInterval(this.chrono); 
-  }
-
-  time(){
+  dateTime(){
     var today = new Date();
     var seg = Number(today.getSeconds());
     var ss = String(today.getSeconds());
@@ -125,17 +131,11 @@ export class SaltosPage {
 
   initJump(){
 
-    this.i = setInterval(()=>{
-      this.deviceMotion.getCurrentAcceleration().then(
-        (acceleration: DeviceMotionAccelerationData) => {
-          this.l_accX = acceleration.x;
-          this.l_accY = acceleration.y;
-          this.l_accZ = acceleration.z;
-        },
-        (error: any) => console.log(error)
-      );
-      this.time();
-
+    this.w = this.deviceMotion.watchAcceleration({frequency: 500}).subscribe((acceleration: DeviceMotionAccelerationData) => {
+      this.l_accX = acceleration.x;
+      this.l_accY = acceleration.y;
+      this.l_accZ = acceleration.z;
+      this.dateTime();
       var data_jump = {
         id : Date.now(),
         date : this.date,
@@ -147,18 +147,14 @@ export class SaltosPage {
       }
       this.jumpsDbService.create(data_jump).then(response => {
         this.jumps_tasks.unshift( data_jump );
-        console.log(data_jump);
-        console.log(this.jumps_tasks)
       })
-            
-    },200)
+    });
 
   }
 
   stopJump(){
     this.loadStopGetData();
-    //sensors.disableSensor();
-    clearInterval(this.i);
+    this.w.unsubscribe();
   }
 
   toHomePage(){
@@ -176,7 +172,7 @@ export class SaltosPage {
   loadStopGetData() {
     const loader = this.loadingCtrl.create({
       content: "Finalizando toma de datos...",
-      duration: 500
+      duration: 1000
     });
     loader.present();
   }

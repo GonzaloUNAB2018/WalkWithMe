@@ -1,65 +1,68 @@
 <article>
-<h1>Aplicación Walk With Me</h1>
-<img src="./src/assets/imgs/logo-kaplan.png" alt="100px">
-<h2>Descarga e instalacion</h2>
-
-<p>La aplicación está construida desde el entorno de 
-    Ionic en su versión 3.9.2 la que permite crear
-    una aplicación web uniendo las capacidades nativas 
-    que nos ofrecen los smartphones.</p>
-<p>Para ejecutar la aplicación existen 2 métodos efectivos:</p>
-
-<h3>Método 1: Instalación desde APK</h3>
-
-<p>En la carpeta <a href="https://github.com/GonzaloUNAB2018/WalkWithMe/tree/master/apk">apk</a> 
-    de github se cargan constantemente todas
-    las actualizaciones importantes que se realizan a la aplicación.
-    Solo debe descargarlas a un dispositivo <b>Android</b> versión 5.1 o 
-    superior y ejecutarlo.</p>
-<p>Recuerde dar permisos para instalar desde fuentes desconocidas a su dispositivo</p>
-
-<h3>Método 2: Descarga del código y ejecución con entorno de desarrollador</h3>
-
-<p>Éste método es mas complejo ya que es principalmente para quienes puedan ejecutar usando
-    un entorno de desarrollo.
-</p>
-<p>Las herramientas necesarias son las siguientes:
-</p>
-
-<ol>
-    <li><a href="https://developer.android.com/studio">Android Studio</a></li>
-    <li><a href="https://git-scm.com/downloads">Git</a></li>
-    <li><a href="https://nodejs.org/es/download/">Node</a></li>
-</ol>
-
-<p>Una vez estén todas las aplicaciones instaladas, ejecutamos una aplicación de consola
-    (yo uso Powershell) desde una carpeta a la que se destine el proyecto, por ejemplo
-    "C:\Proyectos", desde donse se ejecuta los siguiente:
-</p>
-
-<h4>Instala Ionic v 3.9.2</h4>
-<code>npm install -g ionic@3.9.2 cordova@7.1.0</code>
-
-<h4>Descarga desde Github</h4>
-<code>git clone https://github.com/GonzaloUNAB2018/WalkWithMe</code>
-
-<h4>Ingresa a carpeta WalkWithMe</h4>
-<code>cd WalkWithMe</code>
-
-<h4>Descarga componentes con NPM</h4>
-<code>npm -i</code>
-
-<h4>Instala plataforma Android</h4>
-<code>ionic cordova platform add android@6.3</code>
-
-<h4>Prepara el entorno Android</h4>
-<code>ionic cordova prepare android</code>
-
-<p>En éste punto ya debes tener tu smartphone conectado al pc
-    con los permisos de traspaso de datos correspondientes.
-</p>
-
-<h4>Instala la aplicación en el dispositivo</h4>
-<code>ionic cordova run android</code>
-    
+    <h1>Aplicación Walk With Me</h1>
+    <img src="./src/assets/imgs/logo-kaplan.png" alt="100px">
+    <h3>versión 0.0.9.1</h3>
+    <h2 id="indice">Indice</h2>
+    <ol>
+        <li><a href="#indice">Indice</a></li>
+        <li><a href="#instalacion">Instalación</a></li>
+        <ol>
+            <li style="text-indent:10px;"><a href="#one">Instalación en dispositivo Método 1</a></li>
+            <li style="text-indent:10px;"><a href="#two">Instalación en dispositivo Método 2</a></li>
+            <ol>
+                    <li style="text-indent:20px;"><a href="#a">Instala Ionic v 3.9.2</a></li>
+                    <li style="text-indent:20px;"><a href="#b">Descarga desde Github</a></li>
+                    <li style="text-indent:20px;"><a href="#c">Ingresa a carpeta WalkWithMe</a></li>
+                    <li style="text-indent:20px;"><a href="#d">Descarga componentes con NPM</a></li>
+                    <li style="text-indent:20px;"><a href="#e">Instala plataforma Android</a></li>
+                    <li style="text-indent:20px;"><a href="#f">Prepara el entorno Android</a></li>
+                    <li style="text-indent:20px;"><a href="#g">Instala la aplicación en el dispositivo</a></li>
+                </ol>
+        </ol>
+    </ol>
+    <h2 id="instalacion">Descarga e instalacion</h2>
+    <p>La aplicación está construida desde el entorno de 
+        Ionic en su versión 3.9.2 la que permite crear
+        una aplicación web uniendo las capacidades nativas 
+        que nos ofrecen los smartphones.</p>
+    <p>Para ejecutar la aplicación existen 2 métodos efectivos:</p>
+    <h3 id="one">Método 1: Instalación desde APK</h3>
+    <p>En la carpeta <a href="https://github.com/GonzaloUNAB2018/WalkWithMe/tree/master/apk">apk</a> 
+        de github se cargan constantemente todas
+        las actualizaciones importantes que se realizan a la aplicación.
+        Solo debe descargarlas a un dispositivo <b>Android</b> versión 6.0 o 
+        superior y ejecutarlo.</p>
+    <p>Recuerde dar permisos para instalar desde fuentes desconocidas a su dispositivo</p>
+    <h3 id="two">Método 2: Descarga del código y ejecución con entorno de desarrollador</h3>
+    <p>Éste método es mas complejo ya que es principalmente para quienes puedan ejecutar usando
+        un entorno de desarrollo.
+    </p>
+    <p>Las herramientas necesarias son las siguientes:
+    </p>
+    <ol>
+        <li><a href="https://developer.android.com/studio">Android Studio</a></li>
+        <li><a href="https://git-scm.com/downloads">Git</a></li>
+        <li><a href="https://nodejs.org/es/download/">Node</a></li>
+    </ol>
+    <p>Una vez estén todas las aplicaciones instaladas, ejecutamos una aplicación de consola
+        (yo uso Powershell) desde una carpeta a la que se destine el proyecto, por ejemplo
+        "C:\Proyectos", desde donse se ejecuta los siguiente:
+    </p>
+    <h4 id="a">Instala Ionic v 3.9.2</h4>
+    <code>npm install -g ionic@3.9.2 cordova@7.1.0</code>
+    <h4 id="b">Descarga desde Github</h4>
+    <code>git clone https://github.com/GonzaloUNAB2018/WalkWithMe</code>
+    <h4 id="c">Ingresa a carpeta WalkWithMe</h4>
+    <code>cd WalkWithMe</code>
+    <h4 id="d">Descarga componentes con NPM</h4>
+    <code>npm -i</code>
+    <h4 id="e">Instala plataforma Android</h4>
+    <code>ionic cordova platform add android@6.3</code>
+    <h4 id="f">Prepara el entorno Android</h4>
+    <code>ionic cordova prepare android</code>
+    <p>En éste punto ya debes tener tu smartphone conectado al pc
+        con los permisos de traspaso de datos correspondientes.
+    </p>
+    <h4 id="g">Instala la aplicación en el dispositivo</h4>
+    <code>ionic cordova run android</code>
 </article>

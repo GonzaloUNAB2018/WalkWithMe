@@ -15,6 +15,7 @@ import { SQLite } from '@ionic-native/sqlite';
 import { Geolocation } from '@ionic-native/geolocation';
 import { Stepcounter } from '@ionic-native/stepcounter';
 import { BackgroundMode } from '@ionic-native/background-mode';
+
 //FIREBASE
 import {firebase} from './firebase.module';
 import { AngularFireModule } from '@angular/fire';

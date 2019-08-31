@@ -6,15 +6,18 @@
   <div padding-left padding-right>
     <p class="text" *ngIf="cdown_ok">¡Cuenta atrás!</p>
     <p class="text" *ngIf="!cdown_ok">Ejecutando Caminata</p>
+    <p class="text">{{stepSensorTrue}}</p>
   </div>
 
-  <button ion-button full round large color="danger" (click)="toHomePage()">STOP</button>
+  <button ion-button full round large color="danger" (click)="stopAll()">STOP</button>
 
   <div padding-left padding-right>
+    
     <p class="text" *ngIf="!cdown_ok"> Contador de pasos: </p>
     <p class="steps" *ngIf="!cdown_ok">{{steps}}</p>
+    <!--p class="steps" *ngIf="!cdown_ok" id="steps">0</p-->
     <p class="chrono" *ngIf="cdown_ok"> {{cdown_ss}} </p>
-    <p class="chrono" *ngIf="!cdown_ok"> {{hh}} : {{minutos}} : {{segundos}} : {{ms}} </p>
+    <p class="chrono" *ngIf="!cdown_ok" id="time">00:00</p>
   </div>
 
 </ion-content>

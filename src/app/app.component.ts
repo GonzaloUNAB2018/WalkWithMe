@@ -2,7 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { Platform, Nav } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
-import { BackgroundMode } from '@ionic-native/background-mode';
+//import { BackgroundMode } from '@ionic-native/background-mode';
 import { InitialPage } from '../pages/initial/initial';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { HomePage } from '../pages/home/home';
@@ -33,14 +33,14 @@ export class MyApp {
     public ABSDbService: ABSDbProvider,
     public sqlite: SQLite,
     private afAuth: AngularFireAuth,
-    private backgroundMode: BackgroundMode, 
+    
     ) {
       
       
       
       this.platform.ready().then(() => {
         this.statusBar.styleDefault();
-        this.backgroundMode.enable();
+        
         this.createDatabase();
         this.afAuth.auth.onAuthStateChanged(user=>{
           if(user){

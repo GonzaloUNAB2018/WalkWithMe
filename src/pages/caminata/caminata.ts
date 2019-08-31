@@ -19,19 +19,29 @@ export class CaminataPage {
   startingOffset = 0;
   steps: number = 0;
   subscription: any;
+
+  private interval: any;
+  private dataInterval: any;
+  private seconds: number = 0;
+  public time: string = '00:00';
+  public showSeconds: boolean = true;
+  i : any;
+  cdown_ok: boolean;
+  cdown: any;
+  cdown_ss: number = 5;
+  date: string;
+  hour: string;
   
-  interval: any = setInterval(()=>{
+  /*interval: any = setInterval(()=>{
     this.onInterval()
-  }, 500);
+  }, 500);*/
 
 
-  start: any;
+  //start: any;
   diff: any;
   end : any;
   timerID: number;
   document : any;
-  hour: string;
-  date: string;
 
   hh: number = 0;
   mm: number = 0;
@@ -40,10 +50,7 @@ export class CaminataPage {
   segundos: string = "00";
   ms: number = 0;
   chrono: any;
-
-  cdown: any;
-  cdown_ss: number = 5;
-  cdown_ok: boolean;
+  stepSensorTrue: string;
 
   constructor(
     public navCtrl: NavController,
@@ -53,6 +60,23 @@ export class CaminataPage {
     private stepsDbService: StepsDbProvider,
     private stepcounter: Stepcounter,
     ) {
+
+      this.stepcounter.deviceCanCountSteps().then(data=>{
+        console.log(data);
+        if(data){
+          this.stepSensorTrue = 'Su teléfono cuenta con sensor contador de pasos'
+          this.stepcounter.getHistory().then(history=>{
+            console.log(history)
+          });
+          this.stepcounter.getTodayStepCount().then(toDay=>{
+            console.log(toDay)
+          });
+
+        }else{
+          alert('Su Teléfono no cuenta con sensor para contar los pasos')
+        }
+      });
+    
       
   }
 
@@ -60,9 +84,17 @@ export class CaminataPage {
     this.countDown()
   }
 
+  stopAll(){
+    this.stop();
+    this.loadStopGetData();
+    setTimeout(()=>{
+      this.navCtrl.pop()
+    },500)
+    
+  }
+
   ionViewWillLeave(){
-    this.stopSteps();
-    this.stopCrono();
+    
   }
 
   countDown(){
@@ -71,7 +103,7 @@ export class CaminataPage {
       this.cdown_ss=this.cdown_ss-1;
       if(this.cdown_ss<1){
         this.stopCountDown();
-        this.chronometer();
+        this.start();
         this.initSteps();
         this.cdown_ok=false;
       }
@@ -80,51 +112,30 @@ export class CaminataPage {
 
   stopCountDown(){
     clearInterval(this.cdown);
+    //this.stopSteps();
   }
 
-  chronometer() {
-    this.chrono = setInterval(()=>{
-      this.ms=this.ms+1;
-      if(this.ms===10){
-        this.ms=0;
-        this.ss=this.ss+1;
-        if(this.ss>=0&&this.ss<10){
-          this.segundos='0'+this.ss;
-        }else if(this.ss===60){
-          this.ss=0;
-          this.segundos='0'+this.ss;
-          this.mm=this.mm+1;
-          if(this.mm>=0&&this.mm<10){
-            this.minutos='0'+this.mm;
-          }else if(this.mm===0){
-            this.hh=this.hh+1;
-            this.mm=0;
-            this.minutos='0'+this.mm;
-          }else{
-            this.minutos=String(this.mm)
-          };
-        }else{
-          this.segundos=String(this.ss);
-        }
-        
-      };
-    },100);
-  }
-
-  stopCrono(){
-    clearInterval(this.chrono); 
+  start() {
+    //this.stepcounter.start(this.startingOffset);
+    this.time = '00:00'
+    this.interval = window.setInterval(() => {
+      this.seconds++;
+      this.time = this.getTimeFormatted();
+      document.getElementById('time').innerHTML=this.time;
+      //steps!
+      this.geolocation.getCurrentPosition().then(co=>{
+        this.lat = co.coords.latitude;
+        this.lng = co.coords.longitude;
+        this.alt = co.coords.altitude;
+        this.speed = co.coords.speed
+      });
+      console.log(this.lat, this.lng)
+    }, 1000);
   }
 
   initSteps(){
     console.log('Se inicia Caminata');
-    this.subscription = this.geolocation.watchPosition().subscribe(co=>{
-      this.lat = co.coords.latitude;
-      this.lng = co.coords.longitude;
-      this.alt = co.coords.altitude;
-      this.speed = co.coords.speed;
-    })
 
-    
     this.stepcounter.start(this.startingOffset)
     .then(
       onSuccess => 
@@ -133,27 +144,60 @@ export class CaminataPage {
       console.log('stepcounter-start error', onFailure)
     );
 
-    if(this.interval != null){
-      this.interval
-    }else{
-      this.interval = setInterval(()=>{
-        this.onInterval()
-      }, 500)
-    }
+    this.dataInterval = window.setInterval(()=>{
+      this.onInterval();
+    }, 500)
 
   }
 
+  stop() {
+    window.clearInterval(this.interval);
+    window.clearInterval(this.dataInterval);
+    this.seconds = 0;
+    this.stopSteps();
+  }
+
+  getTimeFormatted() {
+    var hours   = Math.floor(this.seconds / 3600);
+    var minutes = Math.floor((this.seconds - (hours * 3600)) / 60);
+    var seconds = this.seconds - (hours * 3600) - (minutes * 60);
+
+    var hours_st = hours.toString();
+    var minutes_st = minutes.toString();
+    var seconds_st = seconds.toString();
+    if (hours   < 10) {
+      hours_st   = "0" + hours.toString();
+    }
+    if (minutes < 10) {
+      minutes_st = "0" + minutes.toString();
+    }
+    if (seconds < 10) {
+      seconds_st = "0" + seconds.toString();
+    }
+
+    var formatted_time = '';
+    if (hours > 0) {
+      formatted_time += hours_st + ':';
+    }
+    formatted_time += minutes_st;
+    if (this.showSeconds) {
+      formatted_time += ':' + seconds_st;
+    }
+    return formatted_time;
+  }
+
   stopSteps(){
-    this.subscription.unsubscribe();
+    //this.subscription.unsubscribe();
+    //window.clearInterval(this.dataInterval);
     this.loadStopGetData();
-    clearInterval(this.interval);
+    //clearInterval(this.interval);
     this.stepcounter.stop().then(
       onSuccess => 
       console.log('stepcounter-stop success', onSuccess), 
       onFailure => 
       console.log('stepcounter-stop error', onFailure)
       );
-    console.log('Se realizaron '+this.steps+' pasos');
+    //console.log('Se realizaron '+this.steps+' pasos');
     console.log(this.lat, this.lng);
   }
 
@@ -177,7 +221,7 @@ export class CaminataPage {
     loader.present();
   }
 
-  time(){
+  dateTime(){
     var today = new Date();
     var seg = Number(today.getSeconds());
     var ss = String(today.getSeconds());
@@ -198,15 +242,12 @@ export class CaminataPage {
   }
 
   onInterval(){
-    this.stepcounter.getStepCount().then(steps=>{
+    this.stepcounter.getStepCount().then(steps =>{
       this.steps = steps;
-    });
+      console.log(this.steps)
+    })
     
-    this.time();
-
-    if(this.speed === null){
-      this.speed = 0;
-    }
+    this.dateTime();
 
     var data_steps ={
       id : Date.now(),
@@ -221,7 +262,7 @@ export class CaminataPage {
     };
     this.stepsDbService.create(data_steps).then(response => {
       this.steps_tasks.unshift( data_steps );
-      console.log(this.steps_tasks)
+      //console.log(this.steps_tasks)
     })
   }
 
