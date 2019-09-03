@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
 import { ABSDbProvider } from '../../providers/ABS-db/ABSs-db';
 import { DeviceMotion, DeviceMotionAccelerationData } from '@ionic-native/device-motion';
+import { Gyroscope, GyroscopeOrientation } from '@ionic-native/gyroscope';
+
 
 @IonicPage()
 @Component({
@@ -13,6 +15,9 @@ export class AbdominalesPage {
   public l_accX: any = 0;
   public l_accY: any = 0;
   public l_accZ: any = 0;
+  public g_accX: any = 0;
+  public g_accY: any = 0;
+  public g_accZ: any = 0;
   ABSs_tasks : any [] = [];
   private interval: any;
   private seconds: number = 0;
@@ -31,7 +36,8 @@ export class AbdominalesPage {
     public navParams: NavParams,
     public loadingCtrl: LoadingController,
     private ABSsDbService: ABSDbProvider,
-    private deviceMotion: DeviceMotion
+    private deviceMotion: DeviceMotion,
+    public gyroscope: Gyroscope
     ) {
     
   }
@@ -56,6 +62,7 @@ export class AbdominalesPage {
   stop() {
     window.clearInterval(this.interval);
     this.seconds = 0;
+    this.stopABS();
   }
 
   getTimeFormatted() {
@@ -132,6 +139,11 @@ export class AbdominalesPage {
       this.l_accX = acceleration.x;
       this.l_accY = acceleration.y;
       this.l_accZ = acceleration.z;
+      this.gyroscope.getCurrent().then((orientation: GyroscopeOrientation) => {
+        this.g_accX = orientation.x;
+        this.g_accY = orientation.y;
+        this.g_accZ = orientation.z;
+      }).catch();
       this.dateTime();
       var data_ABS = {
         id : Date.now(),
@@ -141,6 +153,9 @@ export class AbdominalesPage {
         x : this.l_accX,
         y : this.l_accY,
         z : this.l_accZ,
+        giroscope_x : this.g_accX,
+        giroscope_y : this.g_accY,
+        giroscope_z : this.g_accZ,
       }
       this.ABSsDbService.create(data_ABS).then(response => {
         this.ABSs_tasks.unshift( data_ABS );

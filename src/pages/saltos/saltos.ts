@@ -3,8 +3,6 @@ import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-an
 import { JumpDbProvider } from '../../providers/jump-db/jump-db';
 import { DeviceMotion, DeviceMotionAccelerationData } from '@ionic-native/device-motion';
 
-//declare var sensors;
-
 @IonicPage()
 @Component({
   selector: 'page-saltos',
@@ -12,7 +10,6 @@ import { DeviceMotion, DeviceMotionAccelerationData } from '@ionic-native/device
 })
 export class SaltosPage {
 
-  
   public l_accX: any = 0;
   public l_accY: any = 0;
   public l_accZ: any = 0;
@@ -60,6 +57,7 @@ export class SaltosPage {
   stop() {
     window.clearInterval(this.interval);
     this.seconds = 0;
+    this.stopJump()
   }
 
   getTimeFormatted() {

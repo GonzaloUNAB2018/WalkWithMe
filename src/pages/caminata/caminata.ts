@@ -18,38 +18,17 @@ export class CaminataPage {
   steps_tasks: any[] = [];
   startingOffset = 0;
   steps: number = 0;
-  subscription: any;
 
   private interval: any;
   private dataInterval: any;
   private seconds: number = 0;
   public time: string = '00:00';
   public showSeconds: boolean = true;
-  i : any;
   cdown_ok: boolean;
   cdown: any;
   cdown_ss: number = 5;
   date: string;
   hour: string;
-  
-  /*interval: any = setInterval(()=>{
-    this.onInterval()
-  }, 500);*/
-
-
-  //start: any;
-  diff: any;
-  end : any;
-  timerID: number;
-  document : any;
-
-  hh: number = 0;
-  mm: number = 0;
-  minutos: string = "00";
-  ss: number = 0;
-  segundos: string = "00";
-  ms: number = 0;
-  chrono: any;
   stepSensorTrue: string;
 
   constructor(
@@ -65,13 +44,12 @@ export class CaminataPage {
         console.log(data);
         if(data){
           this.stepSensorTrue = 'Su teléfono cuenta con sensor contador de pasos'
-          this.stepcounter.getHistory().then(history=>{
+          /*this.stepcounter.getHistory().then(history=>{
             console.log(history)
-          });
+          });*/
           this.stepcounter.getTodayStepCount().then(toDay=>{
             console.log(toDay)
           });
-
         }else{
           alert('Su Teléfono no cuenta con sensor para contar los pasos')
         }
@@ -116,13 +94,13 @@ export class CaminataPage {
   }
 
   start() {
-    //this.stepcounter.start(this.startingOffset);
-    this.time = '00:00'
+    //Inicia Cronómetro;
+    //this.time = '00:00'
     this.interval = window.setInterval(() => {
       this.seconds++;
       this.time = this.getTimeFormatted();
       document.getElementById('time').innerHTML=this.time;
-      //steps!
+      //Toma la ubicación Geográfica!
       this.geolocation.getCurrentPosition().then(co=>{
         this.lat = co.coords.latitude;
         this.lng = co.coords.longitude;
@@ -175,7 +153,7 @@ export class CaminataPage {
       seconds_st = "0" + seconds.toString();
     }
 
-    var formatted_time = '';
+    var formatted_time = '0';
     if (hours > 0) {
       formatted_time += hours_st + ':';
     }
@@ -187,18 +165,8 @@ export class CaminataPage {
   }
 
   stopSteps(){
-    //this.subscription.unsubscribe();
-    //window.clearInterval(this.dataInterval);
     this.loadStopGetData();
-    //clearInterval(this.interval);
-    this.stepcounter.stop().then(
-      onSuccess => 
-      console.log('stepcounter-stop success', onSuccess), 
-      onFailure => 
-      console.log('stepcounter-stop error', onFailure)
-      );
-    //console.log('Se realizaron '+this.steps+' pasos');
-    console.log(this.lat, this.lng);
+    this.stepcounter.stop()
   }
 
   toHomePage(){
@@ -262,7 +230,7 @@ export class CaminataPage {
     };
     this.stepsDbService.create(data_steps).then(response => {
       this.steps_tasks.unshift( data_steps );
-      //console.log(this.steps_tasks)
+      console.table(this.steps_tasks);
     })
   }
 

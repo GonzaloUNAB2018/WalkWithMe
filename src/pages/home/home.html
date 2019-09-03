@@ -6,78 +6,34 @@
     </ion-buttons>
     <ion-buttons end>
       <button ion-button icon-only (click)="loadDb()"><ion-icon name="cloud-upload" class="navbar-logo"></ion-icon></button>
-      <!--button ion-button icon-only (click)="clearDb()"><ion-icon name="trash" class="navbar-logo"></ion-icon></button-->
       <button ion-button icon-only (click)="toProfilePage()"><ion-icon name="person" class="navbar-logo"></ion-icon></button>
       <button ion-button icon-only (click)="toOptionPage()"><ion-icon name="options" class="navbar-logo"></ion-icon></button>
     </ion-buttons>
   </ion-navbar>
-  
-  <!--ion-card padding class="sup-card">
-    <ion-grid>
-      <ion-row>
-        <ion-col col-3>
-          <ion-icon *ngIf="supervisionButton" name="power" class="sup-icon"></ion-icon>
-          <ion-icon *ngIf="!supervisionButton" name="power" class="sup-icon-red"></ion-icon>
-        </ion-col>
-        <ion-col col-9>
-          <button *ngIf="supervisionButton&&!disableSup_button" ion-button large full round color="primary" (click)="initSupervision()">
-            <p class="button-text"><b>INICIE SUPERVISIÓN</b></p>
-          </button>
-          <button *ngIf="!supervisionButton&&!disableSup_button" ion-button large full round color="danger" (click)="stopSupervision()">
-            <p class="button-text"><b>TERMINE SUPERVISIÓN</b></p>
-          </button>
-          <button *ngIf="supervisionButton&&disableSup_button" ion-button large full round disabled>
-            <p class="button-text"><b>INICIE SUPERVISIÓN</b></p>
-          </button>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
-  </ion-card-->
-  
-  <img src="{{warning}}">
-
-  <div padding-right>
+  <div><p class="title">Por favor inicie su actividad</p></div>
+  <div>
     <ion-grid>
       <ion-row>
         <ion-col col-6 align="center">
           <ion-card button class="icon_card_button" *ngIf="!disabled_sa" color="primary" (click)="toJumpPage()">
-            <img src="./assets/imgs/jump.png" width="30px">
+            <img class="image1" src="./assets/imgs/jump.jpg" width="30px">
           </ion-card>
-          <ion-card button class="icon_card_button" *ngIf="disabled_sa" color="primary" disabled>
-            <img src="./assets/imgs/jump.png" width="30px">
-          </ion-card>
-          <p class="color">Saltos</p>
+          <p class="text">Saltos</p>
         </ion-col>
         <ion-col col-6 align="center">
           <ion-card button class="icon_card_button" *ngIf="!disabled_ab" color="primary" (click)="toABSPage()">
-            <img src="./assets/imgs/ABS.png" width="30px">
+            <img class="image2" src="./assets/imgs/ABS.jpg" width="30px">
           </ion-card>
-          <ion-card button class="icon_card_button" *ngIf="disabled_ab" color="primary" disabled>
-            <img src="./assets/imgs/ABS.png" width="30px">
-          </ion-card>
-          <p class="color">Abdominales</p>
+          <p class="text">Abdominales</p>
         </ion-col>
-        <ion-col col-6 align="center">
-          <ion-card button class="icon_card_button" *ngIf="!disabled_se" color="primary" (click)="initSent()" disabled>
-            <img src="./assets/imgs/squat.png" width="30px">
+        <ion-col col-12 align="center">
+          <ion-card  button class="icon_card_button" *ngIf="!disabled_ca" color="primary" (click)="toStepsPage()">
+            <img align="center" class="image3" src="./assets/imgs/caminata.jpg" width="30px">
           </ion-card>
-          <ion-card button class="icon_card_button" *ngIf="disabled_se" color="primary" disabled>
-            <img src="./assets/imgs/squat.png" width="30px">
-          </ion-card>
-          <p class="color">Sentadillas</p>
-        </ion-col>
-        <ion-col col-6 align="center">
-          <ion-card button class="icon_card_button" *ngIf="!disabled_ca" color="primary" (click)="toStepsPage()">
-            <img src="./assets/imgs/walk.png" width="30px">
-          </ion-card>
-          <ion-card button class="icon_card_button" *ngIf="disabled_ca" color="primary" disabled>
-            <img src="./assets/imgs/walk.png" width="30px">
-          </ion-card>
-          <p class="color">Caminata</p>
+          <p class="text">Caminata</p>
         </ion-col>
       </ion-row>
     </ion-grid>
   </div>
 
-  <!--p class="chrono"> 1 : 23 : 45 : 6 </p-->
 </ion-content>

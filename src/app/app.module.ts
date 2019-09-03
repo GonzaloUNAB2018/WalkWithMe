@@ -15,6 +15,7 @@ import { SQLite } from '@ionic-native/sqlite';
 import { Geolocation } from '@ionic-native/geolocation';
 import { Stepcounter } from '@ionic-native/stepcounter';
 import { BackgroundMode } from '@ionic-native/background-mode';
+import { Gyroscope } from '@ionic-native/gyroscope'
 
 //FIREBASE
 import {firebase} from './firebase.module';
@@ -84,7 +85,7 @@ import { ProfilePageModule } from '../pages/profile/profile.module';
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     DeviceMotion,
-    //Sensors,
+    Gyroscope,
     TasksService,
     SQLite,
     Geolocation,

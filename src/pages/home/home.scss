@@ -1,5 +1,44 @@
 page-home {
 
+    .title{
+        font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        color: color($colors, light);
+        text-align: center;
+        font-size: 20px;
+    }
+
+    .text{
+        font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        color: color($colors, light);
+        text-align: center;
+        font-size: 16px;
+    }
+
+    .image1{
+        border-radius: 15px;
+        object-fit: cover;
+        object-position: 100% 0;
+        width: 130px;
+        height: 100px;
+    }
+
+    .image2{
+        border-radius: 15px;
+        object-fit: cover;
+        object-position: 70% 0;
+        width: 130px;
+        height: 100px;
+    }
+
+    .image3{
+        border-radius: 15px;
+        object-fit: cover;
+        object-position: 100% 0;
+        width: 280px;
+        height: 130px;
+        align-content: center;
+    }
+
     .content.content-md{
         background-color: darkslategrey;
     }
@@ -98,10 +137,6 @@ page-home {
 
     .logo-kaplan{
         width: 170px;
-    }
-
-    .color{
-        color: color($colors, light)
     }
 
     .icon_card_button{

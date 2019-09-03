@@ -56,7 +56,7 @@ export class HomePage {
   uid: any;
 
   requiereUpdate: any;
-  versionApp = '0.0.9.1'
+  versionApp = '0.0.9.2'
 
   constructor(
     public navCtrl: NavController,
@@ -85,7 +85,7 @@ export class HomePage {
     }
     this.afProvider.requiereUpdateApp().valueChanges().subscribe(requiereUpdate=>{
       this.requiereUpdate = requiereUpdate;
-      if(this.requiereUpdate.requiere==='0.0.9.1'){
+      if(this.requiereUpdate.requiere==='0.0.9.2'){
         console.log('No requiere actualizar')
       }else{
         this.requiereUpdateAppFunction()
