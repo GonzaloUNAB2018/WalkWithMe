@@ -16,6 +16,7 @@ import { Geolocation } from '@ionic-native/geolocation';
 import { Stepcounter } from '@ionic-native/stepcounter';
 import { BackgroundMode } from '@ionic-native/background-mode';
 import { Gyroscope } from '@ionic-native/gyroscope'
+import { Health } from '@ionic-native/health';
 
 //FIREBASE
 import {firebase} from './firebase.module';
@@ -95,6 +96,7 @@ import { ProfilePageModule } from '../pages/profile/profile.module';
     Stepcounter,
     AnguarFireProvider,
     BackgroundMode,
+    Health
   ]
 })
 export class AppModule {}

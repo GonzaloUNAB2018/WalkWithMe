@@ -2,7 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { Platform, Nav } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
-//import { BackgroundMode } from '@ionic-native/background-mode';
+import { BackgroundMode } from '@ionic-native/background-mode';
 import { InitialPage } from '../pages/initial/initial';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { HomePage } from '../pages/home/home';
@@ -33,6 +33,7 @@ export class MyApp {
     public ABSDbService: ABSDbProvider,
     public sqlite: SQLite,
     private afAuth: AngularFireAuth,
+    private backgroundMode: BackgroundMode,
     
     ) {
       
@@ -40,6 +41,15 @@ export class MyApp {
       
       this.platform.ready().then(() => {
         this.statusBar.styleDefault();
+        if(this.platform.is('cordova')){
+          this.backgroundMode.enable();
+          console.log('Background Mode está habilitado');
+          if(this.backgroundMode.isEnabled()){
+            console.log('Notificando');
+          }else{
+            console.log('No notificando');
+          }
+        }
         
         this.createDatabase();
         this.afAuth.auth.onAuthStateChanged(user=>{

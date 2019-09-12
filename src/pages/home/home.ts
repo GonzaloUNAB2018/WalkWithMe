@@ -14,6 +14,7 @@ import { AbdominalesPage } from '../abdominales/abdominales';
 import { User } from '../../models/user';
 import { AnguarFireProvider } from '../../providers/anguar-fire/anguar-fire';
 import { ProfilePage } from '../profile/profile';
+import { Health } from '@ionic-native/health';
 
 
 @Component({
@@ -69,6 +70,7 @@ export class HomePage {
     public jumpDbService: JumpDbProvider,
     public sqlite: SQLite,
     public afProvider: AnguarFireProvider,
+    private health: Health,
     //private afDb: AngularFireDatabase,
     ) {
       
@@ -86,7 +88,21 @@ export class HomePage {
     this.afProvider.requiereUpdateApp().valueChanges().subscribe(requiereUpdate=>{
       this.requiereUpdate = requiereUpdate;
       if(this.requiereUpdate.requiere==='0.0.9.2'){
-        console.log('No requiere actualizar')
+        console.log('No requiere actualizar');
+        this.health.isAvailable()
+        .then((available:boolean) => {
+          console.log(available);
+          this.health.requestAuthorization([
+            'distance', 'nutrition',  //read and write permissions
+            {
+              read: ['steps'],       //read only permission
+              write: ['height', 'weight']  //write only permission
+            }
+          ])
+          .then(res => console.log(res))
+          .catch(e => console.log(e));
+        })
+        .catch(e => console.log(e));
       }else{
         this.requiereUpdateAppFunction()
       }
@@ -130,7 +146,7 @@ export class HomePage {
          });
       
          toast.onDidDismiss(() => {
-           console.log('Dismissed toast');
+           console.log('It is Ok');
          });
       
          toast.present();
@@ -141,8 +157,9 @@ export class HomePage {
   }
 
   toProfilePage(){
-    alert('Página de Perfil de Usuario en desarrollo')
+    //alert('Página de Perfil de Usuario en desarrollo')
     //this.navCtrl.push(ProfilePage, {uid: this.uid, nickName: this.user.nickName})
+    this.navCtrl.push(ProfilePage);
   }
 
   toStepsPage(){
